@@ -21,9 +21,7 @@
 
 				</h6>
 			</p>
-		</div>
-	</div>
-</nav>
+<%= render partial: 'nav' %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
@@ -42,6 +40,14 @@
 			<%= render :partial => @company.codes %>
         </div>
       </div>
+      
+          <%= render :partial => "codes/form", :locals =>{:code => @code} %>
+
+
+  
+
+  </div>
+</div>
       <h4 class="text-center">Comments </h4>
       		<hr class="my-4">
 		</hr>
@@ -97,7 +103,7 @@
     </div>
   </div>
 </div>
-<%= link_to 'Edit', edit_company_path(@company) %> 
+
 
 <style type="text/css">.mycontent-right {
   border-left: 3px solid #F2F7F9 !important; 

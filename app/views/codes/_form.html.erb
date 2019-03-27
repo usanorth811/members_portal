@@ -1,40 +1,35 @@
 <%= form_with(model: code, local: true) do |form| %>
-  <% if code.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(code.errors.count, "error") %> prohibited this code from being saved:</h2>
+  
+<div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
+        <div class="card" style="width: 18rem; ">
+          <div class="card-header" >
+            <h6 style="padding-top: 10px !important;">
+                  <div style="color: #E27d60">Add Code</div>
+                  <%= form.text_field :code %>
+            </h6>
+          </div>
 
-      <ul>
-      <% code.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
-  </div>
 
-  <div class="field">
+  <p class="card-text">
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
+  </p>
 
-  <div class="field">
+  <p class="card-text">
     <%= form.label :facility_type %>
     <%= form.text_field :facility_type %>
-  </div>
+  </p>
 
-  <div class="field">
+  <p class="card-text">
     <%= form.label :destination %>
     <%= form.text_field :destination %>
-  </div>
+  </p>
 
-  <div class="field">
+  <p class="card-text">
     <%= form.label :company_id %>
     <%= form.text_field :company_id %>
-  </div>
+  </p>
 
   <div class="actions">
     <%= form.submit %>

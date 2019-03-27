@@ -9,10 +9,7 @@
             Destination: <%= link_to @code.destination, edit_code_path(@code) %>
           </h6>
         </p>
-    </div>
-  </div>
-</div>
-</nav>
+<%= render partial: 'nav' %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
@@ -50,7 +47,7 @@
 </div>
 
 
-<%= link_to 'Edit', edit_code_path(@code) %> 
+
 
 <style type="text/css">.mycontent-right {
   border-left: 3px solid #F2F7F9 !important;
