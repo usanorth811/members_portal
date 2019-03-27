@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = current_user.groups
   end
 
   # GET /groups/1
@@ -14,7 +14,8 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    @group = Group.new
+    @group = current_user.groups.build
+    @group.company_id = Company.find_by billing_id: @group.billing_id
   end
 
   # GET /groups/1/edit
@@ -24,8 +25,12 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(group_params)
 
+    
+    @group = current_user.groups.build(group_params)
+    puts @group.billing_id
+    @group.company_id = Company.where(billing_id: @group.billing_id).pluck(:id).first
+    puts @group.company_id
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }

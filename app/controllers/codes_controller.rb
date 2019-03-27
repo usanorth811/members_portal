@@ -1,5 +1,16 @@
 class CodesController < ApplicationController
   before_action :set_code, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission
+
+  def require_permission
+    @group = Group.find_by_billing_id(@code.company.billing_id)
+    @users_group = current_user.groups.find_by_billing_id(@code.company.billing_id)
+    if @users_group.billing_id != @group.billing_id
+
+      redirect_to root_path
+
+    end
+  end
 
   # GET /codes
   # GET /codes.json

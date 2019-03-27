@@ -1,5 +1,16 @@
 class BillingContactsController < ApplicationController
   before_action :set_billing_contact, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission
+
+  def require_permission
+    @group = Group.find_by_billing_id(@billing_contact.company.billing_id)
+    @users_group = current_user.groups.find_by_billing_id(@billing_contact.company.billing_id)
+    if @users_group.billing_id != @group.billing_id
+
+      redirect_to root_path
+
+    end
+  end
 
   # GET /billing_contacts
   # GET /billing_contacts.json
