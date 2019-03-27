@@ -1,0 +1,57 @@
+
+
+      <h3><%= @code.name %></h3>
+      <p>
+          <h6>
+            <%= link_to @code.company.name, @code.company %> - 
+            Code: <%= link_to @code.code, edit_code_path(@code) %>  -  
+            Facility Type: <%= link_to @code.facility_type, edit_code_path(@code) %>  -  
+            Destination: <%= link_to @code.destination, edit_code_path(@code) %>
+          </h6>
+        </p>
+    </div>
+  </div>
+</div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <div class="container" style="padding-top: 35px !important">
+        <h4 class="text-center">Contacts</h4>
+            <hr class="my-4">
+            </hr>
+        <div class="row">
+          <%= render :partial => @code.contacts %>
+        </div>
+      </div>
+            <h4 class="text-center">Notes </h4>
+          <hr class="my-4">
+    </hr>
+    <div class="card">
+      <div class="card-header">
+      Comment 1
+    </div>
+
+  <p class="card-text">
+    Comment 1 body
+  </p>
+
+    </div>
+    <div class="mycontent-right">
+      <div class="col-md-3">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_code_path(@code) %> 
+
+<style type="text/css">.mycontent-right {
+  border-left: 3px solid #F2F7F9 !important;
+}</style>

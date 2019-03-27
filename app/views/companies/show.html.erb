@@ -1,0 +1,104 @@
+
+			<h3 class="white-text">
+  				<%= @company.name %>
+  			</h3>
+  			<p>
+  				<h6>
+
+  				<% if @company.billing_contact.present? %>
+
+				Billing Contact: 
+				<%= link_to @company.billing_contact.name, @company.billing_contact, class: "no_style" %> - 
+
+				<%end%>
+					<% if @company.billing_contact.present? %>
+
+					  Member Rep: 
+					<%= link_to @company.billing_contact.name, @company.billing_contact %> 
+					<%end%>
+
+
+
+				</h6>
+			</p>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" >
+  <div class="row" >
+    <div class="col-md-8 offset-md-1">
+      <div class="container-fluid" style="padding-top: 35px !important">
+		<h4 class="text-center">Codes</h4>
+		<hr class="my-4">
+		</hr>
+		<div class="row">
+			<%= render :partial => @company.codes %>
+        </div>
+      </div>
+      <h4 class="text-center">Comments </h4>
+      		<hr class="my-4">
+		</hr>
+		    <div class="card">
+      <div class="card-header">
+      Comment 1
+    </div>
+
+  <p class="card-text">
+    Comment 1 body
+  </p>
+
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="mycontent-right">
+    	<div style="padding-left: 15px">
+    	Status: 
+
+    	<% if @company.status == "Active" %>
+    		<div class="badge badge-success" > 
+    		<% elsif @company.status == "Pending" %>
+    		<div class="badge badge-warning">
+    		<% elsif @company.status == "Canceled" %>
+    		<div class="badge badge-danger">
+    		<% else %>
+    		<div class="badge badge-info">
+    	<%end%>
+
+    		<%= @company.status %></div>
+    		<hr class="my-4">
+    	</hr>
+    	<div class=""> Billing Contact:
+
+      		<% if @company.billing_contact.present? %>
+			<%= link_to @company.billing_contact.name, @company.billing_contact %> 
+			<p>
+				Billing Address:
+			<%= @company.billing_contact.addr %>
+		</p>
+		<p>
+			Phone:
+			<%= @company.billing_contact.phone %>
+		</p>
+		<p>
+			Email:
+			<%= @company.billing_contact.email %>
+
+			<%end%>
+		</p>
+	</div>
+</div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Edit', edit_company_path(@company) %> 
+
+<style type="text/css">.mycontent-right {
+  border-left: 3px solid #F2F7F9 !important; 
+}</style>

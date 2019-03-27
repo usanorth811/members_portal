@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  facility_type: MyString
+  destination: MyString
+  company: one
+
+two:
+  code: MyString
+  name: MyString
+  facility_type: MyString
+  destination: MyString
+  company: two

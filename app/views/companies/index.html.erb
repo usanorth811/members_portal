@@ -1,0 +1,29 @@
+    </div>
+  </div>
+</div>
+</nav>
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Companies</h1>
+
+<div class="container"style="padding-top: 35px !important">
+  <div class="row">
+    <% @companies.each do |company| %>
+    <div class="col-md-4" style="padding-top: 25px !important">
+    	<div class="card">
+    		<div class="card-header">
+        		<h5><%= link_to company.name, company %></h5>
+        	</div>
+
+
+
+        </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+<br>
+
+<%= link_to 'New Company', new_company_path %>

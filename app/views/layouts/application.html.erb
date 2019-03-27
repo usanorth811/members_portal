@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MemberPortal</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<!-- Add this to <head> -->
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>Member Portal</title>
+
+    <!-- Required Stylesheets -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"
+    />
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  </head>
+  <body>
+ <style type="text/css">.bg-dark{color: white !important; background-color:#E27d60 }</style>
+<style type="text/css">a{text-decoration: none !important;background-color:transparent !important; color: #E27d60 ;} </style>
+<style type="text/css">a:visited{ color: #E27d60 !important} </style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="row">
+
+
+      <div class="col-md-1">
+       
+        <%= image_tag("811-logo.svg", :width => "75", :style =>"align-items: center") %>
+
+      </div>
+      <div class="col-md-10 offset-md-1">
+       
+    <%= yield %>
+
+</div>
+<%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    <nav id="footer" class="footer sticky-bottom navbar-dark bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+        <div class="text-center">
+          <%= image_tag("811-logo.svg", :width => "95", :style=>"margin-top: -50px !important; padding-top: 25px;") %>
+      <h6>USA NORTH 811</h6>
+      <p>
+Phone: 811 // 800-642-2444
+        </p>
+        <p>
+4005 Port Chicago Hwy, Suite 100 Concord, CA 94520-1122
+</p>
+</div>
+</div>
+</div>
+</div>
+</nav>
+  </body>
+
+</html>

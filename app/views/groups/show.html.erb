@@ -1,0 +1,28 @@
+    </div>
+  </div>
+</div>
+</nav>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Billing:</strong>
+  <%= @group.billing_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @group.user_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @group.user %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @group.company %>
+</p>
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
