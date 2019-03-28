@@ -1,14 +1,5 @@
 <%= form_with(model: contact, local: true) do |form| %>
-<div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
-  <div class="card" style="width: 18rem; ">      
-    <a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      <div class="card-header" >
-        <h6 style="padding-top: 10px !important;">
-          <div style="color: #E27d60">Add Contact</div>      
-        </h6>
-      </div>
-    </a>
-    <div class="collapse" id="collapseExample">
+
       <div class="card card-body">
         <form>
           <div class="form-group">
@@ -31,7 +22,7 @@
 
           <div class="form-group">
             <div class="actions">
-              <%= form.submit 'Add Contact', class: 'btn btn-success', type: "submit" %>
+              <%= form.submit 'Submit', class: 'btn btn-success btn-block', type: "submit" %>
             </div>
           </div>
         </form>

@@ -4,15 +4,32 @@
 			<%= link_to contact.contact_type, edit_contact_path(contact) %>
 		</div>
 
-	<p class="card-text">
+	<p class="card-text text-muted" style="padding-left: 10px; padding-top: 5px">
 		Name: <%= contact.name %>
 	</p>
-	<p class="card-text">
+	<p class="card-text text-muted"style="padding-left: 10px">
 		Phone: <%= contact.phone %>
 	</p>
-	<p class="">
+	<p class="card-text text-muted"style="padding-left: 10px">
 		Email: <%= contact.email %>
 	</p>
+	<div class="container-fluid" style="padding-bottom: 10px">
+		<div class="row">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-secondary btn-block">
+					<%= link_to image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);'), edit_contact_path(contact)%>
 
+    			</button>
+    		</div>
+    		<div class="col-md-6">
+				<button type="button" class="btn btn-danger btn-block">
+					<%= link_to image_tag("trashcan.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);'), contact, method: :delete, data: { confirm: 'Are you sure you want to delete this contact?' } %>
+
+    			</button>    	
+			</div>
+		</div>
+	</div>
 	</div>
 </div>

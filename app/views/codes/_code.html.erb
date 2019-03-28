@@ -6,19 +6,25 @@
 		</h6>
 		</div>
 
-		<p class="card-text">
+		<h6 class="card-text text-muted" style="padding-left: 10px; padding-top: 5px">
 			Name: 
 			<%= code.name %>
-		</p>
-		<p class="card-text">
+		</h6>
+		<h6 class="card-text text-muted"style="padding-left: 10px">
 			Facility Type: 
 			<%= code.facility_type %>
-		</p>
-		<p>
+		</h6>
+		<h6 class="text-muted" style="padding-left: 10px">
 			Destination: 
 			<%= code.destination %>
-		</p>
-	
+		</h6>
+		<div class="container" style="padding-bottom: 10px">
+		<button type="button" class="btn btn-secondary btn-block">
+			<%= link_to image_tag("pencil.svg", :width => "20", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);'), edit_code_path(code)%>
+
+    	</button>
+		</div>
 
 	</div>
 </div>
