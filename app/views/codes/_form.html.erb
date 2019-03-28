@@ -1,37 +1,41 @@
 <%= form_with(model: code, local: true) do |form| %>
-  
+
 <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
-        <div class="card" style="width: 18rem; ">
-          <div class="card-header" >
-            <h6 style="padding-top: 10px !important;">
-                  <div style="color: #E27d60">Add Code</div>
-                  <%= form.text_field :code %>
-            </h6>
+  <div class="card" style="width: 18rem; ">      
+    <a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <div class="card-header" >
+        <h6 style="padding-top: 10px !important;">
+          <div style="color: #E27d60">Add Code</div>      
+        </h6>
+      </div>
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <form>
+          <div class="form-group">
+            <%= form.text_field :code, class: 'form-control', :placeholder => 'Code' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.text_field :name, class: 'form-control',:placeholder => 'Name' %>
           </div>
 
 
+          <div class="form-group">
+            <%= form.text_field :facility_type, class: 'form-control',:placeholder => 'Facility Type' %>
+          </div>
 
-  <p class="card-text">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </p>
+          <div class="form-group">
+            <%= form.text_field :destination, class: 'form-control',:placeholder => 'Destination' %>
+          </div>
 
-  <p class="card-text">
-    <%= form.label :facility_type %>
-    <%= form.text_field :facility_type %>
-  </p>
 
-  <p class="card-text">
-    <%= form.label :destination %>
-    <%= form.text_field :destination %>
-  </p>
-
-  <p class="card-text">
-    <%= form.label :company_id %>
-    <%= form.text_field :company_id %>
-  </p>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+          <div class="form-group">
+            <div class="actions">
+              <%= form.submit 'Add Code', class: 'btn btn-success', type: "submit" %>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 <% end %>
