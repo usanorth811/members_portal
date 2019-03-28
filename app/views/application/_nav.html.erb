@@ -1,7 +1,7 @@
     </div>
   </div>
 
-
+    <% if user_signed_in? -%>
   	<div class="nav-item dropdown">
   		
   		<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag("person.svg", :width => "40", :style => '-webkit-filter:invert(100%);
@@ -12,11 +12,14 @@
         <a class="dropdown-item" href="#"><%= image_tag("question.svg", :width => "25", :style => 'padding-right: 10px')%> FAQ</a>
         <a class="dropdown-item" href="#"><%= image_tag("gear.svg", :width => "25", :style => 'padding-right: 10px')%> Settings</a>
         <div class="dropdown-divider"></div>
-  		<%= link_to 'Sign in', new_user_session_path, class: 'dropdown-item' %>
-  		<%= link_to 'Sign out', destroy_user_session_path, :method => :delete, class: 'dropdown-item' %>
+
+  		    <%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: 'dropdown-item' %>
+
 		</div>
 	</div>
-
+  <%else%>
+  <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-info' %>
+  <%end%>
 
 </div>
 </nav>
