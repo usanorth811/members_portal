@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
+    @group = Group.new
     @groups = current_user.groups
   end
 
@@ -26,7 +27,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
 
-    
+    @group = current_user.groups.build
+    @group.company_id = Company.find_by billing_id: @group.billing_id
     @group = current_user.groups.build(group_params)
     puts @group.billing_id
     @group.company_id = Company.where(billing_id: @group.billing_id).pluck(:id).first

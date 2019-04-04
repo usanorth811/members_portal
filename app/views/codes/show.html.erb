@@ -1,9 +1,8 @@
 
 
-      <h3><%= @code.name %></h3>
+      <h3><%= @code.company.name %></h3>
       <p>
           <h6>
-            <%= link_to @code.company.name, @code.company %> - 
             Code: <%= link_to @code.code, edit_code_path(@code) %>  -  
             Facility Type: <%= link_to @code.facility_type, edit_code_path(@code) %>  -  
             Destination: <%= link_to @code.destination, edit_code_path(@code) %>
@@ -13,7 +12,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+      <ol class="breadcrumb" style="background-color: white">
+        <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
+        <li class="breadcrumb-item"><%= link_to @code.company.name, @code.company %></li>
+        <li class="breadcrumb-item active" aria-current="page"><%= @code.name %></li>
+      </ol>        
       <p id="notice"><%= notice %></p>
+    
     </div>
   </div>
 </div>

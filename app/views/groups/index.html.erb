@@ -1,13 +1,21 @@
+<h3 class="white-text">
+  <%= current_user.email %>
+</h3>
+
 <%= render partial: 'nav' %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+      <ol class="breadcrumb" style="background-color: white">
+
+      </ol>        
       <p id="notice"><%= notice %></p>
+    
     </div>
   </div>
 </div>
 
-<div class="container" >
+<div class="container" style="padding-bottom: 250px">
   <div class="row" >
     <div class="col-md-12">
       <h4 class="text-center">Companies</h4>
@@ -22,17 +30,41 @@
       <div class="card-header" >
         <h6 style="padding-top: 10px !important;"><%= link_to group.company.name, group.company %></h6>
       </div>
-      <div class="card-text">
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-secondary btn-block">
+          <%= link_to image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);'), edit_group_path(group)%>
+
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="button" class="btn btn-danger btn-block">
+              <%= link_to image_tag("trashcan.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);'), group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' } %>
+
+            </button>     
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+</div>
     <% end %>
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem; ">      
+        <div class="card-header" >
+          <h6 style="padding-top: 10px !important;">
+            <div style="color: #E27d60">Add Company</div>      
+          </h6>
+        </div>
+      </a>
+
+    
+    <%= render 'form', group: @group %>
+  </div>
   </div>
 </div>
 
 
 
-<%= link_to 'New Group', new_group_path %>

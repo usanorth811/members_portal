@@ -15,6 +15,7 @@ class CodesController < ApplicationController
   # GET /codes
   # GET /codes.json
   def index
+    @code = Code.new
     @codes = Code.all
   end
 
@@ -39,7 +40,7 @@ class CodesController < ApplicationController
 
     respond_to do |format|
       if @code.save
-        format.html { redirect_to @code, notice: 'Code was successfully created.' }
+        format.html { redirect_to @code.company, notice: 'Code was successfully created.' }
         format.json { render :show, status: :created, location: @code }
       else
         format.html { render :new }
@@ -53,7 +54,7 @@ class CodesController < ApplicationController
   def update
     respond_to do |format|
       if @code.update(code_params)
-        format.html { redirect_to @code, notice: 'Code was successfully updated.' }
+        format.html { redirect_to @code.company, notice: 'Code was successfully updated.' }
         format.json { render :show, status: :ok, location: @code }
       else
         format.html { render :edit }

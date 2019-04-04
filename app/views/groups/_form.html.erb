@@ -1,25 +1,15 @@
 <%= form_with(model: group, local: true) do |form| %>
-  <% if group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
-
-      <ul>
-      <% group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :billing_id %>
-    <%= form.text_field :billing_id %>
-  </div>
-
-
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
+  <div class="card card-body">
+        <form>
+          <div class="form-group">
+        <%= form.text_field :billing_id, class: 'form-control', :placeholder => 'Billing ID' %>
+          </div>
+          <div class="form-group">
+            <div class="actions">
+              <%= form.submit 'Submit', class: 'btn btn-success btn-block', type: "submit" %>
+            </div>
+          </div>
+        </form>
+      </div>
 <% end %>

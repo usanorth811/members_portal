@@ -3,11 +3,15 @@ class CompaniesController < ApplicationController
   before_action :require_permission
 
   def require_permission
-    @group = Group.find_by_billing_id(@company.billing_id)
-    @users_group = current_user.groups.find_by_billing_id(@company.billing_id)
-    if @users_group.billing_id != @group.billing_id
+    if current_user.admin?
 
-      redirect_to root_path
+    else
+      @group = Group.find_by_billing_id(@company.billing_id)
+      @users_group = current_user.groups.find_by_billing_id(@company.billing_id)
+      if @users_group.billing_id != @group.billing_id
+
+          redirect_to root_path
+      end
 
     end
   end
@@ -15,7 +19,9 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    if current_user.admin?
+      @companies = Company.all
+    end
   end
 
   # GET /companies/1
@@ -25,7 +31,9 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
+    if current_user.admin?
+      @company = Company.new
+    end
   end
 
   # GET /companies/1/edit
@@ -35,40 +43,52 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
+    if current_user.admin?
+      @company = Company.new(company_params)
 
-    respond_to do |format|
-      if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @company.save
+          format.html { redirect_to @company, notice: 'Company was successfully created.' }
+          format.json { render :show, status: :created, location: @company }
+        else
+          format.html { render :new }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       end
+      else
+      redirect_to root_path, notice: 'You do not have permission to perform that action' 
     end
   end
 
   # PATCH/PUT /companies/1
   # PATCH/PUT /companies/1.json
   def update
-    respond_to do |format|
-      if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: @company }
-      else
-        format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+    if current_user.admin?
+      respond_to do |format|
+        if @company.update(company_params)
+          format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+          format.json { render :show, status: :ok, location: @company }
+        else
+          format.html { render :edit }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to @company, notice: 'You do not have permission to perform that action' 
     end
   end
 
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
-    @company.destroy
-    respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.admin?
+      @company.destroy
+      respond_to do |format|
+        format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to @company, notice: 'You do not have permission to perform that action'
     end
   end
 

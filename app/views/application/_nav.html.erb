@@ -7,18 +7,19 @@
   		<a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag("person.svg", :width => "40", :style => '-webkit-filter:invert(100%);
         filter:invert(100%);')%></a>
     	<div class="dropdown-menu dropdown-menu-right" >
-        <a class="dropdown-item" href="#"><%= image_tag("home.svg", :width => "25", :style => 'padding-right: 10px')%> Home</a>
+        <a class="dropdown-item" href="/groups"><%= image_tag("home.svg", :width => "25", :style => 'padding-right: 10px')%> Home</a>
         <a class="dropdown-item" href="#"><%= image_tag("book.svg", :width => "25", :style => 'padding-right: 10px')%> Handbook</a>
         <a class="dropdown-item" href="#"><%= image_tag("question.svg", :width => "25", :style => 'padding-right: 10px')%> FAQ</a>
         <a class="dropdown-item" href="#"><%= image_tag("gear.svg", :width => "25", :style => 'padding-right: 10px')%> Settings</a>
         <div class="dropdown-divider"></div>
 
-  		    <%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: 'dropdown-item' %>
+        <a class="dropdown-item" href="/users/sign_out" data-method = "delete"><%= image_tag("sign-out.svg", :width => "25", :style => 'padding-right: 10px')%> Log Out</a>
+  		    
 
 		</div>
 	</div>
   <%else%>
-  <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-info' %>
+  
   <%end%>
 
 </div>
