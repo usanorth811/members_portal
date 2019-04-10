@@ -1,6 +1,7 @@
-<h3 class="white-text">
-  <%= current_user.email %>
-</h3>
+
+
+  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
+
 
 <%= render partial: 'nav' %>
 <div class="container-fluid">

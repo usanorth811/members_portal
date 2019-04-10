@@ -3,12 +3,14 @@ class CodesController < ApplicationController
   before_action :require_permission
 
   def require_permission
-    @group = Group.find_by_billing_id(@code.company.billing_id)
-    @users_group = current_user.groups.find_by_billing_id(@code.company.billing_id)
-    if @users_group.billing_id != @group.billing_id
+    if current_user.admin?
 
-      redirect_to root_path
-
+    else  
+      @group = Group.find_by_billing_id(@code.company.billing_id)
+      @users_group = current_user.groups.find_by_billing_id(@code.company.billing_id)
+      if @users_group.billing_id != @group.billing_id
+        redirect_to root_path
+      end
     end
   end
 

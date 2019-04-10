@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :confirmable
   has_many :groups
   has_many :companies, :through => :groups
+  has_one :profile
 end
