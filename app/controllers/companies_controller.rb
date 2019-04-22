@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
+  before_action :load_activities, only: [:index, :show]
 
   def require_permission
     if current_user.admin?
@@ -101,5 +102,10 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :billing_id, :status, :member_type)
+    end
+
+    def load_activities
+
+      @activities = PublicActivity::Activity.where(:billing => @company.billing_id).order('created_at DESC').limit(10)
     end
 end

@@ -19,6 +19,8 @@
             <%= form.text_field :email, class: 'form-control',:placeholder => 'Email' %>
           </div>
 
+          <%= form.hidden_field :code_id, :value => @code.id %>
+
 
           <div class="form-group">
             <div class="actions">
