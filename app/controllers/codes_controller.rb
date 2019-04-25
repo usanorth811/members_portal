@@ -1,6 +1,7 @@
 class CodesController < ApplicationController
   before_action :set_code, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
+  before_action :load_activities, only: [:index, :show, :new, :edit, :destroy]
 
   def require_permission
     if current_user.admin?
@@ -54,6 +55,7 @@ class CodesController < ApplicationController
   # PATCH/PUT /codes/1
   # PATCH/PUT /codes/1.json
   def update
+    @code.billing = @code.company.billing_id
     respond_to do |format|
       if @code.update(code_params)
         format.html { redirect_to @code.company, notice: 'Code was successfully updated.' }
@@ -75,6 +77,10 @@ class CodesController < ApplicationController
     end
   end
 
+  def billing
+      @code.billing = @code.company.billing_id
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_code
@@ -83,6 +89,10 @@ class CodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def code_params
-      params.require(:code).permit(:code, :name, :facility_type, :destination, :company_id)
+      params.require(:code).permit(:code, :name, :facility_type, :destination, :company_id, :billing)
+    end
+
+    def load_activities
+      @activities = PublicActivity::Activity.where(:billing => @code.company.billing_id).order('created_at DESC').limit(10)
     end
 end

@@ -6,15 +6,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def require_permission
-    if current_user.admin?
 
-    else
-      @group = Group.find_by_billing_id(@contact.code.company.billing_id)
-      @users_group = current_user.groups.find_by_billing_id(@contact.code.company.billing_id)
-      if @users_group.billing_id != @group.billing_id
-        redirect_to root_path
-      end
-    end
   end
 
   def index

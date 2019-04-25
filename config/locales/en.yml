@@ -36,3 +36,7 @@ en:
       create: ' added a contact '
       destroy: ' removed a contact'
       update: ' updated a contact '
+    code:
+      create: ' added a code '
+      destroy: ' removed a code '
+      update: ' updated a code '
