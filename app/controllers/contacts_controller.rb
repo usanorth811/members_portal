@@ -37,6 +37,9 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
+        @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' crated a contact for ' + @contact.code.code.to_s 
+        ActionMailer::Base.mail(from: "caleb.woods@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, body: "Test").deliver 
+
         format.html { redirect_to @contact.code, notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
@@ -53,6 +56,10 @@ class ContactsController < ApplicationController
     respond_to do |format|
       
       if @contact.update(contact_params)
+          @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' updated a contact for ' + @contact.code.code.to_s 
+            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
+            @useremail = current_user.email
+            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: @useremail, subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver 
         format.html { redirect_to @contact.code, notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else
@@ -65,6 +72,9 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
+    @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' removed a contact for ' + @contact.code.code.to_s 
+    ActionMailer::Base.mail(from: "caleb.woods@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, body: "Test").deliver 
+
     @contact.destroy
     respond_to do |format|
       format.html { redirect_to @contact.code, notice: 'Contact was successfully destroyed.' }

@@ -1,38 +1,37 @@
 <%= render partial: 'nav' %>
 <p id="notice"><%= notice %></p>
+<div class="text-center" style="padding-top: 50px; padding-bottom: 100px">
+<h3>My Profile</h3>
+<% if current_user.profile %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h6>Name: <%= current_user.profile.first_name %> <%= current_user.profile.last_name %></h6>
+    </div>
+    <div class="col-md-12">
+      <h6>Phone: <%= current_user.profile.phone %></h6>
+    </div>
+    <div class="col-md-12">
+      <h6>Employer: <%= current_user.profile.employer %></h6>
+    </div>
+    <div class="col-md-12">
+      <h6>Title: <%= current_user.profile.title %></h6>
+    </div>
+    </div>
+    <div class="col-md-12">
+      <h6>Email: <%= current_user.email %></h6>
+    </div>          
+    <h5><%= link_to 'Edit', edit_profile_path(current_user.profile) %></h5>
+  </div>
+</div>
+<div class="text-center">
 
-<h1>Profiles</h1>
+  <h4> <%= link_to 'Account Settings', edit_user_registration_path %> </h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Phone</th>
-      <th>Employer</th>
-      <th>Title</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <tr>
-        <td><%= profile.first_name %></td>
-        <td><%= profile.last_name %></td>
-        <td><%= profile.phone %></td>
-        <td><%= profile.employer %></td>
-        <td><%= profile.title %></td>
-        <td><%= profile.user %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Profile', new_profile_path %>
+<%else%>
+<%= link_to 'Create', new_profile_path %>
+<%end%>
+</div>
+<style type="text/css">#footer{position: fixed;width: 100%;
+  bottom: 0;}</style>

@@ -1,6 +1,6 @@
 <%= render partial: 'nav' %>
 <p id="notice"><%= notice %></p>
-
+<div class="text-center">
 <p>
   <strong>Name:</strong>
   <%= @billing_contact.name %>
@@ -27,4 +27,7 @@
 </p>
 
 <%= link_to 'Edit', edit_billing_contact_path(@billing_contact) %> |
-<%= link_to 'Back', billing_contacts_path %>
+<%= link_to 'Back', root_path %>
+</div>
+<style type="text/css">#footer{position: fixed;width: 100%;
+  bottom: 0;}</style>

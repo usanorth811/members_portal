@@ -1,7 +1,5 @@
+<% if current_user.profile %>
 
-<h3 class="white-text">
-  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
-</h3>
 
 
 <%= render partial: 'nav' %>
@@ -67,6 +65,13 @@
     </div>
   </div>
 </div>
+<%else%>
+<%= render partial: 'nav' %>
+<h2 class="container text-center" style="padding-top: 75px; padding-bottom: 75px">
+<%= link_to "Create Your Profile", new_profile_path %>
+</h2>
+<% end %>
 
-
+<style type="text/css">#footer{position: fixed;width: 100%;
+  bottom: 0;}</style>
 

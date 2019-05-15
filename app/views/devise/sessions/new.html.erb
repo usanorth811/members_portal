@@ -1,5 +1,18 @@
 <%= render partial: 'nav' %>
-<h2>Log in</h2>
+
+  <header style="margin-bottom: -50px">
+  <div class="overlay">
+  <iframe src="https://player.vimeo.com/video/282909136?autoplay=1&muted=1" width="640" height="360" frameborder=“0” allowfullscreen allow=autoplay></iframe></div>
+  <div class="container h-100">
+    <div class="d-flex h-100 text-center align-items-center">
+      <div class="col-md-4 offset-md-4">
+        <div class="card" >
+        <div class="card-header" >
+        <h2>Log in</h2>
+      </div>
+        <div class="card card-body">
+    
+    
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -24,4 +37,15 @@
   </div>
 <% end %>
 
+<h4>OR </h4>
+
 <%= render "devise/shared/links" %>
+</div>
+  
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</header>

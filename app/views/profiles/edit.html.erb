@@ -1,6 +1,11 @@
-<h1>Editing Profile</h1>
+<%= render partial: 'nav' %>
+<div class="text-center">
+<h1 >Edit Profile</h1>
 
 <%= render 'form', profile: @profile %>
 
 <%= link_to 'Show', @profile %> |
 <%= link_to 'Back', profiles_path %>
+<style type="text/css">#footer{position: fixed;width: 100%;
+  bottom: 0;}</style>
+</div>

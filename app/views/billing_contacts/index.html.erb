@@ -1,36 +1,7 @@
 <%= render partial: 'nav' %>
 <p id="notice"><%= notice %></p>
 
-<h1>Billing Contacts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Addr</th>
-      <th>Company</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @billing_contacts.each do |billing_contact| %>
-      <tr>
-        <td><%= billing_contact.name %></td>
-        <td><%= billing_contact.phone %></td>
-        <td><%= billing_contact.email %></td>
-        <td><%= billing_contact.addr %></td>
-        <td><%= billing_contact.company %></td>
-        <td><%= link_to 'Show', billing_contact %></td>
-        <td><%= link_to 'Edit', edit_billing_contact_path(billing_contact) %></td>
-        <td><%= link_to 'Destroy', billing_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Billing Contact', new_billing_contact_path %>
+<style type="text/css">#footer{position: fixed;width: 100%;
+  bottom: 0;}</style>
