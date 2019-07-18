@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
   belongs_to :user
-  belongs_to :company
+  has_many :member_contacts
+  
 end

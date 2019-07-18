@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @member_contact.name %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @member_contact.ip %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @member_contact.member_id %>
+</p>
+
+<p>
+  <strong>Member code:</strong>
+  <%= @member_contact.member_code %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @member_contact.contact_id %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @member_contact.type %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @member_contact.company %>
+</p>
+
+<p>
+  <strong>Contact name:</strong>
+  <%= @member_contact.contact_name %>
+</p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @member_contact.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @member_contact.address2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @member_contact.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @member_contact.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @member_contact.zip %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @member_contact.phone %>
+</p>
+
+<p>
+  <strong>Phone ext:</strong>
+  <%= @member_contact.phone_ext %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @member_contact.email %>
+</p>
+
+<%= link_to 'Edit', edit_member_contact_path(@member_contact) %> |
+<%= link_to 'Back', member_contacts_path %>

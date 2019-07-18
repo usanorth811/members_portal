@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
   before_action :load_activities, only: [:index, :show]
+  
 
   def require_permission
     if current_user.admin?
@@ -28,13 +29,19 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    require 'httparty'
+    require 'json'
+    response = HTTParty.get("http://localhost:8080/members/group="+@company.billing_id+"")
+    @memb = JSON.parse(response)
+    @members = @memb['Members']
+    
   end
 
   # GET /companies/new
   def new
-    if current_user.admin?
+    
       @company = Company.new
-    end
+    
   end
 
   # GET /companies/1/edit

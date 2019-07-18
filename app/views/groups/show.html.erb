@@ -1,25 +1,436 @@
+
+			<h3 class="white-text">
+      
+    </h3>
+    <p>
+      <h6>
+
+      
+
+
+
+    </h6>
+  </p>
 <%= render partial: 'nav' %>
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+  <ol class="breadcrumb"style="background-color: white">
+    <li class="breadcrumb-item"><%=link_to "COMPANIES", root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @group.id %></li>
+  </ol>
+  <p id="notice"><%= notice %></p>
+</div>
+</div>
+</div>
 
-<p>
-  <strong>Billing:</strong>
-  <%= @group.billing_id %>
+
+
+<div class="container-fluid" >
+<div class="row" >
+<div class="col-md-8 offset-md-1">
+  <div class="container-fluid" style="padding-top: 35px !important">
+<h4 class="text-center">Codes</h4>
+<hr class="my-4">
+</hr>
+<div class="row" >
+
+  <%if @members.present?%>
+  <% @members.each do |member| %>
+    <div class="col-xl-12 text-center" style="padding-bottom: 25px !important">
+      <div class="card" style="width: auto; ">
+
+        <div class="card-header" >
+          <h5 style="padding-left: 55px; padding-top: 10px !important; color: #E27d60 !important ">
+            <%= member['Code'] %> - <%= member['Company'] %>
+          
+          <% if member['Active'] == "true" %>
+            <div class="badge badge-success float-right"  > 
+              Active
+            </div>
+          <% elsif member['Active'] == "false" %>
+            <div class="badge badge-danger float-right" >
+              Not Active
+            </div>
+          <% else %>
+            <div class="badge badge-info float-right" >
+            </div>
+          <%end%>
+          </h5>
+        </div>
+
+        <h5 class="card-text text-muted" style="padding-top: 15px">
+          Facility Type: <%= member['Facility'] %>
+        </h5>
+
+        <h5 class="text-muted" style="padding-left: 10px">
+          Destination: <%= member['Delivery_address'] %>
+        </h5>
+
+        <div class='col-md-6 offset-md-3'>
+          <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Contacts</button>
+        </div>
+        <div class="collapse" id="collapseExample<%=member['Member_id']%>">
+          <div class='container'>
+            <div class="row" style='padding-top: 15px'>
+            <%if member['Contacts'][0]['Contacts'].present?%>
+              <% member['Contacts'][0]['Contacts'].each do |contact| %>
+          
+                <div class='col-xl-3 col-lg-4 col-md-6 col-sm-12' style='padding-top: 15px'>
+                  <div class="card" style="width: auto; ">
+
+                    <div class="card-header" >
+                      <h5 class="text-muted">
+                        <%if contact['Contact_type'] == 'RCVR' %>
+                          RECEIVING LOCATION
+                        <%elsif contact['Contact_type']== 'ALTR' %>
+                          ALTERNATE
+                        <%elsif contact['Contact_type']== 'BILL' %>
+                          BILLING
+                        <%elsif contact['Contact_type']== 'BORD' %>
+                          Board Representative
+                        <%elsif contact['Contact_type']== 'DAMG' %>
+                          DAMAGES
+                        <%elsif contact['Contact_type']== 'DATA' %>
+                          DATABASE
+                        <%elsif contact['Contact_type']== 'EMER' %>
+                          EMERGENCY
+                        <%elsif contact['Contact_type']== 'ENGR'%>
+                          ENGINEERING
+                        <%elsif contact['Contact_type']== 'MAIN'%>
+                          MAIN SWITCHBOARD
+                        <%elsif contact['Contact_type']== 'SURV'%>
+                          SURVEYOR
+                        <%elsif contact['Contact_type']== 'CONT'%>
+                          CONTACT
+                        <%elsif contact['Contact_type']== 'NITE'%>
+                          NIGHT TIME
+                        <%elsif contact['Contact_type']== 'AHRS'%>
+                          AFTER HOURS
+                        <%elsif contact['Contact_type']== 'VACU'%>
+                          VACUUM
+                        <%elsif contact['Contact_type']== 'REPR'%>
+                          MEMBER REP
+                        <%end%>
+                      </h5>
+                      <div class='card-body'>
+                        <h6 class="text-muted"><%= contact['Name'] %></h6>
+                        <h6 class="text-muted"><a href="tel:<%= contact['Phone'] %>"><%= contact['Phone'] %></a></h6>
+                        <h6 class="text-muted"><a href = "mailto:<%= contact['Email'] %>"><%= contact['Email'] %></a></h6>
+                        <% if contact['Address1'].present? %>
+                          <h6 class="text-muted"><%= contact['Address1'] %></h6>
+                          <h6 class="text-muted"><%= contact['City'] %>, <%= contact['State'] %></h6>
+                          <h6 class="text-muted"><%= contact['Zip'] %></h6>
+                        <%end%>
+                        <div class='row'>
+                        <div class='col-md-6'>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal<%=contact['Id']%>">
+                        <%=image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+                        filter:invert(100%); text-size:10;')%> Edit
+                        </button>
+                        </div>
+                        <div class='col-md-6'>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<%=contact['Id']%>1234">
+                        <%=image_tag("trashcan.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+                        filter:invert(100%); text-size:10;')%> Delete
+                        </button>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal<%=contact['Id']%>1234" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">Are You Sure?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    <div class="modal-body">
+                    <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                      <div class="modal-body">
+                        <div class='container'>
+                        
+                          <form>
+                          <div class="form-group row" >
+                          
+                          <%= form.hidden_field :contact_type, :value => contact['Contact_type'] %>
+                          
+                          <%= form.hidden_field :contact_name, :value => contact['Name'] %>
+                          
+                          <%= form.hidden_field :phone, :value => contact['Phone'] %>
+                          
+                          <%= form.hidden_field :email, :value => contact['Email'] %>
+                          
+                          <%= form.hidden_field :address1, :value => contact['Address1'] %>
+                          
+                          <%= form.hidden_field :address2, :value => contact['Address2'] %>
+                          
+                          <%= form.hidden_field :city, :value => contact['City'] %>
+                          
+                          <%= form.hidden_field :state, :value => contact['State'] %>
+                          
+                          <%= form.hidden_field :zip, :value => contact['Zip'] %>
+                          <%= form.hidden_field :name, :value => current_user.email %>
+                          <%= form.hidden_field :member_id, :value => contact['Member_id'] %>
+                          <%= form.hidden_field :member_code, :value => member['Code'] %>
+                          <%= form.hidden_field :contact_id, :value => contact['Id'] %>
+                          <%= form.hidden_field :company, :value => member['Company'] %>
+                          <%= form.hidden_field :group_id, :value => @group.id %>
+                              <%= form.hidden_field :stype, :value => 'DELETE' %>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            
+                        <%= form.submit 'Yes', class: 'btn btn-danger', type: "submit" %>
+                        </div>
+                          </form>
+                          
+                        </div>
+                      </div>
+                      
+                        
+                      
+                      <%end%>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="modal fade" id="exampleModal<%=contact['Id']%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editing <%= contact['Contact_type'] %> for <%=member['Company']%></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                      <div class="modal-body">
+                        <div class='container'>
+                        
+                          <form>
+                          <div class="form-group row" >
+                           
+                              <label for="exampleInputEmail1" >Contact Type</label>
+                              <%= form.text_field :contact_type, class: 'form-control', value: contact['Contact_type'] %>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Name</label>
+                              <%= form.text_field :contact_name, class: 'form-control', value: contact['Name'] %>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
+                              <%= form.text_field :phone, class: 'form-control', value: contact['Phone'] %>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                              <%= form.text_field :email, class: 'form-control', value: contact['Email'] %>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                              <%= form.text_field :address1, class: 'form-control', value: contact['Address1']%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                              <%= form.text_field :address2, class: 'form-control', value: contact['Address2']%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                              <%= form.text_field :city, class: 'form-control', value: contact['City']%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                              <%= form.text_field :state, class: 'form-control', value: contact['State']%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                              <%= form.text_field :zip, class: 'form-control', value: contact['Zip'] %>
+
+                              <%= form.hidden_field :name, :value => current_user.email %>
+                              <%= form.hidden_field :member_id, :value => contact['Member_id'] %>
+                              <%= form.hidden_field :member_code, :value => member['Code'] %>
+                              <%= form.hidden_field :contact_id, :value => contact['Id'] %>
+                              <%= form.hidden_field :company, :value => member['Company'] %>
+                              <%= form.hidden_field :group_id, :value => @group.id %>
+                              <%= form.hidden_field :stype, :value => 'UPDATE' %>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                        </div>
+                          </form>
+                          
+                        </div>
+                      </div>
+                      
+                        
+                      
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              <%end%>
+            <%end%> 
+            </div>
+            <div class='row'>
+            <div class='col-xl-12 col-sm-12' style='padding-top: 15px'>
+                  <div class="card" style="width: auto; ">
+
+                    <div class="card-header" data-toggle="collapse" href="#collapseExample12345" role="button" aria-expanded="false" aria-controls="collapseExample12345" >
+                      <h5 class="text-muted">
+                      New Contact
+                      </h5>
+                    </div>
+                    <div class='card-body' id="collapseExample12345">
+                    <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                      
+                        
+                          <form>
+                          <div class="form-group row" >
+                            <div class='col-md-4' style='padding-top: 10px'>
+                              <label for="exampleInputEmail1" >Contact Type</label>
+                              <%= form.text_field :contact_type, class: 'form-control' %>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Name</label>
+                              <%= form.text_field :contact_name, class: 'form-control'%>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
+                              <%= form.text_field :phone, class: 'form-control' %>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                              <%= form.text_field :email, class: 'form-control' %>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                              <%= form.text_field :address1, class: 'form-control'%>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                              <%= form.text_field :address2, class: 'form-control'%>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                              <%= form.text_field :city, class: 'form-control'%>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                              <%= form.text_field :state, class: 'form-control'%>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                              <%= form.text_field :zip, class: 'form-control' %>
+                            </div>
+                              <%= form.hidden_field :name, :value => current_user.email %>
+                              <%= form.hidden_field :member_id, :value => member['Member_id'] %>
+                              <%= form.hidden_field :member_code, :value => member['Code'] %>
+                              <%= form.hidden_field :contact_id %>
+                              <%= form.hidden_field :company, :value => member['Company'] %>
+                              <%= form.hidden_field :group_id, :value => @group.id %>
+                              <%= form.hidden_field :stype, :value => 'INSERT' %>
+                            </div>
+                          
+                        <%= form.submit 'Add Contact', class: 'btn btn-success btn-block', type: "submit" %>
+                        
+                          </form>
+                          <%end%>
+                    </div>
+                  </div>
+            </div>
+            
+
+            </div>
+          </div>
+        </div>
+        <div class="container" style="padding-bottom: 10px">
+          <div class="row">
+            <div class="col-md-6 ">
+            <!–– <button type="button" class="btn btn-secondary btn-block"> 
+            <!––    <%= link_to image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%); filter:invert(100%);') %>
+                <!––  </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <%end%>
+<%end%>
+  <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
+    <% if current_user.admin? %>
+<div class="card" style="width: auto; ">      
+<a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <div class="card-header" >
+    <h6 style="padding-top: 10px !important;">
+      <div style="color: #E27d60">Add Code</div>      
+    </h6>
+  </div>
+</a>
+
+
+
+</div>
+<% end %>
+</div>
+
+</div>
+</div>
+  <h4 class="text-center">Comments </h4>
+      <hr class="my-4">
+</hr>
+    <div class="card">
+  <div class="card-header">
+  Comment 1
+</div>
+
+<p class="card-text">
+Comment 1 body
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @group.user_id %>
-</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="mycontent-right">
+  <div style="padding-left: 15px">
+  
 
-<p>
-  <strong>User:</strong>
-  <%= @group.user %>
-</p>
+    
+  
+  <div class=""> Billing Contact:
 
-<p>
-  <strong>Company:</strong>
-  <%= @group.company %>
+      
 </p>
+<hr class="my-4">
+  </hr>
+<h6>Recent Activity</h6>
+<ul class="list-group">
+<%if @activities.present?%>
+<% @activities.each do |activity| %>
+  <li class="list-group-item">
+   
+    <strong></strong>
+    <% render_activity activity, display: :i18n %>
+    <% if activity.trackable %>
+    
+      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> <%= activity.text %> for <%= link_to activity.trackable.code.code,  code_path(activity.trackable.code.id) %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+      <% else %>
+      <%= activity.owner.profile.first_name %> <%= activity.owner.profile.last_name %> <%= activity.text %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+      <% end %>
+      
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+  </li>
+<% end %>
+<%end%>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<style type="text/css">.mycontent-right {
+border-left: 3px solid #F2F7F9 !important; 
+}</style>

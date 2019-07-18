@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :member_contacts
   get 'activities/index'
   resources :profiles
-  resources :groups
+  resources :groups do 
+    resources :member_contacts
+  end
   devise_for :users
   resources :contacts
   resources :codes do

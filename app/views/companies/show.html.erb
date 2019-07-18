@@ -33,6 +33,9 @@
     </div>
   </div>
 </div>
+
+ 
+  
 <div class="container-fluid" >
   <div class="row" >
     <div class="col-md-8 offset-md-1">
@@ -41,12 +44,88 @@
 		<hr class="my-4">
 		</hr>
 		<div class="row">
-			<%= render :partial => @company.codes %>
-        
+      
+      <% @members.each do |member| %>
+        <div class="col-xl-12 text-center" style="padding-bottom: 25px !important">
+          <div class="card" style="width: auto; ">
+
+            <div class="card-header" >
+              <h5 style="padding-left: 55px; padding-top: 10px !important; color: #E27d60 !important ">
+                <%= member['Code'] %> - <%= member['Company'] %>
+              
+              <% if member['Active'] == "true" %>
+                <div class="badge badge-success float-right"  > 
+                  Active
+                </div>
+    		      <% elsif member['Active'] == "false" %>
+                <div class="badge badge-danger float-right" >
+                  Not Active
+                </div>
+    		      <% else %>
+                <div class="badge badge-info float-right" >
+                </div>
+              <%end%>
+              </h5>
+            </div>
+
+            <h5 class="card-text text-muted" style="padding-top: 15px">
+              Facility Type: <%= member['Facility'] %>
+            </h5>
+
+            <h5 class="text-muted" style="padding-left: 10px">
+              Destination: <%= member['Delivery_address'] %>
+            </h5>
+
+            <div class='col-md-6 offset-md-3'>
+              <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Contacts</button>
+            </div>
+            <div class="collapse" id="collapseExample<%=member['Member_id']%>">
+              <div class='container'>
+                <div class="row" style='padding-top: 15px'>
+                  <% member['Contacts'][0]['Contacts'].each do |contact| %>
+              
+                    <div class='col-xl-3 col-lg-4 col-md-6 col-sm-12' style='padding-top: 15px'>
+                      <div class="card" style="width: auto; ">
+
+                        <div class="card-header" >
+                          <h5 class="text-muted">
+                            <%= contact['Contact_type'] %>
+                          </h5>
+                          <div class='card-body'>
+                            <h6 class="text-muted"><%= contact['Name'] %></h6>
+                            <h6 class="text-muted"><%= contact['Phone'] %></h6>
+                            <h6 class="text-muted"><%= contact['Email'] %></h6>
+                            <% if contact['Address1'].present? %>
+                              <h6 class="text-muted"><%= contact['Address1'] %></h6>
+                              <h6 class="text-muted"><%= contact['City'] %>, <%= contact['State'] %></h6>
+                              <h6 class="text-muted"><%= contact['Zip'] %></h6>
+                            <%end%>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  <%end%>
+                </div>
+              </div>
+            </div>
+            <div class="container" style="padding-bottom: 10px">
+              <div class="row">
+                <div class="col-md-6 ">
+                <!–– <button type="button" class="btn btn-secondary btn-block"> 
+                <!––    <%= link_to image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%); filter:invert(100%);') %>
+                    <!––  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <%end%>
       
       <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
         <% if current_user.admin? %>
-  <div class="card" style="width: 18rem; ">      
+  <div class="card" style="width: auto; ">      
     <a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
       <div class="card-header" >
         <h6 style="padding-top: 10px !important;">
@@ -109,21 +188,10 @@
     <div class="col-md-3">
     <div class="mycontent-right">
     	<div style="padding-left: 15px">
-    	Status: 
+    	
 
-    	<% if @company.status == "Active" %>
-    		<div class="badge badge-success" > 
-    		<% elsif @company.status == "Pending" %>
-    		<div class="badge badge-warning">
-    		<% elsif @company.status == "Canceled" %>
-    		<div class="badge badge-danger">
-    		<% else %>
-    		<div class="badge badge-info">
-    	<%end%>
-
-    		<%= @company.status %></div>
-    		<hr class="my-4">
-    	</hr>
+    		
+    	
     	<div class=""> Billing Contact:
 
       		<% if @company.billing_contact.present? %>
