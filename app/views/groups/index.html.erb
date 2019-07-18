@@ -33,14 +33,14 @@
         <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
           <div class="row">
             <div class="col-md-6">
-              <button type="button" class="btn btn-secondary btn-block">
-                <%= link_to image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%);
-        filter:invert(100%);'), edit_group_path(group)%>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal<%=group.id%>">
+                <%= image_tag("pencil.svg", :width => "15", :style => '-webkit-filter:invert(100%);
+        filter:invert(100%);')%>
 
               </button>
             </div>
             <div class="col-md-6">
-              <button type="button" class="btn btn-danger btn-block">
+              <button type="button" class="btn btn-danger" >
                 <%= link_to image_tag("trashcan.svg", :width => "15", :style => '-webkit-filter:invert(100%);
         filter:invert(100%);'), group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' } %>
 
@@ -50,6 +50,40 @@
         </div>
       </div>
   </div>
+  <div class="modal fade" id="exampleModal<%=group.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for group, url: edit_group_path(group)  do |form|  %>
+      <div class="modal-body">
+        <div class='container'>
+        
+          <form>
+          <div class="form-group row" >
+           
+              <label for="exampleInputEmail1" >Billing ID</label>
+              <%= form.text_field :billing_id, class: 'form-control', value: group.billing_id %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+        </div>
+          </form>
+          
+        </div>
+      </div>
+      
+        
+      
+      <%end%>
+    </div>
+  </div>
+</div>
   <% end %>
   <div class="col-md-4"style='padding-top: 15px'>
     <div class="card" style="width: 18rem; ">      
@@ -75,3 +109,4 @@
 <style type="text/css">#footer{position: fixed;width: 100%;
   bottom: 0;}</style>
 
+  
