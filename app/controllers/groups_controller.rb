@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
   def show
     require 'httparty'
     require 'json'
-    response = HTTParty.get("http://localhost:8080/members/group="+@group.billing_id+"")
+    response = HTTParty.get("http://52.8.206.74/members/group="+@group.billing_id+"")
     @memb = JSON.parse(response)
     @members = @memb['Members']
   end
