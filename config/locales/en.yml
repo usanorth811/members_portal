@@ -32,8 +32,8 @@
 
 en:
   activity:
-    contact:
-      create: ' added a contact '
+    member_contact:
+      create: ' made a change '
       destroy: ' removed a contact'
       update: ' updated a contact '
     code:

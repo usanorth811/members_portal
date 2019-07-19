@@ -5,11 +5,11 @@
        
         <strong></strong>
         <% render_activity activity, display: :i18n %>
-        <% if activity.trackable %>
+        
           <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> <%= activity.text %> a <%= link_to activity.trackable.contact_type, contact_path(activity.trackable)%> contact for <%= link_to activity.trackable.code.code,  code_path(activity.trackable.code.id) %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
           <%= activity.billing %>
           
-        <% end %>
+        
       </li>
     <% end %>
   </ul>

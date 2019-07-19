@@ -42,7 +42,7 @@ Rails.application.configure do
     address:              'usaexch01.usan.org',
     authentication:       'login',
     user_name:            'caleb.woods',
-    password:             'Mu$k3t33r$',    
+    password:             'Temp1234!',    
     enable_starttls_auto: true,
     :openssl_verify_mode  => 'none'
       }

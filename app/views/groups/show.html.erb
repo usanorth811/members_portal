@@ -412,12 +412,10 @@ Comment 1 body
    
     <strong></strong>
     <% render_activity activity, display: :i18n %>
-    <% if activity.trackable %>
     
-      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> <%= activity.text %> for <%= link_to activity.trackable.code.code,  code_path(activity.trackable.code.id) %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
-      <% else %>
-      <%= activity.owner.profile.first_name %> <%= activity.owner.profile.last_name %> <%= activity.text %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
-      <% end %>
+    
+      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> <%= activity.text %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+      
       
 
   </li>
