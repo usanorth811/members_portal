@@ -26,7 +26,6 @@ class MemberContactsController < ApplicationController
   def create
     @member_contact = MemberContact.new(member_contact_params)
     
-
     require 'uri'
     require 'net/http'
 
@@ -53,7 +52,7 @@ class MemberContactsController < ApplicationController
     puts response.read_body
     
     respond_to do |format|
-      if @member_contact.valid?
+      if @member_contact.save
             #@message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@member_contact.stype+' a contact for ' + @member_contact.member_code.to_s 
             #ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
             #@useremail = current_user.email
@@ -90,8 +89,13 @@ class MemberContactsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def billing
+    @member_contact.billing
+  end
 
   private
+
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_member_contact
       @member_contact = MemberContact.find(params[:id])
@@ -99,6 +103,9 @@ class MemberContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_contact_params
-      params.require(:member_contact).permit(:name, :ip, :member_id, :member_code, :contact_id, :contact_type, :company, :contact_name, :address1, :address2, :city, :state, :zip, :phone, :phone_ext, :email, :group_id, :stype)
+      params.require(:member_contact).permit(:name, :ip, :member_id, :member_code, :contact_id, :contact_type, :company, :contact_name, :address1, :address2, :city, :state, :zip, :phone, :phone_ext, :email, :group_id, :stype, :billing)
+    end
+    def load_activities
+      @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
     end
 end

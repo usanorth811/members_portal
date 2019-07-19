@@ -183,6 +183,7 @@
                           <%= form.hidden_field :company, :value => member['Company'] %>
                           <%= form.hidden_field :group_id, :value => @group.id %>
                               <%= form.hidden_field :stype, :value => 'DELETE' %>
+                              <%= form.hidden_field :billing, :value => @group.billing_id%>
                             </div>
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -253,6 +254,7 @@
                               <%= form.hidden_field :company, :value => member['Company'] %>
                               <%= form.hidden_field :group_id, :value => @group.id %>
                               <%= form.hidden_field :stype, :value => 'UPDATE' %>
+                              <%= form.hidden_field :billing, :value => @group.billing_id%>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -330,6 +332,7 @@
                               <%= form.hidden_field :company, :value => member['Company'] %>
                               <%= form.hidden_field :group_id, :value => @group.id %>
                               <%= form.hidden_field :stype, :value => 'INSERT' %>
+                              <%= form.hidden_field :billing, :value => @group.billing_id%>
                             </div>
                           
                         <%= form.submit 'Add Contact', class: 'btn btn-success btn-block', type: "submit" %>

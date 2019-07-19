@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_174151) do
     t.string "email"
     t.string "group_id"
     t.string "stype"
+    t.string "billing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

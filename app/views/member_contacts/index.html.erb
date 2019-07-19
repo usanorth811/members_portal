@@ -33,7 +33,7 @@
         <td><%= member_contact.member_id %></td>
         <td><%= member_contact.member_code %></td>
         <td><%= member_contact.contact_id %></td>
-        <td><%= member_contact.type %></td>
+        <td><%= member_contact.stype %></td>
         <td><%= member_contact.company %></td>
         <td><%= member_contact.contact_name %></td>
         <td><%= member_contact.address1 %></td>
@@ -44,6 +44,7 @@
         <td><%= member_contact.phone %></td>
         <td><%= member_contact.phone_ext %></td>
         <td><%= member_contact.email %></td>
+        <td><%= member_contact.group.billing_id %></td>
         <td><%= link_to 'Show', member_contact %></td>
         <td><%= link_to 'Edit', edit_member_contact_path(member_contact) %></td>
         <td><%= link_to 'Destroy', member_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
