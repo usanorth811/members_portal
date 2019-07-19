@@ -19,7 +19,7 @@ class CreateMemberContacts < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :group_id
       t.string :stype
-      t.string :billing
+      
 
       t.timestamps
     end
