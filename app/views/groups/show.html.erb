@@ -417,7 +417,16 @@ Comment 1 body
     <% render_activity activity, display: :i18n %>
     
     
-      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> <%= activity.text %> on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> 
+      <% if activity.stype == 'UPDATE' %>
+      Updated a contact for 
+      <%elsif activity.stype == 'DELETE' %>
+      Deleted a contact for
+      <%else %>
+      Added a contact for
+      <%end%>
+      <%= activity.code %>
+       on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
       
       
 

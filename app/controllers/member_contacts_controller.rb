@@ -92,6 +92,12 @@ class MemberContactsController < ApplicationController
   def billing
     @member_contact.billing
   end
+  def stype
+    @member_contact.stype
+  end
+  def code 
+    @member_contact.member_code
+  end
 
   private
 
