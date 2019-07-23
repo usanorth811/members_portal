@@ -117,6 +117,7 @@
                       </h5>
                       <div class='card-body'>
                         <h6 class="text-muted"><%= contact['Name'] %></h6>
+                        
                         <h6 class="text-muted"><a href="tel:<%= contact['Phone'] %>"><%= number_to_phone contact['Phone'] %></a></h6>
                         <h6 class="text-muted"><a href = "mailto:<%= contact['Email'] %>"><%= contact['Email'] %></a></h6>
                         <% if contact['Address1'].present? %>
@@ -163,7 +164,7 @@
                           
                           <%= form.hidden_field :contact_type, :value => contact['Contact_type'] %>
                           
-                          <%= form.hidden_field :contact_name, :value => contact['Name'] %>
+                          <%= form.hidden_field :contact_name, :value => contact['Contact'] %>
                           
                           <%= form.hidden_field :phone, :value => contact['Phone'] %>
                           
@@ -182,7 +183,7 @@
                           <%= form.hidden_field :member_id, :value => contact['Member_id'] %>
                           <%= form.hidden_field :member_code, :value => member['Code'] %>
                           <%= form.hidden_field :contact_id, :value => contact['Id'] %>
-                          <%= form.hidden_field :company, :value => member['Company'] %>
+                          <%= form.hidden_field :company, :value => contact['Name'] %>
                           <%= form.hidden_field :group_id, :value => @group.id %>
                               <%= form.hidden_field :stype, :value => 'DELETE' %>
                               <%= form.hidden_field :billing, :value => @group.billing_id%>
