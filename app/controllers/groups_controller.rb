@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
    
     @group = Group.new
     @groups = current_user.groups
+    
   end
 
   # GET /groups/1
@@ -18,6 +19,14 @@ class GroupsController < ApplicationController
     response = HTTParty.get("http://52.8.206.74/members/group="+@group.billing_id+"")
     @memb = JSON.parse(response)
     @members = @memb['Members']
+
+    response1 = HTTParty.get("http://52.8.206.74/billing/billing_code="+@group.billing_id+"")
+    puts response1
+    @bill = JSON.parse(response1)
+    puts @bill
+    @bills = @bill['Billing']
+    puts @bills
+    
   end
 
   # GET /groups/new

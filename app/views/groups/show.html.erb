@@ -1,15 +1,17 @@
-
-			<h3 class="white-text">
-      
-    </h3>
+  
     <p>
-      <h6>
+    <div class='col-md-12 offset-md-2'>
+    <h2 class="white-text">
+    <% if @bills == nil %>
+    
+    <% else %>
+    <%@bills.each do |bill|%>
+      <%= bill['Name']%>
+      <%end%>
 
-      
-
-
-
-    </h6>
+    <% end%>
+  </h2>
+  </div>
   </p>
 <%= render partial: 'nav' %>
 <div class="container-fluid">
