@@ -168,6 +168,8 @@
                           
                           <%= form.hidden_field :phone, :value => contact['Phone'] %>
                           
+                          <%= form.hidden_field :phone_ext, :value => contact['Phone_ext'] %>
+                          
                           <%= form.hidden_field :email, :value => contact['Email'] %>
                           
                           <%= form.hidden_field :address1, :value => contact['Address1'] %>
@@ -231,6 +233,9 @@
                              
                               <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
                               <%= form.text_field :phone, class: 'form-control', value: contact['Phone'] %>
+
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Ext</label>
+                              <%= form.text_field :phone_ext, class: 'form-control', value: contact['Phone_ext'] %>
                              
                               <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
                               <%= form.text_field :email, class: 'form-control', value: contact['Email'] %>
@@ -303,6 +308,10 @@
                             <div class='col-md-4'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
                               <%= form.text_field :phone, class: 'form-control' %>
+                            </div>
+                            <div class='col-md-4'>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Ext</label>
+                              <%= form.text_field :phone_ext, class: 'form-control' %>
                             </div>
                             <div class='col-md-4'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
