@@ -12,7 +12,7 @@
 <div class="col-md-12">
   <ol class="breadcrumb"style="background-color: white">
     <li class="breadcrumb-item"><%=link_to "COMPANIES", root_path %></li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @group.id %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
   </ol>
   <p id="notice"><%= notice %></p>
 </div>
