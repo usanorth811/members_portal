@@ -1,10 +1,11 @@
   
     <p>
-    <div class='col-md-12 offset-md-2'>
+    <div class='col-lg-12 offset-lg-2 d-none d-lg-block'>
     <h2 class="white-text">
     <%= @group.name %>
   </h2>
   </div>
+  
   </p>
 <%= render partial: 'nav' %>
 <div class="container-fluid">
@@ -23,6 +24,11 @@
 
 <div class="container-fluid" >
 <div class="row" >
+<div class='col-md-8 offset-md-1 d-lg-none'>
+    <h4 class="text-center">
+    <%= @group.name %>
+    </h4>
+</div>
 <div class="col-md-8 offset-md-1">
   <div class="container-fluid" style="padding-top: 35px !important">
 <h4 class="text-center">Codes</h4>
