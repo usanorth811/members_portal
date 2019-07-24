@@ -42,24 +42,34 @@
       <div class="card" style="width: auto; ">
 
         <div class="card-header" >
-          <h5 style="padding-left: 55px; padding-top: 10px !important; color: #E27d60 !important ">
-            <%= member['Code'] %> - <%= member['Company'] %>
+        <h5 style=" padding-top: 10px !important; color: #E27d60 !important ">
+        <div class='col-md-10 offset-md-1'>
           
+            <%= member['Code'] %> - <%= member['Company'] %>
+         
+        </div>
+        
           <% if member['Active'] == "true" %>
-            <div class="badge badge-success float-right"  > 
+            <div class="badge badge-success float-right col-md-1 d-none d-md-block"  > 
+              Active
+            </div>
+            <div class="badge badge-success col-xs-1 d-md-none"  > 
               Active
             </div>
           <% elsif member['Active'] == "false" %>
-            <div class="badge badge-danger float-right" >
+            <div class="badge badge-danger float-right col-md-1 d-none d-md-block" >
+              Not Active
+            </div>
+            <div class="badge badge-danger col-xs-1 d-md-none" >
               Not Active
             </div>
           <% else %>
             <div class="badge badge-info float-right" >
             </div>
           <%end%>
-          </h5>
+          
         </div>
-
+    </h5>
         <h5 class="card-text text-muted" style="padding-top: 15px">
           Facility Type: <%= member['Facility'] %>
         </h5>
