@@ -15,10 +15,24 @@
   </div>
 </div>
 
-<div class="container" style="padding-bottom: 250px">
+<div class="container text-center" style="padding-bottom: 250px">
   <div class="row" >
     <div class="col-md-12">
-      <h4 class="text-center">Companies</h4>
+      <h2 class='text-center'>Welcome to the USA North 811 Member's Portal</h2>
+      <div class='col-md-4 offset-md-4'><hr class="my-4"></hr></div>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class='col-md-4'>
+      <h4><a href="/profiles">My Profile</a></h4>
+    </div>
+    <div class='col-md-4'>
+      <h4 class="text-center">My Companies</h4>
+    </div>
+    <div class='col-md-4'>
+      <h4><a href="https://webtms.usan.org">WebTMS</a></h4>
+    </div>
+    <div class='col-md-12'>
       <hr class="my-4"></hr>
     </div>
   </div>
@@ -26,9 +40,15 @@
   <div class="row">
     <% @groups.each do |group| %>
     <div class="col-md-4" style='padding-top: 15px'>
-      <div class="card" style="width: 18rem; ">
+      <div class="card" style="width: auto; ">
         <div class="card-header" >
-          <h6 style="padding-top: 10px !important;"><%= link_to group.billing_id, group %></h6>
+          <h6 style="padding-top: 10px !important;">
+          <%if group.name == nil %>
+            <%=link_to group.billing_id, group %>
+          <%else%>
+            <%= link_to group.name, group %> 
+          <%end%>
+          </h6>
         </div>
         <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
           <div class="row">
@@ -59,7 +79,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <%= form_for group, url: edit_group_path(group)  do |form|  %>
+      <%= form_for group, url: group_path(group)  do |form|  %>
       <div class="modal-body">
         <div class='container'>
         
@@ -68,6 +88,8 @@
            
               <label for="exampleInputEmail1" >Billing ID</label>
               <%= form.text_field :billing_id, class: 'form-control', value: group.billing_id %>
+              <label for="exampleInputEmail1" >Company Name</label>
+              <%= form.text_field :name, class: 'form-control', value: group.name %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -86,7 +108,7 @@
 </div>
   <% end %>
   <div class="col-md-4"style='padding-top: 15px'>
-    <div class="card" style="width: 18rem; ">      
+    <div class="card" style="width: auto; ">      
       <div class="card-header" >
         <h6 style="padding-top: 10px !important;">
           <div style="color: #E27d60">Add Company</div>      
@@ -106,7 +128,7 @@
 </h2>
 <% end %>
 
-<style type="text/css">#footer{position: fixed;width: 100%;
+<style type="text/css">#footer{width: 100%;
   bottom: 0;}</style>
 
   

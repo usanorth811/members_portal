@@ -41,14 +41,25 @@ class GroupsController < ApplicationController
   def edit
   end
 
+  
   # POST /groups
   # POST /groups.json
   def create
+    
     @group = current_user.groups.build
     
     @group = current_user.groups.build(group_params)
     puts @group.billing_id
-    
+    require 'httparty'
+    require 'json'
+    response1 = HTTParty.get("http://52.8.206.74/billing/billing_code="+@group.billing_id+"")
+    puts response1
+    @bill = JSON.parse(response1)
+    puts @bill
+    @bills = @bill['Billing']
+    if @bills != nil
+    @group.name = @bills[0]['Name']
+    end
     
     respond_to do |format|
       if @group.save
@@ -93,7 +104,7 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:billing_id, :user_id, :user_id, :company_id)
+      params.require(:group).permit(:billing_id, :user_id, :user_id, :company_id, :name)
     end
     def load_activities
 

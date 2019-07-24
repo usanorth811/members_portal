@@ -2,14 +2,7 @@
     <p>
     <div class='col-md-12 offset-md-2'>
     <h2 class="white-text">
-    <% if @bills == nil %>
-    
-    <% else %>
-    <%@bills.each do |bill|%>
-      <%= bill['Name']%>
-      <%end%>
-
-    <% end%>
+    <%= @group.name %>
   </h2>
   </div>
   </p>
@@ -413,7 +406,7 @@ Comment 1 body
 
     
   
-  <div class=""> Billing Contact:
+  <a href="https://webtms.usan.org"><h6> Log In to WebTMS</h6></a>
 
       
 </p>
