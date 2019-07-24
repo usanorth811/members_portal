@@ -117,7 +117,7 @@
                       </h5>
                       <div class='card-body'>
                         <h6 class="text-muted"><%= contact['Name'] %></h6>
-                        
+                        <h6 class='text-muted'>Name: <%= contact['Contact_name'] %></h6>
                         <h6 class="text-muted"><a href="tel:<%= contact['Phone'] %>"><%= number_to_phone contact['Phone'] %></a></h6>
                         <h6 class="text-muted"><a href = "mailto:<%= contact['Email'] %>"><%= contact['Email'] %></a></h6>
                         <% if contact['Address1'].present? %>
