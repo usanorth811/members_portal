@@ -251,7 +251,7 @@
                             </div> 
                             <div class="col-sm-12">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
-                              <%= form.text_field :email, class: 'form-control', value: contact['Email'] %>
+                              <%= form.text_field :email, class: 'form-control', value: contact['Email'],type: "email" %>
                             </div>
                             <div class="d-none d-lg-block col-lg-12">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
@@ -332,7 +332,7 @@
                             </div>
                             <div class='col-md-4'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
-                              <%= form.text_field :email, class: 'form-control' %>
+                              <%= form.text_field :email, class: 'form-control',type: "email" %>
                             </div>
                             <div class='col-md-4'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
