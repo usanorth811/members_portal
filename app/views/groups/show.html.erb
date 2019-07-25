@@ -233,25 +233,27 @@
                         
                           <form>
                           <div class="form-group row" >
-                           
+                            <div class="col-sm-6">
                               <label for="exampleInputEmail1" >Contact Type</label>
-                              <%= form.text_field :contact_type, class: 'form-control', value: contact['Contact_type'] %>
-                             
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Name</label>
-                              <%= form.text_field :contact_name, class: 'form-control', value: contact['Name'] %>
-                             
+                              <%= form.select :contact_type, ['RCVR',"ALTR",'BILL','DAMG','DATA','EMER','ENGR','SURV','CONT','NITE','AHRS','VACU','REPR','BORD'], {:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['Contact_type'], required: true %>
+                            </div> 
+                            <div class="col-sm-6">  
+                              <label for="exampleInputEmail1" style=''>Contact Name</label>
+                              <%= form.text_field :contact_name, class: 'form-control', value: contact['Contact_name'], required: true %>
+                            </div> 
+                            <div class="col-md-12 col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
-                              <%= form.text_field :phone, class: 'form-control', value: contact['Phone'] %>
-
-                              <div class="d-none d-lg-block">
+                              <%= form.text_field :phone, class: 'form-control', value: contact['Phone'], required: true %>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Ext</label>
                               <%= form.text_field :phone_ext, class: 'form-control', value: contact['Phone_ext'] %>
-                             </div>
-
+                            </div> 
+                            <div class="col-sm-12">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
                               <%= form.text_field :email, class: 'form-control', value: contact['Email'] %>
-                             
-                              <div class="d-none d-lg-block">
+                            </div>
+                            <div class="d-none d-lg-block col-lg-12">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
                               <%= form.text_field :address1, class: 'form-control', value: contact['Address1']%>
                              
@@ -260,13 +262,15 @@
                              
                               <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
                               <%= form.text_field :city, class: 'form-control', value: contact['City']%>
-                             
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
                               <%= form.text_field :state, class: 'form-control', value: contact['State']%>
-                             
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
                               <%= form.text_field :zip, class: 'form-control', value: contact['Zip'] %>
-                              </div>
+                            </div>
                               
                               <%= form.hidden_field :name, :value => current_user.email %>
                               <%= form.hidden_field :member_id, :value => contact['Member_id'] %>
@@ -310,19 +314,19 @@
                         
                           <form>
                           <div class="form-group row" >
-                            <div class='col-md-4' style='padding-top: 10px'>
-                              <label for="exampleInputEmail1" >Contact Type</label>
-                              <%= form.text_field :contact_type, class: 'form-control' %>
-                            </div>
+                          <div class="col-sm-4" style='padding-top:10px'>
+                          <label for="exampleInputEmail1" >Contact Type</label>
+                          <%= form.select :contact_type, ['RCVR',"ALTR",'BILL','DAMG','DATA','EMER','ENGR','SURV','CONT','NITE','AHRS','VACU','REPR','BORD'],{},class: 'form-control custom-select',  required: true %>
+                        </div> 
                             <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Name</label>
-                              <%= form.text_field :contact_name, class: 'form-control'%>
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Contact Name</label>
+                              <%= form.text_field :contact_name, class: 'form-control', required: true%>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
-                              <%= form.text_field :phone, class: 'form-control' %>
+                              <%= form.text_field :phone, class: 'form-control', required: true %>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Ext</label>
                               <%= form.text_field :phone_ext, class: 'form-control' %>
                             </div>
@@ -342,11 +346,11 @@
                               <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
                               <%= form.text_field :city, class: 'form-control'%>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
                               <%= form.text_field :state, class: 'form-control'%>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
                               <%= form.text_field :zip, class: 'form-control' %>
                             </div>
