@@ -265,7 +265,7 @@
                             </div>
                             <div class="d-none d-lg-block col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
-                              <%= form.text_field :state, class: 'form-control', value: contact['State']%>
+                              <%= form.select :state, ['CA','NV'],{:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['State']%>
                             </div>
                             <div class="d-none d-lg-block col-lg-6">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
@@ -348,7 +348,7 @@
                             </div>
                             <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
-                              <%= form.text_field :state, class: 'form-control'%>
+                              <%= form.select :state, ['CA','NV'],{}, class: 'form-control custom-select'%>
                             </div>
                             <div class='col-md-2'>
                               <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
