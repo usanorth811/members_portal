@@ -28,7 +28,7 @@ class MemberContactsController < ApplicationController
     
     require 'uri'
     require 'net/http'
-
+    if @member_contact.valid?
     url = URI("https://jas2.usanorth811.org:10443/membersapi")
 
     http = Net::HTTP.new(url.host, url.port)
@@ -50,7 +50,7 @@ class MemberContactsController < ApplicationController
     puts request.body
     response = http.request(request)
     puts response.read_body
-    
+    end
     respond_to do |format|
       if @member_contact.save
             #@message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@member_contact.stype+' a contact for ' + @member_contact.member_code.to_s 
@@ -60,7 +60,8 @@ class MemberContactsController < ApplicationController
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved' }
         format.json { render :show, status: :created, location: @member_contact }
       else
-        format.html { redirect_to root_path }
+        puts @member_contact.errors.to_s
+        format.html { redirect_to @member_contact.group }
         format.json { render json: @member_contact.errors, status: :unprocessable_entity }
       end
     end
