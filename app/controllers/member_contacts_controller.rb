@@ -60,9 +60,9 @@ class MemberContactsController < ApplicationController
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved' }
         format.json { render :show, status: :created, location: @member_contact }
       else
-        puts @member_contact.errors.to_s
+        flash[:member_contact_errors] = @member_contact.errors.full_messages
         format.html { redirect_to @member_contact.group }
-        format.json { render json: @member_contact.errors, status: :unprocessable_entity }
+        
       end
     end
   end

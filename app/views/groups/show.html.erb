@@ -19,7 +19,14 @@
 </div>
 </div>
 </div>
-
+<% if flash[:member_contact_errors] %>
+  <h5>Could not submit changes for the following reasons:</h5>
+    <div class="alert alert-danger" role="alert">
+    <% flash[:member_contact_errors].each do |msg| %>
+      <h6><%= msg %></h6>
+    <% end %>
+    </div>
+  <% end %>
 
 
 <div class="container-fluid" >
