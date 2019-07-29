@@ -135,8 +135,8 @@
                         <%end%>
                       </h5>
                       <div class='card-body'>
-                        <h6 class="text-muted"><%= contact['Name'] %></h6>
-                        <h6 class='text-muted'>Name: <%= contact['Contact_name'] %></h6>
+                      <% if false %><h6 class="text-muted"><%= contact['Name'] %></h6><%end%>
+                        <h6 class='text-muted'><%= contact['Contact'] %></h6>
                         <h6 class="text-muted"><a href="tel:<%= contact['Phone'] %>"><%= number_to_phone contact['Phone'] %></a></h6>
                         <h6 class="text-muted"><a href = "mailto:<%= contact['Email'] %>"><%= contact['Email'] %></a></h6>
                         <% if contact['Address1'].present? %>
@@ -354,13 +354,101 @@
                         <%end%>
                       </h5>
                       <div class='card-body'>
-                        This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.
+                        This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.                       
                       </div>
+                      <button type='button' class='btn btn-info' data-toggle="modal" data-target="#exampleModal">Quick Add</button>
                     </div>
                   </div>
                   </div>
                 </div>
-                
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Quick Add contact for <%=member['Company']%></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                      <div class="modal-body">
+                        <div class='container'>
+                        
+                          <form>
+                          <div class="form-group row" >
+                            <div class="col-sm-6">
+                              <label for="exampleInputEmail1" >Contact Type</label>
+                              <input class="form-control" type="text" placeholder="<%=missingcontact%>" readonly>
+                              
+                            </div> 
+                            <div class="col-sm-6">  
+                              <label for="exampleInputEmail1" style=''>Contact Name</label>
+                              
+                              <%= form.text_field :contact_name, class: 'form-control', required: true %>
+                              <h6 ><small style='color: red; '>*required</small></h6>
+                            </div> 
+                            <div class="col-md-12 col-lg-6">
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
+                              
+                              <%= form.text_field :phone, class: 'form-control', required: true %>
+                              <h6 ><small style='color: red; '>*required</small></h6>
+                            </div>
+                            
+                            <div class="col-md-12 col-lg-6">
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                              <%= form.text_field :email, class: 'form-control',type: "email" %>
+                            </div>
+
+                            <div class="d-none">
+                              <label for="exampleInputEmail1" style='padding-top:10px;'>Ext</label>
+                              
+                              <%= form.text_field :phone_ext, class: 'form-control' %>
+                            </div> 
+                            
+                            <div class="d-none">
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                              <%= form.text_field :address1, class: 'form-control'%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                              <%= form.text_field :address2, class: 'form-control'%>
+                             
+                              <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                              <%= form.text_field :city, class: 'form-control'%>
+                            </div>
+                            <div class="d-none ">
+                              <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                              <%= form.select :state, ['CA','NV'],class: 'form-control custom-select' %>
+                            </div>
+                            <div class="d-none ">
+                              <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                              <%= form.text_field :zip, class: 'form-control' %>
+                            </div>
+                            
+                            <%= form.hidden_field :contact_type, :value => missingcontact %>
+                            <%= form.hidden_field :name, :value => current_user.email %>
+                            <%= form.hidden_field :member_id, :value => member['Member_id'] %>
+                            <%= form.hidden_field :member_code, :value => member['Code'] %>
+                            <%= form.hidden_field :contact_id %>
+                            <%= form.hidden_field :company, :value => member['Company'] %>
+                            <%= form.hidden_field :group_id, :value => @group.id %>
+                            <%= form.hidden_field :stype, :value => 'INSERT' %>
+                            <%= form.hidden_field :billing, :value => @group.billing_id%>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                        </div>
+                          </form>
+                          
+                        </div>
+                      </div>
+                      
+                        
+                      
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
             <%end%> 
             </div>
             <div class='row'>
