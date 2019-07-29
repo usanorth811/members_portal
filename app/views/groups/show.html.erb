@@ -356,12 +356,12 @@
                       <div class='card-body'>
                         This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.                       
                       </div>
-                      <button type='button' class='btn btn-info' data-toggle="modal" data-target="#exampleModal">Quick Add</button>
+                      <button type='button' class='btn btn-info' data-toggle="modal" data-target="#exampleModal<%=missingcontact%>">Quick Add</button>
                     </div>
                   </div>
                   </div>
                 </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal<%=missingcontact%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
