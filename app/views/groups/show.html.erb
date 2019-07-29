@@ -77,6 +77,8 @@
           
         </div>
     </h5>
+    <% @missingcontacts = ['RCVR','ALTR','DAMG','DATA','EMER','CONT','AHRS','VACU']%>
+    
         <h5 class="card-text text-muted" style="padding-top: 15px">
           Facility Type: <%= member['Facility'] %>
         </h5>
@@ -93,7 +95,8 @@
             <div class="row" style='padding-top: 15px'>
             <%if member['Contacts'][0]['Contacts'].present?%>
               <% member['Contacts'][0]['Contacts'].each do |contact| %>
-          
+                
+                <% @missingcontacts -= [contact['Contact_type']]%>
                 <div class='col-xl-3 col-lg-4 col-md-6 col-sm-12' style='padding-top: 15px'>
                   <div class="card" style="width: auto; ">
 
@@ -311,6 +314,53 @@
                   </div>
                 </div>
               <%end%>
+              <%end%>
+              <% @missingcontacts.each do |missingcontact| %>
+              <div class='col-xl-3 col-lg-4 col-md-6 col-sm-12' style='padding-top: 15px'>
+                  <div class="card" style="width: auto; ">
+                  <div class="alert alert-warning" role="alert">
+                    <div class="" >
+                      <h5 class="text-muted">
+                        <%if missingcontact == 'RCVR' %>
+                          RECEIVING LOCATION
+                        <%elsif missingcontact== 'ALTR' %>
+                          ALTERNATE
+                        <%elsif missingcontact== 'BILL' %>
+                          BILLING
+                        <%elsif missingcontact== 'BORD' %>
+                          Board Representative
+                        <%elsif missingcontact== 'DAMG' %>
+                          DAMAGES
+                        <%elsif missingcontact== 'DATA' %>
+                          DATABASE
+                        <%elsif missingcontact== 'EMER' %>
+                          EMERGENCY
+                        <%elsif missingcontact== 'ENGR'%>
+                          ENGINEERING
+                        <%elsif missingcontact== 'MAIN'%>
+                          MAIN SWITCHBOARD
+                        <%elsif missingcontact== 'SURV'%>
+                          SURVEYOR
+                        <%elsif missingcontact== 'CONT'%>
+                          CONTACT
+                        <%elsif missingcontact== 'NITE'%>
+                          NIGHT TIME
+                        <%elsif missingcontact== 'AHRS'%>
+                          AFTER HOURS
+                        <%elsif missingcontact== 'VACU'%>
+                          VACUUM
+                        <%elsif missingcontact== 'REPR'%>
+                          MEMBER REP
+                        <%end%>
+                      </h5>
+                      <div class='card-body'>
+                        This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                
             <%end%> 
             </div>
             <div class='row'>

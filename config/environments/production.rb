@@ -63,7 +63,22 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "member_portal_#{Rails.env}"
 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: "https://guarded-depths-88265.herokuapp.com" }
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    domain:               'usan.org', 
+    address:              'usaexch16.usanorth811.org',
+    authentication:       'login',
+    user_name:            'caleb.woods',
+    password:             'Temp1234!',    
+    enable_starttls_auto: true,
+    :openssl_verify_mode  => 'none'
+      }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
