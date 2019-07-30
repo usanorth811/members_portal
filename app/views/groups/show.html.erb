@@ -353,10 +353,11 @@
                           MEMBER REP
                         <%end%>
                       </h5>
+                      <div class="alert alert-danger"><h5 style='padding-top:7px'> Missing Contact </h5></div>
                       <div class='card-body'>
                         This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.                       
                       </div>
-                      <button type='button' class='btn btn-info' data-toggle="modal" data-target="#exampleModal<%=missingcontact%>">Quick Add</button>
+                      <button type='button' class='btn btn-success' data-toggle="modal" data-target="#exampleModal<%=missingcontact%>">Quick Add</button>
                     </div>
                   </div>
                   </div>
@@ -417,7 +418,7 @@
                             </div>
                             <div class="d-none ">
                               <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
-                              <%= form.select :state, ['CA','NV'],class: 'form-control custom-select' %>
+                              <%= form.text_field :state, class: 'form-control' %>
                             </div>
                             <div class="d-none ">
                               <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>

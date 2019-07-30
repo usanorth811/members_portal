@@ -40,6 +40,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     domain:               'usan.org', 
     address:              'usaexch16.usanorth811.org',
+    port:                 578,
     authentication:       'login',
     user_name:            'caleb.woods',
     password:             'Temp1234!',    
