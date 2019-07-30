@@ -53,10 +53,10 @@ class MemberContactsController < ApplicationController
     end
     respond_to do |format|
       if @member_contact.save
-            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@member_contact.stype+' a contact for ' + @member_contact.member_code.to_s 
-            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
-            @useremail = current_user.email
-            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: @useremail, subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver 
+            #@message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@member_contact.stype+' a contact for ' + @member_contact.member_code.to_s 
+            #ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
+            #@useremail = current_user.email
+            #ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: @useremail, subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver 
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved' }
         format.json { render :show, status: :created, location: @member_contact }
       else
