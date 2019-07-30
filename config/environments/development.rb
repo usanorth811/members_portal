@@ -39,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     domain:               'usan.org', 
-    address:              'usaexch16.usanorth811.org',
+    address:              'usaexch01.usan.org',
     authentication:       'login',
     user_name:            'caleb.woods',
     password:             'Temp1234!',    
