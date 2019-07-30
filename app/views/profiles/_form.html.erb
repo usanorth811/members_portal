@@ -10,33 +10,35 @@
       </ul>
     </div>
   <% end %>
-
+<div class='container'>
+<div class='row'>
+<div class='col-md-6 offset-md-3'>
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :phone %>
-    <%= form.text_field :phone %>
+    <%= form.text_field :phone, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :employer %>
-    <%= form.text_field :employer %>
+    <%= form.text_field :employer, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
-
-
+</div>
+</div>
 
   <div class="actions">
     <%= form.submit %>
