@@ -28,29 +28,29 @@ class MemberContactsController < ApplicationController
     
     require 'uri'
     require 'net/http'
-    if @member_contact.valid?
-    url = URI("https://jas2.usanorth811.org:10443/membersapi")
+    #if @member_contact.valid?
+    #url = URI("https://jas.usanorth811.org:10443/membersapi")
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(url)
-    request["Content-Type"] = 'application/json'
-    request["Accept"] = '*/*'
-    request["Cache-Control"] = 'no-cache'
-    request["Host"] = 'jas2.usanorth811.org:10443'
-    request["Accept-Encoding"] = 'gzip, deflate'
-    request["Content-Length"] = '702'
-    request["Connection"] = 'keep-alive'
-    request["cache-control"] = 'no-cache'
+    #http = Net::HTTP.new(url.host, url.port)
+    #http.use_ssl = true
+    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #request = Net::HTTP::Post.new(url)
+    #request["Content-Type"] = 'application/json'
+    #request["Accept"] = '*/*'
+    #request["Cache-Control"] = 'no-cache'
+    #request["Host"] = 'jas2.usanorth811.org:10443'
+    #request["Accept-Encoding"] = 'gzip, deflate'
+    #request["Content-Length"] = '702'
+    #request["Connection"] = 'keep-alive'
+    #request["cache-control"] = 'no-cache'
     
-    @body = "{\n    \"token\": \"ZWkWwc6AzegYjSGddKKcDDn3YjZUFY9z\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
+    #@body = "{\n    \"token\": \"6Z36PSzyyHadp6ko8ZueRmvoD2hLwaCN\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
     
-    request.body = @body
-    puts request.body
-    response = http.request(request)
-    puts response.read_body
-    end
+    #request.body = @body
+    #puts request.body
+    #response = http.request(request)
+    #puts response.read_body
+    #end
     respond_to do |format|
       if @member_contact.save
             @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@member_contact.stype+' a contact for ' + @member_contact.member_code.to_s 
