@@ -86,7 +86,12 @@
         <h5 class="text-muted" style="padding-left: 10px">
           Ticket Delivery Destination: <%= member['Delivery_address'] %>
         </h5>
-
+        <h5 class="text-muted" style="padding-left: 10px">
+          Current Service Area Version Number: <%= member['Shape'] %>
+        </h5>
+        <h5 class="text-muted" style="padding-left: 10px">
+           Service Area Last Updated <%= Date.parse(member['Created']).strftime("%m/%d/%y")%>
+        </h5>
         <div class='col-md-6 offset-md-3'>
           <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Contacts</button>
         </div>
