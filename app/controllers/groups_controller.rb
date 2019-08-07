@@ -67,7 +67,7 @@ class GroupsController < ApplicationController
     
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Company was successfully added.' }
+        format.html { redirect_to @group, notice: 'Company was successfully added to your profile.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
