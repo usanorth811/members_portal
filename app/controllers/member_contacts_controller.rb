@@ -64,7 +64,7 @@ class MemberContactsController < ApplicationController
             ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
             @useremail = 'caleb.woods@usanorth811.org'
             ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: @useremail, subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver 
-        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved' }
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
         format.json { render :show, status: :created, location: @member_contact }
       else
         flash[:member_contact_errors] = @member_contact.errors.full_messages

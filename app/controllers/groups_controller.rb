@@ -26,7 +26,11 @@ class GroupsController < ApplicationController
     puts @bill
     @bills = @bill['Billing']
     puts @bills
-    
+
+    response2 = HTTParty.get("https://guarded-depths.com/members/totals/group="+@group.billing_id+"/", :verify => false)
+    @count = JSON.parse(response2)
+    @counts = @count['Counts']
+    @total = 0
   end
 
   # GET /groups/new
