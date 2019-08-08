@@ -53,13 +53,10 @@ class GroupsController < ApplicationController
     @group = current_user.groups.build
     
     @group = current_user.groups.build(group_params)
-    puts @group.billing_id
     require 'httparty'
     require 'json'
     response1 = HTTParty.get("https://52.8.206.74/billing/billing_code="+@group.billing_id+"", :verify => false)
-    puts response1
     @bill = JSON.parse(response1)
-    puts @bill
     @bills = @bill['Billing']
     if @bills != nil
     @group.name = @bills[0]['Name']

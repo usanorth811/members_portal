@@ -47,9 +47,7 @@ class MemberContactsController < ApplicationController
     @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
     
     request.body = @body
-    puts request.body
     response = http.request(request)
-    puts response.read_body
     end
     respond_to do |format|
       if @member_contact.save
@@ -62,8 +60,6 @@ class MemberContactsController < ApplicationController
             end
             @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.contact_type+' contact for ' + @member_contact.member_code.to_s 
             ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
-            @useremail = 'caleb.woods@usanorth811.org'
-            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: @useremail, subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver 
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
         format.json { render :show, status: :created, location: @member_contact }
       else
