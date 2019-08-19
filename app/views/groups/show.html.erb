@@ -251,7 +251,7 @@
                             <div class="col-sm-6">
                               <label for="exampleInputEmail1" >Contact Type</label>
                               
-                              <%= form.select :contact_type, ['RCVR',"ALTR",'BILL','DAMG','DATA','EMER','ENGR','SURV','CONT','NITE','AHRS','VACU','REPR','BORD'], {:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['Contact_type'], required: true %>
+                              <%= form.select :contact_type, ['RCVR',"ALTR",'DAMG','DATA','EMER','CONT','AHRS','VACU'], {:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['Contact_type'], required: true %>
                               <h6 ><small style='color: red; '>*required</small></h6>
                             </div> 
                             <div class="col-sm-6">  
@@ -526,7 +526,7 @@
                           <div class="form-group row" >
                           <div class="col-sm-4" style='padding-top:10px'>
                             <label for="exampleInputEmail1" >Contact Type</label>
-                            <%= form.select :contact_type, ['RCVR',"ALTR",'BILL','DAMG','DATA','EMER','ENGR','SURV','CONT','NITE','AHRS','VACU','REPR','BORD'],{},class: 'form-control custom-select',  required: true %>
+                            <%= form.select :contact_type, ['RCVR',"ALTR",'DAMG','DATA','EMER','CONT','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
                             <h6 ><small style='color: red; '>*required</small></h6>
                           </div> 
                             <div class='col-md-4'>
