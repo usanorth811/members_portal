@@ -108,7 +108,7 @@
                     <div class="card-header" >
                       <h5 class="text-muted">
                         <%if contact['Contact_type'] == 'RCVR' %>
-                          RECEIVING LOCATION
+                          RECEIVING LOCATION <h6><small>This contact appears on tickets</small></h6>
                         <%elsif contact['Contact_type']== 'ALTR' %>
                           ALTERNATE
                         <%elsif contact['Contact_type']== 'BILL' %>
@@ -128,7 +128,7 @@
                         <%elsif contact['Contact_type']== 'SURV'%>
                           SURVEYOR
                         <%elsif contact['Contact_type']== 'CONT'%>
-                          CONTACT <h6><small>This contact appears on tickets</small></h6>
+                          CONTACT 
                         <%elsif contact['Contact_type']== 'NITE'%>
                           NIGHT TIME
                         <%elsif contact['Contact_type']== 'AHRS'%>
