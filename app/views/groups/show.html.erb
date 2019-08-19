@@ -149,6 +149,11 @@
                           <h6 class="text-muted"><%= contact['City'] %>, <%= contact['State'] %></h6>
                           <h6 class="text-muted"><%= contact['Zip'] %></h6>
                         <%end%>
+                        <% if contact['Contact_type'] == 'REPR' %>
+                        <h6><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on changing your Member Rep</small></h6>
+                        <% elsif contact['Contact_type'] == 'BILL' %>
+                        <h6><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on changing your Billing contact</small></h6>
+                        <%else%>
                         <div class='row'>
                         <div class='col-lg-12'>
                         <button type="button" style='width:100px' class="btn btn-info" data-toggle="modal" data-target="#exampleModal<%=contact['Id']%>">
@@ -163,6 +168,7 @@
                         </button>
                         </div>
                         </div>
+                        <% end%>
                       </div>
                     </div>
                   </div>
