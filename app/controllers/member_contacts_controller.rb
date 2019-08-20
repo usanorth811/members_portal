@@ -58,8 +58,10 @@ class MemberContactsController < ApplicationController
             else 
               @action = 'added'
             end
+            @usermessage = "Your contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
             @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.contact_type+' contact for ' + @member_contact.member_code.to_s 
             ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver
+            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
         format.json { render :show, status: :created, location: @member_contact }
       else
