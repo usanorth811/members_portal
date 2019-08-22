@@ -45,12 +45,12 @@
     <% @groups.each do |group| %>
     <div class="col-md-4" style='padding-top: 15px'>
       <div class="card" style="width: auto; ">
-        <div class="card-header" >
-          <h6 style="padding-top: 10px !important; font-weight: 600">
+        <div class="card-header">
+          <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
           <%if group.name == nil %>
-            <%=link_to group.billing_id, group %>
+            <%=link_to group.billing_id, group, :style => ' color:white !important' %>
           <%else%>
-            <%= link_to group.name, group %> 
+            <%= link_to group.name, group, :style => ' color:white !important'%> 
           <%end%>
           </h6>
         </div>
@@ -115,8 +115,8 @@
   <div class="col-md-4"style='padding-top: 15px'>
     <div class="card" style="width: auto; ">      
       <div class="card-header" >
-        <h6 style="padding-top: 10px !important;font-weight: 600">
-          <div style="color: #E7947C">Add Company</div>      
+        <h6 style="padding-top: 10px !important;font-weight: 600; ">
+          <div style="color:white ">Add Company</div>      
         </h6>
       </div>
     </a>
