@@ -36,7 +36,7 @@
   </head>
   <body>
  <style type="text/css">.bg-dark{color: white !important; background-color:#E27d60 }</style>
-<style type="text/css">a{text-decoration: none !important;background-color:transparent !important; color: #E7947C ;} </style>
+<style type="text/css">a{font-weight: 600 !important; text-decoration: none !important;background-color:transparent !important; color: #E7947C ;} </style>
 <style type="text/css">a:visited{ color: #E7947C !important} </style>
 <style type="text/css"> body {color: #2c3444; font-family: 'Avenir', Helvetica, Arial, sans-serif;
 -webkit-font-smoothing: antialiased;
@@ -44,11 +44,11 @@
 .navbar{ background-color: #2c3444; color: white;}
 .footer{ background-color: #2c3444; color: white;}
 .card-header{ background-color: #3F4655; color: white;}
-.card-body{ background-color: #EBECEE; }
+.card-body{ background-color: white; }
 .card-text{ background-color: #EBECEE}
 h4{ font-weight: 500 !important;}
 .breadcrumb { background-color: white;}
-.list-group-item{ color: #2c3444; font-weight: 600}
+.list-group-item{  font-weight: 600}
 .badge-secondary{ background-color: #2c3444;}
 .badge-success{ background-color: #BCCB31; color: #2c3444}
 .btn-info:hover {background-color: #E27D60; border-color: #E27D60}
@@ -62,10 +62,10 @@ a:hover {color: #E7947C !important}
 
       <div class="col-md-3">
        
-        <%= link_to image_tag("usanorthlogo7.svg", :width => "200", :style =>"align-items: left;"), root_path %>
+        <%= link_to image_tag("usanorthlogo7.svg", :width => "200", :style =>"align-items: center;"), root_path %>
 
       </div>
-      <div class="col-md-7 " style="text-align: center; padding-left:50px">
+      <div class="col-md-9 " style="text-align: center; padding-left:50px">
        
     <%= yield %>
 
