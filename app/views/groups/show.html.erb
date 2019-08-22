@@ -93,7 +93,7 @@
            Service Area Last Updated <%= Date.parse(member['Created']).strftime("%m/%d/%y")%>
         </h5>
         <div class='col-md-6 offset-md-3'>
-          <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Contacts</button>
+          <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Show Contacts</button>
         </div>
         
         <div class="collapse" id="collapseExample<%=member['Member_id']%>">
@@ -157,8 +157,8 @@
                         <%else%>
                         <div class='row'>
                         <div class='col-lg-3 offset-lg-3 col-sm-6'>
-                        <button type="button" style='width:50px' class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal<%=contact['Id']%>">
-                        <%=image_tag("pencil_blue.svg", :width => "15")%>
+                        <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal<%=contact['Id']%>">
+                        <%=image_tag("pencil_teal.svg", :width => "15")%>
                         </button>
                         </div>
                         <div class='col-lg-3 col-sm-6'>
@@ -383,9 +383,11 @@
                 <div class='col-xl-4 col-lg-6 col-md-12 col-sm-12' style='padding-top: 15px'>
                   
                   
-                  <div class="card alert-danger" style="width: auto; ">
+                  <div class="card " style="width: auto; ">
                     <div style='padding-top: 15px; padding-bottom: 15px; padding-left: 15px; padding-right: 15px' >
-                      <h5 class=" ">
+                    <div class='alert-danger' >
+                    <div class=""><h5 style='font-weight: 600; padding-top:15px'> Missing Contact </h5></div>
+                      <h5 class=" " style=' padding-top: 5px; padding-left: 15px; padding-right: 15px'>
                         <%if missingcontact == 'RCVR' %>
                           RECEIVING LOCATION
                         <%elsif missingcontact== 'ALTR' %>
@@ -418,11 +420,14 @@
                           MEMBER REP
                         <%end%>
                       </h5>
-                      <div class=""><h5 style='padding-top:7px'> Missing Contact </h5></div>
-                      <div class=''>
+                      
+                      <div style='padding-top: 7px; padding-bottom: 15px; padding-left: 15px; padding-right: 15px'>
                         This Member Code requires <%= missingcontact %> contact to be complete. Please add this contact type.                       
                       </div>
+                      </div>
+                      <div style='padding-top: 15px'>
                       <button type='button' class='btn btn-info' data-toggle="modal" data-target="#exampleModal<%=missingcontact%>">Quick Add</button>
+                      </div>
                     </div>
                   </div>
                   

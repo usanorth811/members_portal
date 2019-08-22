@@ -56,15 +56,15 @@
         </div>
         <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
           <div class="row">
-            <div class="col-lg-6 col-sm-6">
-              <button type="button" style='width:100px' class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal<%=group.id%>">
-                <%= image_tag("pencil_blue.svg", :width => "15")%>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+              <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal<%=group.id%>">
+                <%= image_tag("pencil_teal.svg", :width => "15")%>
                 <%-# :style => '-webkit-filter:invert(100%);filter:invert(100%);'-%>
               </button>
             </div>
-            <div class='col-lg-6 col-sm-6'>
+            <div class='col-lg-6 col-sm-6 col-xs-6'>
             
-              <%= button_to group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' },style: 'width:100px', remote: true, class: "btn btn-outline-danger" do %>
+              <%= button_to group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' },style: 'width:50px', remote: true, class: "btn btn-outline-danger" do %>
                 <%= image_tag("trashcan_orange.svg", :width => "15")%>
         <% end %>
                
