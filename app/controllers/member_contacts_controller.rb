@@ -26,6 +26,38 @@ class MemberContactsController < ApplicationController
   def create
     @member_contact = MemberContact.new(member_contact_params)
     
+    if @member_contact.contact_type == 'RCVR'
+        @member_contact.company = 'RECEIVING LOCATION' 
+    elsif @member_contact.contact_type== 'ALTR' 
+          ALTERNATE
+    elsif @member_contact.contact_type== 'BILL'
+      @member_contact.company =  'BILLING'
+    elsif @member_contact.contact_type== 'BORD'
+      @member_contact.company =  'Board Representative'
+    elsif @member_contact.contact_type== 'DAMG' 
+      @member_contact.company =  'DAMAGES'
+    elsif @member_contact.contact_type== 'DATA' 
+      @member_contact.company =  'DATABASE'
+    elsif @member_contact.contact_type== 'EMER' 
+      @member_contact.company =  'EMERGENCY'
+    elsif @member_contact.contact_type== 'ENGR'
+      @member_contact.company =  'ENGINEERING'
+    elsif @member_contact.contact_type== 'MAIN'
+      @member_contact.company =  'MAIN SWITCHBOARD'
+    elsif @member_contact.contact_type== 'SURV'
+      @member_contact.company =  'SURVEYOR'
+    elsif @member_contact.contact_type== 'CONT'
+      @member_contact.company =  'CONTACT' 
+    elsif @member_contact.contact_type== 'NITE'
+      @member_contact.company =  'NIGHT TIME'
+    elsif @member_contact.contact_type== 'AHRS'
+      @member_contact.company =  'AFTER HOURS'
+    elsif @member_contact.contact_type== 'VACU'
+      @member_contact.company =  'VACUUM'
+    elsif @member_contact.contact_type== 'REPR'
+      @member_contact.company =  'MEMBER REP'
+    end
+    
     require 'uri'
     require 'net/http'
     if @member_contact.valid?
@@ -58,8 +90,8 @@ class MemberContactsController < ApplicationController
             else 
               @action = 'added'
             end
-            @usermessage = "Your contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
-            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.contact_type+' contact for ' + @member_contact.member_code.to_s 
+            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
+            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
             
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
         format.json { render :show, status: :created, location: @member_contact }
@@ -104,6 +136,9 @@ class MemberContactsController < ApplicationController
   end
   def code 
     @member_contact.member_code
+  end
+  def contact_type
+    @member_contact.contact_type
   end
 
   private

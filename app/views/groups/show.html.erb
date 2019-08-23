@@ -744,11 +744,101 @@
     
       <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> 
       <% if activity.stype == 'UPDATE' %>
-      Updated a contact for 
+      Updated a <%if activity.contact_type == 'RCVR' %>
+      Recieving 
+    <%elsif activity.contact_type== 'ALTR' %>
+      Alternate
+    <%elsif activity.contact_type== 'BILL' %>
+      Billing
+    <%elsif activity.contact_type== 'BORD' %>
+      Board Representative
+    <%elsif activity.contact_type== 'DAMG' %>
+      Damage
+    <%elsif activity.contact_type== 'DATA' %>
+      Database
+    <%elsif activity.contact_type== 'EMER' %>
+      Emergency 
+    <%elsif activity.contact_type== 'ENGR'%>
+      Engineering
+    <%elsif activity.contact_type== 'MAIN'%>
+      MAIN SWITCHBOARD
+    <%elsif activity.contact_type== 'SURV'%>
+      Surveyor
+    <%elsif activity.contact_type== 'CONT'%>
+       
+    <%elsif activity.contact_type== 'NITE'%>
+      Night Time
+    <%elsif activity.contact_type== 'AHRS'%>
+      After Hours
+    <%elsif activity.contact_type== 'VACU'%>
+      Vacuum
+    <%elsif activity.contact_type== 'REPR'%>
+      Member Rep
+    <%end%> contact for 
       <%elsif activity.stype == 'DELETE' %>
-      Deleted a contact for
+      Deleted a <%if activity.contact_type == 'RCVR' %>
+      Recieving 
+    <%elsif activity.contact_type== 'ALTR' %>
+      Alternate
+    <%elsif activity.contact_type== 'BILL' %>
+      Billing
+    <%elsif activity.contact_type== 'BORD' %>
+      Board Representative
+    <%elsif activity.contact_type== 'DAMG' %>
+      Damage
+    <%elsif activity.contact_type== 'DATA' %>
+      Database
+    <%elsif activity.contact_type== 'EMER' %>
+      Emergency 
+    <%elsif activity.contact_type== 'ENGR'%>
+      Engineering
+    <%elsif activity.contact_type== 'MAIN'%>
+      MAIN SWITCHBOARD
+    <%elsif activity.contact_type== 'SURV'%>
+      Surveyor
+    <%elsif activity.contact_type== 'CONT'%>
+       
+    <%elsif activity.contact_type== 'NITE'%>
+      Night Time
+    <%elsif activity.contact_type== 'AHRS'%>
+      After Hours
+    <%elsif activity.contact_type== 'VACU'%>
+      Vacuum
+    <%elsif activity.contact_type== 'REPR'%>
+      Member Rep
+    <%end%> contact for
       <%else %>
-      Added a contact for
+      Added a <%if activity.contact_type == 'RCVR' %>
+      Recieving 
+    <%elsif activity.contact_type== 'ALTR' %>
+      Alternate
+    <%elsif activity.contact_type== 'BILL' %>
+      Billing
+    <%elsif activity.contact_type== 'BORD' %>
+      Board Representative
+    <%elsif activity.contact_type== 'DAMG' %>
+      Damage
+    <%elsif activity.contact_type== 'DATA' %>
+      Database
+    <%elsif activity.contact_type== 'EMER' %>
+      Emergency 
+    <%elsif activity.contact_type== 'ENGR'%>
+      Engineering
+    <%elsif activity.contact_type== 'MAIN'%>
+      MAIN SWITCHBOARD
+    <%elsif activity.contact_type== 'SURV'%>
+      Surveyor
+    <%elsif activity.contact_type== 'CONT'%>
+       
+    <%elsif activity.contact_type== 'NITE'%>
+      Night Time
+    <%elsif activity.contact_type== 'AHRS'%>
+      After Hours
+    <%elsif activity.contact_type== 'VACU'%>
+      Vacuum
+    <%elsif activity.contact_type== 'REPR'%>
+      Member Rep
+    <%end%> contact for
       <%end%>
       <%= activity.code %>
        on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>

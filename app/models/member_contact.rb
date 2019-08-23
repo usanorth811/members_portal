@@ -16,6 +16,7 @@ class MemberContact < ApplicationRecord
     tracked billing: Proc.new {|controller, model| controller.billing }
     tracked stype: Proc.new {|controller, model| controller.stype }
     tracked code: Proc.new {|controller, model| controller.code }
+    tracked contact_type: Proc.new {|controller, model| controller.contact_type }
 end
 
 
