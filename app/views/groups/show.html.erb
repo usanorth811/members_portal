@@ -82,7 +82,7 @@
         <h5  style="padding-top: 15px">
           Facility Type: <%= member['Facility'] %>
         </h5>
-
+        
         <h5 class=" " style="padding-left: 10px">
         
         <div class="modal fade" id="questionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,11 +117,41 @@
         Ticket Delivery Destination: <%= member['Delivery_address'] %>
         </h5>
         <h5 class=" " style="padding-left: 10px">
-          Current Service Area Version Number: <%= member['Shape'] %>
+          Current Service Area Version Number: <%= member['Shape'] %> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#service_area_modal">
+          Upload SAR
+        </button>
         </h5>
         <h5 class=" " style="padding-left: 10px">
            Service Area Last Updated <%= Date.parse(member['Created']).strftime("%m/%d/%y")%>
         </h5>
+        <div class="modal fade" id="service_area_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="service_area_modal">Upload SAR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <a name="form900522022" id="formAnchor900522022"></a>
+      <script src="https://fs26.formsite.com/include/form/embedManager.js?900522022"></script>
+      <script>
+      EmbedManager.embed({
+        key: "https://fs26.formsite.com/res/showFormEmbed?EParam=m_OmK8apOTANZkOaL7H0HogAwUXi0cBCFzpUCZwnDno&900522022",
+        width: "100%",
+        mobileResponsive: true,
+        prePopulate: {"1":"<%= current_user.profile.first_name%>","2":"<%= current_user.profile.last_name%>","3":"<%= current_user.email%>","4":"<%= member['Code']%>"}
+      });
+      </script>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
         
         <div class='col-md-6 offset-md-3'>
           <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Show Contacts</button>
