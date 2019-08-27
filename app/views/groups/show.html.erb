@@ -84,7 +84,37 @@
         </h5>
 
         <h5 class=" " style="padding-left: 10px">
-          Ticket Delivery Destination: <%= member['Delivery_address'] %>
+        
+        <div class="modal fade" id="questionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Contact Types</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ul>
+        <li><h6 style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> &nbsp; The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</h6></li>
+        <li><h6 style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> &nbsp; The person to contact for any billing related issues and will receive your membership billing invoice.</h6></li>
+        <li><h6 style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> &nbsp;  The person that will receive general questions regarding dig tickets your company is notified on.</h6></li> 
+        <li><h6 style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> &nbsp; The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</h6></li>
+        <li><h6 style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> &nbsp; The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</h6></li>
+        <li><h6 style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> &nbsp; The person to contact if an excavator will be exposing your facilities using vacuum equipment.</h6></li>
+        <li><h6 style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> &nbsp; The person to contact during non-business hours.</h6></li>
+        <li><h6 style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> &nbsp; This person will receive the quarterly board meeting minutes.</h6></li>
+        <li><h6 style='text-align:left'><b>Ticket Delivery Contact (RCVR, RECEIVING)</b> &nbsp; The person that is contacted regarding ticket delivery issues/concerns.</h6></li>
+      </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+        Ticket Delivery Destination: <%= member['Delivery_address'] %>
         </h5>
         <h5 class=" " style="padding-left: 10px">
           Current Service Area Version Number: <%= member['Shape'] %>
@@ -92,10 +122,11 @@
         <h5 class=" " style="padding-left: 10px">
            Service Area Last Updated <%= Date.parse(member['Created']).strftime("%m/%d/%y")%>
         </h5>
+        
         <div class='col-md-6 offset-md-3'>
           <button class='btn btn-info' data-toggle="collapse" href="#collapseExample<%=member['Member_id']%>" role="button" aria-expanded="false" aria-controls="collapseExample<%=member['Member_id']%>" >Show Contacts</button>
         </div>
-        
+        <h6 style='padding-top: 20px'><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on updating your facility type, delivery destination, or service area.</small></h6>
         <div class="collapse" id="collapseExample<%=member['Member_id']%>">
           <div class='container'>
             <div class="row" style='padding-top: 15px'>
@@ -107,9 +138,11 @@
                   <div class="border" style="width: auto; ">
 
                     <div class="card-body" >
-                      <h5 class="">
-                        <%if contact['Contact_type'] == 'RCVR' %>
-                          RECEIVING LOCATION <h6><small>This contact appears on tickets</small></h6>
+                      <h5 class=""><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                      <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%> 
+                    </button>
+                        <%if contact['Contact_type'] == 'RCVR' %> 
+                          RECEIVING <h6><small>This contact appears on tickets</small></h6>
                         <%elsif contact['Contact_type']== 'ALTR' %>
                           ALTERNATE
                         <%elsif contact['Contact_type']== 'BILL' %>
@@ -388,6 +421,9 @@
                     <div class='alert-danger' >
                     <div class=""><h5 style='font-weight: 600; padding-top:15px'> Missing Contact </h5></div>
                       <h5 class=" " style=' padding-top: 5px; padding-left: 15px; padding-right: 15px'>
+                      <button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                      <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%> 
+                    </button>
                         <%if missingcontact == 'RCVR' %>
                           RECEIVING LOCATION
                         <%elsif missingcontact== 'ALTR' %>
@@ -537,23 +573,25 @@
                         
                           <form>
                           <div class="form-group row" >
-                          <div class="col-sm-4" style='padding-top:10px'>
-                            <label for="exampleInputEmail1" >Contact Type</label>
+                          <div class="col-sm-4" style=''>
+                            <label for="exampleInputEmail1" ><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                            <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%> 
+                          </button>Contact Type</label>
                             <%= form.select :contact_type, ['RCVR',"ALTR",'DAMG','DATA','EMER','CONT','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
                             <h6 ><small style='color: red; '>*required</small></h6>
                           </div> 
                             <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Contact Name</label>
+                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Contact Name</label>
                               <%= form.text_field :contact_name, class: 'form-control', required: true%>
                               <h6 ><small style='color: red; '>*required</small></h6>
                             </div>
                             <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
+                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Phone</label>
                               <%= form.text_field :phone, class: 'form-control', required: true %>
                               <h6 ><small style='color: red; '>*required</small></h6>
                             </div>
                             <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Ext</label>
+                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Ext</label>
                               <%= form.text_field :phone_ext, class: 'form-control' %>
                             </div>
                             <div class='col-md-4'>
