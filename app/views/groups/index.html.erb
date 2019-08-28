@@ -126,8 +126,10 @@
 </div>
 <%else%>
 <%= render partial: 'nav' %>
-<h2 class="container text-center" style="padding-top: 75px; padding-bottom: 75px">
-<%= link_to "Create Your Profile", new_profile_path %>
+<h2 class="container text-center" style="padding-top: 75px; padding-bottom: 275px">
+<div class='btn btn-info'>
+<%= link_to "Create Your Profile", new_profile_path, :class => 'btn btn-info', :style => 'color:white !important; font-size:40px' %>
+</div>
 </h2>
 <% end %>
 
