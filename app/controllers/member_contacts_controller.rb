@@ -29,7 +29,7 @@ class MemberContactsController < ApplicationController
     if @member_contact.contact_type == 'RCVR'
         @member_contact.company = 'RECEIVING LOCATION' 
     elsif @member_contact.contact_type== 'ALTR' 
-          ALTERNATE
+        @member_contact.company = 'ALTERNATE'
     elsif @member_contact.contact_type== 'BILL'
       @member_contact.company =  'BILLING'
     elsif @member_contact.contact_type== 'BORD'
