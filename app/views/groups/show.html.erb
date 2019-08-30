@@ -289,7 +289,7 @@
                             <div class="col-sm-6">
                               <label for="exampleInputEmail1" >Contact Type</label>
                               
-                              <%= form.select :contact_type, ['RCVR','DAMG','DATA','EMER','CONT','AHRS','VACU'], {:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['Contact_type'], required: true %>
+                              <%= form.select :contact_type, ['RCVR','DAMG','DATA', 'ENGR','EMER','CONT','AHRS','VACU'], {:selected => contact['Contact_type']},class: 'form-control custom-select', value: contact['Contact_type'], required: true %>
                               <h6 ><small style='color: red; '>*required</small></h6>
                             </div> 
                             <div class="col-sm-6">  
@@ -577,7 +577,7 @@
                             <label for="exampleInputEmail1" ><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
                             <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%> 
                           </button>Contact Type</label>
-                            <%= form.select :contact_type, ['RCVR','DAMG','DATA','EMER','CONT','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
+                            <%= form.select :contact_type, ['RCVR','DAMG','DATA','ENGR','EMER','CONT','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
                             <h6 ><small style='color: red; '>*required</small></h6>
                           </div> 
                             <div class='col-md-4'>
