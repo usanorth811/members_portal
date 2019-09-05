@@ -7,6 +7,7 @@ ruby '2.6.3'
 gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+gem "nokogiri", ">= 1.10.4"
 
 gem 'httparty'
 # Use Puma as the app server
