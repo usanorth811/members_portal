@@ -8,13 +8,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :contacts
   resources :codes do
-    resources :contacts
-  end
-  resources :member_reps
-  resources :billing_contacts
+    end
   resources :companies do
-    resources :codes
-  end
+    end
   root to: 'groups#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
