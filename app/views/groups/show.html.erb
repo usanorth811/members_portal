@@ -10,7 +10,7 @@
 <%= render partial: 'nav' %>
 <% require 'httparty'
 require 'json'
-response = HTTParty.get("http://localhost:5000/members/group="+@group.billing_id+"", :verify => false)
+response = HTTParty.get("https://guarded-depths.com/members/group="+@group.billing_id+"", :verify => false)
 @membs = JSON.parse(response)
 @members = @membs['MemberCodes']
 %>
