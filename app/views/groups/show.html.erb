@@ -8,6 +8,14 @@
   
   </p>
 <%= render partial: 'nav' %>
+<% require 'httparty'
+require 'json'
+response = HTTParty.get("http://localhost:5000/members/group="+@group.billing_id+"", :verify => false)
+@membs = JSON.parse(response)
+@members = @membs['MemberCodes']
+%>
+
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-12">
@@ -130,8 +138,8 @@
         <div class="collapse" id="collapseExample<%=member['Member_id']%>">
           <div class='container'>
             <div class="row" style='padding-top: 15px'>
-            <%if member['Contacts'][0]['Contacts'].present?%>
-              <% member['Contacts'][0]['Contacts'].each do |contact| %>
+            <%if member['Contacts'].present?%>
+              <% member['Contacts'].each do |contact| %>
                 
                 <% @missingcontacts -= [contact['Contact_type']]%>
                 <div class='col-xl-4 col-lg-6 col-md-12 col-sm-12' style='padding-top: 15px'>

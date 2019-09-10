@@ -14,11 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    require 'httparty'
-    require 'json'
-    response = HTTParty.get("https://52.8.206.74/members/group="+@group.billing_id+"", :verify => false)
-    @memb = JSON.parse(response)
-    @members = @memb['Members']
+    
 
     response1 = HTTParty.get("https://52.8.206.74/billing/billing_code="+@group.billing_id+"", :verify => false)
     puts response1
