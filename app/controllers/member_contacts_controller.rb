@@ -25,22 +25,6 @@ class MemberContactsController < ApplicationController
   # POST /member_contacts.json
   def create
     @member_contact = MemberContact.new(member_contact_params)
-    
-    respond_to do |format|
-      if @member_contact.save
-            if @member_contact.stype == 'DELETE'
-              @action = 'deleted'
-            elsif @member_contact.stype == 'UPDATE'
-              @action = 'updated'
-            else 
-              @action = 'added'
-            end
-            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
-            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
-            
-        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
-        format.json { render :show, status: :created, location: @member_contact }
-
     if @member_contact.contact_type == 'RCVR'
       @member_contact.company = 'RECEIVING LOCATION' 
   elsif @member_contact.contact_type== 'ALTR' 
@@ -72,6 +56,22 @@ class MemberContactsController < ApplicationController
   elsif @member_contact.contact_type== 'REPR'
     @member_contact.company =  'MEMBER REP'
   end
+    respond_to do |format|
+      if @member_contact.save
+            if @member_contact.stype == 'DELETE'
+              @action = 'deleted'
+            elsif @member_contact.stype == 'UPDATE'
+              @action = 'updated'
+            else 
+              @action = 'added'
+            end
+            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
+            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
+            
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+        format.json { render :show, status: :created, location: @member_contact }
+
+    
   
   
       else
