@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.build(group_params)
     require 'httparty'
     require 'json'
-    response1 = HTTParty.get("https://52.8.206.74/billing/billing_code="+@group.billing_id+"", :verify => false)
+    response1 = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/billing/billing_code="+@group.billing_id+"", :verify => false)
     @bill = JSON.parse(response1)
     @bills = @bill['Billing']
     if @bills != nil
