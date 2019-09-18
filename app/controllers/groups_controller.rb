@@ -16,14 +16,14 @@ class GroupsController < ApplicationController
   def show
     
 
-    response1 = HTTParty.get("https://52.8.206.74/billing/billing_code="+@group.billing_id+"", :verify => false)
+    response1 = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/billing/billing_code="+@group.billing_id+"", :verify => false)
     puts response1
     @bill = JSON.parse(response1)
     puts @bill
     @bills = @bill['Billing']
     puts @bills
 
-    response2 = HTTParty.get("https://guarded-depths.com/members/totals/group="+@group.billing_id+"/", :verify => false)
+    response2 = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/members/totals/group="+@group.billing_id+"/", :verify => false)
     @count = JSON.parse(response2)
     @counts = @count['Counts']
     @total = 0

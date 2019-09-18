@@ -10,7 +10,7 @@
 <%= render partial: 'nav' %>
 <% require 'httparty'
 require 'json'
-response = HTTParty.get("https://guarded-depths.com/members/group="+@group.billing_id+"", :verify => false)
+response = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/members/group="+@group.billing_id+"", :verify => false)
 @membs = JSON.parse(response)
 @members = @membs['MemberCodes']
 %>
