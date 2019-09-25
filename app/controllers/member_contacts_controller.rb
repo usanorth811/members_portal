@@ -103,7 +103,7 @@ class MemberContactsController < ApplicationController
   
   request.body = @body
   response = http.request(request)
-
+    puts response
   ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
             ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
   end
