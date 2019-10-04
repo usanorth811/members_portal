@@ -23,9 +23,7 @@ class GroupsController < ApplicationController
     @bills = @bill['Billing']
     puts @bills
 
-    response2 = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/members/totals/group="+@group.billing_id+"/", :verify => false)
-    @count = JSON.parse(response2)
-    @counts = @count['Counts']
+    
     @total = 0
   end
 

@@ -26,19 +26,20 @@ class MemberContactsController < ApplicationController
   def create
     @member_contact = MemberContact.new(member_contact_params)
     if @member_contact.contact_type == 'RCVR'
-      @member_contact.company = 'RECEIVING LOCATION' 
+      @member_contact.company = 'MARKING CONTACT' 
   elsif @member_contact.contact_type== 'ALTR' 
       @member_contact.company = 'ALTERNATE'
   elsif @member_contact.contact_type== 'BILL'
     @member_contact.company =  'BILLING'
   elsif @member_contact.contact_type== 'BORD'
-    @member_contact.company =  'Board Representative'
+    @member_contact.company =  'Board Rep'
   elsif @member_contact.contact_type== 'DAMG' 
-    @member_contact.company =  'DAMAGES'
+   
+    @member_contact.company =  'EMERGENCY/DAMAGES'
   elsif @member_contact.contact_type== 'DATA' 
     @member_contact.company =  'DATABASE'
   elsif @member_contact.contact_type== 'EMER' 
-    @member_contact.company =  'EMERGENCY'
+    @member_contact.company =  'EMERGENCY/DAMAGES'
   elsif @member_contact.contact_type== 'ENGR'
     @member_contact.company =  'ENGINEERING'
   elsif @member_contact.contact_type== 'MAIN'
@@ -46,7 +47,8 @@ class MemberContactsController < ApplicationController
   elsif @member_contact.contact_type== 'SURV'
     @member_contact.company =  'SURVEYOR'
   elsif @member_contact.contact_type== 'CONT'
-    @member_contact.company =  'CONTACT' 
+ 
+    @member_contact.company = 'MARKING CONTACT'
   elsif @member_contact.contact_type== 'NITE'
     @member_contact.company =  'NIGHT TIME'
   elsif @member_contact.contact_type== 'AHRS'
@@ -56,32 +58,7 @@ class MemberContactsController < ApplicationController
   elsif @member_contact.contact_type== 'REPR'
     @member_contact.company =  'MEMBER REP'
   end
-    respond_to do |format|
-      if @member_contact.save
-            if @member_contact.stype == 'DELETE'
-              @action = 'deleted'
-            elsif @member_contact.stype == 'UPDATE'
-              @action = 'updated'
-            else 
-              @action = 'added'
-            end
-            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
-            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
-            
-        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
-        format.json { render :show, status: :created, location: @member_contact }
-
-    
-  
-  
-      else
-        flash[:member_contact_errors] = @member_contact.errors.full_messages
-        format.html { redirect_to @member_contact.group }
-        
-      end
-    end
-
-    require 'uri'
+  require 'uri'
   require 'net/http'
   if @member_contact.valid?
   url = URI("https://jas.usanorth811.org:10443/membersapi")
@@ -104,9 +81,36 @@ class MemberContactsController < ApplicationController
   request.body = @body
   response = http.request(request)
     puts response.body
-  ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
-            ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
   end
+    respond_to do |format|
+      if @member_contact.save
+            if @member_contact.stype == 'DELETE'
+              @action = 'deleted'
+            elsif @member_contact.stype == 'UPDATE'
+              @action = 'updated'
+            else 
+              @action = 'added'
+            end
+            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
+            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
+            
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+        format.json { render :show, status: :created, location: @member_contact }
+
+        ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
+        ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
+  
+  
+      else
+        flash[:member_contact_errors] = @member_contact.errors.full_messages
+        format.html { redirect_to @member_contact.group }
+        
+      end
+    end
+
+   
+  
+  
         
   end
 
