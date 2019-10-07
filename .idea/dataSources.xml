@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails member_portal: test" uuid="1a2cb2ed-c8f6-40a2-981c-93fbaad9c03c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/member_portal_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails member_portal: development" uuid="f491397f-0dad-424c-abd9-c9bab5fce73f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/member_portal_development</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails member_portal: production" uuid="2930dd43-ece5-4bd4-9d6a-6b8016daef33">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/member_portal_production</jdbc-url>
+    </data-source>
+  </component>
+</project>

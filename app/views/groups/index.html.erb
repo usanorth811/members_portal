@@ -41,10 +41,11 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" id="index" >
     <% @groups.each do |group| %>
-    <div class="col-md-4" style='padding-top: 15px'>
-      <div class="card-text" style="width: auto; ">
+    <div class="col-md-4"  style='padding-top: 15px'>
+      <transition appear name=''>
+      <div class="card-text" id="mimicCard" style="width: auto; ">
         <div class="card-header">
           <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
           <%if group.name == nil %>
@@ -72,6 +73,7 @@
           </div>
         </div>
       </div>
+      </transition>
   </div>
   <div class="modal fade" id="exampleModal<%=group.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -111,6 +113,7 @@
 </div>
   <% end %>
   <div class="col-md-4"style='padding-top: 15px'>
+    <transition appear name="">
     <div class="card" style="width: auto; ">      
       <div class="card-header" >
         <h6 style="padding-top: 10px !important;font-weight: 600; ">
@@ -122,6 +125,7 @@
     
     <%= render 'form', group: @group %>
     </div>
+    </transition>
   </div>
 </div>
 <%else%>
@@ -136,4 +140,11 @@
 <style type="text/css">#footer{width: 100%;
   bottom: 0;}</style>
 
-  
+<script>
+    new Vue({
+        el: '#index',
+        data: {
+            info: null,
+        }
+    });
+</script>

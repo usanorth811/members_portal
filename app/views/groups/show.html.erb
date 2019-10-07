@@ -12,13 +12,16 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-2">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
     <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
   </ol>
   <p id="notice"><%= notice %></p>
 </div>
+  <div class="col-md-6">
+
+  </div>
 </div>
 </div>
 <% if flash[:member_contact_errors] %>
@@ -39,25 +42,60 @@
     </h4>
 </div>
 <div class="col-md-8 offset-md-1">
+
   <div class="container-fluid" style="padding-top: 35px !important">
 <h4 class="text-center">Codes</h4>
 <hr class="my-4">
 </hr>
+
 <div id='app'>
+  <style>
+  .card {
+    display: flex;
+    width: auto !important;
+}
+</style>
   
-  <div class='row'>
+  <div class=''>
+    <div v-if="info == null">
+      &nbsp; <p />
+      &nbsp; <p />
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="https://www.triveea.com/redirect/" class="alert-link">Click here</a> if you're having trouble viewing this page
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      &nbsp; <p />
+      &nbsp; <p />
+      <div class="spinner-border text-info" role="status" style='width: 3rem; height: 3rem;'>
+        <span class="sr-only">Loading...</span>
+      </div>
+      &nbsp; <p />
+      &nbsp; <p />
+      &nbsp; <p />
+      &nbsp; <p />
+    </div>
     <div v-for="member in info" :key="member">
       <div class="col-xl-12 text-center" style="padding-bottom: 25px !important">
-        <div class="card" style="width: 1055px; ">
+        <transition appear name="bounce">
+        <div class="card" >
 
           <div class="card-header" >
             <h4 style=" padding-top: 10px !important;  ">
               <div class='col-md-10 offset-md-1'>
                 {{member.Code}} - {{member.Company}}
               </div>
-              <div class="badge badge-success float-right col-lg-1 d-none d-lg-block"  > 
+              <span v-if="member.Active == 'true'">
+              <div class="badge badge-success float-right col-lg-2" style='font-size: 14px' > 
                 Active
               </div>
+              </span>
+              <span v-else >
+              <div class="badge badge-danger float-right col-lg-2" style='font-size: 14px' > 
+                Not Active
+              </div>
+              </span>
             </h4>
           </div>
           <div class='card-text'>
@@ -80,15 +118,33 @@
             <h6 style='padding-top: 20px'><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on updating your facility type or delivery destination.</small></h6>
             <div class="collapse" :id="'collapseExample'+member.Member_id">
               <div class='container'>
-                <div class="row" style='padding-top: 15px'>
+                <div class="row" style='padding-top: 15px; margin-left: 20px'>
                   <div v-for="contact in member.Contacts" :key="contact">
-                    <div class="d-none">
                     
-                    </div>
-                    <div class='col-xl-4 col-lg-6 col-md-12 col-sm-12' style='padding-top: 15px'>
-                      <div class="border" style="width: 320px; ">
+                    <div class=' d-flex flex-sm-row flex-column p-4 justify-content-center ' style='padding-top: 15px'>
+                    
+                    
+                      <div class="card" v-bind:style="window.width < 500 ? 'width: 180px' : 'width: 280px'">
+                    
                         <div class="card-body" >
-                          <h5>{{contact.Name}}</h5>
+                          <h5>
+                            <div v-if="contact.Contact_type == 'RCVR'"> MARKING CONTACT </div>
+                            <div v-else-if="contact.Contact_type == 'ALTR'"> ALTERNATE </div>
+                            <div v-else-if="contact.Contact_type == 'BILL'"> BILLING </div>
+                            <div v-else-if="contact.Contact_type == 'BORD'"> BOARD REP </div>
+                            <div v-else-if="contact.Contact_type == 'DAMG'"> EMERGENCY / DAMAGES </div>
+                            <div v-else-if="contact.Contact_type == 'EMER'"> EMERGENCY / DAMAGES </div>
+                            <div v-else-if="contact.Contact_type == 'DATA'"> DATABASE </div>
+                            <div v-else-if="contact.Contact_type == 'ENGR'"> ENGINEERING </div>
+                            <div v-else-if="contact.Contact_type == 'MAIN'"> MAIN SWITCHBOARD </div>
+                            <div v-else-if="contact.Contact_type == 'SURV'"> SURVEYOR </div>
+                            <div v-else-if="contact.Contact_type == 'CONT'"> MARKING CONTACT </div>
+                            <div v-else-if="contact.Contact_type == 'NITE'"> NITE TIME </div>
+                            <div v-else-if="contact.Contact_type == 'AHRS'"> AFTER HOURS </div>
+                            <div v-else-if="contact.Contact_type == 'VACU'"> VACUUM </div>
+                            <div v-else-if="contact.Contact_type == 'REPR'"> MEMBER REP </div>
+
+                          </h5>
                           <h6>{{contact.Contact}}</h6>
                           <h6><a :href="'tel:'+contact.Phone">{{contact.Phone}}</a></h6>
                           <h6><a :href="'mailto:'+contact.Email">{{contact.Email}}</a></h6>
@@ -97,12 +153,12 @@
                           <h6>{{contact.State}}</h6>
                           <h6>{{contact.Zip}}</h6>
                           <div class='row'>
-                            <div class='col-lg-3 offset-lg-3 col-sm-6'>
+                            <div class='col-lg-3 offset-lg-3 col-sm-6' >
                               <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'a'">
                                 <%=image_tag("pencil_teal.svg", :width => "15")%>
                               </button>
                             </div>
-                            <div class='col-lg-3 col-sm-6'>
+                            <div class='col-lg-3 col-sm-6' >
                               <button type="button" class="btn btn-outline-danger" style='width:50px' data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'1234a'">
                                 <%=image_tag("trashcan_orange.svg", :width => "15")%>
                               </button>
@@ -460,11 +516,12 @@
 
 </div>
 <% end %>
-</div>
 
 </div>
+</transition>
 </div>
-  
+</div>
+
 </div>
 <div class="col-md-3">
 <div class="mycontent-right">
@@ -497,22 +554,33 @@ EmbedManager.embed({
 });
 </script>
 </div>
-<div style="padding-left: 15px; padding-top:15px">
-  
+<div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
+  <span v-if="ticketCounts == null">
+    <button class="btn btn-info" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+  </span>
+  <span v-else >
   <button class="btn btn-info" data-toggle="collapse" href="#counts" role="button" aria-expanded="false" aria-controls="counts">
   Show 2019 Billable Ticket Totals
   </button>
   <p />
   <div class="collapse" id="counts">
-    <ul class="list-group list-group-flush" >
+    <ul class="list-group list-group-flush" name="fade">
+      <li class="list-group-item d-flex justify-content-between align-items-center" >
+          Month
+          <h6>
+          <span class="badge badge-secondary" style='padding-left: 15px; padding-right: 15px'>
+            Total
+          </span>
+          </h6>
+        </li>
       <div v-for="month in ticketCounts" :key="month">
         <li class="list-group-item d-flex justify-content-between align-items-center" >
           {{month.Month}}
           <h6>
           <span class="badge badge-secondary" style='padding-left: 15px; padding-right: 15px'>
-          <div class='d-none'>
-            {{this.total = this.total + month.Total}}
-            </div>
             {{month.Total}}
           </span>
           </h6>
@@ -522,13 +590,13 @@ EmbedManager.embed({
         YTD Total
         <h6>
         <span class="badge badge-secondary" style='padding-left: 15px; padding-right: 15px'>
-        {{this.total}}
+        {{total[0].Total}}
     </span>
     </h6>
     </li>
     </ul>
     </div>
-
+</span>
 </p>
 
 <h6>Recent Activity</h6>
@@ -663,24 +731,43 @@ EmbedManager.embed({
     missingContacts: [],
     presentContacts: ['RCVR','DATA','EMER','AHRS','VACU'],
     ticketCounts: null,
+    window: {
+      width: 0
+    },
   },
   mounted () {
     axios.get('https://www.triveea.com/members/group='+<%=@group.billing_id%>+' ')
-        .then(response => (this.info = response.data.MemberCodes), axios.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/members/totals/group="+<%=@group.billing_id%>+"/")
+        .then(response => (this.info = response.data.MemberCodes), axios.get("https://www.triveea.com/members/totals/group="+<%=@group.billing_id%>+"/")
         .then(response => (this.ticketCounts = response.data)))
       .catch(error => console.log(error))
+    },
+    created() {
+      window.addEventListener('resize', this.handleResize)
+      this.handleResize();
+    },
+    methods: {
+      handleResize() {
+        this.window.width = window.innerWidth;
+      }
     }
   });
   new Vue({
-  el: '#counts',
+  el: '#ticketcounts',
   data: {
     ticketCounts: null,
     total: null,
+    damages: null,
   },
   mounted () {
-    axios.get('https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/members/totals/group='+<%=@group.billing_id%>+'/')
+    axios.get('https://www.triveea.com/members/totals/group='+<%=@group.billing_id%>+'/')
         .then(response => (this.ticketCounts = response.data.Counts))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
+      axios.get('https://www.triveea.com/members/totals/ytd/group='+<%=@group.billing_id%>+'/')
+        .then(response => (this.total = response.data.Counts))
+          .catch(error => console.log(error));
+      axios.get('https://www.triveea.com/members/totals/damages/group='+<%=@group.billing_id%>+'/')
+        .then(response => (this.damages = response.data.Counts))
+          .catch(error => console.log(error));
     }
   });
 </script>

@@ -15,16 +15,6 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     
-
-    response1 = HTTParty.get("https://usanapi-env.x2abjghhj3.us-west-1.elasticbeanstalk.com/billing/billing_code="+@group.billing_id+"", :verify => false)
-    puts response1
-    @bill = JSON.parse(response1)
-    puts @bill
-    @bills = @bill['Billing']
-    puts @bills
-
-    
-    @total = 0
   end
 
   # GET /groups/new

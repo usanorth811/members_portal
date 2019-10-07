@@ -8,7 +8,7 @@
         filter:invert(100%);')%></a>
     	<div class="dropdown-menu dropdown-menu-right" >
         <a class="dropdown-item" href="/groups"><%= image_tag("home.svg", :width => "25", :style => 'padding-right: 10px')%> Home</a>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal"><%= image_tag("book.svg", :width => "25", :style => 'padding-right: 10px')%> Handbook</a>
+        <% if false %> <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalLaw"><%= image_tag("book.svg", :width => "25", :style => 'padding-right: 10px')%> Law</a> <% end %>
         <a href='' class="dropdown-item"  data-toggle="modal" data-target="#exampleModalFAQ"><%= image_tag("question.svg", :width => "25", :style => 'padding-right: 10px')%> FAQ</a>
         <a class="dropdown-item" href="/profiles"><%= image_tag("gear.svg", :width => "25", :style => 'padding-right: 10px')%> Profile</a>
         <div class="dropdown-divider"></div>
@@ -95,3 +95,23 @@
     </div>
   </div>
 </div>
+<% if false %>
+<div class="modal fade" id="exampleModalLaw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title " id="exampleModalLabel"> Law </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container text-left">
+      <a class='button btn-info' href=''
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
