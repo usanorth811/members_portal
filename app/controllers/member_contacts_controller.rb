@@ -107,7 +107,7 @@ class MemberContactsController < ApplicationController
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
       end
     end
-  end\` \`
+  end
   # PATCH/PUT /member_contacts/1
   # PATCH/PUT /member_contacts/1.json
   def update
