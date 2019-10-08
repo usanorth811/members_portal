@@ -1,567 +1,808 @@
 
-    <p>
-    <div class='col-lg-12 offset-lg-2 d-none d-lg-block'>
-    <h2 class="" style=' font-weight: 600'>
+<p>
+<div class='col-lg-12 offset-lg-2 d-none d-lg-block'>
+  <h2 class="" style=' font-weight: 600'>
     <%= @group.name %>
   </h2>
-  </div>
-  
-  </p>
+</div>
+
+</p>
 <%= render partial: 'nav' %>
 
 
 <div class="container-fluid">
-<div class="row">
-<div class="col-md-2">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
-    <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
-  </ol>
-  <p id="notice"><%= notice %></p>
-</div>
-  <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
+      </ol>
+      <p id="notice"><%= notice %></p>
+    </div>
+    <div class="col-md-6">
 
+    </div>
   </div>
-</div>
 </div>
 <% if flash[:member_contact_errors] %>
   <h5>Could not submit changes for the following reasons:</h5>
-    <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger" role="alert">
     <% flash[:member_contact_errors].each do |msg| %>
       <h6><%= msg %></h6>
     <% end %>
-    </div>
-  <% end %>
+  </div>
+<% end %>
 
 
 <div class="container-fluid" >
-<div class="row" >
-<div class='col-md-8 offset-md-1 d-lg-none'>
-    <h4 class="text-center">
-    <%= @group.name %>
-    </h4>
-</div>
-<div class="col-md-8 offset-md-1">
-
-  <div class="container-fluid" style="padding-top: 35px !important">
-<h4 class="text-center">Codes</h4>
-<hr class="my-4">
-</hr>
-
-<div id='app'>
-  <style>
-  .card {
-    display: flex;
-    width: auto !important;
-}
-</style>
-  
-  <div class=''>
-    <div v-if="info == null">
-      &nbsp; <p />
-      &nbsp; <p />
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <a href="https://www.triveea.com/redirect/" class="alert-link">Click here</a> if you're having trouble viewing this page
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      &nbsp; <p />
-      &nbsp; <p />
-      <div class="spinner-border text-info" role="status" style='width: 3rem; height: 3rem;'>
-        <span class="sr-only">Loading...</span>
-      </div>
-      &nbsp; <p />
-      &nbsp; <p />
-      &nbsp; <p />
-      &nbsp; <p />
+  <div class="row" >
+    <div class='col-md-8 offset-md-1 d-lg-none'>
+      <h4 class="text-center">
+        <%= @group.name %>
+      </h4>
     </div>
-    <div v-for="member in info" :key="member">
-      <div class="col-xl-12 text-center" style="padding-bottom: 25px !important">
-        <transition appear name="bounce">
-        <div class="card" >
+    <div class="col-md-8 offset-md-1">
 
-          <div class="card-header" >
-            <h4 style=" padding-top: 10px !important;  ">
-              <div class='col-md-10 offset-md-1'>
-                {{member.Code}} - {{member.Company}}
+      <div class="container-fluid" style="padding-top: 35px !important">
+        <h4 class="text-center">Codes</h4>
+        <hr class="my-4">
+        </hr>
+
+        <div id='app'>
+          <style>
+            .card {
+              display: flex;
+              width: auto !important;
+            }
+          </style>
+
+          <div class=''>
+            <div v-if="info == null">
+              &nbsp; <p />
+              &nbsp; <p />
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <a href="https://www.triveea.com/redirect/" class="alert-link">Click here</a> if this page is taking too long to load
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <span v-if="member.Active == 'true'">
+              &nbsp; <p />
+              &nbsp; <p />
+              <div class="spinner-border text-info" role="status" style='width: 3rem; height: 3rem;'>
+                <span class="sr-only">Loading...</span>
+              </div>
+              &nbsp; <p />
+              &nbsp; <p />
+              &nbsp; <p />
+              &nbsp; <p />
+            </div>
+            <div v-for="member in info" :key="member">
+              <div class="col-xl-12 text-center" style="padding-bottom: 25px !important">
+                <transition appear name="bounce">
+                  <div class="card" >
+
+                    <div class="card-header" >
+                      <h4 style=" padding-top: 10px !important;  ">
+                        <div class='col-md-10 offset-md-1'>
+                          {{member.Code}} - {{member.Company}}
+                        </div>
+                        <span v-if="member.Active == 'true'">
               <div class="badge badge-success float-right col-lg-2" style='font-size: 14px' > 
                 Active
               </div>
               </span>
-              <span v-else >
+                        <span v-else >
               <div class="badge badge-danger float-right col-lg-2" style='font-size: 14px' > 
                 Not Active
               </div>
               </span>
-            </h4>
-          </div>
-          <div class='card-text'>
-          &nbsp;
-            <h5 >
-              Facility Type: {{member.Facility}}
-            </h5>
-            <h5 >
-              Ticket Delivery Destination: {{member.Delivery_address}}
-            </h5>
-            <h5 >
-              Service Area Version: {{member.Shape}}
-            </h5>
-            <h5 >
-              Service Area Last Updated: {{member.Created.slice(6,10)}}-{{member.Created.slice(0,4)}}
-            </h5>
-            <div class='col-md-6 offset-md-3'>
-              <button class='btn btn-info' data-toggle="collapse" :href="'#collapseExample'+member.Member_id" role="button" aria-expanded="false" :aria-controls="'#collapseExample'+member.Member_id" >Show Contacts</button>
-            </div>
-            <h6 style='padding-top: 20px'><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on updating your facility type or delivery destination.</small></h6>
-            <div class="collapse" :id="'collapseExample'+member.Member_id">
-              <div class='container'>
-                <div class="row" style='padding-top: 15px; margin-left: 20px'>
-                  <div v-for="contact in member.Contacts" :key="contact">
-                    
-                    <div class=' d-flex flex-sm-row flex-column p-4 justify-content-center ' style='padding-top: 15px'>
-                    
-                    
-                      <div class="card" v-bind:style="window.width < 500 ? 'width: 180px' : 'width: 280px'">
-                    
-                        <div class="card-body" >
-                          <h5>
-                            <div v-if="contact.Contact_type == 'RCVR'"> MARKING CONTACT </div>
-                            <div v-else-if="contact.Contact_type == 'ALTR'"> ALTERNATE </div>
-                            <div v-else-if="contact.Contact_type == 'BILL'"> BILLING </div>
-                            <div v-else-if="contact.Contact_type == 'BORD'"> BOARD REP </div>
-                            <div v-else-if="contact.Contact_type == 'DAMG'"> EMERGENCY / DAMAGES </div>
-                            <div v-else-if="contact.Contact_type == 'EMER'"> EMERGENCY / DAMAGES </div>
-                            <div v-else-if="contact.Contact_type == 'DATA'"> DATABASE </div>
-                            <div v-else-if="contact.Contact_type == 'ENGR'"> ENGINEERING </div>
-                            <div v-else-if="contact.Contact_type == 'MAIN'"> MAIN SWITCHBOARD </div>
-                            <div v-else-if="contact.Contact_type == 'SURV'"> SURVEYOR </div>
-                            <div v-else-if="contact.Contact_type == 'CONT'"> MARKING CONTACT </div>
-                            <div v-else-if="contact.Contact_type == 'NITE'"> NITE TIME </div>
-                            <div v-else-if="contact.Contact_type == 'AHRS'"> AFTER HOURS </div>
-                            <div v-else-if="contact.Contact_type == 'VACU'"> VACUUM </div>
-                            <div v-else-if="contact.Contact_type == 'REPR'"> MEMBER REP </div>
+                      </h4>
+                    </div>
+                    <div class='card-text'>
+                      &nbsp;
+                      <h5 >
+                        Facility Type: <span v-if="member.Facility == 'YELL'">YELLOW</span><span v-else-if="member.Facility == 'ORAN'">ORANGE</span><span v-else-if="member.Facility == 'PURP'">PURPLE</span><span v-else-if="member.Facility == 'GREE'">GREEN</span><span v-else>{{member.Facility}}</span>
+                        <button class="btn btn-outline-info" type="button" style='width:50px' data-toggle="collapse" :href="'#exampleModal'+member.Member_id+'a'" role="button" aria-expanded="false" :aria-controls="'#exampleModal'+member.Member_id+'a'">
+                          <%=image_tag("pencil_teal.svg", :width => "15")%>
+                        </button>
+                      </h5>
+                      <%= form_for MemberDetail.new, url: member_details_path do |form|  %>
+                        <div class="collapse" :id="'exampleModal'+member.Member_id+'a'">
+                          <div class='container'>
+                            <form>
+                              <div class="form-group row" >
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4">
+                                  <label for="exampleInputEmail1" >Facility Type</label>
+                                  <select class="form-control custom-select" :value="member.Facility" required="required" name="member_detail[facility]" id="member_detail_facility"><option value=""></option>
+                                    <option value="RED">Red <small>(electric power lines, cables, conduit, and lighting cables)</small></option>
+                                    <option value="YELL">Yellow <small>(gas, oil, steam, petroleum, or gaseous materials)</small></option>
+                                    <option value="ORAN">Orange <small>(communication, alarm or signal lines, cables or conduit)</small></option>
+                                    <option value="BLUE">Blue <small>(potable water)</small></option>
+                                    <option value="PURP">Purple <small>(reclaimed water, irrigation, and slurry lines)</small></option>
+                                    <option value="GREE">Green <small>(sewers and drain lines)</small></option>
+                                  </select>
+                                </div>
 
-                          </h5>
-                          <h6>{{contact.Contact}}</h6>
-                          <h6><a :href="'tel:'+contact.Phone">{{contact.Phone}}</a></h6>
-                          <h6><a :href="'mailto:'+contact.Email">{{contact.Email}}</a></h6>
-                          <h6>{{contact.Address1}}</h6>
-                          <h6>{{contact.City}}</h6>
-                          <h6>{{contact.State}}</h6>
-                          <h6>{{contact.Zip}}</h6>
-                          <div class='row'>
-                            <div class='col-lg-3 offset-lg-3 col-sm-6' >
-                              <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'a'">
-                                <%=image_tag("pencil_teal.svg", :width => "15")%>
-                              </button>
-                            </div>
-                            <div class='col-lg-3 col-sm-6' >
-                              <button type="button" class="btn btn-outline-danger" style='width:50px' data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'1234a'">
-                                <%=image_tag("trashcan_orange.svg", :width => "15")%>
-                              </button>
-                            </div>
-                            <div class="modal fade" :id="'exampleModal'+contact.Id+'1234a'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title text-center" id="exampleModalLabel">Are You Sure?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <h4>This action cannot be undone</h4><h5>Continue?</h5>
-                                    <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
-                                      <div class="modal-body">
-                                        <div class='container'>
-                                          <form>
-                                            <div class="form-group row" >
-                                              <input :value="contact.Contact_type" type="hidden" name="member_contact[contact_type]" id="member_contact_contact_type">
-                                              <input :value="contact.Contact" type="hidden" name="member_contact[contact_name]" id="member_contact_contact_name">
-                                              <input :value="contact.Phone" type="hidden" name="member_contact[phone]" id="member_contact_phone">
-                                              <input :value="contact.Phone_ext" type="hidden" name="member_contact[phone_ext]" id="member_contact_phone_ext">
-                                              <input :value="contact.Email" type="hidden" name="member_contact[email]" id="member_contact_email">
-                                              <input :value="contact.Address1" type="hidden" name="member_contact[address1]" id="member_contact_address1">
-                                              <input :value="contact.Address2" type="hidden" name="member_contact[address2]" id="member_contact_address2">
-                                              <input :value="contact.City" type="hidden" name="member_contact[city]" id="member_contact_city">
-                                              <input :value="contact.State" type="hidden" name="member_contact[state]" id="member_contact_state">
-                                              <input :value="contact.Zip" type="hidden" name="member_contact[zip]" id="member_contact_zip">
-                                              
-                                              <%= form.hidden_field :name, :value => "current_user.email" %>
-                                              <input :value="contact.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
-                                              <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
-                                              <input :value="contact.Id" type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
-                                              <input :value="contact.Name" type="hidden" name="member_contact[company]" id="member_contact_company">
-                                              <%= form.hidden_field :company, :value => "contact.Name" %>
-                                              <%= form.hidden_field :group_id, :value => @group.id %>
-                                              <%= form.hidden_field :stype, :value => 'DELETE' %>
-                                              <%= form.hidden_field :billing, :value => @group.billing_id%>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                            
-                                              <%= form.submit 'Yes', class: 'btn btn-danger', type: "submit" %>
-                                            </div>
-                                          </form> 
-                                        </div>
+                                <%= form.hidden_field :name, :value => current_user.email %>
+                                <input :value="member.Active" type="hidden" name="member_detail[active]" id="member_detail_active">
+                                <input :value="member.Member_id" type="hidden" name="member_detail[member_id]" id="member_detail_member_id">
+                                <input :value="member.Code" type="hidden" name="member_detail[member_code]" id="member_detail_member_code">
+                                <input :value="member.Company" type="hidden" name="member_detail[company]" id="member_detail_company">
+                                <%= form.hidden_field :stype, :value => 'UPDATE' %>
+
+                                <%= form.hidden_field :group_id, :value => @group.id%>
+                              </div>
+                              <div class="form-group row" >
+                                <div class="col-sm-6"> </div>
+                                <div class="col-sm-2">
+                                  <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      <%end%>
+                      <h5 >
+                        Ticket Delivery Destination: {{member.Delivery_address}}
+                      </h5>
+                      <h5 >
+                        Service Area Version: {{member.Shape}}
+                      </h5>
+                      <h5 >
+                        Service Area Last Updated: {{member.Created.slice(6,10)}}-{{member.Created.slice(0,4)}}
+                      </h5>
+                      <div class='col-md-6 offset-md-3'>
+                        <button class='btn btn-info' data-toggle="collapse" :href="'#collapseExample'+member.Member_id" role="button" aria-expanded="false" :aria-controls="'#collapseExample'+member.Member_id" >Show Contacts</button>
+                      </div>
+                      <h6 style='padding-top: 20px'><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on updating your facility type or delivery destination.</small></h6>
+                      <div class="collapse" :id="'collapseExample'+member.Member_id">
+                        <div class='container'>
+                          <div class="row" style='padding-top: 15px; margin-left: 20px'>
+                            <div v-for="contact in member.Contacts" :key="contact">
+
+                              <div class=' d-flex flex-sm-row flex-column p-4 justify-content-center ' style='padding-top: 15px'>
+
+
+                                <div class="card" v-bind:style="window.width < 500 ? 'width: 180px' : 'width: 280px'">
+
+                                  <div class="card-body" >
+                                    <h5>
+                                      <div v-if="contact.Contact_type == 'RCVR'"> MARKING CONTACT </div>
+                                      <div v-else-if="contact.Contact_type == 'ALTR'"> ALTERNATE </div>
+                                      <div v-else-if="contact.Contact_type == 'BILL'"> BILLING </div>
+                                      <div v-else-if="contact.Contact_type == 'BORD'"> BOARD REP </div>
+                                      <div v-else-if="contact.Contact_type == 'DAMG'"> EMERGENCY / DAMAGES </div>
+                                      <div v-else-if="contact.Contact_type == 'EMER'"> EMERGENCY / DAMAGES </div>
+                                      <div v-else-if="contact.Contact_type == 'DATA'"> DATABASE </div>
+                                      <div v-else-if="contact.Contact_type == 'ENGR'"> ENGINEERING </div>
+                                      <div v-else-if="contact.Contact_type == 'MAIN'"> MAIN SWITCHBOARD </div>
+                                      <div v-else-if="contact.Contact_type == 'SURV'"> SURVEYOR </div>
+                                      <div v-else-if="contact.Contact_type == 'CONT'"> MARKING CONTACT </div>
+                                      <div v-else-if="contact.Contact_type == 'NITE'"> NITE TIME </div>
+                                      <div v-else-if="contact.Contact_type == 'AHRS'"> AFTER HOURS </div>
+                                      <div v-else-if="contact.Contact_type == 'VACU'"> VACUUM </div>
+                                      <div v-else-if="contact.Contact_type == 'REPR'"> MEMBER REP </div>
+
+                                    </h5>
+                                    <h6>{{contact.Contact}}</h6>
+                                    <h6><a :href="'tel:'+contact.Phone">({{contact.Phone.slice(0,3)}}) {{contact.Phone.slice(3,6)}}-{{contact.Phone.slice(6,10)}}</a></h6>
+                                    <h6><a :href="'mailto:'+contact.Email">{{contact.Email}}</a></h6>
+                                    <h6>{{contact.Address1}}</h6>
+                                    <h6>{{contact.City}}</h6>
+                                    <h6>{{contact.State}}</h6>
+                                    <h6>{{contact.Zip}}</h6>
+                                    <div class='row'>
+                                      <div class='col-lg-3 offset-lg-3 col-sm-6' >
+                                        <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'a'">
+                                          <%=image_tag("pencil_teal.svg", :width => "15")%>
+                                        </button>
                                       </div>
-                                    <%end%> 
-                                  </div>
-                                  </div>
-                                  </div>
-                                  </div>
-                                  <div class="modal fade" :id="'exampleModal'+contact.Id+'a'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="exampleModalLabel">Editing {{contact.Contact_type}} for {{member.Company}}</h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
-                                          <div class="modal-body">
-                                            <div class='container'>
-                                              <form>
-                                                <div class="form-group row" >
-                                                  <div class="col-sm-6">
-                                                    <label for="exampleInputEmail1" >Contact Type</label>
-                                                    <select class="form-control custom-select" :value="contact.Contact_type" required="required" name="member_contact[contact_type]" id="member_contact_contact_type"><option value=""></option>
-                                                      <option value="RCVR">RCVR</option>
-                                                      <option value="DATA">DATA</option>
-                                                      <option value="CONT">CONT</option>
-                                                      <option value="DAMG">DAMG</option>
-                                                      <option value="ENGR">ENGR</option>
-                                                      <option value="EMER">EMER</option>
-                                                      <option selected="selected" value="AHRS">AHRS</option>
-                                                      <option value="VACU">VACU</option>
-                                                    </select>
-                                                    <h6 ><small style='color: red; '>*required</small></h6>
-                                                  </div> 
-                                                  <div class="col-sm-6">  
-                                                    <label for="exampleInputEmail1" style=''>Contact Name</label>
-                                                    <input class="form-control" :value="contact.Contact" required="required" type="text" name="member_contact[contact_name]" id="member_contact_contact_name">
-                                                    <h6 ><small style='color: red; '>*required</small></h6>
-                                                  </div> 
-                                                  <div class="col-md-12 col-lg-6">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
-                                                    <input class="form-control" :value="contact.Phone" required="required" type="text" name="member_contact[phone]" id="member_contact_phone">
-                                                    <h6 ><small style='color: red; '>*required</small></h6>
+                                      <div class='col-lg-3 col-sm-6' >
+                                        <button type="button" class="btn btn-outline-danger" style='width:50px' data-toggle="modal" :data-target="'#exampleModal'+contact.Id+'1234a'">
+                                          <%=image_tag("trashcan_orange.svg", :width => "15")%>
+                                        </button>
+                                      </div>
+                                      <div class="modal fade" :id="'exampleModal'+contact.Id+'1234a'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title text-center" id="exampleModalLabel">Are You Sure?</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <h4>This action cannot be undone</h4><h5>Continue?</h5>
+                                              <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                                                <div class="modal-body">
+                                                  <div class='container'>
+                                                    <form>
+                                                      <div class="form-group row" >
+                                                        <input :value="contact.Contact_type" type="hidden" name="member_contact[contact_type]" id="member_contact_contact_type">
+                                                        <input :value="contact.Contact" type="hidden" name="member_contact[contact_name]" id="member_contact_contact_name">
+                                                        <input :value="contact.Phone" type="hidden" name="member_contact[phone]" id="member_contact_phone">
+                                                        <input :value="contact.Phone_ext" type="hidden" name="member_contact[phone_ext]" id="member_contact_phone_ext">
+                                                        <input :value="contact.Email" type="hidden" name="member_contact[email]" id="member_contact_email">
+                                                        <input :value="contact.Address1" type="hidden" name="member_contact[address1]" id="member_contact_address1">
+                                                        <input :value="contact.Address2" type="hidden" name="member_contact[address2]" id="member_contact_address2">
+                                                        <input :value="contact.City" type="hidden" name="member_contact[city]" id="member_contact_city">
+                                                        <input :value="contact.State" type="hidden" name="member_contact[state]" id="member_contact_state">
+                                                        <input :value="contact.Zip" type="hidden" name="member_contact[zip]" id="member_contact_zip">
+
+                                                        <%= form.hidden_field :name, :value => "current_user.email" %>
+                                                        <input :value="contact.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
+                                                        <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
+                                                        <input :value="contact.Id" type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
+                                                        <input :value="contact.Name" type="hidden" name="member_contact[company]" id="member_contact_company">
+                                                        <%= form.hidden_field :company, :value => "contact.Name" %>
+                                                        <%= form.hidden_field :group_id, :value => @group.id %>
+                                                        <%= form.hidden_field :stype, :value => 'DELETE' %>
+                                                        <%= form.hidden_field :billing, :value => @group.billing_id%>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+                                                        <%= form.submit 'Yes', class: 'btn btn-danger', type: "submit" %>
+                                                      </div>
+                                                    </form>
                                                   </div>
-                                                  <div class="d-none d-lg-block col-lg-6">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px;'>Ext</label>
-                                                    <input class="form-control" :value="contact.Phone_ext"  type="text" name="member_contact[phone_ext]" id="member_contact_phone_ext">
-                                                  </div> 
-                                                  <div class="col-sm-12">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
-                                                    <input class="form-control" :value="contact.Email"  type="text" name="member_contact[email]" id="member_contact_email">
-                                                  </div>
-                                                  <div class="d-none d-lg-block col-lg-12">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
-                                                    <input class="form-control" :value="contact.Address1"  type="text" name="member_contact[address1]" id="member_contact_address1">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
-                                                    <input class="form-control" :value="contact.Address2"  type="text" name="member_contact[address2]" id="member_contact_address2">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
-                                                    <input class="form-control" :value="contact.City"  type="text" name="member_contact[city]" id="member_contact_city">
-                                                  </div>
-                                                  <div class="d-none d-lg-block col-lg-6">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
-                                                    <select class="form-control custom-select" value="" name="member_contact[state]" id="member_contact_state"><option value="CA">CA</option>
-                                                    <option value="NV">NV</option>
-                                                    <option value="AK">AK</option>
-                                                    <option value="AL">AL</option>
-                                                    <option value="AR">AR</option>
-                                                    <option value="AZ">AZ</option>
-                                                    <option value="CA">CA</option>
-                                                    <option value="CO">CO</option>
-                                                    <option value="CT">CT</option>
-                                                    <option value="DC">DC</option>
-                                                    <option value="DE">DE</option>
-                                                    <option value="FL">FL</option>
-                                                    <option value="GA">GA</option>
-                                                    <option value="HI">HI</option>
-                                                    <option value="IA">IA</option>
-                                                    <option value="ID">ID</option>
-                                                    <option value="IL">IL</option>
-                                                    <option value="IN">IN</option>
-                                                    <option value="KS">KS</option>
-                                                    <option value="KY">KY</option>
-                                                    <option value="LA">LA</option>
-                                                    <option value="MA">MA</option>
-                                                    <option value="MD">MD</option>
-                                                    <option value="ME">ME</option>
-                                                    <option value="MI">MI</option>
-                                                    <option value="MN">MN</option>
-                                                    <option value="MO">MO</option>
-                                                    <option value="MS">MS</option>
-                                                    <option value="MT">MT</option>
-                                                    <option value="NC">NC</option>
-                                                    <option value="ND">ND</option>
-                                                    <option value="NE">NE</option>
-                                                    <option value="NH">NH</option>
-                                                    <option value="NJ">NJ</option>
-                                                    <option value="NM">NM</option>
-                                                    <option value="NV">NV</option>
-                                                    <option value="NY">NY</option>
-                                                    <option value="OH">OH</option>
-                                                    <option value="OK">OK</option>
-                                                    <option value="OR">OR</option>
-                                                    <option value="PA">PA</option>
-                                                    <option value="RI">RI</option>
-                                                    <option value="SC">SC</option>
-                                                    <option value="SD">SD</option>
-                                                    <option value="TN">TN</option>
-                                                    <option value="TX">TX</option>
-                                                    <option value="UT">UT</option>
-                                                    <option value="VA">VA</option>
-                                                    <option value="VT">VT</option>
-                                                    <option value="WA">WA</option>
-                                                    <option value="WI">WI</option>
-                                                    <option value="WV">WV</option>
-                                                    <option value="WY">WY</option></select>
-                                                  </div>
-                                                  <div class="d-none d-lg-block col-lg-6">
-                                                    <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
-                                                    <input class="form-control" :value="contact.Zip"  type="text" name="member_contact[zip]" id="member_contact_zip">
-                                                  </div>
-                              
-                                                  <%= form.hidden_field :name, :value => current_user.email %>
-                                                  <input :value="contact.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
-                                                  <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
-                                                  <input :value="contact.Id" type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
-                                                  <input :value="contact.Name" type="hidden" name="member_contact[company]" id="member_contact_company">
-                                                  <%= form.hidden_field :group_id, :value => @group.id %>
-                                                  <%= form.hidden_field :stype, :value => 'UPDATE' %>
-                                                  <%= form.hidden_field :billing, :value => @group.billing_id%>
                                                 </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                  <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
-                                                </div>
-                                              </form>
+                                              <%end%>
                                             </div>
                                           </div>
-                                        <%end%>
-                                      
+                                        </div>
+                                      </div>
+                                      <div class="modal fade" :id="'exampleModal'+contact.Id+'a'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Editing {{contact.Contact_type}} for {{member.Company}}</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+                                              <div class="modal-body">
+                                                <div class='container'>
+                                                  <form>
+                                                    <div class="form-group row" >
+                                                      <div class="col-sm-6">
+                                                        <label for="exampleInputEmail1" >Contact Type</label>
+                                                        <select class="form-control custom-select" :value="contact.Contact_type" required="required" name="member_contact[contact_type]" id="member_contact_contact_type"><option value=""></option>
+                                                          <option value="RCVR">RCVR</option>
+                                                          <option value="DATA">DATA</option>
+                                                          <option value="CONT">CONT</option>
+                                                          <option value="DAMG">DAMG</option>
+                                                          <option value="ENGR">ENGR</option>
+                                                          <option value="EMER">EMER</option>
+                                                          <option selected="selected" value="AHRS">AHRS</option>
+                                                          <option value="VACU">VACU</option>
+                                                        </select>
+                                                        <h6 ><small style='color: red; '>*required</small></h6>
+                                                      </div>
+                                                      <div class="col-sm-6">
+                                                        <label for="exampleInputEmail1" style=''>Contact Name</label>
+                                                        <input class="form-control" :value="contact.Contact" required="required" type="text" name="member_contact[contact_name]" id="member_contact_contact_name">
+                                                        <h6 ><small style='color: red; '>*required</small></h6>
+                                                      </div>
+                                                      <div class="col-md-12 col-lg-6">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>Phone</label>
+                                                        <input class="form-control" :value="contact.Phone" required="required" type="text" name="member_contact[phone]" id="member_contact_phone">
+                                                        <h6 ><small style='color: red; '>*required</small></h6>
+                                                      </div>
+                                                      <div class="d-none d-lg-block col-lg-6">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px;'>Ext</label>
+                                                        <input class="form-control" :value="contact.Phone_ext"  type="text" name="member_contact[phone_ext]" id="member_contact_phone_ext">
+                                                      </div>
+                                                      <div class="col-sm-12">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                                                        <input class="form-control" :value="contact.Email"  type="text" name="member_contact[email]" id="member_contact_email">
+                                                      </div>
+                                                      <div class="d-none d-lg-block col-lg-12">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                                                        <input class="form-control" :value="contact.Address1"  type="text" name="member_contact[address1]" id="member_contact_address1">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                                                        <input class="form-control" :value="contact.Address2"  type="text" name="member_contact[address2]" id="member_contact_address2">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                                                        <input class="form-control" :value="contact.City"  type="text" name="member_contact[city]" id="member_contact_city">
+                                                      </div>
+                                                      <div class="d-none d-lg-block col-lg-6">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                                                        <select class="form-control custom-select" value="" name="member_contact[state]" id="member_contact_state"><option value="CA">CA</option>
+                                                          <option value="NV">NV</option>
+                                                          <option value="AK">AK</option>
+                                                          <option value="AL">AL</option>
+                                                          <option value="AR">AR</option>
+                                                          <option value="AZ">AZ</option>
+                                                          <option value="CA">CA</option>
+                                                          <option value="CO">CO</option>
+                                                          <option value="CT">CT</option>
+                                                          <option value="DC">DC</option>
+                                                          <option value="DE">DE</option>
+                                                          <option value="FL">FL</option>
+                                                          <option value="GA">GA</option>
+                                                          <option value="HI">HI</option>
+                                                          <option value="IA">IA</option>
+                                                          <option value="ID">ID</option>
+                                                          <option value="IL">IL</option>
+                                                          <option value="IN">IN</option>
+                                                          <option value="KS">KS</option>
+                                                          <option value="KY">KY</option>
+                                                          <option value="LA">LA</option>
+                                                          <option value="MA">MA</option>
+                                                          <option value="MD">MD</option>
+                                                          <option value="ME">ME</option>
+                                                          <option value="MI">MI</option>
+                                                          <option value="MN">MN</option>
+                                                          <option value="MO">MO</option>
+                                                          <option value="MS">MS</option>
+                                                          <option value="MT">MT</option>
+                                                          <option value="NC">NC</option>
+                                                          <option value="ND">ND</option>
+                                                          <option value="NE">NE</option>
+                                                          <option value="NH">NH</option>
+                                                          <option value="NJ">NJ</option>
+                                                          <option value="NM">NM</option>
+                                                          <option value="NV">NV</option>
+                                                          <option value="NY">NY</option>
+                                                          <option value="OH">OH</option>
+                                                          <option value="OK">OK</option>
+                                                          <option value="OR">OR</option>
+                                                          <option value="PA">PA</option>
+                                                          <option value="RI">RI</option>
+                                                          <option value="SC">SC</option>
+                                                          <option value="SD">SD</option>
+                                                          <option value="TN">TN</option>
+                                                          <option value="TX">TX</option>
+                                                          <option value="UT">UT</option>
+                                                          <option value="VA">VA</option>
+                                                          <option value="VT">VT</option>
+                                                          <option value="WA">WA</option>
+                                                          <option value="WI">WI</option>
+                                                          <option value="WV">WV</option>
+                                                          <option value="WY">WY</option></select>
+                                                      </div>
+                                                      <div class="d-none d-lg-block col-lg-6">
+                                                        <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                                                        <input class="form-control" :value="contact.Zip"  type="text" name="member_contact[zip]" id="member_contact_zip">
+                                                      </div>
+
+                                                      <%= form.hidden_field :name, :value => current_user.email %>
+                                                      <input :value="contact.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
+                                                      <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
+                                                      <input :value="contact.Id" type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
+                                                      <input :value="contact.Name" type="hidden" name="member_contact[company]" id="member_contact_company">
+                                                      <%= form.hidden_field :group_id, :value => @group.id %>
+                                                      <%= form.hidden_field :stype, :value => 'UPDATE' %>
+                                                      <%= form.hidden_field :billing, :value => @group.billing_id%>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                                                    </div>
+                                                  </form>
+                                                </div>
+                                              </div>
+                                            <%end%>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          <div class="row justify-content-center">
+                            <div v-for="MissingContact in member.MissingContacts[0]" :key="MissingContact">
+                              <div v-for="name in MissingContact" :key="name">
+                                <div class='d-flex flex-sm-row flex-column p-4 justify-content-center' style='padding-top: 15px'>
+                                  <div class="card badge-danger" >
+                                    <div class="card-body alert-danger" >
+                                      <h5>
+                                        Missing <span v-if="name == 'RCVR'"> Marking </span>
+                                        <span v-else-if="name == 'ALTR'"> Alternate </span>
+                                        <span v-else-if="name == 'BILL'"> Billing </span>
+                                        <span v-else-if="name == 'BORD'"> Board Rep </span>
+                                        <span v-else-if="name == 'DAMG'"> Emergency / Damage </span>
+                                        <span v-else-if="name == 'EMER'"> Emergency / Damage </span>
+                                        <span v-else-if="name == 'DATA'"> Database </span>
+                                        <span v-else-if="name == 'ENGR'"> Engineering </span>
+                                        <span v-else-if="name == 'MAIN'"> Main Switchboard </span>
+                                        <span v-else-if="name == 'SURV'"> Surveyor </span>
+                                        <span v-else-if="name == 'CONT'"> Marking </span>
+                                        <span v-else-if="name == 'NITE'"> Nite Time </span>
+                                        <span v-else-if="name == 'AHRS'"> After Hours </span>
+                                        <span v-else-if="name == 'VACU'"> Vacuum </span>
+                                        <span v-else-if="name == 'REPR'"> Member Rep </span> Contact
+
+                                      </h5>
+
+                                      <h6>This Member Code Requires a <span v-if="name == 'RCVR'"> Marking </span>
+                                        <span v-else-if="name == 'ALTR'"> Alternate </span>
+                                        <span v-else-if="name == 'BILL'"> Billing </span>
+                                        <span v-else-if="name == 'BORD'"> Board Rep </span>
+                                        <span v-else-if="name == 'DAMG'"> Emergency / Damage </span>
+                                        <span v-else-if="name == 'EMER'"> Emergency / Damage </span>
+                                        <span v-else-if="name == 'DATA'"> Database </span>
+                                        <span v-else-if="name == 'ENGR'"> Engineering </span>
+                                        <span v-else-if="name == 'MAIN'"> Main Switchboard </span>
+                                        <span v-else-if="name == 'SURV'"> Surveyor </span>
+                                        <span v-else-if="name == 'CONT'"> Marking </span>
+                                        <span v-else-if="name == 'NITE'"> Nite Time </span>
+                                        <span v-else-if="name == 'AHRS'"> After Hours </span>
+                                        <span v-else-if="name == 'VACU'"> Vacuum </span>
+                                        <span v-else-if="name == 'REPR'"> Member Rep </span> contact to be complete</h6>
+                                      <button type="button" class='btn btn-info' data-toggle="modal" :data-target="'#'+name+'modal'+member.Member_id">Quick Add</button>
+                                      <div class="modal fade" :id="name+'modal'+member.Member_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Add <span v-if="name == 'RCVR'"> Marking </span>
+                                                <span v-else-if="name == 'ALTR'"> Alternate </span>
+                                                <span v-else-if="name == 'BILL'"> Billing </span>
+                                                <span v-else-if="name == 'BORD'"> Board Rep </span>
+                                                <span v-else-if="name == 'DAMG'"> Emergency / Damage </span>
+                                                <span v-else-if="name == 'EMER'"> Emergency / Damage </span>
+                                                <span v-else-if="name == 'DATA'"> Database </span>
+                                                <span v-else-if="name == 'ENGR'"> Engineering </span>
+                                                <span v-else-if="name == 'MAIN'"> Main Switchboard </span>
+                                                <span v-else-if="name == 'SURV'"> Surveyor </span>
+                                                <span v-else-if="name == 'CONT'"> Marking </span>
+                                                <span v-else-if="name == 'NITE'"> Nite Time </span>
+                                                <span v-else-if="name == 'AHRS'"> After Hours </span>
+                                                <span v-else-if="name == 'VACU'"> Vacuum </span>
+                                                <span v-else-if="name == 'REPR'"> Member Rep </span> Contact for {{member.Code}}</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+
+
+                                                <form>
+                                                  <div class="form-group row" >
+                                                    <div class="col-sm-4" style=''>
+                                                      <label for="exampleInputEmail1" ><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                                                        <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%>
+                                                      </button>Contact Type</label>
+                                                      <input readonly class="form-control " :value="name" required="required" name="member_contact[contact_type]" id="member_contact_contact_type">
+
+                                                      </input>
+                                                      <h6 ><small style='color: red; '>*required</small></h6>
+
+                                                    </div>
+                                                    <div class='col-md-4'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Contact Name</label>
+                                                      <%= form.text_field :contact_name, class: 'form-control', required: true%>
+                                                      <h6 ><small style='color: red; '>*required</small></h6>
+                                                    </div>
+                                                    <div class='col-md-3'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Phone</label>
+                                                      <%= form.text_field :phone, class: 'form-control', required: true %>
+                                                      <h6 ><small style='color: red; '>*required</small></h6>
+                                                    </div>
+                                                    <div class='col-md-2'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Ext</label>
+                                                      <%= form.text_field :phone_ext, class: 'form-control' %>
+                                                    </div>
+                                                    <div class='col-md-4'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                                                      <%= form.text_field :email, class: 'form-control',type: "email" %>
+                                                    </div>
+                                                    <div class='col-md-4'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                                                      <%= form.text_field :address1, class: 'form-control'%>
+                                                    </div>
+                                                    <div class='col-md-4'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                                                      <%= form.text_field :address2, class: 'form-control'%>
+                                                    </div>
+                                                    <div class='col-md-4'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                                                      <%= form.text_field :city, class: 'form-control'%>
+                                                    </div>
+                                                    <div class='col-md-2'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                                                      <%= form.select :state, [
+                                                          ['CA', 'CA'],
+                                                          ['NV', 'NV'],
+                                                          ['AK', 'AK'],
+                                                          ['AL', 'AL'],
+                                                          ['AR', 'AR'],
+                                                          ['AZ', 'AZ'],
+                                                          ['CA', 'CA'],
+                                                          ['CO', 'CO'],
+                                                          ['CT', 'CT'],
+                                                          ['DC', 'DC'],
+                                                          ['DE', 'DE'],
+                                                          ['FL', 'FL'],
+                                                          ['GA', 'GA'],
+                                                          ['HI', 'HI'],
+                                                          ['IA', 'IA'],
+                                                          ['ID', 'ID'],
+                                                          ['IL', 'IL'],
+                                                          ['IN', 'IN'],
+                                                          ['KS', 'KS'],
+                                                          ['KY', 'KY'],
+                                                          ['LA', 'LA'],
+                                                          ['MA', 'MA'],
+                                                          ['MD', 'MD'],
+                                                          ['ME', 'ME'],
+                                                          ['MI', 'MI'],
+                                                          ['MN', 'MN'],
+                                                          ['MO', 'MO'],
+                                                          ['MS', 'MS'],
+                                                          ['MT', 'MT'],
+                                                          ['NC', 'NC'],
+                                                          ['ND', 'ND'],
+                                                          ['NE', 'NE'],
+                                                          ['NH', 'NH'],
+                                                          ['NJ', 'NJ'],
+                                                          ['NM', 'NM'],
+                                                          ['NV', 'NV'],
+                                                          ['NY', 'NY'],
+                                                          ['OH', 'OH'],
+                                                          ['OK', 'OK'],
+                                                          ['OR', 'OR'],
+                                                          ['PA', 'PA'],
+                                                          ['RI', 'RI'],
+                                                          ['SC', 'SC'],
+                                                          ['SD', 'SD'],
+                                                          ['TN', 'TN'],
+                                                          ['TX', 'TX'],
+                                                          ['UT', 'UT'],
+                                                          ['VA', 'VA'],
+                                                          ['VT', 'VT'],
+                                                          ['WA', 'WA'],
+                                                          ['WI', 'WI'],
+                                                          ['WV', 'WV'],
+                                                          ['WY', 'WY']
+                                                      ],{}, class: 'form-control custom-select'%>
+                                                    </div>
+                                                    <div class='col-md-2'>
+                                                      <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                                                      <%= form.text_field :zip, class: 'form-control' %>
+                                                    </div>
+                                                    <%= form.hidden_field :name, :value => current_user.email %>
+                                                    <input :value="member.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
+                                                    <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
+                                                    <input  type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
+                                                    <input :value="member.Company" type="hidden" name="member_contact[company]" id="member_contact_company">
+                                                    <%= form.hidden_field :group_id, :value => @group.id %>
+                                                    <%= form.hidden_field :stype, :value => 'INSERT' %>
+                                                    <%= form.hidden_field :billing, :value => @group.billing_id%>
+                                                  </div>
+
+                                                  <%= form.submit 'Add Contact', class: 'btn btn-info btn-block', type: "submit" %>
+
+                                                </form>
+                                              <%end%>
+                                            </div>
+
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+                        <div class='row'>
+                          <div class='col-xl-12 col-sm-12' style='padding-top: 15px'>
+                            <div class="card" style="width: auto; ">
+
+                              <div class="card-header" data-toggle="collapse" href="#collapseExample12345" role="button" aria-expanded="false" aria-controls="collapseExample12345" >
+                                <h5 class=" ">
+                                  New Contact
+                                </h5>
+                              </div>
+                              <div class='card-body' id="collapseExample12345">
+                                <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
+
+
+                                  <form>
+                                    <div class="form-group row" >
+                                      <div class="col-sm-4" style=''>
+                                        <label for="exampleInputEmail1" ><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                                          <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%>
+                                        </button>Contact Type</label>
+                                        <%= form.select :contact_type, ['RCVR','DATA','ENGR','EMER','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
+                                        <h6 ><small style='color: red; '>*required</small></h6>
+
+                                      </div>
+                                      <div class='col-md-4'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Contact Name</label>
+                                        <%= form.text_field :contact_name, class: 'form-control', required: true%>
+                                        <h6 ><small style='color: red; '>*required</small></h6>
+                                      </div>
+                                      <div class='col-md-2'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Phone</label>
+                                        <%= form.text_field :phone, class: 'form-control', required: true %>
+                                        <h6 ><small style='color: red; '>*required</small></h6>
+                                      </div>
+                                      <div class='col-md-2'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Ext</label>
+                                        <%= form.text_field :phone_ext, class: 'form-control' %>
+                                      </div>
+                                      <div class='col-md-4'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
+                                        <%= form.text_field :email, class: 'form-control',type: "email" %>
+                                      </div>
+                                      <div class='col-md-4'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
+                                        <%= form.text_field :address1, class: 'form-control'%>
+                                      </div>
+                                      <div class='col-md-4'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
+                                        <%= form.text_field :address2, class: 'form-control'%>
+                                      </div>
+                                      <div class='col-md-4'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
+                                        <%= form.text_field :city, class: 'form-control'%>
+                                      </div>
+                                      <div class='col-md-2'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
+                                        <%= form.select :state, [
+                                            ['CA', 'CA'],
+                                            ['NV', 'NV'],
+                                            ['AK', 'AK'],
+                                            ['AL', 'AL'],
+                                            ['AR', 'AR'],
+                                            ['AZ', 'AZ'],
+                                            ['CA', 'CA'],
+                                            ['CO', 'CO'],
+                                            ['CT', 'CT'],
+                                            ['DC', 'DC'],
+                                            ['DE', 'DE'],
+                                            ['FL', 'FL'],
+                                            ['GA', 'GA'],
+                                            ['HI', 'HI'],
+                                            ['IA', 'IA'],
+                                            ['ID', 'ID'],
+                                            ['IL', 'IL'],
+                                            ['IN', 'IN'],
+                                            ['KS', 'KS'],
+                                            ['KY', 'KY'],
+                                            ['LA', 'LA'],
+                                            ['MA', 'MA'],
+                                            ['MD', 'MD'],
+                                            ['ME', 'ME'],
+                                            ['MI', 'MI'],
+                                            ['MN', 'MN'],
+                                            ['MO', 'MO'],
+                                            ['MS', 'MS'],
+                                            ['MT', 'MT'],
+                                            ['NC', 'NC'],
+                                            ['ND', 'ND'],
+                                            ['NE', 'NE'],
+                                            ['NH', 'NH'],
+                                            ['NJ', 'NJ'],
+                                            ['NM', 'NM'],
+                                            ['NV', 'NV'],
+                                            ['NY', 'NY'],
+                                            ['OH', 'OH'],
+                                            ['OK', 'OK'],
+                                            ['OR', 'OR'],
+                                            ['PA', 'PA'],
+                                            ['RI', 'RI'],
+                                            ['SC', 'SC'],
+                                            ['SD', 'SD'],
+                                            ['TN', 'TN'],
+                                            ['TX', 'TX'],
+                                            ['UT', 'UT'],
+                                            ['VA', 'VA'],
+                                            ['VT', 'VT'],
+                                            ['WA', 'WA'],
+                                            ['WI', 'WI'],
+                                            ['WV', 'WV'],
+                                            ['WY', 'WY']
+                                        ],{}, class: 'form-control custom-select'%>
+                                      </div>
+                                      <div class='col-md-2'>
+                                        <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
+                                        <%= form.text_field :zip, class: 'form-control' %>
+                                      </div>
+                                      <%= form.hidden_field :name, :value => current_user.email %>
+                                      <input :value="member.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
+                                      <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
+                                      <input  type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
+                                      <input :value="member.Company" type="hidden" name="member_contact[company]" id="member_contact_company">
+                                      <%= form.hidden_field :group_id, :value => @group.id %>
+                                      <%= form.hidden_field :stype, :value => 'INSERT' %>
+                                      <%= form.hidden_field :billing, :value => @group.billing_id%>
+                                    </div>
+
+                                    <%= form.submit 'Add Contact', class: 'btn btn-info btn-block', type: "submit" %>
+
+                                  </form>
+                                <%end%>
+                              </div>
+                            </div>
+                          </div>
+
+
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
-              <div class='row'>
-            <div class='col-xl-12 col-sm-12' style='padding-top: 15px'>
-                  <div class="card" style="width: auto; ">
-
-                    <div class="card-header" data-toggle="collapse" href="#collapseExample12345" role="button" aria-expanded="false" aria-controls="collapseExample12345" >
-                      <h5 class=" ">
-                      New Contact
-                      </h5>
-                    </div>
-                    <div class='card-body' id="collapseExample12345">
-                    <%= form_for MemberContact.new, url: member_contacts_path do |form|  %>
-                      
-                        
-                          <form>
-                          <div class="form-group row" >
-                          <div class="col-sm-4" style=''>
-                            <label for="exampleInputEmail1" ><button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
-                            <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%> 
-                          </button>Contact Type</label>
-                            <%= form.select :contact_type, ['RCVR','DATA','ENGR','EMER','AHRS','VACU'],{},class: 'form-control custom-select',  required: true %>
-                            <h6 ><small style='color: red; '>*required</small></h6>
-                            
-                          </div> 
-                            <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Contact Name</label>
-                              <%= form.text_field :contact_name, class: 'form-control', required: true%>
-                              <h6 ><small style='color: red; '>*required</small></h6>
-                            </div>
-                            <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Phone</label>
-                              <%= form.text_field :phone, class: 'form-control', required: true %>
-                              <h6 ><small style='color: red; '>*required</small></h6>
-                            </div>
-                            <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px;padding-bottom:3px'>Ext</label>
-                              <%= form.text_field :phone_ext, class: 'form-control' %>
-                            </div>
-                            <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
-                              <%= form.text_field :email, class: 'form-control',type: "email" %>
-                            </div>
-                            <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 1</label>
-                              <%= form.text_field :address1, class: 'form-control'%>
-                            </div>
-                            <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Address 2</label>
-                              <%= form.text_field :address2, class: 'form-control'%>
-                            </div>
-                            <div class='col-md-4'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>City</label>
-                              <%= form.text_field :city, class: 'form-control'%>
-                            </div>
-                            <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>State</label>
-                              <%= form.select :state, [
-                                ['CA', 'CA'],
-                                ['NV', 'NV'],
-                                ['AK', 'AK'],
-                                ['AL', 'AL'],
-                                ['AR', 'AR'],
-                                ['AZ', 'AZ'],
-                                ['CA', 'CA'],
-                                ['CO', 'CO'],
-                                ['CT', 'CT'],
-                                ['DC', 'DC'],
-                                ['DE', 'DE'],
-                                ['FL', 'FL'],
-                                ['GA', 'GA'],
-                                ['HI', 'HI'],
-                                ['IA', 'IA'],
-                                ['ID', 'ID'],
-                                ['IL', 'IL'],
-                                ['IN', 'IN'],
-                                ['KS', 'KS'],
-                                ['KY', 'KY'],
-                                ['LA', 'LA'],
-                                ['MA', 'MA'],
-                                ['MD', 'MD'],
-                                ['ME', 'ME'],
-                                ['MI', 'MI'],
-                                ['MN', 'MN'],
-                                ['MO', 'MO'],
-                                ['MS', 'MS'],
-                                ['MT', 'MT'],
-                                ['NC', 'NC'],
-                                ['ND', 'ND'],
-                                ['NE', 'NE'],
-                                ['NH', 'NH'],
-                                ['NJ', 'NJ'],
-                                ['NM', 'NM'],
-                                ['NV', 'NV'],
-                                ['NY', 'NY'],
-                                ['OH', 'OH'],
-                                ['OK', 'OK'],
-                                ['OR', 'OR'],
-                                ['PA', 'PA'],
-                                ['RI', 'RI'],
-                                ['SC', 'SC'],
-                                ['SD', 'SD'],
-                                ['TN', 'TN'],
-                                ['TX', 'TX'],
-                                ['UT', 'UT'],
-                                ['VA', 'VA'],
-                                ['VT', 'VT'],
-                                ['WA', 'WA'],
-                                ['WI', 'WI'],
-                                ['WV', 'WV'],
-                                ['WY', 'WY']
-                              ],{}, class: 'form-control custom-select'%>
-                            </div>
-                            <div class='col-md-2'>
-                              <label for="exampleInputEmail1" style='padding-top:10px'>Zip</label>
-                              <%= form.text_field :zip, class: 'form-control' %>
-                            </div>
-                              <%= form.hidden_field :name, :value => current_user.email %>
-                              <input :value="member.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
-                                                  <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
-                                                  <input  type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
-                                                  <input :value="member.Company" type="hidden" name="member_contact[company]" id="member_contact_company">
-                              <%= form.hidden_field :group_id, :value => @group.id %>
-                              <%= form.hidden_field :stype, :value => 'INSERT' %>
-                              <%= form.hidden_field :billing, :value => @group.billing_id%>
-                            </div>
-                          
-                        <%= form.submit 'Add Contact', class: 'btn btn-info btn-block', type: "submit" %>
-                        
-                          </form>
-                          <%end%>
-                    </div>
-                  </div>
-            </div>
-            
-
-            </div>
             </div>
           </div>
         </div>
+
+        <div class="row" >
+
+          <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
+            <% if current_user.admin? %>
+              <div class="card" style="width: auto; ">
+                <a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <div class="card-header" >
+                    <h6 style="padding-top: 10px !important;">
+                      <div style="color: #E27d60">Add Code</div>
+                    </h6>
+                  </div>
+                </a>
+
+
+
+              </div>
+            <% end %>
+
+          </div>
+          </transition>
+        </div>
       </div>
+
     </div>
-  </div>
-</div>
+    <div class="col-md-3">
+      <div class="mycontent-right">
+        <div style="padding-left: 15px; padding-top:15px">
+          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#service_area_modal" >
+            Upload SAR
+          </button>
+          <div class="collapse" id="service_area_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="service_area_modal">Upload SAR</h5>
 
-<div class="row" >
+                </div>
+                <div class="modal-body">
+                  <a name="form900522022" id="formAnchor900522022"></a>
+                  <script src="https://fs26.formsite.com/include/form/embedManager.js?900522022"></script>
 
-  <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
-    <% if current_user.admin? %>
-<div class="card" style="width: auto; ">      
-<a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-  <div class="card-header" >
-    <h6 style="padding-top: 10px !important;">
-      <div style="color: #E27d60">Add Code</div>      
-    </h6>
-  </div>
-</a>
+                </div>
 
-
-
-</div>
-<% end %>
-
-</div>
-</transition>
-</div>
-</div>
-
-</div>
-<div class="col-md-3">
-<div class="mycontent-right">
-  <div style="padding-left: 15px; padding-top:15px">
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#service_area_modal" >
-  Upload SAR
-</button>
-  <div class="collapse" id="service_area_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="service_area_modal">Upload SAR</h5>
-        
-      </div>
-      <div class="modal-body">
-      <a name="form900522022" id="formAnchor900522022"></a>
-      <script src="https://fs26.formsite.com/include/form/embedManager.js?900522022"></script>
-      
-      </div>
-      
-    </div>
-  </div>
-</div>
-<script>
-EmbedManager.embed({
-  key: "https://fs26.formsite.com/res/showFormEmbed?EParam=m_OmK8apOTANZkOaL7H0HogAwUXi0cBCFzpUCZwnDno&900522022",
-  width: "100%",
-  mobileResponsive: true,
-  prePopulate: {"1":"<%= current_user.profile.first_name%>","2":"<%= current_user.profile.last_name%>","3":"<%= current_user.email%>"}
-});
-</script>
-</div>
-<div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
+              </div>
+            </div>
+          </div>
+          <script>
+              EmbedManager.embed({
+                  key: "https://fs26.formsite.com/res/showFormEmbed?EParam=m_OmK8apOTANZkOaL7H0HogAwUXi0cBCFzpUCZwnDno&900522022",
+                  width: "100%",
+                  mobileResponsive: true,
+                  prePopulate: {"1":"<%= current_user.profile.first_name%>","2":"<%= current_user.profile.last_name%>","3":"<%= current_user.email%>"}
+              });
+          </script>
+        </div>
+        <div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
   <span v-if="ticketCounts == null">
     <button class="btn btn-info" type="button" disabled>
       <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading...
     </button>
   </span>
-  <span v-else >
+          <span v-else >
   <button class="btn btn-info" data-toggle="collapse" href="#counts" role="button" aria-expanded="false" aria-controls="counts">
   Show 2019 Billable Ticket Totals
   </button>
@@ -597,181 +838,179 @@ EmbedManager.embed({
     </ul>
     </div>
 </span>
-</p>
+          </p>
 
-<h6>Recent Activity</h6>
-<ul class="list-group">
-<%if @activities.present?%>
-<% @activities.each do |activity| %>
-  <li class="list-group-item">
-   
-    <strong></strong>
-    <% render_activity activity, display: :i18n %>
-    
-      <% if activity.owner %>
-      <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %> 
-      <% end%>
-      <% if activity.stype == 'UPDATE' %>
-      Updated a <%if activity.contact_type == 'RCVR' %>
-      Marking Contact 
-    <%elsif activity.contact_type== 'ALTR' %>
-      Alternate
-    <%elsif activity.contact_type== 'BILL' %>
-      Billing
-    <%elsif activity.contact_type== 'BORD' %>
-      Board Representative
-    <%elsif activity.contact_type== 'DAMG' %>
-    Emergency/Damage
-    <%elsif activity.contact_type== 'DATA' %>
-      Database
-    <%elsif activity.contact_type== 'EMER' %>
-      Emergency/Damage
-    <%elsif activity.contact_type== 'ENGR'%>
-      Engineering
-    <%elsif activity.contact_type== 'MAIN'%>
-      MAIN SWITCHBOARD
-    <%elsif activity.contact_type== 'SURV'%>
-      Surveyor
-    <%elsif activity.contact_type== 'CONT'%>
-       Marking Contact
-    <%elsif activity.contact_type== 'NITE'%>
-      Night Time
-    <%elsif activity.contact_type== 'AHRS'%>
-      After Hours
-    <%elsif activity.contact_type== 'VACU'%>
-      Vacuum
-    <%elsif activity.contact_type== 'REPR'%>
-      Member Rep
-    <%end%> contact for 
-      <%elsif activity.stype == 'DELETE' %>
-      Deleted a <%if activity.contact_type == 'RCVR' %>
-      Marking Contact 
-    <%elsif activity.contact_type== 'ALTR' %>
-      Alternate
-    <%elsif activity.contact_type== 'BILL' %>
-      Billing
-    <%elsif activity.contact_type== 'BORD' %>
-      Board Representative
-    <%elsif activity.contact_type== 'DAMG' %>
-    Emergency/Damage
-    <%elsif activity.contact_type== 'DATA' %>
-      Database
-    <%elsif activity.contact_type== 'EMER' %>
-      Emergency/Damage
-    <%elsif activity.contact_type== 'ENGR'%>
-      Engineering
-    <%elsif activity.contact_type== 'MAIN'%>
-      MAIN SWITCHBOARD
-    <%elsif activity.contact_type== 'SURV'%>
-      Surveyor
-    <%elsif activity.contact_type== 'CONT'%>
-    Marking Contact
-    <%elsif activity.contact_type== 'NITE'%>
-      Night Time
-    <%elsif activity.contact_type== 'AHRS'%>
-      After Hours
-    <%elsif activity.contact_type== 'VACU'%>
-      Vacuum
-    <%elsif activity.contact_type== 'REPR'%>
-      Member Rep
-    <%end%> contact for
-      <%else %>
-      Added a <%if activity.contact_type == 'RCVR' %>
-      Marking Contact 
-    <%elsif activity.contact_type== 'ALTR' %>
-      Alternate
-    <%elsif activity.contact_type== 'BILL' %>
-      Billing
-    <%elsif activity.contact_type== 'BORD' %>
-      Board Representative
-    <%elsif activity.contact_type== 'DAMG' %>
-    Emergency/Damage
-    <%elsif activity.contact_type== 'DATA' %>
-      Database
-    <%elsif activity.contact_type== 'EMER' %>
-      Emergency/Damage
-    <%elsif activity.contact_type== 'ENGR'%>
-      Engineering
-    <%elsif activity.contact_type== 'MAIN'%>
-      MAIN SWITCHBOARD
-    <%elsif activity.contact_type== 'SURV'%>
-      Surveyor
-    <%elsif activity.contact_type== 'CONT'%>
-    Marking Contact
-    <%elsif activity.contact_type== 'NITE'%>
-      Night Time
-    <%elsif activity.contact_type== 'AHRS'%>
-      After Hours
-    <%elsif activity.contact_type== 'VACU'%>
-      Vacuum
-    <%elsif activity.contact_type== 'REPR'%>
-      Member Rep
-    <%end%> contact for
-      <%end%>
-      <%= activity.code %>
-       on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
-      
-      
+          <h6>Recent Activity</h6>
+          <ul class="list-group">
+            <%if @activities.present?%>
+              <% @activities.each do |activity| %>
+                <li class="list-group-item">
 
-  </li>
-<% end %>
-<%end%>
-</ul>
-</div>
-</div>
-</div>
-</div>
+                  <strong></strong>
+                  <% render_activity activity, display: :i18n %>
+
+                  <% if activity.owner %>
+                    <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %>
+                  <% end%>
+                  <% if activity.stype == 'UPDATE' %>
+                    Updated a <%if activity.contact_type == 'RCVR' %>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'ALTR' %>
+                      Alternate
+                    <%elsif activity.contact_type== 'BILL' %>
+                      Billing
+                    <%elsif activity.contact_type== 'BORD' %>
+                      Board Representative
+                    <%elsif activity.contact_type== 'DAMG' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'DATA' %>
+                      Database
+                    <%elsif activity.contact_type== 'EMER' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'ENGR'%>
+                      Engineering
+                    <%elsif activity.contact_type== 'MAIN'%>
+                      MAIN SWITCHBOARD
+                    <%elsif activity.contact_type== 'SURV'%>
+                      Surveyor
+                    <%elsif activity.contact_type== 'CONT'%>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'NITE'%>
+                      Night Time
+                    <%elsif activity.contact_type== 'AHRS'%>
+                      After Hours
+                    <%elsif activity.contact_type== 'VACU'%>
+                      Vacuum
+                    <%elsif activity.contact_type== 'REPR'%>
+                      Member Rep
+                    <%end%> contact for
+                  <%elsif activity.stype == 'DELETE' %>
+                    Deleted a <%if activity.contact_type == 'RCVR' %>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'ALTR' %>
+                      Alternate
+                    <%elsif activity.contact_type== 'BILL' %>
+                      Billing
+                    <%elsif activity.contact_type== 'BORD' %>
+                      Board Representative
+                    <%elsif activity.contact_type== 'DAMG' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'DATA' %>
+                      Database
+                    <%elsif activity.contact_type== 'EMER' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'ENGR'%>
+                      Engineering
+                    <%elsif activity.contact_type== 'MAIN'%>
+                      MAIN SWITCHBOARD
+                    <%elsif activity.contact_type== 'SURV'%>
+                      Surveyor
+                    <%elsif activity.contact_type== 'CONT'%>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'NITE'%>
+                      Night Time
+                    <%elsif activity.contact_type== 'AHRS'%>
+                      After Hours
+                    <%elsif activity.contact_type== 'VACU'%>
+                      Vacuum
+                    <%elsif activity.contact_type== 'REPR'%>
+                      Member Rep
+                    <%end%> contact for
+                  <%else %>
+                    Added a <%if activity.contact_type == 'RCVR' %>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'ALTR' %>
+                      Alternate
+                    <%elsif activity.contact_type== 'BILL' %>
+                      Billing
+                    <%elsif activity.contact_type== 'BORD' %>
+                      Board Representative
+                    <%elsif activity.contact_type== 'DAMG' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'DATA' %>
+                      Database
+                    <%elsif activity.contact_type== 'EMER' %>
+                      Emergency/Damage
+                    <%elsif activity.contact_type== 'ENGR'%>
+                      Engineering
+                    <%elsif activity.contact_type== 'MAIN'%>
+                      MAIN SWITCHBOARD
+                    <%elsif activity.contact_type== 'SURV'%>
+                      Surveyor
+                    <%elsif activity.contact_type== 'CONT'%>
+                      Marking Contact
+                    <%elsif activity.contact_type== 'NITE'%>
+                      Night Time
+                    <%elsif activity.contact_type== 'AHRS'%>
+                      After Hours
+                    <%elsif activity.contact_type== 'VACU'%>
+                      Vacuum
+                    <%elsif activity.contact_type== 'REPR'%>
+                      Member Rep
+                    <%end%> contact for
+                  <%end%>
+                  <%= activity.code %>
+                  on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+
+
+
+                </li>
+              <% end %>
+            <%end%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-  new Vue({
-  el: '#app',
-  data: {
-    info: null,
-    missingContacts: [],
-    presentContacts: ['RCVR','DATA','EMER','AHRS','VACU'],
-    ticketCounts: null,
-    window: {
-      width: 0
-    },
-  },
-  mounted () {
-    axios.get('https://www.triveea.com/members/group='+<%=@group.billing_id%>+' ')
+    new Vue({
+        el: '#app',
+        data: {
+            info: null,
+            ticketCounts: null,
+            window: {
+                width: 0
+            },
+        },
+        mounted () {
+            axios.get('https://www.triveea.com/members/group='+<%=@group.billing_id%>+' ')
         .then(response => (this.info = response.data.MemberCodes), axios.get("https://www.triveea.com/members/totals/group="+<%=@group.billing_id%>+"/")
         .then(response => (this.ticketCounts = response.data)))
-      .catch(error => console.log(error))
-    },
-    created() {
-      window.addEventListener('resize', this.handleResize)
-      this.handleResize();
-    },
-    methods: {
-      handleResize() {
-        this.window.width = window.innerWidth;
-      }
-    }
-  });
-  new Vue({
-  el: '#ticketcounts',
-  data: {
-    ticketCounts: null,
-    total: null,
-    damages: null,
-  },
-  mounted () {
-    axios.get('https://www.triveea.com/members/totals/group='+<%=@group.billing_id%>+'/')
+        .catch(error => console.log(error))
+        },
+        created() {
+            window.addEventListener('resize', this.handleResize)
+            this.handleResize();
+        },
+        methods: {
+            handleResize() {
+                this.window.width = window.innerWidth;
+            }
+        }
+    });
+    new Vue({
+        el: '#ticketcounts',
+        data: {
+            ticketCounts: null,
+            total: null,
+            damages: null,
+        },
+        mounted () {
+            axios.get('https://www.triveea.com/members/totals/group='+<%=@group.billing_id%>+'/')
         .then(response => (this.ticketCounts = response.data.Counts))
-      .catch(error => console.log(error));
-      axios.get('https://www.triveea.com/members/totals/ytd/group='+<%=@group.billing_id%>+'/')
+                .catch(error => console.log(error));
+            axios.get('https://www.triveea.com/members/totals/ytd/group='+<%=@group.billing_id%>+'/')
         .then(response => (this.total = response.data.Counts))
-          .catch(error => console.log(error));
-      axios.get('https://www.triveea.com/members/totals/damages/group='+<%=@group.billing_id%>+'/')
+                .catch(error => console.log(error));
+            axios.get('https://www.triveea.com/members/totals/damages/group='+<%=@group.billing_id%>+'/')
         .then(response => (this.damages = response.data.Counts))
-          .catch(error => console.log(error));
-    }
-  });
+                .catch(error => console.log(error));
+        }
+    });
 </script>
 
 <style type="text/css">.mycontent-right {
-border-left: 3px solid #F2F7F9 !important; 
+  border-left: 3px solid #F2F7F9 !important;
 }</style>

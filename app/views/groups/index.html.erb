@@ -2,139 +2,139 @@
 
 
 
-<%= render partial: 'nav' %>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <ol class="breadcrumb" style="background-color: white">
+  <%= render partial: 'nav' %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <ol class="breadcrumb" style="background-color: white">
 
-      </ol>        
-      <p id="notice"><%= notice %></p>
-    
-    </div>
-  </div>
-</div>
+        </ol>
+        <p id="notice"><%= notice %></p>
 
-<div class="container text-center" style="padding-bottom: 220px">
-  <div class="row" >
-    <div class="col-md-12">
-      <h2 class='text-center'>Welcome to the USA North 811 Member Portal</h2>
-      <div class='col-md-4 offset-md-4'><hr class="my-4"></hr></div>
-    </div>
-  </div>
-  <div class='row text-center'>
-    <div class='col-lg-4'>
-      <h4 style='font-weight: 600 !important'><a href="/profiles">My Profile</a></h4>
-    </div>
-    <div class='col-lg-4 d-none d-lg-block'>
-      <h4 style='font-weight: 600 !important' class="text-center">My Companies</h4>
-    </div>
-    <div class='col-lg-4'>
-      <h4 style='font-weight: 600 !important'><a href="https://webtms.usan.org" target="_blank">WebTMS</a></h4>
-    </div>
-    
-    <div class='col-md-12'>
-      <hr class="my-4"></hr>
-    </div>
-    <div class='col-sm-12 d-lg-none'>
-      <h4 class="text-center">My Companies</h4>
+      </div>
     </div>
   </div>
 
-  <div class="row" id="index" >
-    <% @groups.each do |group| %>
-    <div class="col-md-4"  style='padding-top: 15px'>
-      <transition appear name=''>
-      <div class="card-text" id="mimicCard" style="width: auto; ">
-        <div class="card-header">
-          <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
-          <%if group.name == nil %>
-            <%=link_to group.billing_id, group, :style => ' color:white !important' %>
-          <%else%>
-            <%= link_to group.name, group, :style => ' color:white !important'%> 
-          <%end%>
-          </h6>
-        </div>
-        <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-xs-6">
-              <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal<%=group.id%>">
-                <%= image_tag("pencil_teal.svg", :width => "15")%>
-                <%-# :style => '-webkit-filter:invert(100%);filter:invert(100%);'-%>
-              </button>
+  <div class="container text-center" style="padding-bottom: 220px">
+    <div class="row" >
+      <div class="col-md-12">
+        <h2 class='text-center'>Welcome to the USA North 811 Member Portal</h2>
+        <div class='col-md-4 offset-md-4'><hr class="my-4"></hr></div>
+      </div>
+    </div>
+    <div class='row text-center'>
+      <div class='col-lg-4'>
+        <h4 style='font-weight: 600 !important'><a href="/profiles">My Profile</a></h4>
+      </div>
+      <div class='col-lg-4 d-none d-lg-block'>
+        <h4 style='font-weight: 600 !important' class="text-center">My Companies</h4>
+      </div>
+      <div class='col-lg-4'>
+        <h4 style='font-weight: 600 !important'><a href="https://webtms.usan.org" target="_blank">WebTMS</a></h4>
+      </div>
+
+      <div class='col-md-12'>
+        <hr class="my-4"></hr>
+      </div>
+      <div class='col-sm-12 d-lg-none'>
+        <h4 class="text-center">My Companies</h4>
+      </div>
+    </div>
+
+    <div class="row" id="index" >
+      <% @groups.each do |group| %>
+        <div class="col-md-4"  style='padding-top: 15px'>
+          <transition appear name=''>
+            <div class="card-text" id="mimicCard" style="width: auto; ">
+              <div class="card-header">
+                <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
+                  <%if group.name == nil %>
+                    <%=link_to group.billing_id, group, :style => ' color:white !important' %>
+                  <%else%>
+                    <%= link_to group.name, group, :style => ' color:white !important'%>
+                  <%end%>
+                </h6>
+              </div>
+              <div class="container-fluid" style="padding-bottom: 10px; padding-top: 10px">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6 col-xs-6">
+                    <button type="button" style='width:50px' class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal<%=group.id%>">
+                      <%= image_tag("pencil_teal.svg", :width => "15")%>
+                      <%-# :style => '-webkit-filter:invert(100%);filter:invert(100%);'-%>
+                    </button>
+                  </div>
+                  <div class='col-lg-6 col-sm-6 col-xs-6'>
+
+                    <%= button_to group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' },style: 'width:50px', remote: true, class: "btn btn-outline-danger" do %>
+                      <%= image_tag("trashcan_orange.svg", :width => "15")%>
+                    <% end %>
+
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class='col-lg-6 col-sm-6 col-xs-6'>
-            
-              <%= button_to group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' },style: 'width:50px', remote: true, class: "btn btn-outline-danger" do %>
-                <%= image_tag("trashcan_orange.svg", :width => "15")%>
-        <% end %>
-               
+          </transition>
+        </div>
+        <div class="modal fade" id="exampleModal<%=group.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= form_for group, url: group_path(group)  do |form|  %>
+                <div class="modal-body">
+                  <div class='container'>
+
+                    <form>
+                      <div class="form-group row" >
+
+                        <label for="exampleInputEmail1" >Billing ID</label>
+                        <%= form.text_field :billing_id, class: 'form-control', value: group.billing_id %>
+                        <label for="exampleInputEmail1" >Company Name</label>
+                        <%= form.text_field :name, class: 'form-control', value: group.name %>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+
+
+
+              <%end%>
             </div>
           </div>
         </div>
-      </div>
-      </transition>
-  </div>
-  <div class="modal fade" id="exampleModal<%=group.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <%= form_for group, url: group_path(group)  do |form|  %>
-      <div class="modal-body">
-        <div class='container'>
-        
-          <form>
-          <div class="form-group row" >
-           
-              <label for="exampleInputEmail1" >Billing ID</label>
-              <%= form.text_field :billing_id, class: 'form-control', value: group.billing_id %>
-              <label for="exampleInputEmail1" >Company Name</label>
-              <%= form.text_field :name, class: 'form-control', value: group.name %>
+      <% end %>
+      <div class="col-md-4"style='padding-top: 15px'>
+        <transition appear name="">
+          <div class="card" style="width: auto; ">
+            <div class="card-header" >
+              <h6 style="padding-top: 10px !important;font-weight: 600; ">
+                <div style="color:white ">Add Company</div>
+              </h6>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
-        </div>
-          </form>
-          
-        </div>
-      </div>
-      
-        
-      
-      <%end%>
-    </div>
-  </div>
-</div>
-  <% end %>
-  <div class="col-md-4"style='padding-top: 15px'>
-    <transition appear name="">
-    <div class="card" style="width: auto; ">      
-      <div class="card-header" >
-        <h6 style="padding-top: 10px !important;font-weight: 600; ">
-          <div style="color:white ">Add Company</div>      
-        </h6>
-      </div>
-    </a>
+            </a>
 
-    
-    <%= render 'form', group: @group %>
+
+            <%= render 'form', group: @group %>
+          </div>
+        </transition>
+      </div>
     </div>
-    </transition>
-  </div>
-</div>
 <%else%>
-<%= render partial: 'nav' %>
-<h2 class="container text-center" style="padding-top: 75px; padding-bottom: 275px">
-<div class='btn btn-info'>
-<%= link_to "Create Your Profile", new_profile_path, :class => 'btn btn-info', :style => 'color:white !important; font-size:40px' %>
-</div>
-</h2>
+  <%= render partial: 'nav' %>
+  <h2 class="container text-center" style="padding-top: 75px; padding-bottom: 275px">
+    <div class='btn btn-info'>
+      <%= link_to "Create Your Profile", new_profile_path, :class => 'btn btn-info', :style => 'color:white !important; font-size:40px' %>
+    </div>
+  </h2>
 <% end %>
 
 <style type="text/css">#footer{width: 100%;

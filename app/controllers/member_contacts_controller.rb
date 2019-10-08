@@ -20,100 +20,94 @@ class MemberContactsController < ApplicationController
   # GET /member_contacts/1/edit
   def edit
   end
-
   # POST /member_contacts
   # POST /member_contacts.json
   def create
     @member_contact = MemberContact.new(member_contact_params)
     if @member_contact.contact_type == 'RCVR'
-      @member_contact.company = 'MARKING CONTACT' 
-  elsif @member_contact.contact_type== 'ALTR' 
+      @member_contact.company = 'MARKING CONTACT'
+    elsif @member_contact.contact_type== 'ALTR'
       @member_contact.company = 'ALTERNATE'
-  elsif @member_contact.contact_type== 'BILL'
-    @member_contact.company =  'BILLING'
-  elsif @member_contact.contact_type== 'BORD'
-    @member_contact.company =  'Board Rep'
-  elsif @member_contact.contact_type== 'DAMG' 
-   
-    @member_contact.company =  'EMERGENCY/DAMAGES'
-  elsif @member_contact.contact_type== 'DATA' 
-    @member_contact.company =  'DATABASE'
-  elsif @member_contact.contact_type== 'EMER' 
-    @member_contact.company =  'EMERGENCY/DAMAGES'
-  elsif @member_contact.contact_type== 'ENGR'
-    @member_contact.company =  'ENGINEERING'
-  elsif @member_contact.contact_type== 'MAIN'
-    @member_contact.company =  'MAIN SWITCHBOARD'
-  elsif @member_contact.contact_type== 'SURV'
-    @member_contact.company =  'SURVEYOR'
-  elsif @member_contact.contact_type== 'CONT'
- 
-    @member_contact.company = 'MARKING CONTACT'
-  elsif @member_contact.contact_type== 'NITE'
-    @member_contact.company =  'NIGHT TIME'
-  elsif @member_contact.contact_type== 'AHRS'
-    @member_contact.company =  'AFTER HOURS'
-  elsif @member_contact.contact_type== 'VACU'
-    @member_contact.company =  'VACUUM'
-  elsif @member_contact.contact_type== 'REPR'
-    @member_contact.company =  'MEMBER REP'
-  end
-  require 'uri'
-  require 'net/http'
-  if @member_contact.valid?
-  url = URI("https://jas.usanorth811.org:10443/membersapi")
-
-  http = Net::HTTP.new(url.host, url.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  request = Net::HTTP::Post.new(url)
-  request["Content-Type"] = 'application/json'
-  request["Accept"] = '*/*'
-  request["Cache-Control"] = 'no-cache'
-  request["Host"] = 'jas2.usanorth811.org:10443'
-  request["Accept-Encoding"] = 'gzip, deflate'
-  request["Content-Length"] = '702'
-  request["Connection"] = 'keep-alive'
-  request["cache-control"] = 'no-cache'
-  
-  @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
-  
-  request.body = @body
-  response = http.request(request)
-    puts response.body
-  end
-    respond_to do |format|
-      if @member_contact.save
-            if @member_contact.stype == 'DELETE'
-              @action = 'deleted'
-            elsif @member_contact.stype == 'UPDATE'
-              @action = 'updated'
-            else 
-              @action = 'added'
-            end
-            @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
-            @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s 
-            
-        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
-        format.json { render :show, status: :created, location: @member_contact }
-
-        ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
-        ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
-  
-  
-      else
-        flash[:member_contact_errors] = @member_contact.errors.full_messages
-        format.html { redirect_to @member_contact.group }
-        
+    elsif @member_contact.contact_type== 'BILL'
+      @member_contact.company =  'BILLING'
+    elsif @member_contact.contact_type== 'BORD'
+      @member_contact.company =  'Board Rep'
+    elsif @member_contact.contact_type== 'DAMG'
+      @member_contact.company =  'EMERGENCY/DAMAGES'
+    elsif @member_contact.contact_type== 'DATA'
+      @member_contact.company =  'DATABASE'
+    elsif @member_contact.contact_type== 'EMER'
+      @member_contact.company =  'EMERGENCY/DAMAGES'
+    elsif @member_contact.contact_type== 'ENGR'
+      @member_contact.company =  'ENGINEERING'
+    elsif @member_contact.contact_type== 'MAIN'
+      @member_contact.company =  'MAIN SWITCHBOARD'
+    elsif @member_contact.contact_type== 'SURV'
+      @member_contact.company =  'SURVEYOR'
+    elsif @member_contact.contact_type== 'CONT'
+      @member_contact.company = 'MARKING CONTACT'
+    elsif @member_contact.contact_type== 'NITE'
+      @member_contact.company =  'NIGHT TIME'
+    elsif @member_contact.contact_type== 'AHRS'
+      @member_contact.company =  'AFTER HOURS'
+    elsif @member_contact.contact_type== 'VACU'
+      @member_contact.company =  'VACUUM'
+    elsif @member_contact.contact_type== 'REPR'
+      @member_contact.company =  'MEMBER REP'
+    end
+    require 'uri'
+    require 'net/http'
+    if @member_contact.valid?
+      url = URI("https://jas.usanorth811.org:10443/membersapi")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(url)
+      request["Content-Type"] = 'application/json'
+      request["Accept"] = '*/*'
+      request["Cache-Control"] = 'no-cache'
+      request["Host"] = 'jas2.usanorth811.org:10443'
+      request["Accept-Encoding"] = 'gzip, deflate'
+      request["Content-Length"] = '702'
+      request["Connection"] = 'keep-alive'
+      request["cache-control"] = 'no-cache'
+      @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
+      request.body = @body
+      puts request.body
+      response = http.request(request)
+      puts response.body
+      outputj = JSON.parse(response.body)
+      puts outputj["results"][0]["status"]
+      output = outputj["results"][0]["status"].to_s
+    end
+    if output.start_with? 'Successful'
+      respond_to do |format|
+        if @member_contact.save
+          if @member_contact.stype == 'DELETE'
+            @action = 'deleted'
+          elsif @member_contact.stype == 'UPDATE'
+            @action = 'updated'
+          else
+            @action = 'added'
+          end
+          @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
+          @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s
+          format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+          format.json { render :show, status: :created, location: @member_contact }
+          puts "successful update"
+          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
+          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
+        else
+          flash[:member_contact_errors] = @member_contact.errors.full_messages
+          format.html { redirect_to @member_contact.group }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
       end
     end
-
-   
-  
-  
-        
-  end
-
+  end\` \`
   # PATCH/PUT /member_contacts/1
   # PATCH/PUT /member_contacts/1.json
   def update
@@ -143,7 +137,7 @@ class MemberContactsController < ApplicationController
   def stype
     @member_contact.stype
   end
-  def code 
+  def code
     @member_contact.member_code
   end
   def contact_type
@@ -152,17 +146,17 @@ class MemberContactsController < ApplicationController
 
   private
 
-  
-    # Use callbacks to share common setup or constraints between actions.
-    def set_member_contact
-      @member_contact = MemberContact.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def member_contact_params
-      params.require(:member_contact).permit(:name, :ip, :member_id, :member_code, :contact_id, :contact_type, :company, :contact_name, :address1, :address2, :city, :state, :zip, :phone, :phone_ext, :email, :group_id, :stype, :billing)
-    end
-    def load_activities
-      @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_member_contact
+    @member_contact = MemberContact.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def member_contact_params
+    params.require(:member_contact).permit(:name, :ip, :member_id, :member_code, :contact_id, :contact_type, :company, :contact_name, :address1, :address2, :city, :state, :zip, :phone, :phone_ext, :email, :group_id, :stype, :billing)
+  end
+  def load_activities
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
+  end
 end

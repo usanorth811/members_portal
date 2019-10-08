@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @member_detail.name %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @member_detail.member_id %>
+</p>
+
+<p>
+  <strong>Member code:</strong>
+  <%= @member_detail.member_code %>
+</p>
+
+<p>
+  <strong>Stype:</strong>
+  <%= @member_detail.stype %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @member_detail.group %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @member_detail.company %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @member_detail.description %>
+</p>
+
+<p>
+  <strong>Facility:</strong>
+  <%= @member_detail.facility %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @member_detail.active %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @member_detail.group %>
+</p>
+
+<%= link_to 'Edit', edit_member_detail_path(@member_detail) %> |
+<%= link_to 'Back', member_details_path %>

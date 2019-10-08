@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Member Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Member</th>
+      <th>Member code</th>
+      <th>Stype</th>
+      <th>Group</th>
+      <th>Company</th>
+      <th>Description</th>
+      <th>Facility</th>
+      <th>Active</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @member_details.each do |member_detail| %>
+      <tr>
+        <td><%= member_detail.name %></td>
+        <td><%= member_detail.member_id %></td>
+        <td><%= member_detail.member_code %></td>
+        <td><%= member_detail.stype %></td>
+        <td><%= member_detail.group %></td>
+        <td><%= member_detail.company %></td>
+        <td><%= member_detail.description %></td>
+        <td><%= member_detail.facility %></td>
+        <td><%= member_detail.active %></td>
+        <td><%= member_detail.group %></td>
+        <td><%= link_to 'Show', member_detail %></td>
+        <td><%= link_to 'Edit', edit_member_detail_path(member_detail) %></td>
+        <td><%= link_to 'Destroy', member_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Member Detail', new_member_detail_path %>
