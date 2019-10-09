@@ -10,10 +10,10 @@
 <%= render partial: 'nav' %>
 
 
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row">
     <div class="col-md-12">
-      <ol class="breadcrumb">
+      <ol class="breadcrumb"id="dark-container">
         <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
         <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
       </ol>
@@ -841,10 +841,10 @@
           </p>
 
           <h6>Recent Activity</h6>
-          <ul class="list-group">
+          <ul class="list-group" >
             <%if @activities.present?%>
               <% @activities.each do |activity| %>
-                <li class="list-group-item">
+                <li class="list-group-item" >
 
                   <strong></strong>
                   <% render_activity activity, display: :i18n %>
