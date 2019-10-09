@@ -49,7 +49,7 @@ class MemberDetailsController < ApplicationController
       request["Connection"] = 'keep-alive'
       request["cache-control"] = 'no-cache'
 
-      @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"details\",\n    \"name\": \""+@member_detail.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_detail.member_id+"\",\n    \"member_code\": \""+@member_detail.member_code+"\",\n    \"member\": [\n        {\n            \"stype\":\""+@member_detail.stype+"\",\n            \"group\":\""+@member_detail.group_code+"\",\n           \"company\":\""+@member_detail.company+"\",\n              \"description\":\" \",\n              \"facility\":\""+@member_detail.facility+"\",\n            \"active\":\""+@active+"\"\n            }\n    ]\n}"
+      @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"details\",\n    \"name\": \""+@member_detail.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_detail.member_id+"\",\n    \"member_code\": \""+@member_detail.member_code+"\",\n    \"member\": [\n        {\n            \"stype\":\""+@member_detail.stype+"\",\n            \"group\":\""+@member_detail.group_code+"\",\n           \"company\":\""+@member_detail.company+"\",\n              \"description\":\""+@member_detail.description+"\",\n              \"facility\":\""+@member_detail.facility+"\",\n            \"active\":\""+@active+"\"\n            }\n    ]\n}"
       puts @body
       request.body = @body
       response = http.request(request)
