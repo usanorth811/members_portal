@@ -184,7 +184,9 @@
                                       <div v-else-if="contact.Contact_type == 'AHRS'"> AFTER HOURS </div>
                                       <div v-else-if="contact.Contact_type == 'VACU'"> VACUUM </div>
                                       <div v-else-if="contact.Contact_type == 'REPR'"> MEMBER REP </div>
-
+                                      <button type="button" class='btn' data-toggle="modal" data-target="#questionmodal">
+                                        <%= image_tag("question.svg", :width => "12", :style => 'padding-bottom: 5px; margin-left:-13px; margin-right:-11px')%>
+                                      </button>
                                     </h5>
                                     <h6>{{contact.Contact}}</h6>
                                     <h6><a :href="'tel:'+contact.Phone">({{contact.Phone.slice(0,3)}}) {{contact.Phone.slice(3,6)}}-{{contact.Phone.slice(6,10)}}</a></h6>
@@ -964,7 +966,35 @@
     </div>
   </div>
 </div>
-
+<div id="questionmodal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Contact Types</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><h6 style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> &nbsp; The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</h6></li>
+          <li><h6 style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> &nbsp; The person to contact for any billing related issues and will receive your membership billing invoice.</h6></li>
+          <li><h6 style='text-align:left'><b>Marking Contact (RCVR, RECEIVING)</b> &nbsp; Person or office that receives tickets during traditional business hours. Answers questions from excavators about markings (or can contact specific field locating technician to assign technician to answer questions).</h6></li>
+          <li><h6 style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> &nbsp;  The person that will receive general questions regarding dig tickets your company is notified on.</h6></li>
+          <li><h6 style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> &nbsp; The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</h6></li>
+          <li><h6 style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> &nbsp; The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</h6></li>
+          <li><h6 style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> &nbsp; The person to contact if an excavator will be exposing your facilities using vacuum equipment.</h6></li>
+          <li><h6 style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> &nbsp; The person to contact during non-business hours.</h6></li>
+          <li><h6 style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> &nbsp; This person will receive the quarterly board meeting minutes.</h6></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     new Vue({
         el: '#app',
