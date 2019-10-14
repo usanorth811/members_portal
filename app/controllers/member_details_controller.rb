@@ -25,62 +25,84 @@ class MemberDetailsController < ApplicationController
   # POST /member_details.json
   def create
     @member_detail = MemberDetail.new(member_detail_params)
+    #set group code as billing id
     @member_detail.group_code = @member_detail.group.billing_id
+    #define active as true or false
     if @member_detail.active == "true"
       @active = "1"
     else
       @active = "0"
     end
+
+    #validate request
+    if @member_detail.valid?
+      #post data to jas
+      jas
+    else
+      #redirect and display error
+      flash[:member_detail_errors] = @member_detail.errors.full_messages
+      redirect_to @member_detail.group, flash[:member_detail_errors]
+    end
+  end
+
+  def ready_message
+    #define action from stype
+    if @member_detail.stype == 'DELETE'
+      @action = 'deleted'
+    elsif @member_detail.stype == 'UPDATE'
+      @action = 'updated'
+    else
+      @action = 'added'
+    end
+    #define user and admin message
+    @usermessage = "Your " + @member_detail.company.downcase + " facility type for " + @member_detail.member_code.to_s + " was succesfully " + @action
+    @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_detail.company+' contact for ' + @member_detail.member_code.to_s
+    #prepare delayed job of email send
+    ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'facility_mailer').deliver_later!(wait: 1.minute)
+    ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'facility_mailer').deliver_later!(wait: 1.minute)
+  end
+
+  def jas
     require 'uri'
     require 'net/http'
-    if @member_detail.valid?
-      url = URI("https://jas.usanorth811.org:10443/membersapi")
+    #define url
+    url = URI("https://jas.usanorth811.org:10443/membersapi")
 
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(url)
-      request["Content-Type"] = 'application/json'
-      request["Accept"] = '*/*'
-      request["Cache-Control"] = 'no-cache'
-      request["Host"] = 'jas2.usanorth811.org:10443'
-      request["Accept-Encoding"] = 'gzip, deflate'
-      request["Content-Length"] = '702'
-      request["Connection"] = 'keep-alive'
-      request["cache-control"] = 'no-cache'
-
-      @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"details\",\n    \"name\": \""+@member_detail.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_detail.member_id+"\",\n    \"member_code\": \""+@member_detail.member_code+"\",\n    \"member\": [\n        {\n            \"stype\":\""+@member_detail.stype+"\",\n            \"group\":\""+@member_detail.group_code+"\",\n           \"company\":\""+@member_detail.company+"\",\n              \"description\":\""+@member_detail.description+"\",\n              \"facility\":\""+@member_detail.facility+"\",\n            \"active\":\""+@active+"\"\n            }\n    ]\n}"
-      puts @body
-      request.body = @body
-      response = http.request(request)
-      puts response.body
-      outputj = JSON.parse(response.body)
-      puts outputj["results"][0]["message"]
-      output = outputj["results"][0]["message"].to_s
-    end
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(url)
+    request["Content-Type"] = 'application/json'
+    request["Accept"] = '*/*'
+    request["Cache-Control"] = 'no-cache'
+    request["Host"] = 'jas2.usanorth811.org:10443'
+    request["Accept-Encoding"] = 'gzip, deflate'
+    request["Content-Length"] = '702'
+    request["Connection"] = 'keep-alive'
+    request["cache-control"] = 'no-cache'
+    #define request body
+    @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"details\",\n    \"name\": \""+@member_detail.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_detail.member_id+"\",\n    \"member_code\": \""+@member_detail.member_code+"\",\n    \"member\": [\n        {\n            \"stype\":\""+@member_detail.stype+"\",\n            \"group\":\""+@member_detail.group_code+"\",\n           \"company\":\""+@member_detail.company+"\",\n              \"description\":\""+@member_detail.description+"\",\n              \"facility\":\""+@member_detail.facility+"\",\n            \"active\":\""+@active+"\"\n            }\n    ]\n}"
+    puts @body
+    request.body = @body
+    #send request
+    response = http.request(request)
+    puts response.body
+    #parse response for message
+    outputj = JSON.parse(response.body)
+    puts outputj["results"][0]["message"]
+    output = outputj["results"][0]["message"].to_s
+    #check if response is successful
     if output.start_with? '1'
       respond_to do |format|
         if @member_detail.save
-          if @member_detail.stype == 'DELETE'
-            @action = 'deleted'
-          elsif @member_detail.stype == 'UPDATE'
-            @action = 'updated'
-          else
-            @action = 'added'
-          end
-          @usermessage = "Your " + @member_detail.company.downcase + " facility type for " + @member_detail.member_code.to_s + " was succesfully " + @action
-          @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_detail.company+' contact for ' + @member_detail.member_code.to_s
-
+          #redirect to group and display successful message
           format.html { redirect_to @member_detail.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
           format.json { render :show, status: :created, location: @member_detail }
-
-          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'facility_mailer').deliver_later!(wait: 1.minute)
-          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'facility_mailer').deliver_later!(wait: 1.minute)
-
-
+          ready_message
         else
+          #redirect and display error
           flash[:member_detail_errors] = @member_detail.errors.full_messages
-          format.html { redirect_to @member_detail.group }
+          format.html { redirect_to @member_detail.group, flash[:member_detail_errors] }
 
         end
       end
@@ -88,11 +110,10 @@ class MemberDetailsController < ApplicationController
 
     else
       respond_to do |format|
+        #redirect and display generic error
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
       end
     end
-
-
   end
   #def create
   #  @member_detail = MemberDetail.new(member_detail_params)
