@@ -55,31 +55,44 @@ class MemberContactsController < ApplicationController
     elsif @member_contact.contact_type== 'REPR'
       @member_contact.company =  'MEMBER REP'
     end
+
+    if @member_contact.stype == 'DELETE'
+      jas
+    elsif @member_contact.valid?
+      jas
+    else
+      respond_to do |format|
+        flash[:member_contact_errors] = @member_contact.errors.full_messages
+        format.html { redirect_to @member_contact.group }
+      end
+    end
+
+  end
+
+  def jas
     require 'uri'
     require 'net/http'
-    if @member_contact.valid?
-      url = URI("https://jas.usanorth811.org:10443/membersapi")
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(url)
-      request["Content-Type"] = 'application/json'
-      request["Accept"] = '*/*'
-      request["Cache-Control"] = 'no-cache'
-      request["Host"] = 'jas2.usanorth811.org:10443'
-      request["Accept-Encoding"] = 'gzip, deflate'
-      request["Content-Length"] = '702'
-      request["Connection"] = 'keep-alive'
-      request["cache-control"] = 'no-cache'
-      @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
-      request.body = @body
-      puts request.body
-      response = http.request(request)
-      puts response.body
-      outputj = JSON.parse(response.body)
-      puts outputj["results"][0]["status"]
-      output = outputj["results"][0]["status"].to_s
-    end
+    url = URI("https://jas.usanorth811.org:10443/membersapi")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(url)
+    request["Content-Type"] = 'application/json'
+    request["Accept"] = '*/*'
+    request["Cache-Control"] = 'no-cache'
+    request["Host"] = 'jas2.usanorth811.org:10443'
+    request["Accept-Encoding"] = 'gzip, deflate'
+    request["Content-Length"] = '702'
+    request["Connection"] = 'keep-alive'
+    request["cache-control"] = 'no-cache'
+    @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"contacts\",\n    \"name\": \""+@member_contact.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_contact.member_id+"\",\n    \"member_code\": \""+@member_contact.member_code+"\",\n    \"contacts\": [\n        {\n            \"stype\":\""+@member_contact.stype+"\",\n            \"contact_id\":\""+@member_contact.contact_id+"\",\n            \"type\":\""+@member_contact.contact_type+"\",\n            \"company\":\""+@member_contact.company+"\",\n            \"contact_name\":\""+@member_contact.contact_name+"\",\n            \"address1\":\""+@member_contact.address1+"\",\n            \"address2\":\""+@member_contact.address2+"\",\n            \"city\":\""+@member_contact.city+"\",\n            \"state\":\""+@member_contact.state+"\",\n            \"zip\":\""+@member_contact.zip+"\",\n            \"phone\":\""+@member_contact.phone+"\",\n            \"phone_ext\":\""+@member_contact.phone_ext+"\",\n            \"email\":\""+@member_contact.email+"\"\n        }\n    ]\n}"
+    request.body = @body
+    puts request.body
+    response = http.request(request)
+    puts response.body
+    outputj = JSON.parse(response.body)
+    puts outputj["results"][0]["status"]
+    output = outputj["results"][0]["status"].to_s
     if output.start_with? 'Successful'
       respond_to do |format|
         if @member_contact.save

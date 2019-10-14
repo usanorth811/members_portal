@@ -1000,15 +1000,13 @@
         el: '#app',
         data: {
             info: null,
-            ticketCounts: null,
             window: {
                 width: 0
             },
         },
         mounted () {
             axios.get('https://www.triveea.com/members/group='+<%=@group.billing_id%>+' ')
-        .then(response => (this.info = response.data.MemberCodes), axios.get("https://www.triveea.com/members/totals/group="+<%=@group.billing_id%>+"/")
-        .then(response => (this.ticketCounts = response.data)))
+        .then(response => (this.info = response.data.MemberCodes))
         .catch(error => console.log(error))
         },
         created() {
@@ -1035,9 +1033,7 @@
             axios.get('https://www.triveea.com/members/totals/ytd/group='+<%=@group.billing_id%>+'/')
         .then(response => (this.total = response.data.Counts))
                 .catch(error => console.log(error));
-            axios.get('https://www.triveea.com/members/totals/damages/group='+<%=@group.billing_id%>+'/')
-        .then(response => (this.damages = response.data.Counts))
-                .catch(error => console.log(error));
+
         }
     });
 </script>
