@@ -26,22 +26,17 @@ class MemberContactsController < ApplicationController
     @member_contact = MemberContact.new(member_contact_params)
     #update company field to match contact type
     update_company
-    #check if update type is delete
-    if @member_contact.stype == 'DELETE'
-      #if true, send delete without validate
+    #otherwise, check if request is valid
+    if @member_contact.valid?
+      #send request if valid
       jas
     else
-      #otherwise, check if request is valid
-      if @member_contact.valid?
-        #send request if valid
-        jas
-      else
-        #send error if not valid
-        respond_to do |format|
-          flash[:member_contact_errors] = @member_contact.errors.full_messages
-          format.html { redirect_to @member_contact.group }
-        end
+      #send error if not valid
+      respond_to do |format|
+        flash[:member_contact_errors] = @member_contact.errors.full_messages
+        format.html { redirect_to @member_contact.group }
       end
+
     end
   end
 
