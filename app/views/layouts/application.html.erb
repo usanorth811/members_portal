@@ -159,7 +159,9 @@ h4{ font-weight: 500 !important;}
 .btn-info{ border-color: #388694; background-color: #388694; font-weight: 600}
 .btn-info:hover {background-color: #E27D60; border-color: #E27D60}
 a:hover {color: #E7947C !important}
-
+#hidden {
+  display:none;
+}
 </style>
 <nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
@@ -172,7 +174,10 @@ a:hover {color: #E7947C !important}
 
       </div>
       <div class="col-md-9 " style="text-align: center; padding-left:50px">
-
+        <h1 id="hidden" style="@media screen  {
+            // IE9+ CSS
+            .ie9up{display: inline !important;}
+            }">You are using an incompatible browser. Please use the latest version of Chrome, Firefox, or Safari.</h1>
         <%= yield %>
 
       </div>
