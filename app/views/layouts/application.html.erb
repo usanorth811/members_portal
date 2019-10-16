@@ -172,9 +172,7 @@ a:hover {color: #E7947C !important}
 
       </div>
       <div class="col-md-9 " style="text-align: center; padding-left:50px">
-        <% require "browser"
-
-           browser = Browser.new("Some User Agent", accept_language: "en-us")
+        <%
            if browser.ie? %>
           <h1 class="disclaimer">You are using an incompatible browser. Upgrade to the latest version of Chrome, Firefox, or Safari.</h1>
         <% end %>
