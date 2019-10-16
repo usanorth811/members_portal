@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 gem "nokogiri", ">= 1.10.4"
-
+gem "browser", require: "browser/browser"
 gem 'httparty'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
