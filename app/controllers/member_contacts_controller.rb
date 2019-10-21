@@ -30,6 +30,7 @@ class MemberContactsController < ApplicationController
     if @member_contact.valid?
       #send request if valid
       jas
+      puts @member_contact.contact_type
     else
       #send error if not valid
       respond_to do |format|
@@ -41,37 +42,23 @@ class MemberContactsController < ApplicationController
   end
 
   def update_company
-    if @member_contact.contact_type == 'RCVR'
-      @member_contact.company = 'MARKING CONTACT'
-    elsif @member_contact.contact_type== 'ALTR'
-      @member_contact.company = 'ALTERNATE'
-    elsif @member_contact.contact_type== 'BILL'
-      @member_contact.company =  'BILLING'
-    elsif @member_contact.contact_type== 'BORD'
-      @member_contact.company =  'Board Rep'
-    elsif @member_contact.contact_type== 'DAMG'
-      @member_contact.company =  'EMERGENCY/DAMAGES'
-    elsif @member_contact.contact_type== 'DATA'
-      @member_contact.company =  'DATABASE'
-    elsif @member_contact.contact_type== 'EMER'
-      @member_contact.company =  'EMERGENCY/DAMAGES'
-    elsif @member_contact.contact_type== 'ENGR'
-      @member_contact.company =  'ENGINEERING'
-    elsif @member_contact.contact_type== 'MAIN'
-      @member_contact.company =  'MAIN SWITCHBOARD'
-    elsif @member_contact.contact_type== 'SURV'
-      @member_contact.company =  'SURVEYOR'
-    elsif @member_contact.contact_type== 'CONT'
-      @member_contact.company = 'MARKING CONTACT'
-    elsif @member_contact.contact_type== 'NITE'
-      @member_contact.company =  'NIGHT TIME'
-    elsif @member_contact.contact_type== 'AHRS'
-      @member_contact.company =  'AFTER HOURS'
-    elsif @member_contact.contact_type== 'VACU'
-      @member_contact.company =  'VACUUM'
-    elsif @member_contact.contact_type== 'REPR'
-      @member_contact.company =  'MEMBER REP'
-    end
+    @contact_types = { "RCVR" => 'MARKING CONTACT',
+                       "ALTR" => 'ALTERNATE',
+                       'BILL' => 'BILLING',
+                       'BORD' => 'Board Rep',
+                       'DAMG' => 'EMERGENCY/DAMAGES',
+                       'ENGR' => 'ENGINEERING',
+                       'DATA' => 'DATABASE',
+                       'EMER' => 'EMERGENCY/DAMAGES',
+                       'MAIN' => 'MAIN SWITCHBOARD',
+                       'SURV' => 'SURVEYOR',
+                       'CONT' => 'MARKING CONTACT',
+                       'NITE' => 'NIGHT TIME',
+                       'AHRS' => 'AFTER HOURS',
+                       'VACU' => 'VACUUM',
+                       'REPR' => 'MEMBER REP'}
+    puts @contact_types.fetch(@member_contact.contact_type)
+    @member_contact.company = @contact_types.fetch(@member_contact.contact_type)
   end
 
   def jas
