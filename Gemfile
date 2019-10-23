@@ -10,6 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem "nokogiri", ">= 1.10.4"
 gem "browser"
 gem 'httparty'
+gem 'rack-cors'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
