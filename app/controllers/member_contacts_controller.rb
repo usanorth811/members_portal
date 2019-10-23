@@ -4,7 +4,7 @@ class MemberContactsController < ApplicationController
   # GET /member_contacts
   # GET /member_contacts.json
   def index
-    @member_contacts = MemberContact.all
+    @member_contacts = MemberContact.all.order(:created_at).reverse_order.limit(100)
   end
 
   # GET /member_contacts/1
