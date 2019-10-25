@@ -271,9 +271,15 @@
                                                 <div class='container'>
                                                   <form>
                                                     <div class="form-group row" >
+
+
+                                                      <div style="display:none;" >
                                                       <div class="col-sm-6">
+
+
                                                         <label for="exampleInputEmail1" >Contact Type</label>
-                                                        <select class="form-control custom-select" :value="contact.Contact_type" required="required" name="member_contact[contact_type]" id="member_contact_contact_type"><option value=""></option>
+                                                        <input :value="contact.Contact_type" type="hidden" name="member_contact[contact_type]" id="member_contact_contact_type">
+                                                        <select class="form-control custom-select" :value="contact.Contact_type" disabled><option value=""></option>
                                                           <option value="RCVR">RCVR</option>
                                                           <option value="DATA">DATA</option>
                                                           <option value="CONT">CONT</option>
@@ -284,6 +290,7 @@
                                                           <option value="VACU">VACU</option>
                                                         </select>
                                                         <h6 ><small style='color: red; '>*required</small></h6>
+
                                                       </div>
                                                       <div class="col-sm-6">
                                                         <label for="exampleInputEmail1" style=''>Contact Name</label>
@@ -295,9 +302,11 @@
                                                         <input class="form-control" :value="contact.Phone" required="required" type="text" name="member_contact[phone]" id="member_contact_phone">
                                                         <h6 ><small style='color: red; '>*required</small></h6>
                                                       </div>
+
                                                       <div class="d-none d-lg-block col-lg-6">
                                                         <label for="exampleInputEmail1" style='padding-top:10px;'>Ext</label>
                                                         <input class="form-control" :value="contact.Phone_ext"  type="text" name="member_contact[phone_ext]" id="member_contact_phone_ext">
+                                                      </div>
                                                       </div>
                                                       <div class="col-sm-12">
                                                         <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
@@ -800,14 +809,14 @@
           </script>
         </div>
         <% if false %>
-        <div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
+          <div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
   <span v-if="ticketCounts == null">
     <button class="btn btn-info" type="button" disabled>
       <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading...
     </button>
   </span>
-          <span v-else >
+            <span v-else >
   <button class="btn btn-info" data-toggle="collapse" href="#counts" role="button" aria-expanded="false" aria-controls="counts">
   Show 2019 Billable Ticket Totals
   </button>
@@ -843,127 +852,127 @@
     </ul>
     </div>
 </span>
-          <% end %>
-          </p>
+        <% end %>
+        </p>
 
-          <h6>Recent Activity</h6>
-          <ul class="list-group" >
-            <%if @activities.present?%>
-              <% @activities.each do |activity| %>
-                <li class="list-group-item" >
+        <h6>Recent Activity</h6>
+        <ul class="list-group" >
+          <%if @activities.present?%>
+            <% @activities.each do |activity| %>
+              <li class="list-group-item" >
 
-                  <strong></strong>
-                  <% render_activity activity, display: :i18n %>
+                <strong></strong>
+                <% render_activity activity, display: :i18n %>
 
-                  <% if activity.owner %>
-                    <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %>
-                  <% end%>
-                  <% if activity.stype == 'UPDATE' %>
-                    Updated a <%if activity.contact_type == 'RCVR' %>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'ALTR' %>
-                      Alternate
-                    <%elsif activity.contact_type== 'BILL' %>
-                      Billing
-                    <%elsif activity.contact_type== 'BORD' %>
-                      Board Representative
-                    <%elsif activity.contact_type== 'DAMG' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'DATA' %>
-                      Database
-                    <%elsif activity.contact_type== 'EMER' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'ENGR'%>
-                      Engineering
-                    <%elsif activity.contact_type== 'MAIN'%>
-                      MAIN SWITCHBOARD
-                    <%elsif activity.contact_type== 'SURV'%>
-                      Surveyor
-                    <%elsif activity.contact_type== 'CONT'%>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'NITE'%>
-                      Night Time
-                    <%elsif activity.contact_type== 'AHRS'%>
-                      After Hours
-                    <%elsif activity.contact_type== 'VACU'%>
-                      Vacuum
-                    <%elsif activity.contact_type== 'REPR'%>
-                      Member Rep
-                    <%end%> contact for
-                  <%elsif activity.stype == 'DELETE' %>
-                    Deleted a <%if activity.contact_type == 'RCVR' %>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'ALTR' %>
-                      Alternate
-                    <%elsif activity.contact_type== 'BILL' %>
-                      Billing
-                    <%elsif activity.contact_type== 'BORD' %>
-                      Board Representative
-                    <%elsif activity.contact_type== 'DAMG' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'DATA' %>
-                      Database
-                    <%elsif activity.contact_type== 'EMER' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'ENGR'%>
-                      Engineering
-                    <%elsif activity.contact_type== 'MAIN'%>
-                      MAIN SWITCHBOARD
-                    <%elsif activity.contact_type== 'SURV'%>
-                      Surveyor
-                    <%elsif activity.contact_type== 'CONT'%>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'NITE'%>
-                      Night Time
-                    <%elsif activity.contact_type== 'AHRS'%>
-                      After Hours
-                    <%elsif activity.contact_type== 'VACU'%>
-                      Vacuum
-                    <%elsif activity.contact_type== 'REPR'%>
-                      Member Rep
-                    <%end%> contact for
-                  <%else %>
-                    Added a <%if activity.contact_type == 'RCVR' %>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'ALTR' %>
-                      Alternate
-                    <%elsif activity.contact_type== 'BILL' %>
-                      Billing
-                    <%elsif activity.contact_type== 'BORD' %>
-                      Board Representative
-                    <%elsif activity.contact_type== 'DAMG' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'DATA' %>
-                      Database
-                    <%elsif activity.contact_type== 'EMER' %>
-                      Emergency/Damage
-                    <%elsif activity.contact_type== 'ENGR'%>
-                      Engineering
-                    <%elsif activity.contact_type== 'MAIN'%>
-                      MAIN SWITCHBOARD
-                    <%elsif activity.contact_type== 'SURV'%>
-                      Surveyor
-                    <%elsif activity.contact_type== 'CONT'%>
-                      Marking Contact
-                    <%elsif activity.contact_type== 'NITE'%>
-                      Night Time
-                    <%elsif activity.contact_type== 'AHRS'%>
-                      After Hours
-                    <%elsif activity.contact_type== 'VACU'%>
-                      Vacuum
-                    <%elsif activity.contact_type== 'REPR'%>
-                      Member Rep
-                    <%end%> contact for
-                  <%end%>
-                  <%= activity.code %>
-                  on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+                <% if activity.owner %>
+                  <%= activity.owner.profile.first_name%> <%= activity.owner.profile.last_name %>
+                <% end%>
+                <% if activity.stype == 'UPDATE' %>
+                  Updated a <%if activity.contact_type == 'RCVR' %>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'ALTR' %>
+                    Alternate
+                  <%elsif activity.contact_type== 'BILL' %>
+                    Billing
+                  <%elsif activity.contact_type== 'BORD' %>
+                    Board Representative
+                  <%elsif activity.contact_type== 'DAMG' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'DATA' %>
+                    Database
+                  <%elsif activity.contact_type== 'EMER' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'ENGR'%>
+                    Engineering
+                  <%elsif activity.contact_type== 'MAIN'%>
+                    MAIN SWITCHBOARD
+                  <%elsif activity.contact_type== 'SURV'%>
+                    Surveyor
+                  <%elsif activity.contact_type== 'CONT'%>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'NITE'%>
+                    Night Time
+                  <%elsif activity.contact_type== 'AHRS'%>
+                    After Hours
+                  <%elsif activity.contact_type== 'VACU'%>
+                    Vacuum
+                  <%elsif activity.contact_type== 'REPR'%>
+                    Member Rep
+                  <%end%> contact for
+                <%elsif activity.stype == 'DELETE' %>
+                  Deleted a <%if activity.contact_type == 'RCVR' %>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'ALTR' %>
+                    Alternate
+                  <%elsif activity.contact_type== 'BILL' %>
+                    Billing
+                  <%elsif activity.contact_type== 'BORD' %>
+                    Board Representative
+                  <%elsif activity.contact_type== 'DAMG' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'DATA' %>
+                    Database
+                  <%elsif activity.contact_type== 'EMER' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'ENGR'%>
+                    Engineering
+                  <%elsif activity.contact_type== 'MAIN'%>
+                    MAIN SWITCHBOARD
+                  <%elsif activity.contact_type== 'SURV'%>
+                    Surveyor
+                  <%elsif activity.contact_type== 'CONT'%>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'NITE'%>
+                    Night Time
+                  <%elsif activity.contact_type== 'AHRS'%>
+                    After Hours
+                  <%elsif activity.contact_type== 'VACU'%>
+                    Vacuum
+                  <%elsif activity.contact_type== 'REPR'%>
+                    Member Rep
+                  <%end%> contact for
+                <%else %>
+                  Added a <%if activity.contact_type == 'RCVR' %>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'ALTR' %>
+                    Alternate
+                  <%elsif activity.contact_type== 'BILL' %>
+                    Billing
+                  <%elsif activity.contact_type== 'BORD' %>
+                    Board Representative
+                  <%elsif activity.contact_type== 'DAMG' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'DATA' %>
+                    Database
+                  <%elsif activity.contact_type== 'EMER' %>
+                    Emergency/Damage
+                  <%elsif activity.contact_type== 'ENGR'%>
+                    Engineering
+                  <%elsif activity.contact_type== 'MAIN'%>
+                    MAIN SWITCHBOARD
+                  <%elsif activity.contact_type== 'SURV'%>
+                    Surveyor
+                  <%elsif activity.contact_type== 'CONT'%>
+                    Marking Contact
+                  <%elsif activity.contact_type== 'NITE'%>
+                    Night Time
+                  <%elsif activity.contact_type== 'AHRS'%>
+                    After Hours
+                  <%elsif activity.contact_type== 'VACU'%>
+                    Vacuum
+                  <%elsif activity.contact_type== 'REPR'%>
+                    Member Rep
+                  <%end%> contact for
+                <%end%>
+                <%= activity.code %>
+                on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
 
 
 
-                </li>
-              <% end %>
-            <%end%>
-          </ul>
+              </li>
+            <% end %>
+          <%end%>
+        </ul>
         </div>
       </div>
     </div>
@@ -1010,7 +1019,7 @@
         mounted () {
             axios.get('https://www.triveea.com/members/group='+<%=@group.billing_id%>+' ')
         .then(response => (this.info = response.data.MemberCodes))
-        .catch(error => console.log(error))
+                .catch(error => console.log(error))
         },
         created() {
             window.addEventListener('resize', this.handleResize)
