@@ -103,13 +103,13 @@ class MemberContactsController < ApplicationController
           end
           # Form user and admin message based on action
           @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
-          @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s
+          @message = @member_contact.name.to_s + @member_contact.member_id.to_s + @member_contact.member_code.to_s + @member_contact.contact_type.to_s + @member_contact.company.to_s + @member_contact.contact_name.to_s + @member_contact.address1.to_s + @member_contact.address2.to_s + @member_contact.city.to_s + @member_contact.state.to_s + @member_contact.zip.to_s + @member_contact.phone.to_s + @member_contact.phone_ext.to_s + @member_contact.email.to_s + @member_contact.stype.to_s + @member_contact.billing
           # Redirect back to the group with success notification
           format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
           format.json { render :show, status: :created, location: @member_contact }
           puts "successful update"
           # Delayed action of sending mail
-          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
+          ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: 'caleb.woods@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.second)
           ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.minute)
         else
           # redirect and display error
