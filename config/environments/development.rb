@@ -38,12 +38,15 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    domain:               'usan.org', 
-    address:              '4.14.34.216',
-    :authentication       => :plain,
-    enable_starttls_auto: true,
-    :openssl_verify_mode  => 'none'
-      }
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      user_name:            '811memberportal@gmail.com',
+      password:             ENV['gmailpass'],
+      reply_to:             'memberservices@usanorth811.org',
+      authentication:       :plain,
+      enable_starttls_auto: true
+  }
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.raise_delivery_errors = true
  # Print deprecation notices to the Rails logger.
