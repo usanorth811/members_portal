@@ -67,18 +67,17 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: "guarded-depths-88265.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-
   config.action_mailer.smtp_settings = {
-    domain:               'usan.org', 
-    address:              'usaexch01.usan.org',
-    authentication:       'login',
-    user_name:            'caleb.woods',
-    password:             'Temp1234!',    
-    enable_starttls_auto: true,
-    :openssl_verify_mode  => 'none'
-      }
+      :authentication => :plain,
+      :address => "smtp.mailgun.org",
+      :port => 587,
+      :domain => "guarded-depths-88265.herokuapp.com",
+      :reply_to => "memberservices@usanorth811.org",
+      :user_name => "postmaster@sandbox820f2d8c127a4a61a66f3560df2d2108.mailgun.org",
+      :password => "f4909c867ca2ee89e8403cd0c20560b1-f696beb4-7878f7eb"
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

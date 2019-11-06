@@ -43,8 +43,8 @@ Rails.application.configure do
       :port => 587,
       :domain => "guarded-depths-88265.herokuapp.com",
       :reply_to => "memberservices@usanorth811.org",
-      :user_name => "postmaster@sandbox253094426e0147e689b96b079da0218a.mailgun.org",
-      :password => "304618a46c0ae5fc66f4c97586393259-f696beb4-93666292"
+      :user_name => "postmaster@sandbox820f2d8c127a4a61a66f3560df2d2108.mailgun.org",
+      :password => "f4909c867ca2ee89e8403cd0c20560b1-f696beb4-7878f7eb"
   }
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.raise_delivery_errors = true
