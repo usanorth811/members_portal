@@ -42,7 +42,7 @@ Rails.application.configure do
       port:                 587,
       domain:               'gmail.com',
       user_name:            '811memberportal@gmail.com',
-      password:             ENV['gmailpass'],
+      password:             'hohbe9-Judpuh-jehkoj',
       reply_to:             'memberservices@usanorth811.org',
       authentication:       :plain,
       enable_starttls_auto: true
