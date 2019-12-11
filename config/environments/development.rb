@@ -38,13 +38,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :authentication => :plain,
-      :address => "smtp.mailgun.org",
-      :port => 587,
-      :domain => "guarded-depths-88265.herokuapp.com",
-      :reply_to => "memberservices@usanorth811.org",
-      :user_name => "postmaster@sandbox820f2d8c127a4a61a66f3560df2d2108.mailgun.org",
-      :password => "f4909c867ca2ee89e8403cd0c20560b1-f696beb4-7878f7ebManage"
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      user_name:            '811memberportal@gmail.com',
+      password:             'hohbe9-Judpuh-jehkoj',
+      reply_to:             'memberservices@usanorth811.org',
+      authentication:       :plain,
+      enable_starttls_auto: true
   }
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.raise_delivery_errors = true

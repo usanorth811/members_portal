@@ -230,6 +230,7 @@
                                                     <form>
                                                       <div class="form-group row" >
                                                         <input :value="contact.Contact_type" type="hidden" name="member_contact[contact_type]" id="member_contact_contact_type">
+
                                                         <input :value="contact.Contact" type="hidden" name="member_contact[contact_name]" id="member_contact_contact_name">
                                                         <input :value="contact.Phone" type="hidden" name="member_contact[phone]" id="member_contact_phone">
                                                         <input :value="contact.Phone_ext" type="hidden" name="member_contact[phone_ext]" id="member_contact_phone_ext">
@@ -279,7 +280,7 @@
                                                     <div class="form-group row" >
 
 
-                                                      <div style="display:none;" >
+
                                                       <div class="col-sm-6">
 
 
@@ -313,7 +314,7 @@
                                                         <label for="exampleInputEmail1" style='padding-top:10px;'>Ext</label>
                                                         <input class="form-control" :value="contact.Phone_ext"  type="text" name="member_contact[phone_ext]" id="member_contact_phone_ext">
                                                       </div>
-                                                      </div>
+
                                                       <div class="col-sm-12">
                                                         <label for="exampleInputEmail1" style='padding-top:10px'>Email</label>
                                                         <input class="form-control" :value="contact.Email"  type="text" name="member_contact[email]" id="member_contact_email">
@@ -389,6 +390,7 @@
 
                                                       <%= form.hidden_field :name, :value => current_user.email %>
                                                       <input :value="contact.Member_id" type="hidden" name="member_contact[member_id]" id="member_contact_member_id">
+
                                                       <input :value="member.Code" type="hidden" name="member_contact[member_code]" id="member_contact_member_code">
                                                       <input :value="contact.Id" type="hidden" name="member_contact[contact_id]" id="member_contact_contact_id">
                                                       <input :value="contact.Name" type="hidden" name="member_contact[company]" id="member_contact_company">

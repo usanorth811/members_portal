@@ -23,14 +23,23 @@ class MemberContactsController < ApplicationController
   # POST /member_contacts
   # POST /member_contacts.json
   def create
+    require 'uri'
+    require 'net/http'
     @member_contact = MemberContact.new(member_contact_params)
     #update company field to match contact type
     update_company
     #otherwise, check if request is valid
-    if @member_contact.valid?
+    if @member_contact.save
       #send request if valid
-      jas
-      puts @member_contact.contact_type
+      # Check request type
+      if @member_contact.stype == 'INSERT'
+        api_create
+      elsif @member_contact.stype == 'UPDATE'
+        api_update
+      elsif @member_contact.stype == 'DELETE'
+        api_delete
+      end
+      send_notice
     else
       #send error if not valid
       respond_to do |format|
@@ -60,7 +69,109 @@ class MemberContactsController < ApplicationController
     puts @contact_types.fetch(@member_contact.contact_type)
     @member_contact.company = @contact_types.fetch(@member_contact.contact_type)
   end
+  def api_create
+    @result = HTTParty.post("http://52.52.172.182/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+                            :body => {:member_contact => {
+                                :member_id => @member_contact.member_id,
+                                :contact_type => @member_contact.contact_type,
+                                :name => @member_contact.company,
+                                :address1 => @member_contact.address1,
+                                :address2 => @member_contact.address2,
+                                :city => @member_contact.city,
+                                :state => @member_contact.state,
+                                :zip => @member_contact.zip,
+                                :contact => @member_contact.contact_name,
+                                :phone => @member_contact.phone,
+                                :phone_ext => @member_contact.phone_ext,
+                                :email => @member_contact.email
+                            }}.to_json,
+                            :headers => { 'Content-Type' => 'application/json' } )
 
+    case @result.code
+    when 200...290
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+      end
+    when 404
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+      end
+    when 500...600
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+      end
+    end
+  end
+  def api_update
+    @result = HTTParty.put("http://52.52.172.182/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+                           :body => {:member_contact => {
+                               :member_id => @member_contact.member_id,
+                               :contact_type => @member_contact.contact_type,
+                               :name => @member_contact.company,
+                               :address1 => @member_contact.address1,
+                               :address2 => @member_contact.address2,
+                               :city => @member_contact.city,
+                               :state => @member_contact.state,
+                               :zip => @member_contact.zip,
+                               :contact => @member_contact.contact_name,
+                               :phone => @member_contact.phone,
+                               :phone_ext => @member_contact.phone_ext,
+                               :email => @member_contact.email
+                           }}.to_json,
+                           :headers => { 'Content-Type' => 'application/json' } )
+
+    case @result.code
+    when 200...290
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+      end
+    when 404
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
+      end
+    when 500...600
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+      end
+    end
+  end
+
+  def api_delete
+    @result = HTTParty.delete("http://52.52.172.182/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+                              :headers => { 'Content-Type' => 'application/json' } )
+
+    case @result.code
+    when 200...290
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+      end
+    when 404
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
+      end
+    when 500...600
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+      end
+    end
+  end
+  def send_notice
+    if @member_contact.stype == 'DELETE'
+      @action = 'deleted'
+    elsif @member_contact.stype == 'UPDATE'
+      @action = 'updated'
+    else
+      @action = 'added'
+    end
+    # Form user and admin message based on action
+    @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
+    @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s
+
+    ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: 'contact update details', body: @member_contact.inspect.to_yaml, content_type: 'yaml').deliver_later!(wait: 1.second)
+    ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.second)
+    ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.second)
+
+  end
   def jas
     require 'uri'
     require 'net/http'
@@ -73,7 +184,7 @@ class MemberContactsController < ApplicationController
     request["Content-Type"] = 'application/json'
     request["Accept"] = '*/*'
     request["Cache-Control"] = 'no-cache'
-    request["Host"] = 'jas2.usanorth811.org:10443'
+    request["Host"] = 'http://52.52.172.182/member_contacts?user_name=CALEBWOODS&member_code=TST811'
     request["Accept-Encoding"] = 'gzip, deflate'
     request["Content-Length"] = '702'
     request["Connection"] = 'keep-alive'
