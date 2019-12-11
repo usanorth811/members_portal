@@ -128,7 +128,7 @@
                                 <%= form.hidden_field :name, :value => current_user.email %>
                                 <input :value="member.Active" type="hidden" name="member_detail[active]" id="member_detail_active">
                                 <input :value="member.Description" type="hidden" name="member_detail[description]" id="member_detail_description">
-                                <input :value="member.Member_id" type="hidden" name="member_detail[member_id]" id="member_detail_member_id">
+                                <input :value="member.ID" type="hidden" name="member_detail[member_id]" id="member_detail_member_id">
                                 <input :value="member.Code" type="hidden" name="member_detail[member_code]" id="member_detail_member_code">
                                 <input :value="member.Company" type="hidden" name="member_detail[company]" id="member_detail_company">
                                 <%= form.hidden_field :stype, :value => 'UPDATE' %>

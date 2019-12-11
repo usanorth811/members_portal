@@ -37,14 +37,36 @@ class MemberDetailsController < ApplicationController
     #validate request
     if @member_detail.valid?
       #post data to jas
-      jas
+      api_update
     else
       #redirect and display error
       flash[:member_detail_errors] = @member_detail.errors.full_messages
       redirect_to @member_detail.group, flash[:member_detail_errors]
     end
   end
-
+  def api_update
+    @result = HTTParty.put("http://52.52.172.182/members/#{@member_detail.member_id}",
+                           :body => {:member => {
+                               :facility_type => "#{@member_detail.facility}"
+                           }}.to_json,
+                           :headers => { 'Content-Type' => 'application/json' } )
+    puts @member_detail.member_id
+    case @result.code
+    when 200...290
+      respond_to do |format|
+        format.html { redirect_to @member_detail.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
+        ready_message
+      end
+    when 404
+      respond_to do |format|
+        format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
+      end
+    when 500...600
+      respond_to do |format|
+        format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+      end
+    end
+  end
   def ready_message
     #define action from stype
     if @member_detail.stype == 'DELETE'
@@ -62,59 +84,6 @@ class MemberDetailsController < ApplicationController
     ActionMailer::Base.mail(from: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'facility_mailer').deliver_later!(wait: 1.minute)
   end
 
-  def jas
-    require 'uri'
-    require 'net/http'
-    #define url
-    url = URI("https://jas.usanorth811.org:10443/membersapi")
-
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(url)
-    request["Content-Type"] = 'application/json'
-    request["Accept"] = '*/*'
-    request["Cache-Control"] = 'no-cache'
-    request["Host"] = 'jas2.usanorth811.org:10443'
-    request["Accept-Encoding"] = 'gzip, deflate'
-    request["Content-Length"] = '702'
-    request["Connection"] = 'keep-alive'
-    request["cache-control"] = 'no-cache'
-    #define request body
-    @body = "{\n    \"token\": \"yZ24ytp8soMMJfB3BoZDDGZ2hzMaNhHm\",\n    \"page\": \"details\",\n    \"name\": \""+@member_detail.name+"\",\n    \"ip\": \"1.1.1.1\",\n    \"date_time\": \"07/01/2019 00:00:00.000\",\n    \"member_id\": \""+@member_detail.member_id+"\",\n    \"member_code\": \""+@member_detail.member_code+"\",\n    \"member\": [\n        {\n            \"stype\":\""+@member_detail.stype+"\",\n            \"group\":\""+@member_detail.group_code+"\",\n           \"company\":\""+@member_detail.company+"\",\n              \"description\":\""+@member_detail.description+"\",\n              \"facility\":\""+@member_detail.facility+"\",\n            \"active\":\""+@active+"\"\n            }\n    ]\n}"
-    puts @body
-    request.body = @body
-    #send request
-    response = http.request(request)
-    puts response.body
-    #parse response for message
-    outputj = JSON.parse(response.body)
-    puts outputj["results"][0]["message"]
-    output = outputj["results"][0]["message"].to_s
-    #check if response is successful
-    if output.start_with? '1'
-      respond_to do |format|
-        if @member_detail.save
-          #redirect to group and display successful message
-          format.html { redirect_to @member_detail.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
-          format.json { render :show, status: :created, location: @member_detail }
-          ready_message
-        else
-          #redirect and display error
-          flash[:member_detail_errors] = @member_detail.errors.full_messages
-          format.html { redirect_to @member_detail.group, flash[:member_detail_errors] }
-
-        end
-      end
-
-
-    else
-      respond_to do |format|
-        #redirect and display generic error
-        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
-      end
-    end
-  end
   #def create
   #  @member_detail = MemberDetail.new(member_detail_params)
   #
@@ -131,27 +100,6 @@ class MemberDetailsController < ApplicationController
 
   # PATCH/PUT /member_details/1
   # PATCH/PUT /member_details/1.json
-  def update
-    respond_to do |format|
-      if @member_detail.update(member_detail_params)
-        format.html { redirect_to @member_detail, notice: 'Member detail was successfully updated.' }
-        format.json { render :show, status: :ok, location: @member_detail }
-      else
-        format.html { render :edit }
-        format.json { render json: @member_detail.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /member_details/1
-  # DELETE /member_details/1.json
-  def destroy
-    @member_detail.destroy
-    respond_to do |format|
-      format.html { redirect_to member_details_url, notice: 'Member detail was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
