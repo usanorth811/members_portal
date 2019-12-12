@@ -63,7 +63,7 @@ class MemberDetailsController < ApplicationController
       end
     when 500...600
       respond_to do |format|
-        format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+        format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{@result.code}" }
       end
     end
   end

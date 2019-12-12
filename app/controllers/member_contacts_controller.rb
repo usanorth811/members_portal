@@ -96,6 +96,10 @@ class MemberContactsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
       end
+    when 422
+      respond_to do |format|
+        format.html { redirect_to @member_contact.group, notice: "Unable to save duplicate contact." }
+      end
     when 500...600
       respond_to do |format|
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
@@ -122,6 +126,7 @@ class MemberContactsController < ApplicationController
 
     case @result.code
     when 200...290
+      puts @result.body
       respond_to do |format|
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
@@ -131,7 +136,7 @@ class MemberContactsController < ApplicationController
       end
     when 500...600
       respond_to do |format|
-        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{@result.code}" }
       end
     end
   end
