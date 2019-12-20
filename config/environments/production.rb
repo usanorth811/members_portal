@@ -70,14 +70,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://811memberportal.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address:              'smtp.gmail.com',
-      port:                 587,
-      domain:               'gmail.com',
-      user_name:            '811memberportal@gmail.com',
-      password:             'hohbe9-Judpuh-jehkoj',
-      reply_to:             'memberservices@usanorth811.org',
-      authentication:       :plain,
-      enable_starttls_auto: true
+      address:               'smtp.sendgrid.net',
+      port:                 25,
+      authentication:       'login',
+      user_name:            'apikey',
+      password:             ENV['SENDGRID_API_KEY'],
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
