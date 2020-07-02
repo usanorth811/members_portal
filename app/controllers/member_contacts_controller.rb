@@ -172,7 +172,7 @@ class MemberContactsController < ApplicationController
     @usermessage = "Your " + @member_contact.company.downcase + " contact for " + @member_contact.member_code.to_s + " was succesfully " + @action
     @message = current_user.profile.first_name.to_s + ' ' + current_user.profile.last_name.to_s + ' '+@action+' a '+@member_contact.company+' contact for ' + @member_contact.member_code.to_s
 
-    ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: 'contact update details', body: @member_contact.inspect.to_yaml, content_type: 'yaml').deliver_later!(wait: 1.second)
+    #ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: 'contact update details', body: @member_contact.inspect.to_yaml, content_type: 'yaml').deliver_later!(wait: 1.second)
     ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: 'memberservices@usanorth811.org', subject: @message, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.second)
     ActionMailer::Base.mail(from: "memberservices@usanorth811.org",reply_to: "memberservices@usanorth811.org", to: current_user.email, subject: @usermessage, template_path: 'layouts', template_name: 'contact_mailer').deliver_later!(wait: 1.second)
 

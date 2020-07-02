@@ -107,6 +107,7 @@
                           <%=image_tag("pencil_teal.svg", :width => "15")%>
                         </button>
                       </h5>
+
                       <%= form_for MemberDetail.new, url: member_details_path do |form|  %>
                         <div class="collapse" :id="'exampleModal'+member.Member_id+'a'">
                           <div class='container'>
@@ -155,11 +156,55 @@
                         Service Area Last Updated: {{member.Created.slice(6,10)}}-{{member.Created.slice(0,4)}}
                       </h5>
                       <div class='col-md-6 offset-md-3'>
-                        <button class='btn btn-info' data-toggle="collapse" :href="'#collapseExample'+member.Member_id" role="button" aria-expanded="false" :aria-controls="'#collapseExample'+member.Member_id" >Show Contacts</button>
+                      <%= simple_form_for(@codestatus) do |f| %>
+                        <%= f.error_notification %>
+                        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+                        <div class="form-inputs">
+                          <input :value="member.Code" type="hidden" name="codestatus[code]" id="codestatus_code">
+                          <%= f.hidden_field :sar_updated, :value => true %>
+                          <%= f.hidden_field :contacts_updated %>
+                          <%= f.hidden_field :user_id, :value => current_user.id %>
+                          <%= f.hidden_field :group_id, :value => @group.id %>
+                        </div>
+
+                        <div class="form-actions">
+                          <%= f.submit 'CONFIRM SERVICE AREA VERSION IS CORRECT', class: 'btn btn-info btn-block', type: "submit", style: "white-space: normal !important; word-wrap: break-word !important;" %>
+                        </div>
+                      <% end %>
                       </div>
+                      <br/>
+                      <div class='col-md-6 offset-md-3'>
+                        <button class='btn btn-info' data-toggle="collapse" :href="'#collapseExample'+member.Member_id" role="button" aria-expanded="false" :aria-controls="'#collapseExample'+member.Member_id" >SHOW CONTACTS</button>
+                      </div>
+                      <br/>
+
                       <h6 style='padding-top: 20px'><small>Please Contact <a href = "mailto:memberservices@usanorth811.org">memberservices@usanorth811.org</a> for more information on updating your facility type or delivery destination.</small></h6>
+
                       <div class="collapse" :id="'collapseExample'+member.Member_id">
                         <div class='container'>
+                          <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                              <p></p>
+                              <%= simple_form_for(@codestatus) do |f| %>
+                                <%= f.error_notification %>
+                                <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+                                <div class="form-inputs">
+                                  <input :value="member.Code" type="hidden" name="codestatus[code]" id="codestatus_code">
+                                  <%= f.hidden_field :sar_updated %>
+                                  <%= f.hidden_field :contacts_updated, :value => true %>
+                                  <%= f.hidden_field :user_id, :value => current_user.id %>
+                                  <%= f.hidden_field :group_id, :value => @group.id %>
+                                </div>
+
+                                <div class="form-actions">
+                                  <%= f.submit 'CONFIRM ALL CONTACTS LISTED ARE CORRECT', class: 'btn btn-info btn-block', type: "submit", style: "white-space: normal !important; word-wrap: break-word !important;" %>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
                           <div class="row" style='padding-top: 15px; margin-left: 20px'>
                             <div v-for="contact in member.Contacts" :key="contact">
 
@@ -598,7 +643,7 @@
                                                     <%= form.hidden_field :billing, :value => @group.billing_id%>
                                                   </div>
 
-                                                  <%= form.submit 'Add Contact', class: 'btn btn-info btn-block', type: "submit" %>
+                                                  <%= form.submit 'ADD CONTACT', class: 'btn btn-info btn-block', type: "submit" %>
 
                                                 </form>
                                               <%end%>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @codestatus.code %>
+</p>
+
+<p>
+  <strong>Sar updated:</strong>
+  <%= @codestatus.sar_updated %>
+</p>
+
+<p>
+  <strong>Contacts updated:</strong>
+  <%= @codestatus.contacts_updated %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @codestatus.user.email %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @codestatus.group.id %>
+</p>
+
+<%= link_to 'Edit', edit_codestatus_path(@codestatus) %> |
+<%= link_to 'Back', codestatuses_path %>

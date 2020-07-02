@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_155754) do
+ActiveRecord::Schema.define(version: 2020_06_17_152059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 2019_10_07_155754) do
     t.datetime "updated_at", null: false
     t.string "billing"
     t.index ["company_id"], name: "index_codes_on_company_id"
+  end
+
+  create_table "codestatuses", force: :cascade do |t|
+    t.string "code"
+    t.boolean "sar_updated"
+    t.boolean "contacts_updated"
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_codestatuses_on_group_id"
+    t.index ["user_id"], name: "index_codestatuses_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -171,6 +183,8 @@ ActiveRecord::Schema.define(version: 2019_10_07_155754) do
 
   add_foreign_key "billing_contacts", "companies"
   add_foreign_key "codes", "companies"
+  add_foreign_key "codestatuses", "groups"
+  add_foreign_key "codestatuses", "users"
   add_foreign_key "contacts", "codes"
   add_foreign_key "groups", "companies"
   add_foreign_key "groups", "users"
