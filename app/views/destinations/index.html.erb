@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Destinations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Old destination</th>
+      <th>New destination</th>
+      <th>Code</th>
+      <th>Group</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @destinations.each do |destination| %>
+      <tr>
+        <td><%= destination.old_destination %></td>
+        <td><%= destination.new_destination %></td>
+        <td><%= destination.code %></td>
+        <td><%= destination.group %></td>
+        <td><%= destination.user %></td>
+        <td><%= link_to 'Show', destination %></td>
+        <td><%= link_to 'Edit', edit_destination_path(destination) %></td>
+        <td><%= link_to 'Destroy', destination, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Destination', new_destination_path %>

@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @codestatus = Codestatus.new
+    @destination = Destination.new
 
   end
 

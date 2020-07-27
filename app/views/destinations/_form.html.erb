@@ -1,0 +1,17 @@
+
+<%= simple_form_for(@destination) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :old_destination %>
+    <%= f.input :new_destination %>
+    <%= f.input :code %>
+    <%= f.association :group %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

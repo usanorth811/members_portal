@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :destinations
   resources :codestatuses
   resources :member_details
   resources :member_contacts

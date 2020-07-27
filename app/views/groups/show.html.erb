@@ -137,9 +137,9 @@
                                 <%= form.hidden_field :group_id, :value => @group.id%>
                               </div>
                               <div class="form-group row" >
-                                <div class="col-sm-6"> </div>
-                                <div class="col-sm-2">
-                                  <%= form.submit 'Save Changes', class: 'btn btn-success btn-block', type: "submit" %>
+                                <div class="col-sm-3"> </div>
+                                <div class="col-sm-6">
+                                  <%= form.submit 'SAVE CHANGES', class: 'btn btn-info btn-block', type: "submit" %>
                                 </div>
                               </div>
                             </form>
@@ -148,7 +148,28 @@
                       <%end%>
                       <h5 >
                         Ticket Delivery Destination: {{member.Delivery_address}}
+                        <button class="btn btn-outline-info" type="button" style='width:50px' data-toggle="collapse" :href="'#exampleModal'+member.Member_id+'d'" role="button" aria-expanded="false" :aria-controls="'#exampleModal'+member.Member_id+'d'">
+                          <%=image_tag("pencil_teal.svg", :width => "15")%>
+                        </button>
                       </h5>
+                      <div class="collapse" :id="'exampleModal'+member.Member_id+'d'">
+                      <%= simple_form_for(@destination) do |f| %>
+                        <%= f.error_notification %>
+                        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+                        <div class="form-inputs">
+                          <input :value="member.Code" type="hidden" name="destination[code]" id="destination_code">
+                          <input :value="member.Delivery_address" type="hidden" name="destination[old_destination]" id="destination_old_destination">
+                          <%= f.input :new_destination %>
+                          <%= f.hidden_field :user_id, :value => current_user.id %>
+                          <%= f.hidden_field :group_id, :value => @group.id %>
+                        </div>
+
+                        <div class="form-actions">
+                          <%= f.submit 'SUBMIT REQUEST', class: 'btn btn-info', type: "submit", style: "white-space: normal !important; word-wrap: break-word !important;" %>
+                        </div>
+                      <% end %>
+                      </div>
                       <h5 >
                         Service Area Version: {{member.Shape}}
                       </h5>
