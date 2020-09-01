@@ -45,7 +45,7 @@ class MemberDetailsController < ApplicationController
     end
   end
   def api_update
-    @result = HTTParty.put("http://52.52.172.182/members/#{@member_detail.member_id}",
+    @result = HTTParty.put("http://UsanPull1API.usanorth811.org/members/#{@member_detail.member_id}",
                            :body => {:member => {
                                :facility_type => "#{@member_detail.facility}"
                            }}.to_json,
