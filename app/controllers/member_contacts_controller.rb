@@ -70,7 +70,8 @@ class MemberContactsController < ApplicationController
     @member_contact.company = @contact_types.fetch(@member_contact.contact_type)
   end
   def api_create
-    @result = HTTParty.post("http://UsanPull1API.usanorth811.org/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+    api_url = ENV['API_URL']
+    @result = HTTParty.post( api_url + "/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                             :body => {:member_contact => {
                                 :member_id => @member_contact.member_id,
                                 :contact_type => @member_contact.contact_type,
@@ -143,7 +144,8 @@ class MemberContactsController < ApplicationController
   end
 
   def api_delete
-    @result = HTTParty.delete("http://UsanPull1API.usanorth811.org/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+    api_url = ENV['API_URL']
+    @result = HTTParty.delete( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                               :headers => { 'Content-Type' => 'application/json' } )
 
     case @result.cod
