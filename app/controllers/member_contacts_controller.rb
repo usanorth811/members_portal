@@ -107,7 +107,8 @@ class MemberContactsController < ApplicationController
     end
   end
   def api_update
-    @result = HTTParty.put("http://UsanPull1API.usanorth811.org/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+    api_url = ENV['API_URL']
+    @result = HTTParty.put( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                            :body => {:member_contact => {
                                :member_id => @member_contact.member_id,
                                :contact_type => @member_contact.contact_type,
@@ -145,7 +146,7 @@ class MemberContactsController < ApplicationController
     @result = HTTParty.delete("http://UsanPull1API.usanorth811.org/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                               :headers => { 'Content-Type' => 'application/json' } )
 
-    case @result.code
+    case @result.cod
     when 200...290
       respond_to do |format|
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
