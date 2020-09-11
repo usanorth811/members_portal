@@ -148,7 +148,7 @@ class MemberContactsController < ApplicationController
     @result = HTTParty.delete( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                               :headers => { 'Content-Type' => 'application/json' } )
 
-    case @result.cod
+    case @result.code
     when 200...290
       respond_to do |format|
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
