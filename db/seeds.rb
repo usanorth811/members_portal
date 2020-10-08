@@ -8,16 +8,17 @@
 
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'billing_contact.csv'))
-csv = CSV.parse(csv_text.scrub, headers: true)
-csv.each do |row|
-  t = BillingContact.new
-  t.name = row ['name']
-  t.email = row ['Email']
-  t.addr = row ['addr']
-  t.company_id = row ['company_id']
+#csv_text = File.read(Rails.root.join('lib', 'seeds', 'billing_contact.csv'))
+#csv = CSV.parse(csv_text.scrub, headers: true)
+#csv.each do |row|
+#  t = BillingContact.new
+#  t.name = row ['name']
+#  t.email = row ['Email']
+#  t.addr = row ['addr']
+#  t.company_id = row ['company_id']
 
-  t.save
-end
+#  t.save
+#end
 
-puts "There are now #{BillingContact.count} rows in the table"
+#puts "There are now #{BillingContact.count} rows in the table"
+AdminUser.create!(email: 'caleb.woods@usanorth811.org', password: 'password', password_confirmation: 'password') if Rails.env.production?
