@@ -5,7 +5,7 @@ ActiveAdmin.register Group do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :billing_id, :user_id, :company_id, :name
+   permit_params :billing_id, :user_id, :company_id, :name
   #
   # or
   #
@@ -14,5 +14,12 @@ ActiveAdmin.register Group do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+   form title: 'Group Form' do |f|
+     inputs 'Details' do
+       input :billing_id
+       input :name
+
+     end
+     actions
+   end
 end
