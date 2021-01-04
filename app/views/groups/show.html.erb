@@ -50,7 +50,7 @@
         </hr>
         <div
           data-controller="content-loader"
-          data-content-loader-url-value="<%= member_detail_list_path(billing_id: @group.billing_id) %>"
+          data-content-loader-url-value="<%= member_detail_list_path(billing_id: @group.billing_id, group_id: @group.id) %>"
         >
           <i class="fas fa-spinner fa-spin"></i> Loading contacts...
 

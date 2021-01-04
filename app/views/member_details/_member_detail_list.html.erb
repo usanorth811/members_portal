@@ -1,10 +1,22 @@
+<% if @member_details == [] %>
+  <div class="alert alert-danger">
+    <p>No associated member codes could be found. Check that the billing ID you've entered is correct.</p>
+    <p>If the problem persists, please contact us at memberservices@usanorth811.org</p>
+  </div>
+<% end %>
 <% @member_details.each do |member_detail| %>
   <div class="card">
     <div class="card-header">
       <%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %>
     </div>
     <div class="card-body">
-      <p><%= member_detail['attributes'] %></p>
+      <%= turbo_frame_tag 'member_detail' do %>
+        <p>
+          <%= member_detail['attributes'] %>
+        </p>
+        <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
+      <% end %>
+
 
       <div
         data-controller="content-loader"

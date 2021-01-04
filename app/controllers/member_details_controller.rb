@@ -8,6 +8,7 @@ class MemberDetailsController < ApplicationController
   end
 
   def member_detail_list
+    @group = params[:group_id]
     require 'httparty'
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/members?group_code="+ params[:billing_id], :verify => false)
@@ -22,6 +23,9 @@ class MemberDetailsController < ApplicationController
 
   # GET /member_details/new
   def new
+    @group = params[:group_id]
+
+    @old_member_detail = HTTParty.get("http://UsanPull1API.usanorth811.org/members/#{params[:member_id]}", :verify => false)
     @member_detail = MemberDetail.new
   end
 
@@ -32,33 +36,46 @@ class MemberDetailsController < ApplicationController
   # POST /member_details
   # POST /member_details.json
   def create
+    puts "BEGIN CREATE"
+
     @member_detail = MemberDetail.new(member_detail_params)
-    #set group code as billing id
-    @member_detail.group_code = @member_detail.group.billing_id
     #define active as true or false
+    puts "CHECK ACTIVE"
+
     if @member_detail.active == "true"
       @active = "1"
+      puts "ACTIVE"
+
     else
       @active = "0"
+      puts "NOT ACTIVE"
+
     end
+    puts "CHECK VALID"
 
     #validate request
     if @member_detail.valid?
+      puts "IS VALID"
+
       #post data to jas
       api_update
     else
+      puts "IS NOT VALID"
+
       #redirect and display error
+      puts @member_detail.errors.full_messages
       flash[:member_detail_errors] = @member_detail.errors.full_messages
       redirect_to @member_detail.group, flash[:member_detail_errors]
     end
   end
   def api_update
+    puts "BEGIN PUT"
     @result = HTTParty.put("http://UsanPull1API.usanorth811.org/members/#{@member_detail.member_id}",
                            :body => {:member => {
                                :facility_type => "#{@member_detail.facility}"
                            }}.to_json,
                            :headers => { 'Content-Type' => 'application/json' } )
-    puts @member_detail.member_id
+    puts @result.code
     case @result.code
     when 200...290
       respond_to do |format|
@@ -112,7 +129,9 @@ class MemberDetailsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_member_detail
-    @member_detail = MemberDetail.find(params[:id])
+    @group = params[:group_id]
+    @member_detail = HTTParty.get("http://UsanPull1API.usanorth811.org/members/#{params[:id]}", :verify => false)
+    pp @member_detail
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
