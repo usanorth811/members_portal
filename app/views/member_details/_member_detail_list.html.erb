@@ -1,0 +1,19 @@
+<% @member_details.each do |member_detail| %>
+  <div class="card">
+    <div class="card-header">
+      <%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %>
+    </div>
+    <div class="card-body">
+      <p><%= member_detail['attributes'] %></p>
+
+      <div
+        data-controller="content-loader"
+        data-content-loader-url-value="<%= contact_list_path(member_id: member_detail['attributes']['member_id']) %>"
+      >
+        <i class="fas fa-spinner fa-spin"></i> Loading contacts...
+      </div>
+    </div>
+  </div>
+  <br/>
+
+<% end %>

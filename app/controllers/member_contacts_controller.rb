@@ -7,6 +7,14 @@ class MemberContactsController < ApplicationController
     @member_contacts = MemberContact.all.order(:created_at).reverse_order.limit(100)
   end
 
+  def contact_list
+    require 'httparty'
+    require 'json'
+    response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
+    @contact_list = response['data']
+    render partial: 'member_contacts/contact_list'
+  end
+
   # GET /member_contacts/1
   # GET /member_contacts/1.json
   def show
@@ -70,7 +78,7 @@ class MemberContactsController < ApplicationController
     @member_contact.company = @contact_types.fetch(@member_contact.contact_type)
   end
   def api_create
-    api_url = ENV['API_URL']
+    api_url = 'http://UsanPull1API.usanorth811.org'
     @result = HTTParty.post( api_url + "/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                             :body => {:member_contact => {
                                 :member_id => @member_contact.member_id,

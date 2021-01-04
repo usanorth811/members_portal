@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :groups do 
     resources :member_contacts
   end
+  get :contact_list, to: 'member_contacts#contact_list'
+  get :member_detail_list, to: 'member_details#member_detail_list'
   devise_for :users
   resources :contacts
   resources :codes do

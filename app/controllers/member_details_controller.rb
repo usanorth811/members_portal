@@ -7,6 +7,14 @@ class MemberDetailsController < ApplicationController
     @member_details = MemberDetail.all
   end
 
+  def member_detail_list
+    require 'httparty'
+    require 'json'
+    response = HTTParty.get("http://UsanPull1API.usanorth811.org/members?group_code="+ params[:billing_id], :verify => false)
+    @member_details = response['data']
+    render partial: 'member_details/member_detail_list'
+  end
+
   # GET /member_details/1
   # GET /member_details/1.json
   def show
