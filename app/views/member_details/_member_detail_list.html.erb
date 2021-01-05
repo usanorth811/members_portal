@@ -5,25 +5,53 @@
   </div>
 <% end %>
 <% @member_details.each do |member_detail| %>
-  <div class="card">
+  <div class="card" >
     <div class="card-header">
-      <%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %>
-    </div>
-    <div class="card-body">
-      <%= turbo_frame_tag 'member_detail' do %>
-        <p>
-          <%= member_detail['attributes'] %>
-        </p>
-        <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
-      <% end %>
-
-
-      <div
-        data-controller="content-loader"
-        data-content-loader-url-value="<%= contact_list_path(member_id: member_detail['attributes']['member_id']) %>"
-      >
-        <i class="fas fa-spinner fa-spin"></i> Loading contacts...
+      <h4><%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %></h4>
+      <div class="text-right">
+        <div class="badge badge-success col-lg-2" style='font-size: 14px'>
+          Active
+        </div>
       </div>
+    </div>
+    <div class="card-body" >
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">&nbsp;</div>
+          <div class="col-md-4 text-left">
+            <%= turbo_frame_tag 'member_detail' do %>
+              <div>
+                <strong>Name: </strong>
+                <br/><%= member_detail['attributes']['name'] %>
+              </div>
+              <div>
+                <strong>Description: </strong>
+                <br/><%= member_detail['attributes']['description'] %>
+              </div>
+              <div>
+                <strong>Facility Type: </strong>
+                <br/><%= member_detail['attributes']['facility_type'] %>
+              </div>
+              <div class="text-center">
+                <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
+
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="">
+            <%= turbo_frame_tag 'contacts' do %>
+              <div class="align-items-center">
+                <%= link_to member_contacts_path(member_id: member_detail['attributes']['member_id'], member_code: member_detail['attributes']['code'], group_id: @group) do %>
+                  <button class="btn btn-info">
+                    Show Contacts
+                  </button>
+                  <% end %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
   <br/>

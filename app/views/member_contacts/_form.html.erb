@@ -2,27 +2,19 @@
 <%= simple_form_for(@member_contact) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :ip %>
-    <%= f.input :member_id %>
-    <%= f.input :member_code %>
-    <%= f.input :contact_id %>
-    <%= f.input :type %>
-    <%= f.input :company %>
-    <%= f.input :contact_name %>
-    <%= f.input :address1 %>
-    <%= f.input :address2 %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :zip %>
-    <%= f.input :phone %>
-    <%= f.input :phone_ext %>
-    <%= f.input :email %>
+    <strong>Contact Type: </strong><%= f.text_field :contact_type, value: @contact['contact_type'], class: 'form-control' %>
+    <%= f.hidden_field :group_id, value: @group %>
+    <%= f.hidden_field :member_id, value: @contact['member_id'] %>
+    <%= f.hidden_field :member_code, value: @member_code %>
+    <%= f.hidden_field :contact_id, value: @contact['id'] %>
+    <%= f.hidden_field :stype, value: @stype %>
+    <strong>Contact: </strong><%= f.text_field :contact_name, value: @contact['contact'], class: 'form-control' %>
+    <strong>Phone: </strong><%= f.text_field :phone, value: @contact['phone'], class: 'form-control' %>
+    <strong>Email: </strong><%= f.text_field :email, value: @contact['email'], class: 'form-control' %>
   </div>
-
+<br/>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "#{@stype} CONTACT", class: 'btn btn-info' %>
   </div>
 <% end %>

@@ -2,7 +2,21 @@
   <div class="row">
     <% @contact_list.each do |contact| %>
       <div class="col-md-4">
-        <%= contact %>
+        <div class="card">
+          <div class="card-header">
+            <%= contact['attributes']['name'] %>
+          </div>
+          <div class="card-body text-left">
+            <%= turbo_frame_tag 'contact' do %>
+              <strong>Contact Type: </strong><br/> <%= contact['attributes']['contact_type'] %> <br/>
+              <strong>Contact: </strong><br/> <%= contact['attributes']['contact'] %> <br/>
+              <strong>Phone: </strong><br/> <%= contact['attributes']['phone'] %> <br/>
+              <strong>Email: </strong><br/> <%= contact['attributes']['email'] %> <br/>
+              <%= link_to 'Edit', new_member_contact_path(member_id: contact['attributes']['member_id'], stype: 'UPDATE', contact_id: contact['id'], member_code: @member_code, group_id: @group) %>
+            <% end %>
+          </div>
+        </div>
+        <br/>
       </div>
     <% end %>
   </div>

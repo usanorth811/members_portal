@@ -4,7 +4,9 @@ class MemberContactsController < ApplicationController
   # GET /member_contacts
   # GET /member_contacts.json
   def index
-    @member_contacts = MemberContact.all.order(:created_at).reverse_order.limit(100)
+    @member = params[:member_id]
+    @member_code = params[:member_code]
+    @group = params[:group_id]
   end
 
   def contact_list
@@ -12,6 +14,9 @@ class MemberContactsController < ApplicationController
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
     @contact_list = response['data']
+    @member_code = params[:member_code]
+    @group = params[:group_id]
+
     render partial: 'member_contacts/contact_list'
   end
 
@@ -22,6 +27,17 @@ class MemberContactsController < ApplicationController
 
   # GET /member_contacts/new
   def new
+    if params[:contact_id].present?
+      require 'httparty'
+      require 'json'
+      response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts/"+ params[:contact_id], :verify => false)
+      @contact = response
+    end
+    @group = params[:group_id]
+
+    @member_code = params[:member_code]
+    @member = params[:member_id]
+    @stype = params[:stype]
     @member_contact = MemberContact.new
   end
 
@@ -49,7 +65,8 @@ class MemberContactsController < ApplicationController
       end
       send_notice
     else
-      #send error if not valid
+      # send error if not valid
+      pp @member_contact.errors
       respond_to do |format|
         flash[:member_contact_errors] = @member_contact.errors.full_messages
         format.html { redirect_to @member_contact.group }
@@ -116,7 +133,8 @@ class MemberContactsController < ApplicationController
     end
   end
   def api_update
-    api_url = ENV['API_URL']
+    puts "BEGIN API UPDATE"
+    api_url = 'http://UsanPull1API.usanorth811.org'
     @result = HTTParty.put( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                            :body => {:member_contact => {
                                :member_id => @member_contact.member_id,
@@ -133,7 +151,8 @@ class MemberContactsController < ApplicationController
                                :email => @member_contact.email
                            }}.to_json,
                            :headers => { 'Content-Type' => 'application/json' } )
-
+    puts @result.code
+    pp @result.body
     case @result.code
     when 200...290
       puts @result.body
