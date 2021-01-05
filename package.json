@@ -13,6 +13,7 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack-dev-server": "^3.11.1"
   }
 }
