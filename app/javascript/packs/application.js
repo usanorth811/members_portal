@@ -15,7 +15,6 @@ import { Turbo, cable } from "@hotwired/turbo-rails"
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
 
 import { Application } from "stimulus"
 import ContentLoader from "stimulus-content-loader"
