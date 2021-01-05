@@ -64,7 +64,7 @@ gem 'httparty'
 gem 'rack-cors'
 # Use Puma as the app server
 # Use SCSS for stylesheets
-# Use Uglifier as compressor for JavaScript assets
+# Use Uglifier as compressor for JavaScript assetss
 gem 'uglifier', '>= 1.3.0'
 gem 'octicons'
 # See https://github.com/rails/execjs#readme for more supported runtimes
