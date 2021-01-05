@@ -1,9 +1,9 @@
 
 <p>
 <div class='col-lg-12 offset-lg-2 d-none d-lg-block'>
-  <h2 class="" style=' font-weight: 600'>
+  <span class="" style='font-size: 1.4rem; font-weight: 600'>
     <%= @group.name %>
-  </h2>
+  </span>
 </div>
 
 </p>
@@ -26,10 +26,10 @@
 </div>
 
 <% if flash[:member_contact_errors] %>
-  <h5>Could not submit changes for the following reasons:</h5>
+  <span style="font-size: 1.3rem; font-weight: 500">Could not submit changes for the following reasons:</span>
   <div class="alert alert-danger" role="alert">
     <% flash[:member_contact_errors].each do |msg| %>
-      <h6><%= msg %></h6>
+      <span style="font-size: 1rem; font-weight: 500"><%= msg %></span>
     <% end %>
   </div>
 <% end %>
@@ -38,14 +38,14 @@
 <div class="container-fluid" >
   <div class="row" >
     <div class='col-md-8 offset-md-1 d-lg-none'>
-      <h4 class="text-center">
+      <span class="text-center">
         <%= @group.name %>
-      </h4>
+      </span>
     </div>
     <div class="col-md-8 offset-md-1">
 
       <div class="container-fluid" style="padding-top: 35px !important">
-        <h4 class="text-center">Codes</h4>
+        <span style="font-size: 1.3rem; font-weight: 500" class="text-center">Codes</span>
         <hr class="my-4">
         </hr>
         <div
@@ -58,27 +58,7 @@
         </div>
 
 
-        <div class="row" >
 
-          <div class="col-xl-4 col-lg-6" style="padding-bottom: 25px !important">
-            <% if current_user.admin? %>
-              <div class="card" style="width: auto; ">
-                <a class="btn " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <div class="card-header" >
-                    <h6 style="padding-top: 10px !important;">
-                      <div style="color: #E27d60">Add Code</div>
-                    </h6>
-                  </div>
-                </a>
-
-
-
-              </div>
-            <% end %>
-
-          </div>
-          </transition>
-        </div>
       </div>
 
     </div>
@@ -92,7 +72,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="service_area_modal">Upload SAR</h5>
+                  <span style="font-size: 1.1rem; font-weight: 500" class="modal-title" id="service_area_modal">Upload SAR</span>
 
                 </div>
                 <div class="modal-body">
@@ -113,25 +93,9 @@
               });
           </script>
         </div>
-        <% if false %>
-          <div id='ticketcounts' style="padding-left: 15px; padding-top:15px">
-  <span v-if="ticketCounts == null">
-    <button class="btn btn-info" type="button" disabled>
-      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-        Loading...
-    </button>
-  </span>
-            <span v-else >
-  <button class="btn btn-info" data-toggle="collapse" href="#counts" role="button" aria-expanded="false" aria-controls="counts">
-  Show 2019 Billable Ticket Totals
-  </button>
-  <p />
-
-</span>
-        <% end %>
         </p>
 
-        <h6>Recent Activity</h6>
+        <span style="font-size: 1rem; font-weight: 500" >Recent Activity</span>
         <ul class="list-group" >
           <%if @activities.present?%>
             <% @activities.each do |activity| %>
@@ -257,22 +221,22 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Contact Types</h5>
+        <span style="font-size: 1.3rem; font-weight: 500" class="modal-title">Contact Types</span>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <ul>
-          <li><h6 style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> &nbsp; The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</h6></li>
-          <li><h6 style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> &nbsp; The person to contact for any billing related issues and will receive your membership billing invoice.</h6></li>
-          <li><h6 style='text-align:left'><b>Marking Contact (RCVR, RECEIVING)</b> &nbsp; Person or office that receives tickets during traditional business hours. Answers questions from excavators about markings (or can contact specific field locating technician to assign technician to answer questions).</h6></li>
-          <li><h6 style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> &nbsp;  The person that will receive general questions regarding dig tickets your company is notified on.</h6></li>
-          <li><h6 style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> &nbsp; The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</h6></li>
-          <li><h6 style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> &nbsp; The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</h6></li>
-          <li><h6 style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> &nbsp; The person to contact if an excavator will be exposing your facilities using vacuum equipment.</h6></li>
-          <li><h6 style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> &nbsp; The person to contact during non-business hours.</h6></li>
-          <li><h6 style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> &nbsp; This person will receive the quarterly board meeting minutes.</h6></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> &nbsp; The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> &nbsp; The person to contact for any billing related issues and will receive your membership billing invoice.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Marking Contact (RCVR, RECEIVING)</b> &nbsp; Person or office that receives tickets during traditional business hours. Answers questions from excavators about markings (or can contact specific field locating technician to assign technician to answer questions).</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> &nbsp;  The person that will receive general questions regarding dig tickets your company is notified on.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> &nbsp; The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> &nbsp; The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> &nbsp; The person to contact if an excavator will be exposing your facilities using vacuum equipment.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> &nbsp; The person to contact during non-business hours.</span></li>
+          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> &nbsp; This person will receive the quarterly board meeting minutes.</span></li>
         </ul>
       </div>
       <div class="modal-footer">

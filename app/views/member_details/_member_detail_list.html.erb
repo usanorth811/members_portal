@@ -7,7 +7,7 @@
 <% @member_details.each do |member_detail| %>
   <div class="card" >
     <div class="card-header">
-      <h4><%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %></h4>
+      <span style="font-size: 1.3rem; font-weight: 500"><%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %></span>
       <div class="text-right">
         <div class="badge badge-success col-lg-2" style='font-size: 14px'>
           Active

@@ -2,20 +2,14 @@
 </div>
 
 <% if user_signed_in? -%>
+
   <div class="nav-item dropdown">
-
-    <a class="nav-link " id="inverted-icon" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag("Hamburger_icon.svg", :width => "40", :style => '-webkit-filter:invert(100%);
-        filter:invert(100%);')%></a>
-    <div class="dropdown-menu dropdown-menu-right" >
-      <a class="dropdown-item" href="/groups"><%= image_tag("home.svg", :width => "25", :style => 'padding-right: 10px')%> Home</a>
-      <% if false %> <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalLaw"><%= image_tag("book.svg", :width => "25", :style => 'padding-right: 10px')%> Law</a> <% end %>
-      <a href='' class="dropdown-item"  data-toggle="modal" data-target="#exampleModalFAQ"><%= image_tag("question.svg", :width => "25", :style => 'padding-right: 10px')%> FAQ</a>
-      <a class="dropdown-item" href="/profiles"><%= image_tag("gear.svg", :width => "25", :style => 'padding-right: 10px')%> Profile</a>
-      <div class="dropdown-divider"></div>
-
-      <a class="dropdown-item" href="/users/sign_out" data-method = "delete"><%= image_tag("sign-out.svg", :width => "25", :style => 'padding-right: 10px')%> Log Out</a>
-
-
+    <div class="collapse navbar-collapse text-right" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="btn btn-info" href="/users/sign_out" data-method = "delete" style=" font-size: 1.1rem; ">Sign Out</a>
+        </li>
+      </ul>
     </div>
   </div>
 <%else%>
@@ -24,94 +18,3 @@
 
 </div>
 </nav>
-
-<div class="modal fade" id="exampleModalFAQ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title " id="exampleModalLabel"><%= image_tag("question.svg", :width => "25", :style => 'padding-bottom: 5px')%> FAQ </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="container text-left">
-
-
-        <h6 style='padding-top: 10px'><b>I am a utility owner, how do I become a member of USA North 811?</b></h6>
-        <p />
-        If you are a utility owner and currently not a member of USA North 811, you can become a member by first filling out our membership application <a href="https://fs26.formsite.com/6jJPTG/form13/index.html?1563986515092">Here</a>
-        <p />
-        <h6><b>What are my responsibilities as a member of USA North 811?</b></h6>
-        <p />
-        <h6>Respond in a timely manner to all locate requests you receive. That means:</h6>
-        <ul>
-          <li>Respond to each request before the start time or legal notice (whichever is later)</li>
-          <li>Accurately mark and locate your underground facilities when threatened by the proposed excavation</li>
-          <li>Notify the contractor, homeowner, or ticket submitter promptly when your facilities are clear of their excavation work and they are in no danger of uncovering them</li>
-          <li>Follow CGA Best Practices Appendix B guidelines when marking the facilities you own in the area of proposed excavation</li>
-          <li>Using the appropriate amount of markings needed to identify your underground facilities while avoiding excessive markings and decorative hardscapes (decorative rock, pavers, stamped walkways, etc) at the site.</li>
-          <li>Using the appropriate marker type for site and weather conditions (flags, paint, whiskers, offsets, etc.)</li>
-          <li>Respond to any other ticket notices (no response, request for call, request for field meet) promptly</li>
-        </ul>
-
-        <h6>Ensure your information is always up to date with USA North 811. That means:</h6>
-        <ul>
-          <li>Maintain detailed maps and records of your underground facilities</li>
-          <li>Reviewing and updating (if needed) your service area registration on a regular basis to ensure you are receiving all of the notifications you should be</li>
-          <li>Reviewing and updating (if needed) the contacts and their information listed on your membership account on a regular basis to ensure contractors, homeowners, and USA North 811 knows who to get in touch with when there is a question or issue</li>
-          <li>Notify USA North 811 of any billing department changes that would impact your bill getting to the correct staff member or payment being sent on time</li>
-        </ul>
-        <p />
-        <h6><b>What counties does USA North 811 cover?</b></h6>
-        <p />
-        <h6>In California, we serve the following counties:</h6>
-        <ul>
-          <li>Alameda, Alpine, Amador, Butte, Calaveras, Colusa, Contra Costa, Del Norte, El Dorado, Fresno, Glenn, Humboldt, Kern, Kings, Lake, Lassen, Madera, Marin, Mariposa, Mendocino, Merced, Modoc, Mono, Monterey, Napa, Nevada, Placer, Plumas, Sacramento, San Benito, San Francisco, San Joaquin, San Luis Obispo, San Mateo, Santa Clara, Santa Cruz, Shasta, Sierra, Siskiyou, Solano, Sonoma, Stanislaus, Sutter, Tehama, Trinity, Tulare, Tuolumne, Yolo, Yuba </li>
-          <li>If you are working in Imperial, Inyo, Los Angeles, Orange, Riverside, San Bernardino, San Diego, Santa Barbara, or Ventura please contact Dig Alert to submit your request.</li>
-        </ul>
-        <p />
-        <h6>In Nevada, we serve the following counties:</h6>
-        <ul>
-          <li>Carson, Churchill, Clark, Douglas, Elko, Esmeralda, Eureka, Humboldt, Lander, Lincoln, Lyon, Mineral, Nye, Pershing, Storey, Washoe, White Pine</li>
-        </ul>
-        <p />
-
-        <h6><b>What are your hours of operation?</b></h6>
-        <p />
-        USA North 811 is now open 24x7 to take your locate requests. During overnight and weekend hours however we have limited staffing available, so we ask that you please submit your tickets online during these hours via our E-Ticket or 811 Express platform unless it is an emergency or priority situation.
-        <p />
-
-        <h6><b>Which utilities are members of USA North 811?</b></h6>
-        <p />
-        To view a list of the underground utilities that are a member of USA North 811, please click the following links:
-        <ul>
-          <li><a href="http://64.62.135.181/images/pdfs/CA-Members-9-12-18.pdf">CA Members</a></li>
-          <li><a href="http://64.62.135.181/images/pdfs/NV-members-9-12-18.pdf">NV Members</a></li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<% if false %>
-  <div class="modal fade" id="exampleModalLaw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title " id="exampleModalLabel"> Law </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container text-left">
-          <a class='button btn-info' href=''
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
