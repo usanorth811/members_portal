@@ -23,6 +23,7 @@ class MemberContactsController < ApplicationController
   # GET /member_contacts/1
   # GET /member_contacts/1.json
   def show
+
   end
 
   # GET /member_contacts/new
@@ -34,7 +35,6 @@ class MemberContactsController < ApplicationController
       @contact = response
     end
     @group = params[:group_id]
-
     @member_code = params[:member_code]
     @member = params[:member_id]
     @stype = params[:stype]
@@ -69,13 +69,16 @@ class MemberContactsController < ApplicationController
       pp @member_contact.errors
       respond_to do |format|
         flash[:member_contact_errors] = @member_contact.errors.full_messages
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/form",
+                                                                        params: { member_contact: @member_contact, member_id: @member_contact.member_id, group_id: @member_contact.group_id, stype: @member_contact.stype, contact: @member_contact}) }
         format.html { redirect_to @member_contact.group }
       end
-
     end
   end
 
   def update_company
+    billing = Group.find(@member_contact.group_id)
+    @member_contact.billing = billing.billing_id
     @contact_types = { "RCVR" => 'MARKING CONTACT',
                        "ALTR" => 'ALTERNATE',
                        'BILL' => 'BILLING',
@@ -157,14 +160,19 @@ class MemberContactsController < ApplicationController
     when 200...290
       puts @result.body
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     when 404
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/form",
+                                                                        locals: { member_contact: @member_contact, result: @result.code}) }
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
       end
     when 500...600
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/form",
+                                                                        locals: { member_contact: @member_contact, result: @result.code}) }
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{@result.code}" }
       end
     end

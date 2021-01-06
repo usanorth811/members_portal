@@ -16,7 +16,21 @@ class GroupsController < ApplicationController
   def show
     @codestatus = Codestatus.new
     @destination = Destination.new
-
+    @contact_types = { "RCVR" => 'MARKING CONTACT',
+                       "ALTR" => 'ALTERNATE',
+                       'BILL' => 'BILLING',
+                       'BORD' => 'Board Rep',
+                       'DAMG' => 'EMERGENCY/DAMAGES',
+                       'ENGR' => 'ENGINEERING',
+                       'DATA' => 'DATABASE',
+                       'EMER' => 'EMERGENCY/DAMAGES',
+                       'MAIN' => 'MAIN SWITCHBOARD',
+                       'SURV' => 'SURVEYOR',
+                       'CONT' => 'MARKING CONTACT',
+                       'NITE' => 'NIGHT TIME',
+                       'AHRS' => 'AFTER HOURS',
+                       'VACU' => 'VACUUM',
+                       'REPR' => 'MEMBER REP'}
   end
 
   # GET /groups/new
@@ -94,7 +108,6 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:billing_id, :user_id, :user_id, :company_id, :name)
     end
     def load_activities
-
       @activities = PublicActivity::Activity.where(:billing => @group.billing_id).order('created_at DESC').limit(10)
     end
 end

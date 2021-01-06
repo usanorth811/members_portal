@@ -34,11 +34,11 @@
               </div>
               <div class="text-center">
                 <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
-
               </div>
             <% end %>
           </div>
         </div>
+        <br/>
         <div class="">
             <%= turbo_frame_tag 'contacts' do %>
               <div class="align-items-center">
@@ -51,9 +51,7 @@
             <% end %>
         </div>
       </div>
-
     </div>
   </div>
   <br/>
-
 <% end %>

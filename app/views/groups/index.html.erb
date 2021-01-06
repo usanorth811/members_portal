@@ -1,7 +1,5 @@
 <% if current_user.profile %>
 
-
-
   <%= render partial: 'nav' %>
   <div class="container-fluid">
     <div class="row">
@@ -16,6 +14,8 @@
   </div>
 
   <div class="container text-center" style="padding-bottom: 220px">
+
+    <!-- Home Page Header -->
     <div class="row" >
       <div class="col-md-12">
         <h2 class='text-center'>Welcome to the USA North 811 Member Portal</h2>
@@ -40,7 +40,9 @@
         <h4 class="text-center">My Companies</h4>
       </div>
     </div>
+    <!-- Home Page Header -->
 
+    <!-- Group List -->
     <div class="row" id="index" >
       <% @groups.each do |group| %>
         <div class="col-md-4"  style='padding-top: 15px'>
@@ -65,7 +67,6 @@
                     </button>
                   </div>
                   <div class='col-lg-6 col-sm-6 col-xs-6'>
-
                     <%= button_to group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' },style: 'width:50px', remote: true, class: "btn btn-outline-danger" do %>
                       <%= image_tag("trashcan_orange.svg", :width => "15")%>
                     <% end %>
@@ -123,13 +124,13 @@
               </h6>
             </div>
             </a>
-
-
             <%= render 'form', group: @group %>
           </div>
         </transition>
       </div>
     </div>
+    <!-- Group List -->
+
 <%else%>
   <%= render partial: 'nav' %>
   <h2 class="container text-center" style="padding-top: 75px; padding-bottom: 275px">
@@ -141,12 +142,4 @@
 
 <style type="text/css">#footer{width: 100%;
   bottom: 0;}</style>
-
-<script>
-    new Vue({
-        el: '#index',
-        data: {
-            info: null,
-        }
-    });
-</script>
+</div>

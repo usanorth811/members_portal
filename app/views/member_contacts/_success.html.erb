@@ -1,0 +1,15 @@
+<%= turbo_frame_tag 'success' do %>
+  <%= turbo_frame_tag 'contact' do %>
+    <div class="badge badge-success " style='display: block; font-size: 12px'>
+      Updated Successfully
+    </div>
+    <br/>
+    <strong>Contact Type: </strong><br/> <%= @member_contact.contact_type %> <br/>
+    <strong>Contact: </strong><br/> <%= @member_contact.contact_name %> <br/>
+    <strong>Phone: </strong><br/> <%= @member_contact.phone %> <br/>
+    <strong>Email: </strong><br/> <%= @member_contact.email %> <br/>
+
+    <%= link_to 'Edit', new_member_contact_path(member_id: @member_contact.member_id, stype: 'UPDATE', contact_id: @member_contact.contact_id, member_code: @member_contact.member_code, group_id: @member_contact.group_id) %>
+
+  <% end %>
+<% end %>
