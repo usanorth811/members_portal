@@ -1,0 +1,23 @@
+<% if @shapes.first.present? %>
+  <% @shapes.each do |shape| %>
+    <% if shape == @shapes.last %>
+      <div>
+        <strong>Shape Version: </strong>
+        <br/><%= shape['version'] %>
+      </div>
+      <div>
+        <strong>Created By: </strong>
+        <br/><%= shape['created_by'] %>
+      </div>
+      <div>
+        <strong>Created On: </strong>
+        <br/><%= Date.parse(shape['created']).strftime("%m/%d/%Y") %>
+      </div>
+    <% end %>
+  <% end %>
+  <% else %>
+
+  <div>
+    <strong>No Shape Files Available</strong>
+  </div>
+<% end %>

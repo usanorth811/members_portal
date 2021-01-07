@@ -9,15 +9,21 @@
     <div class="card-header">
       <span style="font-size: 1.3rem; font-weight: 500"><%= member_detail['attributes']['code'] %> - <%= member_detail['attributes']['description'] %></span>
       <div class="text-right">
+        <% if member_detail['attributes']['active'] == true %>
         <div class="badge badge-success col-lg-2" style='font-size: 14px'>
           Active
         </div>
+        <% else %>
+          <div class="badge badge-danger col-lg-2" style='font-size: 14px'>
+            Not Active
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="card-body" >
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4">&nbsp;</div>
+          <div class="col-md-2">&nbsp;</div>
           <div class="col-md-4 text-left">
             <%= turbo_frame_tag 'member_detail' do %>
               <div>
@@ -36,6 +42,13 @@
                 <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
               </div>
             <% end %>
+          </div>
+          <div class="col-md-4 text-left">
+            <div
+              data-controller="content-loader"
+              data-content-loader-url-value="<%= member_shape_log_path(member_id: member_detail['attributes']['member_id']) %>">
+              <i class="fas fa-spinner fa-spin"></i> Loading Shape Log...
+            </div>
           </div>
         </div>
         <br/>
