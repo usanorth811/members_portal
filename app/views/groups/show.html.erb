@@ -86,29 +86,34 @@
               });
           </script>
         </div>
+        <br/>
         <!-- SAR Upload -->
 
         <!-- Recent Activity Log -->
+        <%= turbo_stream_from 'member_contacts' %>
         <span style="font-size: 1rem; font-weight: 500" >Recent Activity</span>
         <ul class="list-group" >
-          <%if @activities.present?%>
-            <% @activities.each do |activity| %>
-              <li class="list-group-item" >
-                <%= "#{activity.owner.profile.first_name} #{activity.owner.profile.last_name}" if activity.owner %>
-                <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
-                <%= @contact_types.fetch(activity.contact_type) %> contact for
-                <%= activity.code %>
-                on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
-              </li>
-            <% end %>
-          <%end%>
+          <%= turbo_frame_tag 'member_contacts' do %>
+            <%= render partial: 'member_contacts/member_contact', locals: { billing_id: @group.billing_id} %>
+            <%if @activities.present?%>
+              <% @activities.each do |activity| %>
+                <li class="list-group-item" >
+                  <%= "#{activity.owner.profile.first_name} #{activity.owner.profile.last_name}" if activity.owner %>
+                  <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
+                  <%= @contact_types.fetch(activity.contact_type) %> contact for
+                  <%= activity.code %>
+                  on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+                </li>
+              <% end %>
+            <%end%>
+          <% end %>
         </ul>
         <!-- Recent Activity Log -->
 
-        </div>
       </div>
     </div>
   </div>
+</div>
 
 
 <div id="questionmodal" class="modal" tabindex="-1" role="dialog">

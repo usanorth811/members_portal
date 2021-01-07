@@ -1,0 +1,28 @@
+<%= turbo_frame_tag 'member_contacts' do %>
+  <% @activity = PublicActivity::Activity.where(:billing => billing_id).order('created_at DESC').first %>
+  <% if @activity.present? %>
+  <% @contact_types = { "RCVR" => 'MARKING CONTACT',
+                        "ALTR" => 'ALTERNATE',
+                        'BILL' => 'BILLING',
+                        'BORD' => 'Board Rep',
+                        'DAMG' => 'EMERGENCY/DAMAGES',
+                        'ENGR' => 'ENGINEERING',
+                        'DATA' => 'DATABASE',
+                        'EMER' => 'EMERGENCY/DAMAGES',
+                        'MAIN' => 'MAIN SWITCHBOARD',
+                        'SURV' => 'SURVEYOR',
+                        'CONT' => 'MARKING CONTACT',
+                        'NITE' => 'NIGHT TIME',
+                        'AHRS' => 'AFTER HOURS',
+                        'VACU' => 'VACUUM',
+                        'REPR' => 'MEMBER REP'} %>
+
+      <li class="list-group-item" >
+        <%= "#{@activity.owner.profile.first_name} #{@activity.owner.profile.last_name}" if @activity.owner %>
+        <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(@activity.stype) %>
+        <%= @contact_types.fetch(@activity.contact_type) %> contact for
+        <%= @activity.code %>
+        on <%=@activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+      </li>
+  <% end %>
+<% end %>

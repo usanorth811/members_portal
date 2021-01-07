@@ -63,7 +63,7 @@ class MemberContactsController < ApplicationController
       elsif @member_contact.stype == 'DELETE'
         api_delete
       end
-      send_notice
+      # send_notice
     else
       # send error if not valid
       pp @member_contact.errors
