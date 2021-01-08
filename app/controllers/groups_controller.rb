@@ -12,6 +12,15 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @facility_types = {
+        'RED (electric power lines, cables, conduit, and lighting cables)' => 'RED',
+        'Yellow (gas, oil, steam, petroleum, or gaseous materials)' => 'YELL',
+        'Orange (communication, alarm or signal lines, cables or conduit)' => 'ORAN',
+        'Blue (potable water)' => 'BLUE',
+        'Purple (reclaimed water, irrigation, and slurry lines)' => 'PURP',
+        'Green (sewers and drain lines)' => 'GREE',
+        'Unknown' => 'UNKN'
+    }
     @codestatus = Codestatus.new
     @destination = Destination.new
     @contact_types = { "RCVR" => 'MARKING CONTACT',

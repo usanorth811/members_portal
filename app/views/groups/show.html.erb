@@ -69,37 +69,48 @@
     </div>
   </div>
 </div>
-
-
-<div id="questionmodal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span style="font-size: 1.3rem; font-weight: 500" class="modal-title">Contact Types</span>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<br/>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Contact Type Definitions
+        </div>
+        <div class="card-body text-left">
+          <ul class="list-group">
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> - The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> - The person to contact for any billing related issues and will receive your membership billing invoice.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Marking Contact (RCVR, RECEIVING)</b> - Person or office that receives tickets during traditional business hours. Answers questions from excavators about markings (or can contact specific field locating technician to assign technician to answer questions).</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> - The person that will receive general questions regarding dig tickets your company is notified on.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> - The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> - The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> - The person to contact if an excavator will be exposing your facilities using vacuum equipment.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> - The person to contact during non-business hours.</span></li>
+            <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> - This person will receive the quarterly board meeting minutes.</span></li>
+          </ul>
+        </div>
       </div>
-      <div class="modal-body">
-        <ul>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> &nbsp; The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> &nbsp; The person to contact for any billing related issues and will receive your membership billing invoice.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Marking Contact (RCVR, RECEIVING)</b> &nbsp; Person or office that receives tickets during traditional business hours. Answers questions from excavators about markings (or can contact specific field locating technician to assign technician to answer questions).</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>General Questions Contact (CONT, CONTACT)</b> &nbsp;  The person that will receive general questions regarding dig tickets your company is notified on.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Emergency/Facility Dig-in (EMERG, EMERGENCY) Contact</b> &nbsp; The person the excavator will reach out to regarding any emergency or a damaged facility scenario.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Engineer/Service Area Contact (ENGR, ENGINEERING)</b> &nbsp; The individual within your company who is authorized to make changes to your company’s Service Area Registration (SAR).</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Vacuum Contact (VACU, VACUUM)</b> &nbsp; The person to contact if an excavator will be exposing your facilities using vacuum equipment.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>After Hours (AHRS, AFTER HOURS) Contact</b> &nbsp; The person to contact during non-business hours.</span></li>
-          <li><span style="font-size: 1rem; font-weight: 500"  style='text-align:left'><b>Board Minutes Contact (BORD, BOARD REPRESENTATIVE)</b> &nbsp; This person will receive the quarterly board meeting minutes.</span></li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          Facility Type Definitions
+        </div>
+        <div class="card-body text-left">
+          <ul class="list-group">
+            <% @facility_types.each do |key, value| %>
+              <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><%= key %></span></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 <style type="text/css">.mycontent-right {

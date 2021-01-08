@@ -9,7 +9,7 @@ class MemberDetailsController < ApplicationController
 
   def set_facility_types
     @facility_types = {
-        'RED - electric power lines, cables, conduit, and lighting cables' => 'RED',
+        'RED (electric power lines, cables, conduit, and lighting cables)' => 'RED',
         'Yellow (gas, oil, steam, petroleum, or gaseous materials)' => 'YELL',
         'Orange (communication, alarm or signal lines, cables or conduit)' => 'ORAN',
         'Blue (potable water)' => 'BLUE',
