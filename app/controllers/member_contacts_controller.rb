@@ -1,6 +1,24 @@
 class MemberContactsController < ApplicationController
   before_action :set_member_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact_types
 
+  def set_contact_types
+    @contact_types = { "RCVR" => 'MARKING CONTACT',
+                       "ALTR" => 'ALTERNATE',
+                       'BILL' => 'BILLING',
+                       'BORD' => 'Board Rep',
+                       'DAMG' => 'EMERGENCY/DAMAGES',
+                       'ENGR' => 'ENGINEERING',
+                       'DATA' => 'DATABASE',
+                       'EMER' => 'EMERGENCY/DAMAGES',
+                       'MAIN' => 'MAIN SWITCHBOARD',
+                       'SURV' => 'SURVEYOR',
+                       'CONT' => 'MARKING CONTACT',
+                       'NITE' => 'NIGHT TIME',
+                       'AHRS' => 'AFTER HOURS',
+                       'VACU' => 'VACUUM',
+                       'REPR' => 'MEMBER REP'}
+  end
   # GET /member_contacts
   # GET /member_contacts.json
   def index

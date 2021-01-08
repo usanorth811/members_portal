@@ -14,22 +14,12 @@
         <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
         <li class="breadcrumb-item active" aria-current="page"><%if @group.name != nil%><%= @group.name %><%else%><%=@group.billing_id%><%end%></li>
       </ol>
-      <p id="notice"><%= notice %></p>
+
     </div>
     <div class="col-md-6">
     </div>
   </div>
 </div>
-
-<% if flash[:member_contact_errors] %>
-  <span style="font-size: 1.3rem; font-weight: 500">Could not submit changes for the following reasons:</span>
-  <div class="alert alert-danger" role="alert">
-    <% flash[:member_contact_errors].each do |msg| %>
-      <span style="font-size: 1rem; font-weight: 500"><%= msg %></span>
-    <% end %>
-  </div>
-<% end %>
-
 
 <div class="container-fluid" >
   <div class="row" >
@@ -44,7 +34,6 @@
       <div class="container-fluid" style="padding-top: 35px !important">
         <span style="font-size: 1.3rem; font-weight: 500" class="text-center">Codes</span>
         <hr class="my-4">
-        </hr>
         <div
           data-controller="content-loader"
           data-content-loader-url-value="<%= member_detail_list_path(billing_id: @group.billing_id, group_id: @group.id) %>">
@@ -56,39 +45,6 @@
 
     <div class="col-md-3">
       <div class="mycontent-right">
-
-        <!-- SAR Upload -->
-        <div style="padding-left: 15px; padding-top:15px">
-          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#service_area_modal" >
-            Upload SAR
-          </button>
-          <div class="collapse" id="service_area_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <span style="font-size: 1.1rem; font-weight: 500" class="modal-title" id="service_area_modal">Upload SAR</span>
-
-                </div>
-                <div class="modal-body">
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <script>
-              EmbedManager.embed({
-                  key: "https://fs26.formsite.com/res/showFormEmbed?EParam=m_OmK8apOTANZkOaL7H0HogAwUXi0cBCFzpUCZwnDno&900522022",
-                  width: "100%",
-                  mobileResponsive: true,
-                  prePopulate: {"1":"<%= current_user.profile.first_name%>","2":"<%= current_user.profile.last_name%>","3":"<%= current_user.email%>"}
-              });
-          </script>
-        </div>
-        <br/>
-        <!-- SAR Upload -->
-
         <!-- Recent Activity Log -->
         <%= turbo_stream_from 'member_contacts' %>
         <span style="font-size: 1rem; font-weight: 500" >Recent Activity</span>
@@ -96,7 +52,7 @@
           <%= turbo_frame_tag 'member_contacts' do %>
             <%= render partial: 'member_contacts/member_contact', locals: { billing_id: @group.billing_id} %>
             <%if @activities.present?%>
-              <% @activities.each do |activity| %>
+              <% @activities.drop(1).each do |activity| %>
                 <li class="list-group-item" >
                   <%= "#{activity.owner.profile.first_name} #{activity.owner.profile.last_name}" if activity.owner %>
                   <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
@@ -109,7 +65,6 @@
           <% end %>
         </ul>
         <!-- Recent Activity Log -->
-
       </div>
     </div>
   </div>

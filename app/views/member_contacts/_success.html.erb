@@ -4,7 +4,7 @@
       Updated Successfully
     </div>
     <br/>
-    <strong>Contact Type: </strong><br/> <%= @member_contact.contact_type %> <br/>
+    <strong>Contact Type: </strong><br/> <%= @contact_types.fetch(@member_contact.contact_type) %> <br/>
     <strong>Contact: </strong><br/> <%= @member_contact.contact_name %> <br/>
     <strong>Phone: </strong><br/> <%= @member_contact.phone %> <br/>
     <strong>Email: </strong><br/> <%= @member_contact.email %> <br/>

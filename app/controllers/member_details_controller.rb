@@ -1,10 +1,23 @@
 class MemberDetailsController < ApplicationController
   before_action :set_member_detail, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_facility_types
   # GET /member_details
   # GET /member_details.json
   def index
     @member_details = MemberDetail.all
+  end
+
+  def set_facility_types
+    @facility_types = {
+        'RED - electric power lines, cables, conduit, and lighting cables' => 'RED',
+        'Yellow (gas, oil, steam, petroleum, or gaseous materials)' => 'YELL',
+        'Orange (communication, alarm or signal lines, cables or conduit)' => 'ORAN',
+        'Blue (potable water)' => 'BLUE',
+        'Purple (reclaimed water, irrigation, and slurry lines)' => 'PURP',
+        'Green (sewers and drain lines)' => 'GREE',
+        'Unknown' => 'UNKN'
+    }
+
   end
 
   def member_detail_list

@@ -16,7 +16,7 @@
     </div>
   <% end %>
   <div class="form-inputs">
-    <strong>Contact Type: </strong><%= f.text_field :contact_type, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
+    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
     <%= f.hidden_field :group_id, value: "#{ @group.present? ? (@group) : (@member_contact.group_id) }"%>
     <%= f.hidden_field :member_id, value: "#{ @contact.present? ? (@contact['member_id']) : (@member_contact.member_id) }" %>
     <%= f.hidden_field :member_code, value: "#{ @member_code.present? ? (@member_code) : (@member_contact.member_code) }"  %>

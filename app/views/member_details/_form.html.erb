@@ -9,19 +9,13 @@
     <%= f.hidden_field :group_code, value: @old_member_detail['group_code'] %>
     <%= f.hidden_field :company, value: @old_member_detail['name'] %>
     <strong>Description: </strong><%= f.text_field :description, value: @old_member_detail['description'], class: 'form-control' %>
-    <strong>Facility Type: </strong><%= f.select :facility, [['RED - electric power lines, cables, conduit, and lighting cables', 'RED'],
-                             ['Yellow (gas, oil, steam, petroleum, or gaseous materials)', 'YELL'],
-                             ['Orange (communication, alarm or signal lines, cables or conduit)', 'ORAN'],
-                             ['Blue (potable water)', 'BLUE'],
-                             ['Purple (reclaimed water, irrigation, and slurry lines)', 'PURP'],
-                             ['Green (sewers and drain lines)', 'GREE'],
-    ], {}, value: @old_member_detail['facility_type'], class: 'form-control' %>
+    <strong>Facility Type: </strong><%= f.select :facility, @facility_types, { selected: @old_member_detail['facility_type'] }, class: 'form-control' %>
 
     <%= f.hidden_field :active, value: @old_member_detail['active'] %>
     <%= f.hidden_field :group_id, value: @group %>
   </div>
   <br/>
-  <div class="form-actions text-center">
+  <div class="form-actions ">
     <%= f.button :submit, 'Submit', class: 'btn btn-info' %>
   </div>
 

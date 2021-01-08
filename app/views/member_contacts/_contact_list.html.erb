@@ -8,7 +8,7 @@
           </div>
           <div class="card-body text-left">
             <%= turbo_frame_tag 'contact' do %>
-              <strong>Contact Type: </strong><br/> <%= contact['attributes']['contact_type'] %> <br/>
+              <strong>Contact Type: </strong><br/> <%= @contact_types.fetch(contact['attributes']['contact_type']) %> <br/>
               <strong>Contact: </strong><br/> <%= contact['attributes']['contact'] %> <br/>
               <strong>Phone: </strong><br/> <%= contact['attributes']['phone'] %> <br/>
               <strong>Email: </strong><br/> <%= contact['attributes']['email'] %> <br/>
