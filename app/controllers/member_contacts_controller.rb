@@ -115,6 +115,7 @@ class MemberContactsController < ApplicationController
     puts @contact_types.fetch(@member_contact.contact_type)
     @member_contact.company = @contact_types.fetch(@member_contact.contact_type)
   end
+
   def api_create
     api_url = 'http://UsanPull1API.usanorth811.org'
     @result = HTTParty.post( api_url + "/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",

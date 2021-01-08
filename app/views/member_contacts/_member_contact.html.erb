@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'member_contacts' do %>
+<%= turbo_frame_tag "member_contacts#{billing_id}" do %>
   <% @activity = PublicActivity::Activity.where(:billing => billing_id).order('created_at DESC').first %>
   <% if @activity.present? %>
   <% @contact_types = { "RCVR" => 'MARKING CONTACT',

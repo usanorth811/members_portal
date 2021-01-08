@@ -13,6 +13,6 @@ class MemberContact < ApplicationRecord
     tracked code: Proc.new {|controller, model| controller.code }
     tracked contact_type: Proc.new {|controller, model| controller.contact_type }
 
-    after_create_commit { broadcast_prepend_to 'member_contacts', locals: { billing_id: billing} }
+    after_create_commit { broadcast_prepend_to "member_contacts#{billing}", locals: { billing_id: billing}, target: "member_contacts#{billing}" }
 
 end
