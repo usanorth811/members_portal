@@ -1,11 +1,11 @@
 <%= simple_form_for(@member_detail) do |f| %>
   <% if @member_detail.errors.any? %>
     <div id="error_explanation" style="width: 100%">
-      <h6 style="color: #e39777"><%= pluralize(@member_detail.errors.count, "error") %> prohibited this contact from being saved:</h6>
+      <h6 class="text-danger"><%= pluralize(@member_detail.errors.count, "error") %> prohibited this contact from being saved:</h6>
 
       <ul>
         <% @member_detail.errors.each do |error| %>
-          <li style="color: #e39777"><%= error.full_message %></li>
+          <li class="text-danger"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
