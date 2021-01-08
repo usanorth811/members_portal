@@ -81,8 +81,12 @@ class MemberDetailsController < ApplicationController
 
       #redirect and display error
       puts @member_detail.errors.full_messages
-      flash[:member_detail_errors] = @member_detail.errors.full_messages
-      redirect_to @member_detail.group, flash[:member_detail_errors]
+      respond_to do |format|
+        flash[:member_detail_errors] = @member_detail.errors.full_messages
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_detail, partial: "member_details/form",
+                                                                        locals: { member_id: @member_detail.member_id, group_id: @member_detail.group_id}) }
+        format.html { redirect_to @member_detail.group, flash[:member_detail_errors] }
+      end
     end
   end
   def api_update
@@ -96,16 +100,21 @@ class MemberDetailsController < ApplicationController
     case @result.code
     when 200...290
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_detail, partial: "member_details/success", locals: { member_detail: @member_detail }) }
         format.html { redirect_to @member_detail.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
         ready_message
       end
     when 404
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_detail, partial: "member_details/success", locals: { member_detail: @member_detail }) }
         format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
+        pp @result.body
       end
     when 500...600
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_detail, partial: "member_details/success", locals: { member_detail: @member_detail }) }
         format.html { redirect_to @member_detail.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{@result.code}" }
+        pp @result.body
       end
     end
   end

@@ -1,0 +1,22 @@
+<%= turbo_frame_tag 'success' do %>
+  <%= turbo_frame_tag 'member_detail' do %>
+    <div class="badge badge-success " style='width: 50%; display: block; font-size: 12px'>
+      Updated Successfully
+    </div>
+    <div>
+      <strong>Name: </strong>
+      <br/><%= member_detail.name %>
+    </div>
+    <div>
+      <strong>Description: </strong>
+      <br/><%= member_detail.description %>
+    </div>
+    <div>
+      <strong>Facility Type: </strong>
+      <br/><%= @facility_types.invert.fetch(member_detail.facility) %>
+    </div>
+    <div class="">
+      <%= link_to 'Edit', new_member_detail_path(member_id: member_detail.member_id, group_id: member_detail.group_id) %>
+    </div>
+  <% end %>
+<% end %>
