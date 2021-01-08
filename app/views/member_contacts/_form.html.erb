@@ -6,11 +6,11 @@
   <% end %>
   <% if @member_contact.errors.any? %>
     <div id="error_explanation" style="width: 100%">
-      <h6><%= pluralize(@member_contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
+      <h6 style="color: #e39777"><%= pluralize(@member_contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
 
       <ul>
         <% @member_contact.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="text-danger"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
