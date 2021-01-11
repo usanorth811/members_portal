@@ -6,7 +6,7 @@
           <div class="card-header">
             <%= contact['attributes']['name'] %>
           </div>
-          <div class="card-body text-left">
+          <div class="card-body text-start">
             <%= turbo_frame_tag 'contact' do %>
               <strong>Contact Type: </strong><br/> <%= @contact_types.fetch(contact['attributes']['contact_type']) %> <br/>
               <strong>Contact: </strong><br/> <%= contact['attributes']['contact'] %> <br/>

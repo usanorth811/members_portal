@@ -18,12 +18,7 @@
   <title>Member Portal</title>
 
   <!-- Required Stylesheets -->
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"
-    />
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
   <!-- Required scripts -->
 
@@ -155,33 +150,38 @@ h4{ font-weight: 500 !important;}
 .btn-outline-info:hover {border-color: #388694;background-color: #388694; color: #2c3444;}
 .btn-outline-danger{ border-color: #e15b36}
 .btn-outline-danger:hover {border-color: #e15b36;background-color: #e15b36; color: #2c3444;}
-.btn-info{ border-color: #388694; background-color: #388694 !important; font-weight: 600}
-.btn-info:hover {background-color: #E27D60 !important; border-color: #E27D60}
-
+.btn-info{ color: white; border-color: #388694; background-color: #388694 !important; font-weight: 600}
+.btn-info:hover {color: white; background-color: #E27D60 !important; border-color: #E27D60}
+#usan-logo {
+    width: 80%;
+    height: auto;
+    min-width: 50%;
+}
 </style>
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-light ">
   <div class="container-fluid">
-    <div class="row">
-      <%
-        if browser.ie? %>
-        <h1 class="disclaimer">You are using an incompatible browser. Upgrade to the latest version of Chrome, Firefox, or Safari.</h1>
-        <%else %>
+    <%= link_to root_path do %>
+      <%= image_tag("usanorthlogo7.svg", :id => "usan-logo", :style =>"align-items: left;", alt: 'USA North 811 Logo') %>
+    <% end %>
+    <div class="d-flex">
+      <% if user_signed_in? %>
 
+        <div class="col justify-content-end">
 
-      <div class="col-md-3">
+          <a class="btn btn-info btn-sm" href="/users/sign_out" data-method = "delete" style=" font-size: 1rem; ">Sign Out</a>
 
-        <%= link_to image_tag("usanorthlogo7.svg", :width => "200", :height => 'auto', :style =>"align-items: center;", alt: 'icon'), root_path %>
+        </div>
+      <%else%>
 
-      </div>
-      <div class="col-md-9 " style="text-align: center; padding-left:50px">
-
-
+      <%end%>
+    </div>
+  </div>
+</nav>
         <%= yield %>
 
       </div>
       <div class="filler" style="padding-bottom: 50px">
       </div>
-      <% end %>
       <nav id="footer" class="footer sticky-bottom ">
         <div class="container">
           <div class="row">

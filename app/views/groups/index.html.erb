@@ -1,6 +1,6 @@
 <% if current_user.profile %>
 
-  <%= render partial: 'nav' %>
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -132,7 +132,6 @@
     <!-- Group List -->
 
 <%else%>
-  <%= render partial: 'nav' %>
   <h2 class="container text-center" style="padding-top: 75px; padding-bottom: 275px">
     <div class='btn btn-info'>
       <%= link_to "Create Your Profile", new_profile_path, :class => 'btn btn-info', :style => 'color:white !important; font-size:40px' %>

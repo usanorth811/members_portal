@@ -1,9 +1,4 @@
 
-<div class='col-lg-12 offset-lg-2 d-none d-lg-block' style="margin-top: 20px !important">
-  <span class="" style='font-size: 1.4rem; font-weight: 600; '>
-    <%= @group.name %>
-  </span>
-</div>
 
 <%= render partial: 'nav' %>
 
@@ -78,7 +73,7 @@
         <div class="card-header">
           Contact Type Definitions
         </div>
-        <div class="card-body text-left">
+        <div class="card-body text-start">
           <ul class="list-group">
             <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Member Representative Contact (REPR, MEMBER REP)</b> - The sole Representative of your company, that must approve any changes to your membership in order for it to take effect.</span></li>
             <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><b>Billing Contact (BILL, BILLING)</b> - The person to contact for any billing related issues and will receive your membership billing invoice.</span></li>
@@ -98,7 +93,7 @@
         <div class="card-header">
           Facility Type Definitions
         </div>
-        <div class="card-body text-left">
+        <div class="card-body text-start">
           <ul class="list-group">
             <% @facility_types.each do |key, value| %>
               <li class="list-group-item"><span style="font-size: .9rem; font-weight: 500"  style='text-align:left'><%= key %></span></li>
