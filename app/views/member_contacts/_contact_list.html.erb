@@ -25,10 +25,10 @@
   <br/>
   <div class="row">
     <div class="col-12">
-      <div style="font-size: 18px; font-weight: 500" class="text-danger">Missing the following required contacts</div>
+      <div style="font-size: 20px; font-weight: 500" class="text-secondary">Missing the following required contacts</div>
       <span class="text-danger">|</span>
       <% @missing_contact_types.each do |type| %>
-        <%= type[1] %> <span class="text-danger">|</span>
+        <%= link_to type[1], new_member_contact_path %> <span class="text-danger">|</span>
       <% end %>
     </div>
   </div>
