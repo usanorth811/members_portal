@@ -34,7 +34,7 @@ class MemberContactsController < ApplicationController
     @contact_list = response['data']
     @member_code = params[:member_code]
     @group = params[:group_id]
-
+    @missing_contact_types = @contact_types
     render partial: 'member_contacts/contact_list'
   end
 

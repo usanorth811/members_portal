@@ -19,7 +19,7 @@
     <%= f.hidden_field :company, value: "#{ @old_member_detail.present? ? (@old_member_detail['name']) : (@member_detail.name) }"  %>
     <strong>Description: </strong><%= f.text_field :description, value: "#{ @old_member_detail.present? ? (@old_member_detail['description']) : (@member_detail.description) }" , class: 'form-control' %>
     <strong>Facility Type: </strong><%= f.select :facility, @facility_types, { selected: @old_member_detail.present? ? ( @old_member_detail['facility_type']) : (@member_detail.facility)  }, class: 'form-control' %>
-
+    <small class="text-secondary">*if you operate multiple facility types then we encourage you to add additional member codes to your membership</small>
     <%= f.hidden_field :active, value: "#{ @old_member_detail.present? ? (@old_member_detail['active']) : (@member_detail.active) }" %>
     <%= f.hidden_field :group_id, value: @group.present? ? (@group) : (@member_detail.group_id)  %>
   </div>

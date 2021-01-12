@@ -1,6 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <% @contact_list.each do |contact| %>
+      <% @missing_contact_types = @missing_contact_types.except(contact['attributes']['contact_type']) %>
+
       <div class="col-xl-4 col-lg-6">
         <div class="card" style="margin-left: -10px; margin-right: -10px" >
           <div class="card-header">
@@ -19,5 +21,15 @@
         <br/>
       </div>
     <% end %>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-12">
+      <div style="font-size: 18px; font-weight: 500" class="text-danger">Missing the following required contacts</div>
+      <span class="text-danger">|</span>
+      <% @missing_contact_types.each do |type| %>
+        <%= type[1] %> <span class="text-danger">|</span>
+      <% end %>
+    </div>
   </div>
 </div>
