@@ -125,6 +125,13 @@ class MemberContactsController < ApplicationController
   end
 
   def api_create
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
+    puts "BEGIN CREATE"
     api_url = 'http://UsanPull1API.usanorth811.org'
     @result = HTTParty.post( api_url + "/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                             :body => {:member_contact => {
