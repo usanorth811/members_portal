@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :destinations
   resources :codestatuses
   resources :member_details
+  get :member_shape_list, to: 'member_details#member_shape_list'
   resources :member_contacts
   get 'activities/index'
   resources :profiles

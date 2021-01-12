@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+        <thead>
+        <tr>
+          <th scope="col">active?</th>
+          <th scope="col">version</th>
+          <th scope="col">created</th>
+          <th scope="col">created_by</th>
+          <th scope="col">completed</th>
+          <th scope="col">completed_by</th>
+          <th scope="col">released</th>
+          <th scope="col">released_by</th>
+          <th scope="col">request a copy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @shapes.reverse.each do |shape| %>
+        <% if shape == @shapes.reverse.first %>
+          <tr class="table-success">
+            <td>Active <br/>
+              <small><%= link_to raw('Click here to confirm<br/> this is up to date') %></small></td>
+
+            <% else %>
+        <tr>
+        <td>Not Active</td>
+          <% end %>
+            <td><%= shape['version'] %></td>
+            <td><%= shape['created'].present? ? Date.parse(shape['created']).strftime("%m/%d/%Y") : 'N/A' %></td>
+            <td><%= shape['created_by'] %></td>
+            <td><%= shape['completed'].present? ? Date.parse(shape['completed']).strftime("%m/%d/%Y") : 'N/A' %></td>
+            <td><%= shape['completed_by'] %></td>
+            <td><%= shape['released'].present? ? Date.parse(shape['released']).strftime("%m/%d/%Y") : 'N/A' %></td>
+            <td><%= shape['released_by'] %></td>
+            <td><%= link_to raw('Request Copy<br/> for Review') %></td>
+          </tr>
+        <% end %>
+        </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>

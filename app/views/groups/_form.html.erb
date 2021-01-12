@@ -1,10 +1,12 @@
-<%= form_with(model: group, local: true) do |form| %>
 
+<%= form_with(model: group, local: true) do |form| %>
   <div class="card card-body">
     <form>
       <div class="form-group">
+        <%= form.label :billing_id %>
         <%= form.text_field :billing_id, class: 'form-control', :placeholder => 'Billing ID' %>
       </div>
+      <br/>
       <div class="form-group">
         <div class="actions">
           <%= form.submit 'Submit', class: 'btn btn-success btn-block', type: "submit" %>

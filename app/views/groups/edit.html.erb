@@ -1,20 +1,21 @@
-<%= render partial: 'nav' %>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
       <ol class="breadcrumb" style="background-color: white">
         <li class="breadcrumb-item"><%=link_to "HOME", root_path %></li>
 
-      </ol>        
+      </ol>
       <p id="notice"><%= notice %></p>
   </div>
-</div>
-<div class="row" style="padding-top: 45px; padding-bottom: 120px">
-	<div class="col-md-6 offset-md-3">
-<h1>Editing Group</h1>
-	</div>
-</div>
-<%= render 'form', group: @group %>
+    <div class="row" style="padding-top: 45px; padding-bottom: 120px">
+      <div class="col-md-6 offset-md-3">
+        <h1>Editing Group</h1>
+        <%= render 'form', group: @group %>
+      </div>
+    </div>
+  </div>
 
 <%= link_to 'Show', @group %> |
 <%= link_to 'Back', groups_path %>
+</div>

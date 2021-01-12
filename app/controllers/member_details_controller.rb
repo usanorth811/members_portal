@@ -89,6 +89,11 @@ class MemberDetailsController < ApplicationController
       end
     end
   end
+
+  def member_shape_list
+    @shapes = JSON.parse(params[:shapes])
+  end
+
   def api_update
     puts "BEGIN PUT"
     @result = HTTParty.put("http://UsanPull1API.usanorth811.org/members/#{@member_detail.member_id}",
