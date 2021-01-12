@@ -46,38 +46,36 @@
     <div class="row" id="index" >
       <% @groups.each do |group| %>
         <div class="col-md-4"  style='padding-top: 15px'>
-            <div class="card-text" id="mimicCard" style="width: auto; ">
-              <div class="card-header">
-                <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
-                  <%if group.name == nil %>
-                    <%=link_to group.billing_id, group, :style => ' color:white !important' %>
-                  <%else%>
-                    <%= link_to group.name, group, :style => ' color:white !important'%>
-                  <%end%>
-                </h6>
-              </div>
-              <div class="card-body">
-                    <%=link_to "View Contacts", group, class: 'btn btn-info', style: 'color: white!important; margin-top: 5px; margin-bottom: 5px' %>
-                    &nbsp;
-                    <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-success', style: 'margin-top: 5px; margin-bottom: 5px' %>
-                    &nbsp;
-                    <%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' }, class: 'btn btn-danger', style: 'margin-top: 5px; margin-bottom: 5px' %>
-              </div>
+          <div class="card-text" id="mimicCard" style="width: auto; ">
+            <div class="card-header">
+              <h6 style="padding-top: 10px !important; font-weight: 600; color:white !important">
+                <%if group.name == nil %>
+                  <%=link_to group.billing_id, group, :style => ' color:white !important' %>
+                <%else%>
+                  <%= link_to group.name, group, :style => ' color:white !important'%>
+                <%end%>
+              </h6>
             </div>
+            <div class="card-body">
+              <%=link_to "View Contacts", group, class: 'btn btn-info', style: 'color: white!important; margin-top: 5px; margin-bottom: 5px' %>
+              &nbsp;
+              <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-success', style: 'margin-top: 5px; margin-bottom: 5px' %>
+              &nbsp;
+              <%= button_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure you want to remove this company?' }, class: 'btn btn-danger', style: 'margin-top: 5px; margin-bottom: 5px' %>
+            </div>
+          </div>
         </div>
       <% end %>
       <div class="col-md-4"style='padding-top: 15px'>
-        <transition appear name="">
-          <div class="card" style="width: auto; ">
-            <div class="card-header" >
-              <h6 style="padding-top: 10px !important;font-weight: 600; ">
-                <div style="color:white ">Add Company</div>
-              </h6>
-            </div>
-            </a>
-            <%= render 'form', group: @group %>
+        <div class="card" style="width: auto; ">
+          <div class="card-header" >
+            <h6 style="padding-top: 10px !important;font-weight: 600; ">
+              <div style="color:white ">Add Company</div>
+            </h6>
           </div>
-        </transition>
+          </a>
+          <%= render 'form', group: @group %>
+        </div>
       </div>
     </div>
     <!-- Group List -->
@@ -91,5 +89,5 @@
 <% end %>
 
 <style type="text/css">#footer{width: 100%;
-  bottom: 0;}</style>
+    bottom: 0;}</style>
 </div>

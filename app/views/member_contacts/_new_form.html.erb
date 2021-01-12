@@ -1,4 +1,6 @@
-<%= form_with(model: @member_contact, id: @contact.present? ? (@contact['id']) : (@member_contact.contact_id)) do |f| %>
+
+
+<%= form_with(model: @member_contact) do |f| %>
   <% if params[:result].present? %>
     <%= params[:result] %>
   <% end %>
@@ -14,17 +16,17 @@
     </div>
   <% end %>
   <div class="form-inputs">
-    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
+    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { }, class: 'form-control' %>
     <%= f.hidden_field :group_id, value: "#{ @group.present? ? (@group) : (@member_contact.group_id) }"%>
     <%= f.hidden_field :member_id, value: "#{ @contact.present? ? (@contact['member_id']) : (@member_contact.member_id) }" %>
     <%= f.hidden_field :member_code, value: "#{ @member_code.present? ? (@member_code) : (@member_contact.member_code) }"  %>
     <%= f.hidden_field :contact_id, value: "#{ @contact.present? ? (@contact['id']) : (@member_contact.contact_id) }" %>
     <%= f.hidden_field :stype, value: "#{ @stype.present? ? (@stype) : (@member_contact.stype) }" %>
-    <strong>Contact: </strong><%= f.text_field :contact_name, value: "#{ @contact.present? ? (@contact['contact']) : (@member_contact.contact_name) }" , class: 'form-control' %>
-    <strong>Phone: </strong><%= f.text_field :phone, value: "#{ @contact.present? ? (@contact['phone']) : (@member_contact.phone) }", class: 'form-control' %>
-    <strong>Email: </strong><%= f.text_field :email, value: "#{ @contact.present? ? (@contact['email']) : (@member_contact.email) }", class: 'form-control' %>
+    <strong>Contact: </strong><%= f.text_field :contact_name, class: 'form-control' %>
+    <strong>Phone: </strong><%= f.text_field :phone, class: 'form-control' %>
+    <strong>Email: </strong><%= f.text_field :email, class: 'form-control' %>
   </div>
-<br/>
+  <br/>
   <div class="form-actions">
     <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: 'btn btn-info' %>
   </div>
