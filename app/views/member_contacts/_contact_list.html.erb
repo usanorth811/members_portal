@@ -21,6 +21,19 @@
         <br/>
       </div>
     <% end %>
+    <div class="col-xl-4 col-lg-6">
+      <div class="card" style="margin-left: -10px; margin-right: -10px" >
+        <div class="card-header">
+          New Contact
+        </div>
+        <div class="card-body text-start">
+          <%= turbo_frame_tag 'contact' do %>
+            <%= link_to 'Create New Contact', new_member_contact_path(member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %>
+          <% end %>
+        </div>
+      </div>
+      <br/>
+    </div>
   </div>
   <br/>
   <div class="row">
@@ -28,7 +41,9 @@
       <div style="font-size: 20px; font-weight: 500" class="text-secondary">Missing the following required contacts</div>
       <span class="text-danger">|</span>
       <% @missing_contact_types.each do |type| %>
-        <%= link_to type[1], new_member_contact_path %> <span class="text-danger">|</span>
+        <%= turbo_frame_tag 'contact' do %>
+          <%= link_to type[1], new_member_contact_path(member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %> <span class="text-danger">|</span>
+        <% end %>
       <% end %>
     </div>
   </div>

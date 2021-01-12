@@ -32,6 +32,7 @@ class MemberContactsController < ApplicationController
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
     @contact_list = response['data']
+    @member_id = params[:member_id]
     @member_code = params[:member_code]
     @group = params[:group_id]
     @missing_contact_types = @contact_types
@@ -57,6 +58,13 @@ class MemberContactsController < ApplicationController
     @member = params[:member_id]
     @stype = params[:stype]
     @member_contact = MemberContact.new
+    puts "MEMBER ID"
+    puts "MEMBER ID"
+    puts "MEMBER ID"
+    puts "MEMBER ID"
+    puts "MEMBER ID"
+    puts @member_code
+    puts params[:member_code]
   end
 
   # GET /member_contacts/1/edit
@@ -87,7 +95,7 @@ class MemberContactsController < ApplicationController
       pp @member_contact.errors
       respond_to do |format|
         flash[:member_contact_errors] = @member_contact.errors.full_messages
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/form",
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id.present? ? @member_contact.contact_id : @member_contact.member_id, partial: "member_contacts/form",
                                                                         params: { member_contact: @member_contact, member_id: @member_contact.member_id, group_id: @member_contact.group_id, stype: @member_contact.stype, contact: @member_contact}) }
         format.html { redirect_to @member_contact.group }
       end
@@ -134,10 +142,12 @@ class MemberContactsController < ApplicationController
                                 :email => @member_contact.email
                             }}.to_json,
                             :headers => { 'Content-Type' => 'application/json' } )
-
+    puts @result.code
+    pp @result.body
     case @result.code
     when 200...290
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.member_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     when 404
@@ -196,7 +206,10 @@ class MemberContactsController < ApplicationController
       end
     end
   end
-
+  def destroy
+    puts "BEGIN DELETE"
+    puts params
+  end
   def api_delete
     api_url = ENV['API_URL']
     @result = HTTParty.delete( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
