@@ -1,7 +1,7 @@
 <h1>New Member Contact</h1>
 
 <%= turbo_frame_tag 'contact' do %>
-  <%= render 'form', member_contact: @member_contact, member_id: @member, stype: @stype, contact: @contact, member_code: @member_code, group_id: @group %>
+  <%= render 'form', missing_type: @missing_type, member_contact: @member_contact, member_id: @member, stype: @stype, contact: @contact, member_code: @member_code, group_id: @group %>
 <% end %>
 
 <%= link_to 'Back', member_contacts_path %>

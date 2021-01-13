@@ -22,162 +22,164 @@
 
   <!-- Required scripts -->
 
-    <%= stimulus_include_tags %>
+  <%= stimulus_include_tags %>
 </head>
 <body>
 <style type="text/css">.bg-dark{color: white !important; background-color:#E27d60 }</style>
 <style type="text/css">a{font-weight: 600 !important; text-decoration: none !important;background-color:transparent !important; color: #e15b36 ;} </style>
 <style type="text/css">a:visited{ color: #e15b36 !important} </style>
 <style type="text/css">
-  @media2 (prefers-color-scheme: dark) {
-    .navbar {
-      background-color: #2f4f4f !important;
-      color: #e4e4e4 !important;
+    @media2 (prefers-color-scheme: dark) {
+        .navbar {
+            background-color: #2f4f4f !important;
+            color: #e4e4e4 !important;
+        }
+        .footer{
+            background-color: #2f4f4f !important;
+            color: #e4e4e4 !important;
+        }
+        #dark-container {
+            background-color: #444 !important;
+            color: #e4e4e4 !important;
+        }
+        .list-group-item{
+            background-color: #707070 !important;
+            color: #e4e4e4 !important;
+        }
+        body {
+            background-color: #444 !important;
+            color: #e4e4e4 !important;
+        }
+        a {
+            color: #e39777 !important;
+        }
+        img {
+            filter: grayscale(30%) !important;
+        }
+        a {
+            color: #e39777;
+        }
+        .modal-content {
+            background-color: #444 !important;
+            color: #e4e4e4 !important;
+        }
+        input {
+            background-color: #c9c9c9c9 !important;
+            border-color: #707070 !important;
+            color: #707070 !important;
+        }
+        select {
+            background-color: #c9c9c9c9 !important;
+            border-color: #707070 !important;
+            color: #707070 !important;
+        }
+        img {
+            filter: grayscale(30%);
+        }
+        #inverted-icon{
+            filter: grayscale(30%);
+            filter: invert(90%);
+        }
+        .card {
+            border-color: #444;
+        }
+        .card-header{
+            background-color: #2f4f4f !important;
+            color: #e4e4e4 !important;
+        }
+        .card-body{
+            background-color: #c9c9c9c9 !important;
+            color: #444 !important;
+        }
+        .card-text{
+            background-color: #707070 !important;
+        }
     }
-    .footer{
-      background-color: #2f4f4f !important;
-      color: #e4e4e4 !important;
-    }
-    #dark-container {
-      background-color: #444 !important;
-      color: #e4e4e4 !important;
-    }
-    .list-group-item{
-      background-color: #707070 !important;
-      color: #e4e4e4 !important;
-    }
-    body {
-      background-color: #444 !important;
-      color: #e4e4e4 !important;
-    }
-    a {
-      color: #e39777 !important;
-    }
-    img {
-      filter: grayscale(30%) !important;
-    }
-    a {
-      color: #e39777;
-    }
-    .modal-content {
-      background-color: #444 !important;
-      color: #e4e4e4 !important;
-    }
-    input {
-      background-color: #c9c9c9c9 !important;
-      border-color: #707070 !important;
-      color: #707070 !important;
-    }
-    select {
-      background-color: #c9c9c9c9 !important;
-      border-color: #707070 !important;
-      color: #707070 !important;
-    }
-    img {
-      filter: grayscale(30%);
-    }
-    #inverted-icon{
-      filter: grayscale(30%);
-      filter: invert(90%);
-    }
+    body {color: #2c3444; font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale; text-align: center;}
+    .navbar{ background-color: #2c3444; color: white;}
+    .footer{ background-color: #2c3444; color: white;}
+    .card-header{ background-color: #2c3444; color: white;}
+    .card-body{ background-color: white; }
+    .card-text{ background-color: #EBECEE}
     .card {
-      border-color: #444;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.11),
+        0 2px 2px rgba(0,0,0,0.11),
+        0 4px 4px rgba(0,0,0,0.11),
+        0 6px 8px rgba(0,0,0,0.11),
+        0 8px 16px rgba(0,0,0,0.11);
     }
-    .card-header{
-      background-color: #2f4f4f !important;
-      color: #e4e4e4 !important;
+    #mimicCard {
+        box-shadow: 0 1px 1px rgba(0,0,0,0.11),
+        0 2px 2px rgba(0,0,0,0.11),
+        0 4px 4px rgba(0,0,0,0.11),
+        0 6px 8px rgba(0,0,0,0.11),
+        0 8px 16px rgba(0,0,0,0.11);
     }
-    .card-body{
-      background-color: #c9c9c9c9 !important;
-      color: #444 !important;
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
     }
-    .card-text{
-      background-color: #707070 !important;
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: .5;
     }
-  }
-  body {color: #2c3444; font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; text-align: center;}
-.navbar{ background-color: #2c3444; color: white;}
-.footer{ background-color: #2c3444; color: white;}
-.card-header{ background-color: #2c3444; color: white;}
-.card-body{ background-color: white; }
-.card-text{ background-color: #EBECEE}
-.card {
-  box-shadow: 0 1px 1px rgba(0,0,0,0.11),
-  0 2px 2px rgba(0,0,0,0.11),
-  0 4px 4px rgba(0,0,0,0.11),
-  0 6px 8px rgba(0,0,0,0.11),
-  0 8px 16px rgba(0,0,0,0.11);
-}
-#mimicCard {
-  box-shadow: 0 1px 1px rgba(0,0,0,0.11),
-  0 2px 2px rgba(0,0,0,0.11),
-  0 4px 4px rgba(0,0,0,0.11),
-  0 6px 8px rgba(0,0,0,0.11),
-  0 8px 16px rgba(0,0,0,0.11);
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: .5;
-}
-.bounce-enter-active {
-  animation: bounce-in .7s;
-}
+    .bounce-enter-active {
+        animation: bounce-in .7s;
+    }
 
-@keyframes bounce-in {
-  0% {
-    transform: scale(.8);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-h4{ font-weight: 500 !important;}
-.breadcrumb { background-color: white;}
-.list-group-item{  font-weight: 600}
-.badge-secondary{ background-color: #2c3444;}
-.badge-success{ background-color: #BCCB31; color: #2c3444}
-.badge-danger{ background-color: #E36948; color: #EBECEE}
-.btn-outline-secondary{ border-color: #2c3444}
-.btn-outline-secondary:hover {border-color: #2c3444;background-color: #2c3444; color: #2c3444;}
-.btn-outline-info{ border-color: #388694}
-.btn-outline-info:hover {border-color: #388694;background-color: #388694; color: #2c3444;}
-.btn-outline-danger{ border-color: #e15b36}
-.btn-outline-danger:hover {border-color: #e15b36;background-color: #e15b36; color: #2c3444;}
-.btn-info{ color: white; border-color: #388694; background-color: #388694 !important; font-weight: 600}
-.btn-info:hover {color: white; background-color: #E27D60 !important; border-color: #E27D60}
-#usan-logo {
-    width: 200px;
-    height: auto;
-}
-.btn-success {
-    color: white !important;
-    background-color: #198754 !important;
-}
-.btn-success:hover {
-    color: white !important;
-  background-color: #146c43 !important
-}
-.btn-success:visited {
-    color: white !important;
-}
-  .btn-danger {
-      color: white !important;
-      background-color: #e15b36 !important;
-  }
-  .btn-danger:hover {
-      color: white !important;
-      background-color: #c2411d !important
-  }
-  .btn-danger:visited {
-      color: white !important;
-  }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(.8);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    h4{ font-weight: 500 !important;}
+    .breadcrumb { background-color: white;}
+    .list-group-item{  font-weight: 600}
+    .badge-secondary{ background-color: #2c3444;}
+    .badge-success{ background-color: #BCCB31; color: #2c3444}
+    .badge-danger{ background-color: #E36948; color: #EBECEE}
+    .btn-outline-secondary{ border-color: #2c3444}
+    .btn-outline-secondary:hover {border-color: #2c3444;background-color: #2c3444; color: #2c3444;}
+    .btn-outline-info{ border-color: #388694}
+    .btn-outline-info:hover {border-color: #388694;background-color: #388694; color: #2c3444;}
+    .btn-outline-danger{ border-color: #e15b36}
+    .btn-outline-danger:hover {border-color: #e15b36;background-color: #e15b36; color: #2c3444;}
+    .btn-info{ color: white; border-color: #388694; background-color: #388694 !important; font-weight: 600}
+    .btn-info:hover {color: white; background-color: #E27D60 !important; border-color: #E27D60}
+    #usan-logo {
+        width: 200px;
+        height: auto;
+    }
+    .btn-success {
+        color: white !important;
+        background-color: #198754 !important;
+    }
+    .btn-success:hover {
+        color: white !important;
+        background-color: #146c43 !important
+    }
+    .btn-success:visited {
+        color: white !important;
+    }
+    .btn-danger {
+        color: white !important;
+        border-color: #e15b36 !important;
+        background-color: #e15b36 !important;
+    }
+    .btn-danger:hover {
+        color: white !important;
+        border-color: #c2411d !important;
+        background-color: #c2411d !important
+    }
+    .btn-danger:visited {
+        color: white !important;
+    }
 </style>
 <nav class="navbar navbar-light ">
   <div class="container-fluid">
@@ -198,35 +200,43 @@ h4{ font-weight: 500 !important;}
     </div>
   </div>
 </nav>
-        <%= yield %>
 
-      </div>
-      <div class="filler" style="padding-bottom: 50px">
-      </div>
-      <nav id="footer" class="footer sticky-bottom ">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12" style='padding-top: 30px; '>
-              <div class="text-center">
-                <a href="https://www.facebook.com/USANORTH811/" aria-label="Facebook"><img src="https://usanorth811.org/images/facebook.svg" alt="Facebook Icon" width='40px' height="auto" /></a>
-                <a href="https://twitter.com/usanorth811" aria-label="Twitter"><img src="https://usanorth811.org/images/twitter.svg" alt="Twitter Icon" width='40px' /></a>
-                <a href="https://www.instagram.com/usanorth811/" aria-label="Instagram"><img src="https://usanorth811.org/images/instagram.svg" alt="Instagram Icon" width='40px' height="auto" /></a>
-                <a href="https://www.linkedin.com/company/usa-north-811/" aria-label="Linked In"><img src="https://usanorth811.org/images/linkedin.svg" alt="Linked In Icon" width='40px' height="auto" /></a>
-                <a href="https://www.youtube.com/channel/UCI0klvu8UbGND3udvcOdNaA" aria-label="YouTube"><img src="https://usanorth811.org/images/youtube.svg" alt="YouTube Icon" width='40px' height="auto" /></a>
+<%= yield %>
 
-
-                <p style='padding-top: 0px'>
-                <h4>USA North 811</h4>
-                Phone: 811 // 800-642-2444
-                </p>
-                <p style='padding-bottom: 40px'>
-                  4005 Port Chicago Hwy, Suite 100 Concord, CA 94520-1122
-                </p>
-              </div>
-            </div>
-          </div>
+<div class="filler" style="padding-bottom: 50px">
+</div>
+<nav id="footer" class="footer sticky-bottom ">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style='padding-top: 30px; '>
+        <div class="text-center">
+          <a class="social-link" href="https://www.facebook.com/USANORTH811/" aria-label="Facebook">
+            <%= image_tag('facebook.svg', alt: "facebook icon", width: '40px', height: 'auto', class: 'social-link') %>
+          </a>
+          <a class="social-link" href="https://twitter.com/usanorth811" aria-label="Twitter">
+            <img src="https://usanorth811.org/images/twitter.svg" alt="Twitter Icon" width='40px' />
+          </a>
+          <a class="social-link" href="https://www.instagram.com/usanorth811/" aria-label="Instagram">
+            <img src="https://usanorth811.org/images/instagram.svg" alt="Instagram Icon" width='40px' height="auto" />
+          </a>
+          <a class="social-link" href="https://www.linkedin.com/company/usa-north-811/" aria-label="Linked In">
+            <img src="https://usanorth811.org/images/linkedin.svg" alt="Linked In Icon" width='40px' height="auto" />
+          </a>
+          <a class="social-link" href="https://www.youtube.com/channel/UCI0klvu8UbGND3udvcOdNaA" aria-label="YouTube">
+            <img src="https://usanorth811.org/images/youtube.svg" alt="YouTube Icon" width='40px' height="auto" />
+          </a>
+          <p style='padding-top: 0px'>
+          <h4>USA North 811</h4>
+          Phone: 811 // 800-642-2444
+          </p>
+          <p style='padding-bottom: 40px'>
+            4005 Port Chicago Hwy, Suite 100 Concord, CA 94520-1122
+          </p>
         </div>
-      </nav>
+      </div>
+    </div>
+  </div>
+</nav>
 </body>
 
 </html>

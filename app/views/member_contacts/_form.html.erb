@@ -1,7 +1,4 @@
 <%= form_with(model: @member_contact, id: @contact.present? ? (@contact['id']) : (@member_contact.contact_id.present? ? @member_contact.contact_id : params[:member_id])) do |f| %>
-  <% if params[:result].present? %>
-    <%= params[:result] %>
-  <% end %>
   <% if @member_contact.errors.any? %>
     <div id="error_explanation" style="width: 100%;">
       <h6 class="text-danger"><%= pluralize(@member_contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
@@ -14,7 +11,7 @@
     </div>
   <% end %>
   <div class="form-inputs">
-    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
+    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type.present? ? (@member_contact.contact_type) : (missing_type))}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
     <%= f.hidden_field :group_id, value: "#{ @group.present? ? (@group) : (@member_contact.group_id) }"%>
     <%= f.hidden_field :member_id, value: "#{ @contact.present? ? (@contact['member_id']) : (@member_contact.member_id.present? ? (@member_contact.member_id) : (params[:member_id])) }" %>
     <%= f.hidden_field :member_code, value: "#{ @member_code.present? ? (@member_code) : (@member_contact.member_code) }"  %>

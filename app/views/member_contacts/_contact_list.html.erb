@@ -42,7 +42,7 @@
       <span class="text-danger">|</span>
       <% @missing_contact_types.each do |type| %>
         <%= turbo_frame_tag 'contact' do %>
-          <%= link_to type[1], new_member_contact_path(member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %> <span class="text-danger">|</span>
+          <%= link_to type[1], new_member_contact_path(missing_type: type[0], member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %> <span class="text-danger">|</span>
         <% end %>
       <% end %>
     </div>

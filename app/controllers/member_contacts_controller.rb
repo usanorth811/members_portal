@@ -58,6 +58,7 @@ class MemberContactsController < ApplicationController
     @member = params[:member_id]
     @stype = params[:stype]
     @member_contact = MemberContact.new
+    @missing_type = params[:missing_type]
     puts "MEMBER ID"
     puts "MEMBER ID"
     puts "MEMBER ID"
@@ -125,13 +126,6 @@ class MemberContactsController < ApplicationController
   end
 
   def api_create
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
-    puts "BEGIN CREATE"
     api_url = 'http://UsanPull1API.usanorth811.org'
     @result = HTTParty.post( api_url + "/member_contacts?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                             :body => {:member_contact => {
@@ -150,7 +144,7 @@ class MemberContactsController < ApplicationController
                             }}.to_json,
                             :headers => { 'Content-Type' => 'application/json' } )
     puts @result.code
-    pp @result.body
+    pp @result
     case @result.code
     when 200...290
       respond_to do |format|
@@ -167,6 +161,8 @@ class MemberContactsController < ApplicationController
       end
     when 500...600
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.member_id, partial: "member_contacts/form",
+                                                                        locals: { member_contact: @member_contact, result: @result}) }
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
       end
     end
