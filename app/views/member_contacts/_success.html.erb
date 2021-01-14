@@ -5,7 +5,7 @@
     </div>
     <div class="card-body text-start">
       <div class="badge badge-success " style='display: block; font-size: 12px'>
-        <%= @stype == 'INSERT' ? 'Created' : 'Updated' %> Successfully
+        <%= @member_contact.stype == 'INSERT' ? 'Created' : 'Updated' %> Successfully
       </div>
       <br/>
       <strong>Contact Type: </strong><br/> <%= @contact_types.fetch(@member_contact.contact_type) %> <br/>
