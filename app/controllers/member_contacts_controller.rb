@@ -35,7 +35,7 @@ class MemberContactsController < ApplicationController
     @member_id = params[:member_id]
     @member_code = params[:member_code]
     @group = params[:group_id]
-    @missing_contact_types = @contact_types
+    @missing_contact_types = @contact_types.except('CONT')
     render partial: 'member_contacts/contact_list'
   end
 
@@ -153,10 +153,14 @@ class MemberContactsController < ApplicationController
       end
     when 404
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.member_id, partial: "member_contacts/form",
+                                                                        locals: { member_contact: @member_contact, result: @result}) }
         format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
       end
     when 422
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.member_id, partial: "member_contacts/form",
+                                                                        locals: { member_contact: @member_contact, result: @result}) }
         format.html { redirect_to @member_contact.group, notice: "Unable to save duplicate contact." }
       end
     when 500...600

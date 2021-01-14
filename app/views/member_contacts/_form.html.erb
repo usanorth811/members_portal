@@ -1,28 +1,34 @@
-<%= form_with(model: @member_contact, id: @contact.present? ? (@contact['id']) : (@member_contact.contact_id.present? ? @member_contact.contact_id : params[:member_id])) do |f| %>
-  <% if @member_contact.errors.any? %>
-    <div id="error_explanation" style="width: 100%;">
-      <h6 class="text-danger"><%= pluralize(@member_contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
 
-      <ul>
-        <% @member_contact.errors.each do |error| %>
-          <li class="text-danger"><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="form-inputs">
-    <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type.present? ? (@member_contact.contact_type) : (missing_type))}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
-    <%= f.hidden_field :group_id, value: "#{ @group.present? ? (@group) : (@member_contact.group_id) }"%>
-    <%= f.hidden_field :member_id, value: "#{ @contact.present? ? (@contact['member_id']) : (@member_contact.member_id.present? ? (@member_contact.member_id) : (params[:member_id])) }" %>
-    <%= f.hidden_field :member_code, value: "#{ @member_code.present? ? (@member_code) : (@member_contact.member_code) }"  %>
-    <%= f.hidden_field :contact_id, value: "#{ @contact.present? ? (@contact['id']) : (@member_contact.contact_id) }" %>
-    <%= f.hidden_field :stype, value: "#{ @stype.present? ? (@stype) : (@member_contact.stype) }" %>
-    <strong>Contact: </strong><%= f.text_field :contact_name, value: "#{ @contact.present? ? (@contact['contact']) : (@member_contact.contact_name) }" , class: 'form-control' %>
-    <strong>Phone: </strong><%= f.text_field :phone, value: "#{ @contact.present? ? (@contact['phone']) : (@member_contact.phone) }", class: 'form-control' %>
-    <strong>Email: </strong><%= f.text_field :email, value: "#{ @contact.present? ? (@contact['email']) : (@member_contact.email) }", class: 'form-control' %>
+<%= form_with(model: @member_contact, id: @contact.present? ? (@contact['id']) : (@member_contact.contact_id.present? ? @member_contact.contact_id : params[:member_id])) do |f| %>
+  <div class="card-header">
+    <%= @stype == 'INSERT' ? 'Create' : 'Editing' %> Contact
   </div>
-<br/>
-  <div class="form-actions">
-    <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: 'btn btn-info' %>
+  <div class="card-body text-start">
+    <% if @member_contact.errors.any? %>
+      <div id="error_explanation" style="width: 100%;">
+        <h6 class="text-danger"><%= pluralize(@member_contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
+
+        <ul>
+          <% @member_contact.errors.each do |error| %>
+            <li class="text-danger"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-inputs">
+      <strong>Contact Type: </strong><%= f.select :contact_type, @contact_types.invert, { selected: @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type.present? ? (@member_contact.contact_type) : (missing_type))}, value: "#{ @contact.present? ? (@contact['contact_type']) : (@member_contact.contact_type)}", class: 'form-control' %>
+      <%= f.hidden_field :group_id, value: "#{ @group.present? ? (@group) : (@member_contact.group_id) }"%>
+      <%= f.hidden_field :member_id, value: "#{ @contact.present? ? (@contact['member_id']) : (@member_contact.member_id.present? ? (@member_contact.member_id) : (params[:member_id])) }" %>
+      <%= f.hidden_field :member_code, value: "#{ @member_code.present? ? (@member_code) : (@member_contact.member_code) }"  %>
+      <%= f.hidden_field :contact_id, value: "#{ @contact.present? ? (@contact['id']) : (@member_contact.contact_id) }" %>
+      <%= f.hidden_field :stype, value: "#{ @stype.present? ? (@stype) : (@member_contact.stype) }" %>
+      <strong>Contact: </strong><%= f.text_field :contact_name, value: "#{ @contact.present? ? (@contact['contact']) : (@member_contact.contact_name) }" , class: 'form-control' %>
+      <strong>Phone: </strong><%= f.text_field :phone, value: "#{ @contact.present? ? (@contact['phone']) : (@member_contact.phone) }", class: 'form-control' %>
+      <strong>Email: </strong><%= f.text_field :email, value: "#{ @contact.present? ? (@contact['email']) : (@member_contact.email) }", class: 'form-control' %>
+    </div>
+    <br/>
+    <div class="form-actions">
+      <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: 'btn btn-info' %>
+    </div>
   </div>
 <% end %>
