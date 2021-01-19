@@ -1,0 +1,22 @@
+<%= turbo_frame_tag 'contact_status_form' do %>
+
+  <%= form_with(model: @codestatus, local: true) do |form| %>
+    <div class="card card-body">
+      <form>
+        <div class="form-group">
+          <%= form.hidden_field :code, value: member_code %>
+          <%= form.hidden_field :group_id, value: group %>
+          <%= form.hidden_field :user_id, value: user %>
+          <%= form.label :contacts_updated, 'Mark all contacts as up to date' %>
+          <%= form.check_box :contacts_updated, class: 'form-check-input' %>
+        </div>
+        <br/>
+        <div class="form-group">
+          <div class="actions">
+            <%= form.submit 'Submit', class: 'btn btn-success btn-block', type: "submit" %>
+          </div>
+        </div>
+      </form>
+    </div>
+  <% end %>
+<% end %>

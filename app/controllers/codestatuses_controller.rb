@@ -28,9 +28,11 @@ class CodestatusesController < ApplicationController
 
     respond_to do |format|
       if @codestatus.save
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('contact_status_form', partial: "codestatuses/success") }
         format.html { redirect_to @codestatus.group, notice: 'Code status was successfully updated.' }
         format.json { render :show, status: :created, location: @codestatus }
       else
+        format.turbo_stream { render :new }
         format.html { render :new }
         format.json { render json: @codestatus.errors, status: :unprocessable_entity }
       end

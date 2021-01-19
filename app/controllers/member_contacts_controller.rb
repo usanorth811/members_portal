@@ -36,6 +36,7 @@ class MemberContactsController < ApplicationController
     @member_code = params[:member_code]
     @group = params[:group_id]
     @missing_contact_types = @contact_types.except('CONT')
+    @codestatus = Codestatus.new
     render partial: 'member_contacts/contact_list'
   end
 
