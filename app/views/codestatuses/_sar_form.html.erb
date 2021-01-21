@@ -1,0 +1,32 @@
+<%= turbo_frame_tag 'sar_status_form' do %>
+
+  <%= form_with(model: @codestatus, local: true) do |form| %>
+      <form>
+        <div class="form-group">
+          <%= form.hidden_field :code, value: member_code %>
+          <%= form.hidden_field :group_id, value: group %>
+          <%= form.hidden_field :user_id, value: user %>
+          <%= form.hidden_field :sar_updated, value: true %>
+        </div>
+        <br/>
+        <div class="form-group">
+          <div class="actions">
+            <style>
+                .btn-outline-danger {
+                    color: #e15b36;
+                    border: none !important;
+                }
+                .btn-outline-danger:hover {
+                    color: white;
+                    border: none !important;
+                }
+            </style>
+            <%= form.submit 'Mark SAR as up to date',
+                            class: 'btn btn-sm btn-outline-danger',
+                            type: "submit" ,
+                            style: 'font-weight: 600 !important'%>
+          </div>
+        </div>
+      </form>
+  <% end %>
+<% end %>

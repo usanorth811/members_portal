@@ -30,6 +30,9 @@ class MemberDetailsController < ApplicationController
   end
 
   def member_shape_log
+    @group = params[:group_id]
+    @member_id = params[:member_id]
+    @code = params[:code]
     @shapes = HTTParty.get("http://UsanPull1API.usanorth811.org/shape_version_logs?member_id="+ params[:member_id].to_s, :verify => false)
     render partial: 'member_details/member_shape_log'
   end
@@ -91,7 +94,11 @@ class MemberDetailsController < ApplicationController
   end
 
   def member_shape_list
+    @group = params[:group_id]
+    @member_id = params[:member_id]
+    @code = params[:code]
     @shapes = JSON.parse(params[:shapes])
+    @codestatus = Codestatus.new
   end
 
   def api_update

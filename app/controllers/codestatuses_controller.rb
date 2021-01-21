@@ -25,10 +25,15 @@ class CodestatusesController < ApplicationController
   # POST /codestatuses.json
   def create
     @codestatus = Codestatus.new(codestatus_params)
+    if @codestatus.sar_updated?
+      turbo_tag_replace = 'sar_status_form'
+    else
+      turbo_tag_replace = 'contact_status_form'
+    end
 
     respond_to do |format|
       if @codestatus.save
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('contact_status_form', partial: "codestatuses/success") }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(turbo_tag_replace, partial: "codestatuses/success") }
         format.html { redirect_to @codestatus.group, notice: 'Code status was successfully updated.' }
         format.json { render :show, status: :created, location: @codestatus }
       else

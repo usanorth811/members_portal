@@ -21,7 +21,11 @@
         <% if shape == @shapes.reverse.first %>
           <tr class="table-success">
             <td>Active <br/>
-              <small><%= link_to raw('Click here to confirm<br/> this is up to date') %></small></td>
+              <small>
+                <%= turbo_frame_tag 'sar_status_form' do %>
+                  <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
+                  <% end %>
+                </small></td>
 
             <% else %>
         <tr>

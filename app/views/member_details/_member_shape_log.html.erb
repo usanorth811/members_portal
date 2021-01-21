@@ -3,7 +3,15 @@
     <% if shape == @shapes.last %>
       <div>
         <strong>Shape Version: </strong>
-        <br/>Version <%= shape['version'] %> <small><%= link_to "Request a copy for review", member_shape_list_path(shapes: @shapes) %></small>
+        <br/>Version <%= shape['version'] %>
+        <small>
+          <%= link_to "Request a copy for review", member_shape_list_path(
+          shapes: @shapes ,
+          member_id: @member_id ,
+          code: @code ,
+          group_id: @group,
+          code: @code) %>
+        </small>
       </div>
       <div>
         <strong>Created By: </strong>
