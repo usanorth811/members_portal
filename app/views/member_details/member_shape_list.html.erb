@@ -38,7 +38,12 @@
             <td><%= shape['completed_by'] %></td>
             <td><%= shape['released'].present? ? Date.parse(shape['released']).strftime("%m/%d/%Y") : 'N/A' %></td>
             <td><%= shape['released_by'] %></td>
-            <td><%= link_to raw('Request Copy<br/> for Review') %></td>
+            <td>
+              <a href="https://fs26.formsite.com/6jJPTG/gyiuyohkp1/fill?id0=<%= current_user.email %>&id1=<%= @code %>&id2=<%= shape['version'] %>">
+                Request Copy<br/>
+                for Review
+              </a>
+            </td>
           </tr>
         <% end %>
         </tbody>

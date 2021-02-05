@@ -15,7 +15,8 @@ class MemberDetailsController < ApplicationController
         'Blue (potable water)' => 'BLUE',
         'Purple (reclaimed water, irrigation, and slurry lines)' => 'PURP',
         'Green (sewers and drain lines)' => 'GREE',
-        'Unknown' => 'UNKN'
+        'Unknown' => 'UNKN',
+        'Copy (to identify a copy of an existing code)' => 'COPY'
     }
 
   end
