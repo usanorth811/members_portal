@@ -8,6 +8,7 @@
     "bootstrap-vue": "^2.0.0-rc.14",
     "stimulus": "^2.0.0",
     "stimulus-content-loader": "^2.0.0",
+    "stimulus-prefetch": "^1.0.1",
     "vue": "^2.6.9",
     "yar": "^9.1.0",
     "yarn": "^1.22.10"

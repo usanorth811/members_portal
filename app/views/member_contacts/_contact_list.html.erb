@@ -14,7 +14,10 @@
               <strong>Contact: </strong><br/> <%= contact['attributes']['contact'] %> <br/>
               <strong>Phone: </strong><br/> <%= contact['attributes']['phone'] %> <br/>
               <strong>Email: </strong><br/> <%= contact['attributes']['email'] %> <br/>
-              <%= link_to 'Edit', new_member_contact_path(member_id: contact['attributes']['member_id'], stype: 'UPDATE', contact_id: contact['id'], member_code: @member_code, group_id: @group) %>
+              <%= link_to 'Edit', new_member_contact_path(member_id: contact['attributes']['member_id'],
+                                                          stype: 'UPDATE', contact_id: contact['id'],
+                                                          member_code: @member_code, group_id: @group),
+                                                          "data-controller" => "prefetch" %>
             </div>
             </div>
           <% end %>
@@ -29,7 +32,8 @@
           New Contact
         </div>
         <div class="card-body text-start">
-            <%= link_to 'Create New Contact', new_member_contact_path(member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %>
+            <%= link_to 'Create New Contact', new_member_contact_path(member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group),
+                        "data-controller" => "prefetch" %>
         </div>
         <% end %>
 
@@ -53,7 +57,8 @@
       <span class="text-danger">|</span>
       <% @missing_contact_types.each do |type| %>
         <%= turbo_frame_tag 'contact' do %>
-          <%= link_to type[1], new_member_contact_path(missing_type: type[0], member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group) %> <span class="text-danger">|</span>
+          <%= link_to type[1], new_member_contact_path(missing_type: type[0], member_id: @member_id, stype: 'INSERT', member_code: @member_code, group_id: @group),
+                      "data-controller" => "prefetch" %> <span class="text-danger">|</span>
         <% end %>
       <% end %>
     </div>

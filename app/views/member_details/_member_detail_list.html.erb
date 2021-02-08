@@ -39,7 +39,7 @@
                 <br/><%= @facility_types.invert.fetch(member_detail['attributes']['facility_type']) %>
               </div>
               <div class="">
-                <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group) %>
+                <%= link_to 'Edit', new_member_detail_path(member_id: member_detail['id'], group_id: @group), "data-controller" => "prefetch" %>
               </div>
             <% end %>
           </div>
@@ -52,7 +52,7 @@
                                                      group_id: @group) %>">
               <i class="fas fa-spinner fa-spin"></i> Loading Shape Log...
             </div>
-            <a href="https://fs26.formsite.com/6jJPTG/abmfxonqok/fill?id0=<%= current_user.profile.first_name %>&id1=<%= current_user.profile.last_name %>&id2=<%= current_user.email %>&id6=<%= member_detail['attributes']['code'] %>&" >
+            <a href="https://fs26.formsite.com/6jJPTG/abmfxonqok/fill?id0=<%= current_user.profile.first_name %>&id1=<%= current_user.profile.last_name %>&id2=<%= current_user.email %>&id6=<%= member_detail['attributes']['code'] %>" >
               Upload Shape File
             </a>
           </div>
