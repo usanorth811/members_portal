@@ -60,11 +60,6 @@ class MemberContactsController < ApplicationController
     @stype = params[:stype]
     @member_contact = MemberContact.new
     @missing_type = params[:missing_type]
-    puts "MEMBER ID"
-    puts "MEMBER ID"
-    puts "MEMBER ID"
-    puts "MEMBER ID"
-    puts "MEMBER ID"
     puts @member_code
     puts params[:member_code]
   end

@@ -11,8 +11,9 @@ class UpdateDetails
   def update
     @result = HTTParty.put("http://UsanPull1API.usanorth811.org/members/#{@member_detail['id']}",
                            :body => {:member => {
-                               :comments => "#{@member_detail['attributes']['comments']} [#{
-                               @codestatus.sar_updated ? "SAR_UPDATED" : "CONTACTS_UPDATED"}: #{@codestatus.created_at.to_s}]"
+                               :comments => "#{@member_detail['attributes']['comments']}
+                                             [#{@codestatus.sar_updated ? "SAR_UPDATED" : "CONTACTS_UPDATED"}:
+                                             #{@codestatus.created_at.to_s}]"
                            }}.to_json,
                            :headers => { 'Content-Type' => 'application/json' } )
     puts @result.code
