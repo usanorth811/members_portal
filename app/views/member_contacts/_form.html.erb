@@ -23,12 +23,12 @@
       <%= f.hidden_field :contact_id, value: "#{ @contact.present? ? (@contact['id']) : (@member_contact.contact_id) }" %>
       <%= f.hidden_field :stype, value: "#{ @stype.present? ? (@stype) : (@member_contact.stype) }" %>
 
-      <%= f.hidden_field :address1, value: "#{ @contact.present? ? (@contact['address1']) : (@member_contact.address1) } " %>
-      <%= f.hidden_field :address2, value: "#{ @contact.present? ? (@contact['address2']) : (@member_contact.address2) } " %>
-      <%= f.hidden_field :city, value: "#{ @contact.present? ? (@contact['city']) : (@member_contact.city) } " %>
-      <%= f.hidden_field :state, value: "#{ @contact.present? ? (@contact['state']) : (@member_contact.state) } " %>
-      <%= f.hidden_field :zip, value: "#{ @contact.present? ? (@contact['zip']) : (@member_contact.zip) } " %>
-      <%= f.hidden_field :phone_ext, value: "#{ @contact.present? ? (@contact['phone_ext']) : (@member_contact.phone_ext) } " %>
+      <%= f.hidden_field :address1, value: "#{ @contact.present? ? (@contact['address1']) : (@member_contact.address1) }" %>
+      <%= f.hidden_field :address2, value: "#{ @contact.present? ? (@contact['address2']) : (@member_contact.address2) }" %>
+      <%= f.hidden_field :city, value: "#{ @contact.present? ? (@contact['city']) : (@member_contact.city) }" %>
+      <%= f.hidden_field :state, value: "#{ @contact.present? ? (@contact['state']) : (@member_contact.state) }" %>
+      <%= f.hidden_field :zip, value: "#{ @contact.present? ? (@contact['zip']) : (@member_contact.zip) }" %>
+      <%= f.hidden_field :phone_ext, value: "#{ @contact.present? ? (@contact['phone_ext']) : (@member_contact.phone_ext) }" %>
 
       <strong>Contact: </strong><%= f.text_field :contact_name, value: "#{ @contact.present? ? (@contact['contact']) : (@member_contact.contact_name) }" , class: 'form-control' %>
       <strong>Phone: </strong><%= f.text_field :phone, value: "#{ @contact.present? ? (@contact['phone']) : (@member_contact.phone) }", class: 'form-control' %>
