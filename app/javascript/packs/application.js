@@ -19,8 +19,10 @@ import { Turbo, cable } from "@hotwired/turbo-rails"
 import { Application } from "stimulus"
 import ContentLoader from "stimulus-content-loader"
 import Prefetch from "stimulus-prefetch"
+import Reveal from "stimulus-reveal-controller"
 
 const application = Application.start()
+application.register("reveal", Reveal)
 application.register("content-loader", ContentLoader)
 application.register("prefetch", Prefetch)
 

@@ -23,17 +23,31 @@
       <%= f.hidden_field :contact_id, value: "#{ @contact.present? ? (@contact['id']) : (@member_contact.contact_id) }" %>
       <%= f.hidden_field :stype, value: "#{ @stype.present? ? (@stype) : (@member_contact.stype) }" %>
 
-      <%= f.hidden_field :address1, value: "#{ @contact.present? ? (@contact['address1']) : (@member_contact.address1) }" %>
-      <%= f.hidden_field :address2, value: "#{ @contact.present? ? (@contact['address2']) : (@member_contact.address2) }" %>
-      <%= f.hidden_field :city, value: "#{ @contact.present? ? (@contact['city']) : (@member_contact.city) }" %>
-      <%= f.hidden_field :state, value: "#{ @contact.present? ? (@contact['state']) : (@member_contact.state) }" %>
-      <%= f.hidden_field :zip, value: "#{ @contact.present? ? (@contact['zip']) : (@member_contact.zip) }" %>
-      <%= f.hidden_field :phone_ext, value: "#{ @contact.present? ? (@contact['phone_ext']) : (@member_contact.phone_ext) }" %>
-
       <strong>Contact: </strong><%= f.text_field :contact_name, value: "#{ @contact.present? ? (@contact['contact']) : (@member_contact.contact_name) }" , class: 'form-control' %>
       <strong>Phone: </strong><%= f.text_field :phone, value: "#{ @contact.present? ? (@contact['phone']) : (@member_contact.phone) }", class: 'form-control' %>
       <strong>Email: </strong><%= f.text_field :email, value: "#{ @contact.present? ? (@contact['email']) : (@member_contact.email) }", class: 'form-control' %>
+
+      <div data-controller="reveal" data-reveal-hidden-class="hidden">
+        <button data-action="click->reveal#toggle" type="button" class="btn btn-sm btn-secondary mt-2">
+          More...
+        </button>
+        <div data-reveal-target="item" class="hidden ">
+          <strong>address1: </strong>
+          <%= f.text_field :address1, value: "#{ @contact.present? ? (@contact['address1']) : (@member_contact.address1) }", class: "form-control" %>
+          <strong>address2: </strong>
+          <%= f.text_field :address2, value: "#{ @contact.present? ? (@contact['address2']) : (@member_contact.address2) }", class: 'form-control' %>
+          <strong>city: </strong>
+          <%= f.text_field :city, value: "#{ @contact.present? ? (@contact['city']) : (@member_contact.city) }", class: 'form-control' %>
+          <strong>state: </strong>
+          <%= f.select(:state, ['CA','NV','AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UM', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'], {}, {class: 'form-control'}) %>
+          <strong>zip: </strong>
+          <%= f.text_field :zip, value: "#{ @contact.present? ? (@contact['zip']) : (@member_contact.zip) }", class: 'form-control' %>
+          <strong>phone_ext: </strong>
+          <%= f.text_field :phone_ext, value: "#{ @contact.present? ? (@contact['phone_ext']) : (@member_contact.phone_ext) }", class: 'form-control' %>
+        </div>
+      </div>
     </div>
+
     <br/>
     <div class="form-actions">
       <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: 'btn btn-info' %>

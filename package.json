@@ -9,6 +9,7 @@
     "stimulus": "^2.0.0",
     "stimulus-content-loader": "^2.0.0",
     "stimulus-prefetch": "^1.0.1",
+    "stimulus-reveal-controller": "^2.0.0",
     "vue": "^2.6.9",
     "yar": "^9.1.0",
     "yarn": "^1.22.10"
