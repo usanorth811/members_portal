@@ -49,7 +49,11 @@
             <%if @activities.present?%>
               <% @activities.drop(1).each do |activity| %>
                 <li class="list-group-item" style="font-size: .8rem; font-weight: 500">
+                  <% if activity.owner.present? %>
+                    <% if activity.owner.profile.first_name.present? && activity.owner.profile.last_name.present?%>
                   <%= "#{activity.owner.profile.first_name} #{activity.owner.profile.last_name}" if activity.owner %>
+                      <% end %>
+                    <% end %>
                   <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
                   <%= @contact_types.fetch(activity.contact_type) %> contact for
                   <%= activity.code %>
