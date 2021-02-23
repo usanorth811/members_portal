@@ -53,11 +53,19 @@
                     <% if activity.owner.profile.first_name.present? && activity.owner.profile.last_name.present?%>
                   <%= "#{activity.owner.profile.first_name} #{activity.owner.profile.last_name}" if activity.owner %>
                       <% end %>
+                    <% else %>
+                  "profile not found"
                     <% end %>
+                  <% if activity.stype.present? %>
                   <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
-                  <%= @contact_types.fetch(activity.contact_type) %> contact for
+                    <% end %>
+                  <% if activity.contact_type.present? %>
+                <%= @contact_types.fetch(activity.contact_type) %> contact for
+                    <% if activity.code.present? %>
                   <%= activity.code %>
+                      <% end %>
                   on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
+                    <% end %>
                 </li>
               <% end %>
             <%end%>
