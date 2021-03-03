@@ -116,5 +116,6 @@ class GroupsController < ApplicationController
     end
     def load_activities
       @activities = PublicActivity::Activity.where(:billing => @group.billing_id).order('created_at DESC').limit(10)
+      pp @activities
     end
 end
