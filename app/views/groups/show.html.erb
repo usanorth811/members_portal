@@ -61,7 +61,8 @@
                   <% if activity.stype.present? %>
                     <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
                   <% end %>
-                  <% if activity.contact_type %>
+                  <% if activity.contact_type.nil? %>
+                    <% else %>
                     <%= @contact_types.fetch(activity.contact_type) %> contact for
                     <% if activity.code.present? %>
                       <%= activity.code %>
