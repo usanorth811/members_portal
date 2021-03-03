@@ -64,7 +64,6 @@
                   <% if activity.contact_type == nil %>
                     <% else %>
                     <%= @contact_types.fetch(activity.contact_type) %> contact for
-                    <% end %>
                     <% if activity.code.present? %>
                       <%= activity.code %>
                     <% end %>
