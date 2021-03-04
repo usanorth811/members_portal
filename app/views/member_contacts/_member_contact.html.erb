@@ -21,10 +21,15 @@
         <%= "#{@activity.owner.profile.first_name} #{@activity.owner.profile.last_name}" if @activity.owner %>
         <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(@activity.stype) %>
         <% if @activity.contact_type.nil? %>
+        contact
         <% else %>
       <%= @contact_types.fetch(@activity.contact_type) %> contact
-          <% end %>for
+          <% end %>
+        <% if @activity.code.nil? %>
+          <% else %>
+        for
         <%= @activity.code %>
+          <% end %>
         on <%=@activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
       </li>
   <% end %>

@@ -62,13 +62,15 @@
                     <%= {'UPDATE' => ' Updated a ', 'DELETE' => 'Deleted a', 'INSERT' => 'Added a'}.fetch(activity.stype) %>
                   <% end %>
                   <% if activity.contact_type.nil? %>
+                    contact for
                     <% else %>
-                    <%= @contact_types.fetch(activity.contact_type) %> contact for
+                    <%= @contact_types.fetch(activity.contact_type) %> contact
+                    <% end %>
                     <% if activity.code.present? %>
+                    for
                       <%= activity.code %>
                     <% end %>
                     on <%=activity.updated_at.localtime.strftime("%m/%d at %I:%M %p") %>
-                  <% end %>
                 </li>
               <% end %>
             <%end%>
