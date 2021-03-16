@@ -21,4 +21,4 @@ require 'csv'
 #end
 
 #puts "There are now #{BillingContact.count} rows in the table"
-AdminUser.create!(email: 'caleb.woods@usanorth811.org', password: 'password', password_confirmation: 'password') if Rails.env.production?
+AdminUser.create(email: 'caleb.woods@usanorth811.org', password: 'password', password_confirmation: 'password')
