@@ -338,7 +338,6 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
-  turbo-rails
   tzinfo-data
   uglifier (>= 1.3.0)
   view_component

@@ -110,6 +110,7 @@ class MemberDetailsController < ApplicationController
                            }}.to_json,
                            :headers => { 'Content-Type' => 'application/json' } )
     puts @result.code
+    pp @result.body
     case @result.code
     when 200...290
       respond_to do |format|
