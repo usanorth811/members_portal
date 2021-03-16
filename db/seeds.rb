@@ -21,4 +21,7 @@ require 'csv'
 #end
 
 #puts "There are now #{BillingContact.count} rows in the table"
-AdminUser.update(email: 'caleb.woods@usanorth811.org', password: 'password', password_confirmation: 'password')
+user = AdminUser.find_by(email: 'caleb.woods@usanorth811.org')
+pp user
+user.update(email: 'caleb.woods@usanorth811.org', password: 'password', password_confirmation: 'password')
+pp user
