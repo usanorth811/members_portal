@@ -145,6 +145,7 @@ class MemberContactsController < ApplicationController
     when 200...290
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.member_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     when 404
       respond_to do |format|
@@ -220,15 +221,18 @@ class MemberContactsController < ApplicationController
     case @result.code
     when 200...290
       respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
         format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     when 404
       respond_to do |format|
-        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues" }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     when 500...600
       respond_to do |format|
-        format.html { redirect_to @member_contact.group, notice: "There was a problem processing your request. Please try again. Contact us at memberservices@usanorth811.org if the issue continues. Error: #{response.code}" }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@member_contact.contact_id, partial: "member_contacts/success", locals: { member_contact: @member_contact }) }
+        format.html { redirect_to @member_contact.group, notice: 'Your changes have been saved, but may take a moment to appear on this page' }
       end
     end
   end
