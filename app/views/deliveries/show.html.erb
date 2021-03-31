@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Billing:</strong>
+  <%= @delivery.billing %>
+</p>
+
+<p>
+  <strong>Member code:</strong>
+  <%= @delivery.member_code %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @delivery.group_id %>
+</p>
+
+<p>
+  <strong>Delivery type:</strong>
+  <%= @delivery.delivery_type %>
+</p>
+
+<p>
+  <strong>Deliver to:</strong>
+  <%= @delivery.deliver_to %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @delivery.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @delivery.phone %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @delivery.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @delivery.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @delivery.zip %>
+</p>
+
+<%= link_to 'Edit', edit_delivery_path(@delivery) %> |
+<%= link_to 'Back', deliveries_path %>

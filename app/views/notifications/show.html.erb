@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @notification.group_id %>
+</p>
+
+<p>
+  <strong>Delivery:</strong>
+  <%= @notification.delivery_id %>
+</p>
+
+<p>
+  <strong>Concerned citizen ticket:</strong>
+  <%= @notification.concerned_citizen_ticket_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @notification.description %>
+</p>
+
+<%= link_to 'Edit', edit_notification_path(@notification) %> |
+<%= link_to 'Back', notifications_path %>

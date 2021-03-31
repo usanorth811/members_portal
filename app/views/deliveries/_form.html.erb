@@ -1,0 +1,29 @@
+<div class="container ">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 ">
+      <%= simple_form_for(@delivery) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form">
+          <%= f.input :billing, class: "form-control"%>
+          <%= f.input :member_code, class: "form-control" %>
+          <%= f.association :group, collection: current_user.groups, class: "form-control" %>
+          <%= f.input :delivery_type, class: "form-control" %>
+          <%= f.input :deliver_to, class: "form-control" %>
+          <%= f.input :email, class: "form-control" %>
+          <%= f.input :phone, class: "form-control" %>
+          <%= f.input :city, class: "form-control" %>
+          <%= f.input :state, class: "form-control" %>
+          <%= f.input :zip, class: "form-control" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

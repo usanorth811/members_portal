@@ -1,0 +1,21 @@
+
+<%= simple_form_for(@concerned_citizen_ticket) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :first %>
+    <%= f.input :last %>
+    <%= f.input :email %>
+    <%= f.input :state %>
+    <%= f.input :city %>
+    <%= f.input :zip %>
+    <%= f.input :address %>
+    <%= f.input :description %>
+    <%= f.input :notify_citizen %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

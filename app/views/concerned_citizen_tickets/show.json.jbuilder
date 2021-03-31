@@ -1,0 +1,1 @@
+json.partial! "concerned_citizen_tickets/concerned_citizen_ticket", concerned_citizen_ticket: @concerned_citizen_ticket

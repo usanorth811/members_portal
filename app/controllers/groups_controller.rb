@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def index
     @group = Group.new
     @groups = current_user.groups
+    @notifications = Notification.all.where(group_id: @groups)
   end
 
   # GET /groups/1

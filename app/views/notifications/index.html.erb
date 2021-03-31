@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row" >
+    <div class="col-md-12">
+      <h2 class='text-center'>Welcome to the USA North 811 Member Portal</h2>
+      <div class='col-md-4 offset-md-4'><hr class="my-4"></hr></div>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'><a href="/profiles">My Profile</a></h4>
+    </div>
+    <div class='col-lg-3 d-none d-lg-block'>
+      <h4 style='font-weight: 600 !important' class="text-center"><%= link_to "My Companies", groups_path %></h4>
+    </div>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'>
+        Notifications <small>[beta]</small>
+
+      </h4>
+    </div>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'>
+        <%= link_to raw("Concerned Citizen Tickets <small>[beta]</small>"), deliveries_path %>
+      </h4>
+    </div>
+    <div class='col-md-12'>
+      <hr class="my-4"></hr>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @notifications.each do |notification| %>
+          <tr>
+            <td><%= link_to "View Membership", group_path(notification.group_id) %></td>
+            <td><%= link_to "View Rule", delivery_path(notification.delivery_id) %></td>
+            <td><%= link_to "View Ticket", concerned_citizen_ticket_path(notification.concerned_citizen_ticket_id) %></td>
+            <td><%= notification.description %></td>
+            <td><%= link_to 'Delete', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<br>
+

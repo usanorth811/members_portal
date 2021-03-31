@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row" >
+    <div class="col-md-12">
+      <h2 class='text-center'>Welcome to the USA North 811 Member Portal</h2>
+      <div class='col-md-4 offset-md-4'><hr class="my-4"></hr></div>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'><a href="/profiles">My Profile</a></h4>
+    </div>
+    <div class='col-lg-3 d-none d-lg-block'>
+      <h4 style='font-weight: 600 !important' class="text-center"><%= link_to "My Companies", groups_path %></h4>
+    </div>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'>
+        <%= link_to notifications_path do%>
+          Notifications
+          <% if @notifications.count > 0 %>
+            <span style="font-size: 1rem">(<%= @notifications.count %> new)</span>
+          <% end %>
+          <small>[beta]</small>
+        <% end %>
+
+      </h4>
+    </div>
+    <div class='col-lg-3'>
+      <h4 style='font-weight: 600 !important'>
+        Concerned Citizen Tickets <small>[beta]</small>
+      </h4>
+    </div>
+    <div class='col-md-12'>
+      <hr class="my-4"></hr>
+    </div>
+
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Billing ID</th>
+      <th>Member code</th>
+      <th>Delivery type</th>
+      <th>Deliver to</th>
+      <th>Email</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @deliveries.each do |delivery| %>
+      <tr>
+        <td><%= delivery.billing %></td>
+        <td><%= delivery.member_code %></td>
+        <td><%= delivery.delivery_type %></td>
+        <td><%= delivery.deliver_to %></td>
+        <td><%= delivery.email %></td>
+        <td><%= delivery.city %></td>
+        <td><%= delivery.state %></td>
+        <td><%= delivery.zip %></td>
+        <td><%= link_to 'Show', delivery %></td>
+        <td><%= link_to 'Edit', edit_delivery_path(delivery) %></td>
+        <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Delivery', new_delivery_path %>
+
+</div>

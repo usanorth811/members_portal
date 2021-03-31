@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First:</strong>
+  <%= @concerned_citizen_ticket.first %>
+</p>
+
+<p>
+  <strong>Last:</strong>
+  <%= @concerned_citizen_ticket.last %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @concerned_citizen_ticket.email %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @concerned_citizen_ticket.state %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @concerned_citizen_ticket.city %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @concerned_citizen_ticket.zip %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @concerned_citizen_ticket.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @concerned_citizen_ticket.description %>
+</p>
+
+<p>
+  <strong>Notify citizen:</strong>
+  <%= @concerned_citizen_ticket.notify_citizen %>
+</p>
+
+<%= link_to 'Back', concerned_citizen_tickets_path %>
