@@ -13,9 +13,9 @@
     <%= f.input :first %>
     <%= f.input :last %>
     <%= f.input :email %>
-    <%= f.input :state, value: request.location.state  %>
-    <%= f.input :city, value: request.location.city  %>
-    <%= f.input :zip, value: request.location.postal_code  %>
+    <%= f.input :state, input_html: { value: request.location.state }  %>
+    <%= f.input :city, input_html: { value: request.location.city }  %>
+    <%= f.input :zip, input_html: { value: request.location.postal_code } %>
     <%= f.input :address %>
     <%= f.input :street %>
     <%= f.input :cross_st %>
