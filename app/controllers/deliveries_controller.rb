@@ -7,7 +7,7 @@ class DeliveriesController < InheritedResources::Base
   private
 
     def delivery_params
-      params.require(:delivery).permit(:billing, :member_code, :group_id, :delivery_type, :deliver_to, :email, :phone, :city, :state, :zip)
+      params.require(:delivery).permit(:billing, :member_code, :group_id, :delivery_type, :deliver_to, :email, :phone, :city, :state, :zip, :ticket_type)
     end
 
 end

@@ -28,7 +28,7 @@
     </div>
     <div class='col-lg-3'>
       <h4 style='font-weight: 600 !important'>
-        Concerned Citizen Tickets <small>[beta]</small>
+        Concerned Citizen & Cross Bore Tickets <small>[beta]</small>
       </h4>
     </div>
     <div class='col-md-12'>
@@ -36,6 +36,7 @@
     </div>
 
   </div>
+  <h3>Delivery Rules</h3>
   <table class="table">
     <thead>
     <tr>
@@ -56,6 +57,7 @@
       <tr>
         <td><%= delivery.billing %></td>
         <td><%= delivery.member_code %></td>
+        <td><%= delivery.ticket_type %></td>
         <td><%= delivery.delivery_type %></td>
         <td><%= delivery.deliver_to %></td>
         <td><%= delivery.email %></td>
@@ -72,6 +74,6 @@
 
   <br>
 
-  <%= link_to 'New Delivery', new_delivery_path %>
+  <%= link_to 'New Delivery Rule', new_delivery_path %>
 
 </div>

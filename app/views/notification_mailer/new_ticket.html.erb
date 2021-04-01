@@ -181,7 +181,7 @@
         <td><table width="96%"  align="left" cellpadding="0" cellspacing="0">
           <tr>
             <!-- row container for TITLE/EMAIL THEME -->
-            <td align="center" style="font-size: 32px; font-weight: 300; line-height: 2.5em; color: #13222E; font-family: sans-serif;">New Ticket</td>
+            <td align="center" style="font-size: 32px; font-weight: 300; line-height: 2.5em; color: #13222E; font-family: sans-serif;">New <%= @ticket.ticket_type == 'cross_bore' ? 'Cross Bore' : 'Concerned Citizen' %> Ticket</td>
           </tr>
           <tr>
             <!-- row container for TITLE/EMAIL THEME -->

@@ -1,10 +1,11 @@
 <br/>
 <div class="container">
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <h1>New Concerned Citizen Ticket</h1>
-      <%= render 'form', concerned_citizen_ticket: @concerned_citizen_ticket %>
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h1>New <%= params[:type] == 'cross_bore' ? 'Cross Bore' : (params[:type] == 'concerned_citizen' ? "Concerned Citizen" : '') %> Ticket</h1>
+      <%=  render 'form', concerned_citizen_ticket: @concerned_citizen_ticket  %>
     </div>
   </div>
 </div>
+

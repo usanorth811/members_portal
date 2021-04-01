@@ -10,7 +10,8 @@
           <%= f.input :billing, class: "form-control"%>
           <%= f.input :member_code, class: "form-control" %>
           <%= f.association :group, collection: current_user.groups, class: "form-control" %>
-          <%= f.input :delivery_type, class: "form-control" %>
+          <%= f.input :ticket_type, collection: ['cross_bore','concerned_citizen'], class: "form-control" %>
+          <%= f.input :delivery_type, collection: ['email', 'sms'], class: "form-control" %>
           <%= f.input :deliver_to, class: "form-control" %>
           <%= f.input :email, class: "form-control" %>
           <%= f.input :phone, class: "form-control" %>
