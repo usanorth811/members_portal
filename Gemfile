@@ -93,3 +93,5 @@ gem 'rspec-rails', '~> 3.8'
 gem 'coffee-rails', '~> 5.0.0'
 
 gem 'hotwire-rails', '~> 0.1.2'
+
+gem 'geocoder'

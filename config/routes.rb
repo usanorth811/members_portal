@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :notifications
   resources :deliveries
-  resources :concerned_citizen_tickets
+  resources :concerned_citizen_tickets, path: "tickets"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :destinations

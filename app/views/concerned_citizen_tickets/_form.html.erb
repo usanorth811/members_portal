@@ -4,13 +4,21 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
+    <% if params[:type].present? %>
+      <%= f.hidden_field :ticket_type, value: params[:type] %>
+    <% else %>
+      <%= f.input :ticket_type %>
+    <% end %>
+
     <%= f.input :first %>
     <%= f.input :last %>
     <%= f.input :email %>
-    <%= f.input :state %>
-    <%= f.input :city %>
-    <%= f.input :zip %>
+    <%= f.input :state, value: request.location.state  %>
+    <%= f.input :city, value: request.location.city  %>
+    <%= f.input :zip, value: request.location.postal_code  %>
     <%= f.input :address %>
+    <%= f.input :street %>
+    <%= f.input :cross_st %>
     <%= f.input :description %>
   </div>
 <br/>
