@@ -7,8 +7,6 @@
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
         <div class="form">
-          <%= f.input :billing, class: "form-control"%>
-          <%= f.input :member_code, class: "form-control" %>
           <%= f.association :group, collection: current_user.groups, class: "form-control" %>
           <%= f.input :ticket_type, collection: ['cross_bore','concerned_citizen'], class: "form-control" %>
           <%= f.input :delivery_type, collection: ['email', 'sms'], class: "form-control" %>
@@ -16,7 +14,7 @@
           <%= f.input :email, class: "form-control" %>
           <%= f.input :phone, class: "form-control" %>
           <%= f.input :city, class: "form-control" %>
-          <%= f.input :state, class: "form-control" %>
+          <%= f.input :state, collection: ['California', 'Nevada'], class: "form-control" %>
           <%= f.input :zip, class: "form-control" %>
         </div>
 

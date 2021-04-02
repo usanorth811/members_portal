@@ -183,8 +183,14 @@
 </style>
 <nav class="navbar navbar-light ">
   <div class="container-fluid">
-    <%= link_to root_path do %>
-      <%= image_tag("usanorthlogo7.svg", :id => "usan-logo", :style =>"align-items: left;", alt: 'USA North 811 Logo') %>
+    <% if user_signed_in? %>
+      <%= link_to root_path do %>
+        <%= image_tag("usanorthlogo7.svg", :id => "usan-logo", :style =>"align-items: left;", alt: 'USA North 811 Logo') %>
+      <% end %>
+    <% else %>
+      <%= link_to 'https://usanorth811.org' do %>
+        <%= image_tag("usanorthlogo7.svg", :id => "usan-logo", :style =>"align-items: left;", alt: 'USA North 811 Logo') %>
+      <% end %>
     <% end %>
     <div class="d-flex">
       <% if user_signed_in? %>

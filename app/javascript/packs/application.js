@@ -13,7 +13,7 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
+require("@rails/ujs").start()
 import { Turbo, cable } from "@hotwired/turbo-rails"
 
 import { Application } from "stimulus"

@@ -40,8 +40,8 @@
   <table class="table">
     <thead>
     <tr>
-      <th>Billing ID</th>
-      <th>Member code</th>
+      <th>Member Name</th>
+      <th>Ticket Type</th>
       <th>Delivery type</th>
       <th>Deliver to</th>
       <th>Email</th>
@@ -55,8 +55,7 @@
     <tbody>
     <% @deliveries.each do |delivery| %>
       <tr>
-        <td><%= delivery.billing %></td>
-        <td><%= delivery.member_code %></td>
+        <td><%= delivery.group.name %></td>
         <td><%= delivery.ticket_type %></td>
         <td><%= delivery.delivery_type %></td>
         <td><%= delivery.deliver_to %></td>
