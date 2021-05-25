@@ -22,7 +22,7 @@
     </div>
     <div class='col-lg-3'>
       <h4 style='font-weight: 600 !important'>
-        <%= link_to raw("Concerned Citizen & Cross Bore Tickets <small>[beta]</small>"), deliveries_path %>
+        <%= link_to raw("Concerned Citizen & Cross Bore Notifications <small>[beta]</small>"), deliveries_path %>
       </h4>
     </div>
     <div class='col-md-12'>
@@ -48,7 +48,7 @@
           <tr>
             <td><%= link_to "View Membership", group_path(notification.group_id) %></td>
             <td><%= link_to "View Rule", delivery_path(notification.delivery_id) %></td>
-            <td><%= link_to "View Ticket", concerned_citizen_ticket_path(notification.concerned_citizen_ticket_id) %></td>
+            <td><%= link_to "View Notification", concerned_citizen_ticket_path(notification.concerned_citizen_ticket_id) %></td>
             <td><%= notification.description %></td>
             <td><%= link_to 'Delete', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>

@@ -3,7 +3,6 @@ class Delivery < ApplicationRecord
   has_many :notifications,  :dependent => :destroy
 
   validates :ticket_type, presence: true
-  validates :city, presence: true
   validates :state, presence: true
   validates :delivery_type, presence: true
   validates :email, presence: true, if: :email_notification
@@ -17,6 +16,14 @@ class Delivery < ApplicationRecord
 
   def sms_notification
     delivery_type == 'sms'
+  end
+
+  def has_county
+    county.nil?
+  end
+
+  def has_state
+    state.nil?
   end
 
 end

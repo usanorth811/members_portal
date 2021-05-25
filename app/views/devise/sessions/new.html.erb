@@ -13,10 +13,9 @@
             <h2>Log in</h2>
           </div>
           <div class="card card-body">
-
-
-
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
               <div class="field">
                 <%= f.label :email %><br />
                 <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
@@ -33,9 +32,9 @@
                   <%= f.label :remember_me %>
                 </div>
               <% end %>
-
+              <br/>
               <div class="actions">
-                <%= f.submit "Log in" %>
+                <%= f.submit "Log in", class: 'btn btn-info' %>
               </div>
             <% end %>
 

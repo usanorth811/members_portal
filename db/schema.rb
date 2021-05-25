@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_212336) do
+ActiveRecord::Schema.define(version: 2021_05_24_173320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_212336) do
     t.string "ticket_type"
     t.string "street"
     t.string "cross_st"
+    t.string "county"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -151,6 +152,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_212336) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ticket_type"
+    t.string "county"
     t.index ["group_id"], name: "index_deliveries_on_group_id"
   end
 

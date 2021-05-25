@@ -6,6 +6,7 @@ class ConcernedCitizenTicket < ApplicationRecord
   validates :last, presence: true
   validates :email, presence: true
   validates :state, presence: true
+  validates :county, presence: true
   validates :city, presence: true
   validates :zip, :numericality => {:allow_blank => true}
   validates :ticket_type, presence: true

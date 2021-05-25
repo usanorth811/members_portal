@@ -10,11 +10,13 @@
       <%= f.input :ticket_type, collection: ['concerned_citizen', 'cross_bore'] %>
       <br/>
     <% end %>
-
+    <% @counties = %w[Alameda Alpine Amador Butte Calaveras Colusa Contra\ Costa Del\ Norte El\ Dorado Fresno Glenn Humboldt Kern Kings Lake Lassen Madera Marin Mariposa Mendocino Merced Modoc Mono Monterey Napa Nevada Placer Plumas Sacramento San\ Benito San\ Francisco San\ Joaquin San\ Luis\ Obispo San\ Mateo Santa\ Clara Santa\ Cruz Shasta Sierra Siskiyou Solano Sonoma Stanislaus Sutter Tehama Trinity Tulare Tuolumne Yolo Yuba
+Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyon Mineral Nye Pershing Storey Washoe White\ Pine] %>
     <%= f.input :first %>
     <%= f.input :last %>
     <%= f.input :email %>
     <%= f.input :state, collection: ['California', 'Nevada'], input_html: { value: request.location.state }  %>
+    <%= f.input :county, collection: @counties  %>
     <%= f.input :city, input_html: { value: request.location.city }  %>
     <%= f.input :zip, input_html: { value: request.location.postal_code } %>
     <%= f.input :address %>
@@ -24,6 +26,6 @@
   </div>
 <br/>
   <div class="form-actions">
-    <%= f.button :submit, 'Create Ticket', class: 'btn btn-info' %>
+    <%= f.button :submit, 'Submit', class: 'btn btn-info' %>
   </div>
 <% end %>
