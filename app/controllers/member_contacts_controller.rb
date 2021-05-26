@@ -215,7 +215,8 @@ class MemberContactsController < ApplicationController
   end
   def api_delete
     api_url = ENV['API_URL']
-    @result = HTTParty.delete( api_url + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
+
+    @result = HTTParty.delete( "http://UsanPull1API.usanorth811.org" + "/member_contacts/#{@member_contact.contact_id}?user_name=CALEBWOODS&member_code=#{@member_contact.member_code}",
                               :headers => { 'Content-Type' => 'application/json' } )
 
     case @result.code

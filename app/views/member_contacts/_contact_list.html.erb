@@ -17,7 +17,11 @@
               <%= link_to 'Edit', new_member_contact_path(member_id: contact['attributes']['member_id'],
                                                           stype: 'UPDATE', contact_id: contact['id'],
                                                           member_code: @member_code, group_id: @group),
-                                                          "data-controller" => "prefetch" %>
+                                                          "data-controller" => "prefetch" %> |
+              <%= link_to 'Delete', new_member_contact_path(member_id: contact['attributes']['member_id'],
+                                                          stype: 'DELETE', contact_id: contact['id'],
+                                                          member_code: @member_code, group_id: @group),
+                          "data-controller" => "prefetch" %>
             </div>
             </div>
           <% end %>

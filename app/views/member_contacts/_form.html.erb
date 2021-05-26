@@ -1,7 +1,7 @@
 
 <%= form_with(model: @member_contact, id: @contact.present? ? (@contact['id']) : (@member_contact.contact_id.present? ? @member_contact.contact_id : params[:member_id])) do |f| %>
   <div class="card-header">
-    <%= @stype == 'INSERT' ? 'Create' : 'Editing' %> Contact
+    <%= @stype == 'INSERT' ? 'Create' : @stype == 'DELETE' ? 'Delete' : 'Editing' %> Contact
   </div>
   <div class="card-body text-start">
     <% if @member_contact.errors.any? %>
@@ -50,7 +50,7 @@
 
     <br/>
     <div class="form-actions">
-      <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: 'btn btn-info' %>
+      <%= f.submit "#{ @stype.present? ? (@stype) : (@member_contact.stype) } CONTACT", class: "btn #{@stype == 'DELETE' ? 'btn-danger' : 'btn-info'}" %>
     </div>
   </div>
 <% end %>

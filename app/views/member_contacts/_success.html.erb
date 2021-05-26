@@ -4,16 +4,24 @@
       <%= @contact_types.fetch(@member_contact.contact_type) %>
     </div>
     <div class="card-body text-start">
-      <div class="badge badge-success " style='display: block; font-size: 12px'>
-        <%= @member_contact.stype == 'INSERT' ? 'Created' : 'Updated' %> Successfully
+      <div class="badge <%= @member_contact.stype == 'DELETE' ? 'badge-danger' : 'badge-success' %> " style='display: block; font-size: 12px'>
+        <%= @member_contact.stype == 'INSERT' ? 'Created' : @member_contact.stype == 'DELETE' ? 'Deleted' : 'Updated' %> Successfully
       </div>
       <br/>
       <strong>Contact Type: </strong><br/> <%= @contact_types.fetch(@member_contact.contact_type) %> <br/>
       <strong>Contact: </strong><br/> <%= @member_contact.contact_name %> <br/>
       <strong>Phone: </strong><br/> <%= @member_contact.phone %> <br/>
       <strong>Email: </strong><br/> <%= @member_contact.email %> <br/>
-
-      <%= link_to 'Edit', new_member_contact_path(member_id: @member_contact.member_id, stype: 'UPDATE', contact_id: @member_contact.contact_id, member_code: @member_contact.member_code, group_id: @member_contact.group_id) %>
+      <% if @member_contact.stype == 'DELETE' %>
+        <% else %>
+      <%= link_to 'Edit', new_member_contact_path(member_id: @member_contact.member_id,
+                                                  stype: 'UPDATE', contact_id: @member_contact.contact_id,
+                                                  member_code: @member_contact.member_code,
+                                                  group_id: @member_contact.group_id) %> |
+      <%= link_to 'Delete', new_member_contact_path(member_id: @member_contact.member_id,
+                                                    stype: 'DELETE', contact_id: @member_contact.contact_id,
+                                                    member_code: @member_contact.member_code, group_id: @member_contact.group_id)%>
+        <% end %>
     </div>
   <% end %>
 <% end %>

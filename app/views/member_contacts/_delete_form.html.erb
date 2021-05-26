@@ -1,0 +1,14 @@
+
+<%= form_with(model: @member_contact, url: member_contacts_url) do |f| %>
+
+      <%= f.hidden_field :contact_type, value: member_contact['contact_type'] %>
+      <%= f.hidden_field :group_id, value: group %>
+      <%= f.hidden_field :member_id, value: member_contact['member_id'] %>
+      <%= f.hidden_field :member_code, value: member_contact['member_code'] %>
+      <%= f.hidden_field :contact_id, value: member_contact['id'] %>
+      <%= f.hidden_field :stype, value: 'DELETE' %>
+
+    <div class="form-actions">
+      <%= f.submit "DELETE CONTACT", class: 'btn btn-danger' %>
+    </div>
+<% end %>

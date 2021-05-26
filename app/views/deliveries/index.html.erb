@@ -37,39 +37,44 @@
 
   </div>
   <h3>Notification Delivery Rules</h3>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Member Name</th>
-      <th>Notification Type</th>
-      <th>Notification Delivery type</th>
-      <th>Deliver Notification to</th>
-      <th>Email</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @deliveries.each do |delivery| %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
       <tr>
-        <td><%= delivery.group.name %></td>
-        <td><%= delivery.ticket_type %></td>
-        <td><%= delivery.delivery_type %></td>
-        <td><%= delivery.deliver_to %></td>
-        <td><%= delivery.email %></td>
-        <td><%= delivery.city %></td>
-        <td><%= delivery.state %></td>
-        <td><%= delivery.zip %></td>
-        <td><%= link_to 'Show', delivery %></td>
-        <td><%= link_to 'Edit', edit_delivery_path(delivery) %></td>
-        <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Member Name</th>
+        <th>Notification Type</th>
+        <th>Notification Delivery type</th>
+        <th>Deliver Notification to</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>County</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+      <% @deliveries.each do |delivery| %>
+        <tr>
+          <td><%= delivery.group.name %></td>
+          <td><%= delivery.ticket_type %></td>
+          <td><%= delivery.delivery_type %></td>
+          <td><%= delivery.deliver_to %></td>
+          <td><%= delivery.email %></td>
+          <td><%= delivery.city %></td>
+          <td><%= delivery.county %></td>
+          <td><%= delivery.state %></td>
+          <td><%= delivery.zip %></td>
+          <td><%= link_to 'Show', delivery %></td>
+          <td><%= link_to 'Edit', edit_delivery_path(delivery) %></td>
+          <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
 
   <br>
 
