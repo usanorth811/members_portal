@@ -8,21 +8,34 @@
         <% @counties = %w[Alameda Alpine Amador Butte Calaveras Colusa Contra\ Costa Del\ Norte El\ Dorado Fresno Glenn Humboldt Kern Kings Lake Lassen Madera Marin Mariposa Mendocino Merced Modoc Mono Monterey Napa Nevada Placer Plumas Sacramento San\ Benito San\ Francisco San\ Joaquin San\ Luis\ Obispo San\ Mateo Santa\ Clara Santa\ Cruz Shasta Sierra Siskiyou Solano Sonoma Stanislaus Sutter Tehama Trinity Tulare Tuolumne Yolo Yuba
 Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyon Mineral Nye Pershing Storey Washoe White\ Pine] %>
         <div class="form">
-          <%= f.association :group, collection: current_user.groups, class: "form-control" %>
-          <%= f.input :ticket_type, collection: ['cross_bore','concerned_citizen'], class: "form-control" %>
-          <%= f.input :delivery_type, collection: ['email', 'sms'], class: "form-control" %>
-          <%= f.input :deliver_to, class: "form-control" %>
-          <%= f.input :email, class: "form-control" %>
-          <%= f.input :phone, class: "form-control" %>
+          <%= f.association :group, label: 'Select the which company this rule will apply to', collection: current_user.groups, class: "form-control" %>
+          <br/>
+          <%= f.input :ticket_type, label: 'What type of notification request will this rule apply to?', collection: ['cross_bore','concerned_citizen'], class: "form-control" %>
+          <br/>
+          <%= f.input :delivery_type, label: 'How do you want to receive the notifications?', collection: ['email', 'sms'], class: "form-control" %>
+          <br/>
+          <%= f.input :deliver_to, label: 'Who is receiving the notifications?', class: "form-control", placeholder: 'Name' %>
+          <%= f.input :email, class: "form-control", placeholder: 'Email' %>
+          <%= f.input :phone, class: "form-control", placeholder: 'Phone' %>
+          <br/>
           <%= f.input :state, collection: ['California', 'Nevada'], class: "form-control" %>
+          <i>If you'd like to receive notifications for the entire state, just enter the state and leave the county and city blank.</i>
+          <br/>
+          <br/>
           <%= f.input :county, collection: @counties, class: "form-control" %>
+          <i>If you'd like to receive notifications for a specific county, select the state and county, leaving the city blank.</i>
+          <br/>
+          <br/>
           <%= f.input :city, class: "form-control" %>
-          <%= f.input :zip, class: "form-control" %>
+          <i>If you'd like to receive notifications for a specific city, select the state, county, and city.</i>
+          <br/>
+          <br/>
         </div>
-
+        <br/>
         <div class="form-actions">
-          <%= f.button :submit %>
+          <%= f.button :submit, "Create Notification Rule", class: 'btn btn-info' %>
         </div>
+        <br/>
       <% end %>
     </div>
   </div>
