@@ -12,17 +12,29 @@
     <% end %>
     <% @counties = %w[Alameda Alpine Amador Butte Calaveras Colusa Contra\ Costa Del\ Norte El\ Dorado Fresno Glenn Humboldt Kern Kings Lake Lassen Madera Marin Mariposa Mendocino Merced Modoc Mono Monterey Napa Nevada Placer Plumas Sacramento San\ Benito San\ Francisco San\ Joaquin San\ Luis\ Obispo San\ Mateo Santa\ Clara Santa\ Cruz Shasta Sierra Siskiyou Solano Sonoma Stanislaus Sutter Tehama Trinity Tulare Tuolumne Yolo Yuba
 Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyon Mineral Nye Pershing Storey Washoe White\ Pine] %>
-    <%= f.input :first %>
-    <%= f.input :last %>
-    <%= f.input :email %>
-    <%= f.input :state, collection: ['California', 'Nevada'], input_html: { value: request.location.state }  %>
+    <br/>
+
+    <hr/>
+    <span style="font-size: 2.2vh; font-weight: bold">Your Information</span>
+    <%= f.input :first, placeholder: 'First Name', label: 'First Name' %>
+    <%= f.input :last, placeholder: 'Last Name', label: 'Last Name' %>
+    <%= f.input :email, placeholder: 'Email' %>
+    <br/>
+    <hr/>
+    <span style="font-size: 2.2vh; font-weight: bold">Worksite Information</span>
+    <%= f.input :state, collection: ['California', 'Nevada'], selected: request.location.state %>
     <%= f.input :county, collection: @counties  %>
     <%= f.input :city, input_html: { value: request.location.city }  %>
     <%= f.input :zip, input_html: { value: request.location.postal_code } %>
-    <%= f.input :address %>
-    <%= f.input :street %>
-    <%= f.input :cross_st %>
-    <%= f.input :description %>
+    <br/>
+    <b>Is the work taking place at an address?</b>
+    <%= f.input :address, label: "If so, place the address here.", placeholder: "Address" %>
+    <br/>
+    <b>If not, please provide the nearest intersection as a reference</b>
+    <%= f.input :street, label: "Street", placeholder: "Street" %>
+    <%= f.input :cross_st, label: "Intersecting street", placeholder: "Cross Street" %>
+    <br/>
+    <%= f.input :description, label: "Description", placeholder: "Feel free to provide any further details you believe may be helpful." %>
   </div>
 <br/>
   <div class="form-actions">
