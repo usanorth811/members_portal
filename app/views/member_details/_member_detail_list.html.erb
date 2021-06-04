@@ -70,9 +70,14 @@
             <% end %>
         </div>
         <hr/>
-        <a href="https://fs26.formsite.com/6jJPTG/daoiumyrko/fill?id2=<%= current_user.email %>&id0=<%= member_detail['attributes']['code'] %>">
-          Change Ticket Destination
-        </a>
+        <div
+          data-controller="content-loader"
+          data-content-loader-url-value="<%= member_destination_path(
+                                                 member_id: member_detail['attributes']['member_id'],
+                                                 code: member_detail['attributes']['code'],
+                                                 group_id: @group) %>">
+          <i class="fas fa-spinner fa-spin"></i> Loading Destination...
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,13 @@
+
+<% @member_destinations.each do |destination| %>
+  <% if destination['which_destination'] == 'MAIN' %>
+    <%= turbo_frame_tag 'new_destination' do %>
+      <strong>Delivery Type:</strong> <%= destination['delivery_type'] %>
+      <strong>Delivery Address:</strong> <%= destination['delivery_address'] %>
+      <strong>Updated:</strong> <%= Date.parse(destination['updated']).strftime("%m/%d/%Y") %>
+      <strong>Updated By:</strong> <%= destination['updated_by'] %>
+      <br/>
+      <%= link_to 'Request to Change Destination', new_destination_path(destination: @destination, old_destination: destination['delivery_address'], code: @code, group: @group) %>
+    <% end %>
+  <% end %>
+<% end %>

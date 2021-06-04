@@ -11,7 +11,17 @@ class DestinationsController < ApplicationController
   # GET /destinations/1.json
   def show
   end
-
+  def member_destination
+    @destination = Destination.new
+    @group = params[:group_id]
+    @code = params['code']
+    require 'httparty'
+    require 'json'
+    response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
+    pp response
+    @member_destinations = response
+    render partial: 'destinations/member_destination'
+  end
   # GET /destinations/new
   def new
     @destination = Destination.new

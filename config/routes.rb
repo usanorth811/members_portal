@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   get :contact_list, to: 'member_contacts#contact_list'
   get :member_detail_list, to: 'member_details#member_detail_list'
+  get :member_destination, to: 'destinations#member_destination'
   get :member_shape_log, to: 'member_details#member_shape_log'
   devise_for :users
   resources :contacts

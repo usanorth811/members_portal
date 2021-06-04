@@ -4,14 +4,14 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :old_destination %>
+    <%= f.input :old_destination, input_html: {value: params['old_destination']}  %>
     <%= f.input :new_destination %>
-    <%= f.input :code %>
-    <%= f.association :group %>
-    <%= f.association :user %>
+    <%= f.input :code, input_html: {value: params['code']} %>
+    <%= f.hidden_field :group_id, value: params['group'] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
-
+<br/>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Submit Request', class: 'btn btn-info'%>
   </div>
 <% end %>
