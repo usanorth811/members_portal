@@ -4,17 +4,11 @@ class MemberContactsController < ApplicationController
 
   def set_contact_types
     @contact_types = { "RCVR" => 'MARKING CONTACT',
-                       "ALTR" => 'ALTERNATE',
                        'BILL' => 'BILLING',
                        'BORD' => 'Board Rep',
-                       'DAMG' => 'EMERGENCY/DAMAGES',
                        'ENGR' => 'ENGINEERING',
                        'DATA' => 'DATABASE',
                        'EMER' => 'EMERGENCY/DAMAGES',
-                       'MAIN' => 'MAIN SWITCHBOARD',
-                       'SURV' => 'SURVEYOR',
-                       'CONT' => 'MARKING CONTACT',
-                       'NITE' => 'NIGHT TIME',
                        'AHRS' => 'AFTER HOURS',
                        'VACU' => 'VACUUM',
                        'REPR' => 'MEMBER REP'}
@@ -104,17 +98,11 @@ class MemberContactsController < ApplicationController
     billing = Group.find(@member_contact.group_id)
     @member_contact.billing = billing.billing_id
     @contact_types = { "RCVR" => 'MARKING CONTACT',
-                       "ALTR" => 'ALTERNATE',
                        'BILL' => 'BILLING',
                        'BORD' => 'Board Rep',
-                       'DAMG' => 'EMERGENCY/DAMAGES',
                        'ENGR' => 'ENGINEERING',
                        'DATA' => 'DATABASE',
                        'EMER' => 'EMERGENCY/DAMAGES',
-                       'MAIN' => 'MAIN SWITCHBOARD',
-                       'SURV' => 'SURVEYOR',
-                       'CONT' => 'MARKING CONTACT',
-                       'NITE' => 'NIGHT TIME',
                        'AHRS' => 'AFTER HOURS',
                        'VACU' => 'VACUUM',
                        'REPR' => 'MEMBER REP'}

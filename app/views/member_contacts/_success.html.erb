@@ -17,10 +17,8 @@
       <%= link_to 'Edit', new_member_contact_path(member_id: @member_contact.member_id,
                                                   stype: 'UPDATE', contact_id: @member_contact.contact_id,
                                                   member_code: @member_contact.member_code,
-                                                  group_id: @member_contact.group_id) %> |
-      <%= link_to 'Delete', new_member_contact_path(member_id: @member_contact.member_id,
-                                                    stype: 'DELETE', contact_id: @member_contact.contact_id,
-                                                    member_code: @member_contact.member_code, group_id: @member_contact.group_id)%>
+                                                  group_id: @member_contact.group_id) %>
+
         <% end %>
     </div>
   <% end %>
