@@ -3,7 +3,7 @@ class DestinationMailer < ApplicationMailer
 
   def destination
 
-    mail(to: "caleb.woods@usanorth811.org", subject: 'Destination Change Request', layout: 'destination_mailer')
+    mail(to: "memberservices@usanorth811.org", subject: 'Destination Change Request', layout: 'destination_mailer')
   end
 
 end
