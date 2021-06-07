@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :delete_requests
   resources :notifications
   resources :deliveries
   resources :concerned_citizen_tickets, path: "tickets"

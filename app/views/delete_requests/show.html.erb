@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @delete_request.code %>
+</p>
+
+<p>
+  <strong>Billing:</strong>
+  <%= @delete_request.billing %>
+</p>
+
+<p>
+  <strong>Contact type:</strong>
+  <%= @delete_request.contact_type %>
+</p>
+
+<p>
+  <strong>Contact name:</strong>
+  <%= @delete_request.contact_name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @delete_request.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @delete_request.email %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @delete_request.user_id %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @delete_request.completed %>
+</p>
+
+<%= link_to 'Edit', edit_delete_request_path(@delete_request) %> |
+<%= link_to 'Back', delete_requests_path %>

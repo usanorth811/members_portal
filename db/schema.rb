@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_173320) do
+ActiveRecord::Schema.define(version: 2021_06_07_173609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,21 @@ ActiveRecord::Schema.define(version: 2021_05_24_173320) do
     t.index ["code_id"], name: "index_contacts_on_code_id"
   end
 
+  create_table "delete_requests", force: :cascade do |t|
+    t.string "code"
+    t.string "billing"
+    t.string "contact_type"
+    t.string "contact_name"
+    t.string "phone"
+    t.string "email"
+    t.bigint "user_id", null: false
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "contact_number"
+    t.index ["user_id"], name: "index_delete_requests_on_user_id"
+  end
+
   create_table "deliveries", force: :cascade do |t|
     t.string "billing"
     t.string "member_code"
@@ -164,6 +179,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_173320) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "member"
+    t.boolean "completed"
     t.index ["group_id"], name: "index_destinations_on_group_id"
     t.index ["user_id"], name: "index_destinations_on_user_id"
   end
@@ -272,6 +289,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_173320) do
   add_foreign_key "codestatuses", "groups"
   add_foreign_key "codestatuses", "users"
   add_foreign_key "contacts", "codes"
+  add_foreign_key "delete_requests", "users"
   add_foreign_key "deliveries", "groups"
   add_foreign_key "destinations", "groups"
   add_foreign_key "destinations", "users"

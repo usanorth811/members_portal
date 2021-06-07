@@ -5,7 +5,7 @@ ActiveAdmin.register Destination do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :old_destination, :new_destination, :code, :group_id, :user_id
+   permit_params :old_destination, :new_destination, :code, :group_id, :user_id, :member, :completed
   #
   # or
   #

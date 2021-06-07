@@ -15,6 +15,7 @@ class DestinationsController < ApplicationController
     @destination = Destination.new
     @group = params[:group_id]
     @code = params['code']
+    @member = params['member_id']
     require 'httparty'
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
@@ -39,9 +40,14 @@ class DestinationsController < ApplicationController
 
     respond_to do |format|
       if @destination.save
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_destination', partial: 'destinations/request_submitted', locals: {
+            member_id: @destination.member,
+            code: @destination.code,
+            group_id: @destination.group_id}) }
         format.html { redirect_to @destination.group, notice: 'Destination change request was submitted. A representative will contact you shortly.' }
         format.json { render :show, status: :created, location: @destination }
       else
+        format.html { redirect_to @destination.group, notice: 'Destination change request was submitted. A representative will contact you shortly.' }
         format.html { redirect_to @destination.group, notice: 'There was an error processing your request. Please try again' }
         format.json { render json: @destination.errors, status: :unprocessable_entity }
       end
@@ -80,6 +86,6 @@ class DestinationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def destination_params
-      params.require(:destination).permit(:old_destination, :new_destination, :code, :group_id, :user_id)
+      params.require(:destination).permit(:old_destination, :new_destination, :code, :group_id, :user_id, :member, :completed)
     end
 end

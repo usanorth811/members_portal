@@ -1,0 +1,11 @@
+<div class="badge badge-success " style='width: 100%; display: block; font-size: 12px'>
+  Request Submitted
+</div>
+<div
+  data-controller="content-loader"
+  data-content-loader-url-value="<%= member_destination_path(
+                                         member_id: member_id,
+                                         code: code,
+                                         group_id: group_id) %>">
+  <i class="fas fa-spinner fa-spin"></i> Loading Destination...
+</div>

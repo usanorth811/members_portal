@@ -6,7 +6,8 @@
   <div class="form-inputs">
     <%= f.input :old_destination, input_html: {value: params['old_destination']}  %>
     <%= f.input :new_destination %>
-    <%= f.input :code, input_html: {value: params['code']} %>
+    <%= f.hidden_field :code, value: params['code'] %>
+    <%= f.hidden_field :member, value: params['member'] %>
     <%= f.hidden_field :group_id, value: params['group'] %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   </div>

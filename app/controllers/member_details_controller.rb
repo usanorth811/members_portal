@@ -31,6 +31,7 @@ class MemberDetailsController < ApplicationController
   end
 
   def member_shape_log
+    @codestatus = Codestatus.new
     @group = params[:group_id]
     @member_id = params[:member_id]
     @code = params[:code]

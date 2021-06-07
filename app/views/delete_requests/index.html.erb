@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Delete Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Billing</th>
+      <th>Contact type</th>
+      <th>Contact name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>User</th>
+      <th>Compleated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @delete_requests.each do |delete_request| %>
+      <tr>
+        <td><%= delete_request.code %></td>
+        <td><%= delete_request.billing %></td>
+        <td><%= delete_request.contact_type %></td>
+        <td><%= delete_request.contact_name %></td>
+        <td><%= delete_request.phone %></td>
+        <td><%= delete_request.email %></td>
+        <td><%= delete_request.user_id %></td>
+        <td><%= delete_request.compleated %></td>
+        <td><%= link_to 'Show', delete_request %></td>
+        <td><%= link_to 'Edit', edit_delete_request_path(delete_request) %></td>
+        <td><%= link_to 'Destroy', delete_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Delete Request', new_delete_request_path %>

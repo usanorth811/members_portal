@@ -20,6 +20,10 @@
       <div>
         <strong>Created On: </strong>
         <br/><%= Date.parse(shape['created']).strftime("%m/%d/%Y") %>
+        <%= turbo_frame_tag 'sar_status_form' do %>
+          <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
+        <% end %>
+          </div>
       </div>
     <% end %>
   <% end %>

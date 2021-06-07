@@ -28,6 +28,7 @@ class MemberContactsController < ApplicationController
   end
 
   def contact_list
+    @delete_request = DeleteRequest.new
     require 'httparty'
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)

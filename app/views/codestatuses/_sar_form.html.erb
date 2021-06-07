@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'sar_status_form' do %>
 
   <%= form_with(model: @codestatus, local: true) do |form| %>
-      <form>
+      <form >
         <div class="form-group">
           <%= form.hidden_field :code, value: member_code %>
           <%= form.hidden_field :group_id, value: group %>
@@ -21,10 +21,10 @@
                     border: none !important;
                 }
             </style>
-            <%= form.submit 'Mark SAR as up to date',
+            <%= form.submit 'Confirm SAR is up to date',
                             class: 'btn btn-sm btn-outline-danger',
                             type: "submit" ,
-                            style: 'font-weight: 600 !important'%>
+                            style: 'font-weight: 600 !important; margin-top: -45px; margin-left: -5px'%>
           </div>
         </div>
       </form>
