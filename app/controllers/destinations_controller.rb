@@ -11,6 +11,16 @@ class DestinationsController < ApplicationController
   # GET /destinations/1.json
   def show
   end
+
+  def get_destination
+    @member_destinations = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
+    if @member_destinations.code == 500
+      get_destination
+    else
+      render partial: 'destinations/member_destination'
+    end
+  end
+
   def member_destination
     @destination = Destination.new
     @group = params[:group_id]
@@ -18,19 +28,7 @@ class DestinationsController < ApplicationController
     @member = params['member_id']
     require 'httparty'
     require 'json'
-    response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
-    @member_destinations = response
-    if @member_destinations.code == 500
-      @member_destinations = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
-      if @member_destinations.code == 500
-        @member_destinations = HTTParty.get("http://UsanPull1API.usanorth811.org/member_destinations?member_id="+ params[:member_id], :verify => false)
-      else
-        render partial: 'destinations/member_destination'
-      end
-    else
-      render partial: 'destinations/member_destination'
-    end
-
+    get_destination
   end
   # GET /destinations/new
   def new

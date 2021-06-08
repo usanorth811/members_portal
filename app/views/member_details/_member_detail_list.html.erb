@@ -46,6 +46,7 @@
           <div class="col-lg-4 text-start">
             <div
               data-controller="content-loader"
+              data-content-loader-lazy-loading-value=""
               data-content-loader-url-value="<%= member_shape_log_path(
                                                      member_id: member_detail['attributes']['member_id'],
                                                      code: member_detail['attributes']['code'],
@@ -72,6 +73,7 @@
         <hr/>
         <div
           data-controller="content-loader"
+          data-content-loader-lazy-loading-value=""
           data-content-loader-url-value="<%= member_destination_path(
                                                  member_id: member_detail['attributes']['member_id'],
                                                  code: member_detail['attributes']['code'],

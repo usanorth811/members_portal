@@ -21,24 +21,29 @@ class MemberContactsController < ApplicationController
     @group = params[:group_id]
   end
 
+  def get_contacts
+    @attempts = @attempts + 1
+    response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
+    if response.code == 500 and @attempts <= 5
+      puts @attempts
+      get_contacts
+    else
+      @delete_request = DeleteRequest.new
+      @contact_list = response['data']
+      @member_id = params[:member_id]
+      @member_code = params[:member_code]
+      @group = params[:group_id]
+      @missing_contact_types = @contact_types.except('CONT')
+      @codestatus = Codestatus.new
+      render partial: 'member_contacts/contact_list'
+    end
+  end
+
   def contact_list
-    @delete_request = DeleteRequest.new
     require 'httparty'
     require 'json'
-    response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
-    if response.code == 500
-      response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
-      if response.code == 500
-        response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
-      end
-    end
-    @contact_list = response['data']
-    @member_id = params[:member_id]
-    @member_code = params[:member_code]
-    @group = params[:group_id]
-    @missing_contact_types = @contact_types.except('CONT')
-    @codestatus = Codestatus.new
-    render partial: 'member_contacts/contact_list'
+    @attempts = 0
+    get_contacts
   end
 
   # GET /member_contacts/1

@@ -30,22 +30,21 @@ class MemberDetailsController < ApplicationController
     render partial: 'member_details/member_detail_list'
   end
 
+  def get_shapes
+    @shapes = HTTParty.get("http://UsanPull1API.usanorth811.org/shape_version_logs?member_id="+ params[:member_id].to_s, :verify => false)
+    if @shapes.code == 500
+      get_shapes
+    else
+      render partial: 'member_details/member_shape_log'
+    end
+  end
+
   def member_shape_log
     @codestatus = Codestatus.new
     @group = params[:group_id]
     @member_id = params[:member_id]
     @code = params[:code]
-    @shapes = HTTParty.get("http://UsanPull1API.usanorth811.org/shape_version_logs?member_id="+ params[:member_id].to_s, :verify => false)
-    if @shapes.code == 500
-      @shapes = HTTParty.get("http://UsanPull1API.usanorth811.org/shape_version_logs?member_id="+ params[:member_id].to_s, :verify => false)
-      if @shapes.code == 500
-        @shapes = HTTParty.get("http://UsanPull1API.usanorth811.org/shape_version_logs?member_id="+ params[:member_id].to_s, :verify => false)
-      else
-        render partial: 'member_details/member_shape_log'
-      end
-    else
-      render partial: 'member_details/member_shape_log'
-    end
+    get_shapes
   end
   # GET /member_details/1
   # GET /member_details/1.json
