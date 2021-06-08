@@ -26,6 +26,12 @@ class MemberContactsController < ApplicationController
     require 'httparty'
     require 'json'
     response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
+    if response.code == 500
+      response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
+      if response.code == 500
+        response = HTTParty.get("http://UsanPull1API.usanorth811.org/member_contacts?member_id="+ params[:member_id], :verify => false)
+      end
+    end
     @contact_list = response['data']
     @member_id = params[:member_id]
     @member_code = params[:member_code]
