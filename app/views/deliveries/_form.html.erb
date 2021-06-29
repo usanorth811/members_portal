@@ -12,8 +12,11 @@ Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyo
           <br/>
           <%= f.input :ticket_type, label: 'What type of notification request will this rule apply to?', collection: ['cross_bore','concerned_citizen'], class: "form-control" %>
           <br/>
+          <% if false %>
           <%= f.input :delivery_type, label: 'How do you want to receive the notifications?', collection: ['email', 'sms'], class: "form-control" %>
-          <br/>
+            <br/>
+        <% end %>
+          <%= f.hidden_field :delivery_type, value: 'email' %>
           <%= f.input :deliver_to, label: 'Who is receiving the notifications?', class: "form-control", placeholder: 'Name' %>
           <%= f.input :email, class: "form-control", placeholder: 'Email' %>
           <%= f.input :phone, class: "form-control", placeholder: 'Phone' %>

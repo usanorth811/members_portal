@@ -7,8 +7,10 @@
     <% if params[:type].present? %>
       <%= f.hidden_field :ticket_type, value: params[:type] %>
     <% else %>
+      <span style="display: none">
       <%= f.input :ticket_type, collection: ['concerned_citizen', 'cross_bore'] %>
       <br/>
+        </span>
     <% end %>
     <% @counties = %w[Alameda Alpine Amador Butte Calaveras Colusa Contra\ Costa Del\ Norte El\ Dorado Fresno Glenn Humboldt Kern Kings Lake Lassen Madera Marin Mariposa Mendocino Merced Modoc Mono Monterey Napa Nevada Placer Plumas Sacramento San\ Benito San\ Francisco San\ Joaquin San\ Luis\ Obispo San\ Mateo Santa\ Clara Santa\ Cruz Shasta Sierra Siskiyou Solano Sonoma Stanislaus Sutter Tehama Trinity Tulare Tuolumne Yolo Yuba
 Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyon Mineral Nye Pershing Storey Washoe White\ Pine] %>
@@ -21,13 +23,13 @@ Carson Churchill Clark Douglas Elko Esmeralda Eureka Humboldt Lander Lincoln Lyo
     <%= f.input :email, placeholder: 'Email' %>
     <br/>
     <hr/>
-    <span style="font-size: 2.2vh; font-weight: bold">Worksite Information</span>
+    <span style="font-size: 2.2vh; font-weight: bold">What is the location of concern?</span>
     <%= f.input :state, collection: ['California', 'Nevada'], selected: request.location.state %>
     <%= f.input :county, collection: @counties  %>
     <%= f.input :city, input_html: { value: request.location.city }  %>
     <%= f.input :zip, input_html: { value: request.location.postal_code } %>
     <br/>
-    <b>Is the work taking place at an address?</b>
+    <b>Is the location of concern at a physical address?</b>
     <%= f.input :address, label: "If so, place the address here.", placeholder: "Address" %>
     <br/>
     <b>If not, please provide the nearest intersection as a reference</b>

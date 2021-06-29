@@ -4,6 +4,21 @@ class DeliveriesController < InheritedResources::Base
     @deliveries = Delivery.all.where(group_id: current_user.groups)
     @notifications = Notification.all.where(group_id: current_user.groups)
   end
+
+  def create
+    @delivery = Delivery.new(delivery_params)
+      respond_to do |format|
+        if @delivery.save
+          format.turbo_stream { redirect_to deliveries_path}
+          format.html { redirect_to @delivery, notice: 'Notification Rule was successfully created.' }
+          format.json { render :show, status: :created, location: @delivery }
+        else
+          format.html { render :new }
+          format.json { render json: @delivery.errors, status: :unprocessable_entity }
+        end
+      end
+  end
+
   private
 
     def delivery_params
