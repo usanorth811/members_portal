@@ -95,3 +95,4 @@ gem 'coffee-rails', '~> 5.0.0'
 gem 'hotwire-rails', '~> 0.1.2'
 
 gem 'geocoder'
+gem 'rack-cors'
