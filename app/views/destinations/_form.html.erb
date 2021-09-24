@@ -1,4 +1,4 @@
-
+<% if false %>
 <%= simple_form_for(@destination) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -16,3 +16,84 @@
     <%= f.button :submit, 'Submit Request', class: 'btn btn-info'%>
   </div>
 <% end %>
+<% end %>
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
+
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <form action="https://usanorth811--sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+
+        <input type=hidden name="orgid" value="00D7g000000H2um">
+        <input type=hidden name="retURL" value="https://811memberportal.com/groups/<%= params['group'] %>">
+
+        <!--  ----------------------------------------------------------------------  -->
+        <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+        <!--  these lines if you wish to test in debug mode.                          -->
+        <!--  <input type="hidden" name="debug" value=1>                              -->
+        <!--  <input type="hidden" name="debugEmail"                                  -->
+        <!--  value="caleb.woods@usanorth811.org">                                    -->
+        <!--  ----------------------------------------------------------------------  -->
+        <div class="form-inputs">
+          <label for="type">Type</label><select  id="type" name="type" class="form-control">
+          <option value="">--None--</option>
+          <option value="Cancel Membership">Cancel Membership</option>
+          <option value="Company Name Change">Company Name Change</option>
+          <option value="Destination Change" selected>Destination Change</option>
+          <option value="Feature Request">Feature Request</option>
+          <option value="Member Rep Change">Member Rep Change</option>
+          <option value="Membership Merge">Membership Merge</option>
+          <option value="New Membership">New Membership</option>
+          <option value="Problem">Problem</option>
+          <option value="Question">Question</option>
+          <option value="Update Service Area">Update Service Area</option>
+        </select><br>
+
+          <label for="name">Contact Name</label>
+          <input  id="name" maxlength="80" name="name" size="20" type="text" class="form-control"
+                  value="<%= current_user.profile.first_name %> <%= current_user.profile.last_name %>" />
+          <br>
+
+          <label for="email">Email</label>
+          <input  id="email" maxlength="80" name="email" size="20" type="text" class="form-control"
+                  value="<%= current_user.email %>"/>
+          <br>
+
+          <label for="phone">Phone</label>
+          <input  id="phone" maxlength="40" name="phone" size="20" type="text" class="form-control"
+                  value="<%= current_user.profile.phone %>"/>
+          <br>
+
+          <label for="company">Company</label>
+          <input  id="company" maxlength="80" name="company" size="20" type="text" class="form-control"
+                  value="<%= params['code'] %>"/>
+          <br>
+
+          <label for="subject">Subject</label>
+          <input  id="subject" maxlength="80" name="subject" size="20" type="text" class="form-control"
+                  value="Ticket Destination Change"/>
+          <br>
+
+          <label for="description">Description</label>
+          <textarea name="description" class="form-control" >Requesting to change destination from <%= params['old_destination'] %>,to [New Destination Here]
+    </textarea>
+          <br>
+        </div>
+        <input type="submit" name="submit" class="btn btn-info">
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
