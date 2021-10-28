@@ -96,3 +96,4 @@ gem 'hotwire-rails', '~> 0.1.2'
 
 gem 'geocoder'
 gem 'rack-cors'
+gem 'restforce', '~> 5.1.0'

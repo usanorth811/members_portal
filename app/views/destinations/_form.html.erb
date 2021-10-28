@@ -1,4 +1,3 @@
-<% if false %>
 <%= simple_form_for(@destination) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -16,7 +15,8 @@
     <%= f.button :submit, 'Submit Request', class: 'btn btn-info'%>
   </div>
 <% end %>
-<% end %>
+<% if false %>
+
 <!--  ----------------------------------------------------------------------  -->
 <!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
 <!--  If necessary, please modify the charset parameter to specify the        -->
@@ -32,7 +32,7 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <form action="https://usanorth811--sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+      <form action="https://usanorth811--sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST" data-turbo="false">
 
         <input type=hidden name="orgid" value="00D7g000000H2um">
         <input type=hidden name="retURL" value="https://damp-fjord-36427.herokuapp.com/groups/<%= params['group'] %>">
@@ -97,3 +97,4 @@
   </div>
 </div>
 
+<% end %>

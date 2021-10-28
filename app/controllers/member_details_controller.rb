@@ -35,6 +35,19 @@ class MemberDetailsController < ApplicationController
     if @shapes.code == 500
       get_shapes
     else
+      @active = (Date.today - 10.years)
+      if @shapes.first.present?
+
+        @shapes.each do |shape|
+          if shape['released'].present?
+          if Date.parse(shape['released']) != 'N/A'
+            if Date.parse(shape['released']) >= @active
+              @active = Date.parse(shape['released'])
+            end
+          end
+          end
+        end
+      end
       render partial: 'member_details/member_shape_log'
     end
   end
@@ -104,6 +117,8 @@ class MemberDetailsController < ApplicationController
   end
 
   def member_shape_list
+    @active = params[:active]
+
     @group = params[:group_id]
     @member_id = params[:member_id]
     @code = params[:code]

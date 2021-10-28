@@ -1,36 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-        <div class="table-responsive">
-          <table class="table table-striped table-hover align-middle">
-        <thead>
-        <tr>
-          <th scope="col">active?</th>
-          <th scope="col">version</th>
-          <th scope="col">created</th>
-          <th scope="col">created_by</th>
-          <th scope="col">completed</th>
-          <th scope="col">completed_by</th>
-          <th scope="col">released</th>
-          <th scope="col">released_by</th>
-          <th scope="col">request a copy</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @shapes.reverse.each do |shape| %>
-        <% if shape == @shapes.reverse.first %>
-          <tr class="table-success">
-            <td>Active <br/>
-              <small>
-                <%= turbo_frame_tag 'sar_status_form' do %>
-                  <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
-                  <% end %>
-                </small></td>
-
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead>
+          <tr>
+            <th scope="col">active?</th>
+            <th scope="col">version</th>
+            <th scope="col">created</th>
+            <th scope="col">created_by</th>
+            <th scope="col">completed</th>
+            <th scope="col">completed_by</th>
+            <th scope="col">released</th>
+            <th scope="col">released_by</th>
+            <th scope="col">request a copy</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @shapes.reverse.each do |shape| %>
+            <% if shape['released'].present? %>
+              <% if Date.parse(shape['released']).strftime("%m/%d/%Y") == Date.parse(@active).strftime("%m/%d/%Y")%>
+                <tr class="table-success">
+                  <td>Active <br/>
+                    <small>
+                      <%= turbo_frame_tag 'sar_status_form' do %>
+                        <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
+                      <% end %>
+                    </small></td>
+              <% else %>
+                <tr>
+                <td>Not Active</td>
+              <%end %>
             <% else %>
-        <tr>
-        <td>Not Active</td>
-          <% end %>
+              <tr>
+                <td>Not Active</td>
+            <% end %>
             <td><%= shape['version'] %></td>
             <td><%= shape['created'].present? ? Date.parse(shape['created']).strftime("%m/%d/%Y") : 'N/A' %></td>
             <td><%= shape['created_by'] %></td>
@@ -44,11 +48,11 @@
                 for Review
               </a>
             </td>
-          </tr>
-        <% end %>
-        </tbody>
-          </table>
-        </div>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

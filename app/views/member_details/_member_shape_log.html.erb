@@ -1,30 +1,33 @@
 <% if @shapes.first.present? %>
   <% @shapes.each do |shape| %>
-    <% if shape == @shapes.last %>
-      <div>
-        <strong>Shape Version: </strong>
-        <br/>Version <%= shape['version'] %>
-        <small>
-          <%= link_to "Request a copy for review", member_shape_list_path(
-          shapes: @shapes ,
-          member_id: @member_id ,
-          code: @code ,
-          group_id: @group,
-          code: @code) %>
-        </small>
-      </div>
-      <div>
-        <strong>Created By: </strong>
-        <br/><%= shape['created_by'] %>
-      </div>
-      <div>
-        <strong>Created On: </strong>
-        <br/><%= Date.parse(shape['created']).strftime("%m/%d/%Y") %>
-        <%= turbo_frame_tag 'sar_status_form' do %>
-          <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
-        <% end %>
-          </div>
-      </div>
+    <% if shape['released'].present? %>
+      <% if Date.parse(shape['released']) == @active %>
+        <div>
+          <strong>Shape Version: </strong>
+          <br/>Version <%= shape['version'] %>
+          <small>
+            <%= link_to "Request a copy for review", member_shape_list_path(
+                active: @active,
+                shapes: @shapes ,
+                member_id: @member_id ,
+                code: @code ,
+                group_id: @group,
+                code: @code) %>
+          </small>
+        </div>
+        <div>
+          <strong>Created By: </strong>
+          <br/><%= shape['created_by'] %>
+        </div>
+        <div>
+          <strong>Created On: </strong>
+          <br/><%= Date.parse(shape['created']).strftime("%m/%d/%Y") %>
+          <%= turbo_frame_tag 'sar_status_form' do %>
+            <%= render partial: 'codestatuses/sar_form', locals: {member_code: @code, group: @group, user: current_user.id} %>
+          <% end %>
+        </div>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 <% else %>
