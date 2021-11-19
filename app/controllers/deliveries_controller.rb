@@ -9,7 +9,6 @@ class DeliveriesController < InheritedResources::Base
     @delivery = Delivery.new(delivery_params)
       respond_to do |format|
         if @delivery.save
-          format.turbo_stream { redirect_to deliveries_path}
           format.html { redirect_to @delivery, notice: 'Notification Rule was successfully created.' }
           format.json { render :show, status: :created, location: @delivery }
         else
