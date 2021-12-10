@@ -89,6 +89,9 @@ class MemberContactsController < ApplicationController
         api_create
       elsif @member_contact.stype == 'UPDATE'
         api_update
+        if @member_contact.contact_type == "REPR"
+          CreateCaseJob.perform_now("Member Rep Change", @member_contact, current_user.id)
+        end
       elsif @member_contact.stype == 'DELETE'
         api_delete
       end

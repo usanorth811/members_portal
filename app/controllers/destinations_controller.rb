@@ -44,7 +44,7 @@ class DestinationsController < ApplicationController
   def create
     @destination = Destination.new(destination_params)
     DestinationMailer.with(billing_id: @destination.group.billing_id, code: @destination.code, old_destination: @destination.old_destination, new_destination: @destination.new_destination, email: @destination.user.email, name: "#{@destination.user.profile.first_name} #{@destination.user.profile.last_name}").destination.deliver_later!(wait: 1.second)
-    CreateCaseJob.perform_now(@destination)
+    #CreateCaseJob.perform_now("Destination Change", @destination)
     respond_to do |format|
       if @destination.save
         format.turbo_stream { render turbo_stream: turbo_stream.replace('new_destination', partial: 'destinations/request_submitted', locals: {
