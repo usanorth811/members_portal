@@ -8,12 +8,13 @@ class CreateCaseJob < ApplicationJob
     get_requirements
 
     require 'restforce'
+
     client = Restforce.new(host: 'test.salesforce.com',
-            username: ENV['SALESFORCE_USERNAME'],
-            password: ENV['SALESFORCE_PASSWORD'],
-            client_id: ENV['SALESFORCE_CLIENT_ID'],
-            client_secret: ENV['SALESFORCE_CLIENT_SECRET'],
-                           api_version: '52.0')
+                          username: ENV['SALESFORCE_USERNAME'],
+                          password: ENV['SALESFORCE_PASSWORD'],
+                          client_id: ENV['SALESFORCE_CLIENT_ID'],
+                          client_secret: ENV['SALESFORCE_CLIENT_SECRET'],
+                          api_version: '52.0')
     client.authenticate!
     client.describe
     resp = client.create('Case', @post_data)
