@@ -8,9 +8,8 @@ class CreateCaseJob < ApplicationJob
     get_requirements
 
     require 'restforce'
-
-    client = Restforce.new(host: 'test.salesforce.com',
-                          username: ENV['SALESFORCE_USERNAME'],
+    client = Restforce.new(host: ENV['SALESFORCE_HOST'],
+                           username: ENV['SALESFORCE_USERNAME'],
                           password: ENV['SALESFORCE_PASSWORD'],
                           client_id: ENV['SALESFORCE_CLIENT_ID'],
                           client_secret: ENV['SALESFORCE_CLIENT_SECRET'],
@@ -32,6 +31,7 @@ class CreateCaseJob < ApplicationJob
                   New_Member_Rep_Last_Name__c: new_rep[1],
                   New_Member_Rep_Email__c: @data.email,
                   New_Member_Rep_Phone__c: @data.phone,
+                  Billing_Code__c: @group.billing_id,
                   Origin: 'Web',
                   Type: "#{@case_type[0]}",
                   Subject: "#{@case_type[0]}",
